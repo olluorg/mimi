@@ -1,0 +1,26 @@
+{
+  "version": 1,
+  "scenes": [
+    {
+      "id": "sort_fruits_01",
+      "title": "Sort the Fruits",
+      "description": "Drag fruits into the basket",
+      "url": "https://olluorg.github.io/mimi/sort_fruits_01.json",
+      "ageMin": 2, "ageMax": 5
+    },
+    {
+      "id": "match_colors_01",
+      "title": "Match the Colors",
+      "description": "Match each circle to its colored square",
+      "url": "https://olluorg.github.io/mimi/match_colors_01.json",
+      "ageMin": 2, "ageMax": 6
+    },
+    {
+      "id": "sort_animals_01",
+      "title": "Animals Go Home",
+      "description": "Help each animal find its home",
+      "url": "https://olluorg.github.io/mimi/sort_animals_01.json",
+      "ageMin": 3, "ageMax": 6
+    }
+  ]
+}

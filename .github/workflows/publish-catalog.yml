@@ -1,0 +1,51 @@
+name: Publish Catalog
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'desktopApp/src/main/kotlin/GenerateCatalog.kt'
+      - 'core/**'
+      - '.github/workflows/publish-catalog.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - uses: gradle/actions/setup-gradle@v3
+        with:
+          cache-read-only: false
+
+      - name: Generate catalog JSON files
+        run: ./gradlew :desktopApp:generateCatalog
+
+      - uses: actions/configure-pages@v4
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: catalog/
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

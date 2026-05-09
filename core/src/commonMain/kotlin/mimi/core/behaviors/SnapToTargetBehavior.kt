@@ -51,6 +51,12 @@ class SnapToTargetBehavior(
                     priority = priority,
                     source   = id,
                     tick     = ctx.tick
+                ),
+                Command.TriggerFeedback(
+                    feedbackType = "matchSuccess",
+                    params       = mapOf("source" to event.draggedEntity, "target" to event.dropTargetEntity),
+                    source       = id,
+                    tick         = ctx.tick
                 )
             )
         } else {
