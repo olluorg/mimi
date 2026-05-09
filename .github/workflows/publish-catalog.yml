@@ -4,8 +4,7 @@ on:
   push:
     branches: [main]
     paths:
-      - 'desktopApp/src/main/kotlin/GenerateCatalog.kt'
-      - 'core/**'
+      - 'catalog/*.json'
       - '.github/workflows/publish-catalog.yml'
   workflow_dispatch:
 
@@ -28,17 +27,31 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: actions/setup-java@v4
-        with:
-          java-version: '17'
-          distribution: 'temurin'
+      - name: Generate catalog.json from scene files
+        run: |
+          python3 - <<'EOF'
+          import json, pathlib, sys
 
-      - uses: gradle/actions/setup-gradle@v3
-        with:
-          cache-read-only: false
+          BASE_URL = "https://olluorg.github.io/mimi"
+          catalog_dir = pathlib.Path("catalog")
 
-      - name: Generate catalog JSON files
-        run: ./gradlew :desktopApp:generateCatalog
+          scenes = []
+          for path in sorted(catalog_dir.glob("*.json")):
+              if path.name == "catalog.json":
+                  continue
+              try:
+                  data = json.loads(path.read_text())
+                  scene_id = data.get("sceneId") or path.stem
+                  scenes.append({"id": scene_id, "url": f"{BASE_URL}/{path.name}"})
+              except Exception as e:
+                  print(f"WARNING: skipping {path.name}: {e}", file=sys.stderr)
+
+          index = {"version": 2, "scenes": scenes}
+          (catalog_dir / "catalog.json").write_text(json.dumps(index, ensure_ascii=False, indent=2))
+          print(f"Generated catalog.json with {len(scenes)} scenes:")
+          for s in scenes:
+              print(f"  {s['id']}")
+          EOF
 
       - uses: actions/configure-pages@v4
 

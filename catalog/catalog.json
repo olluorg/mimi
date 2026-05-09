@@ -1,47 +1,61 @@
 {
-  "version": 1,
+  "version": 2,
   "scenes": [
     {
       "id": "sort_fruits_01",
-      "title": "Разложи фрукты",
-      "description": "Перетащи фрукты в корзину",
-      "url": "https://olluorg.github.io/mimi/sort_fruits_01.json",
-      "ageMin": 2, "ageMax": 5
+      "url": "https://olluorg.github.io/mimi/sort_fruits_01/sort_fruits_01.json"
     },
     {
       "id": "match_colors_01",
-      "title": "Совмести цвета",
-      "description": "Перетащи кружок к квадрату своего цвета",
-      "url": "https://olluorg.github.io/mimi/match_colors_01.json",
-      "ageMin": 2, "ageMax": 6
+      "url": "https://olluorg.github.io/mimi/match_colors_01/match_colors_01.json"
     },
     {
       "id": "sort_animals_01",
-      "title": "Животные идут домой",
-      "description": "Помоги каждому животному найти свой дом",
-      "url": "https://olluorg.github.io/mimi/sort_animals_01.json",
-      "ageMin": 3, "ageMax": 6
+      "url": "https://olluorg.github.io/mimi/sort_animals_01/sort_animals_01.json"
     },
     {
       "id": "match_shapes_01",
-      "title": "Совмести фигуры",
-      "description": "Перетащи каждую фигуру к её контуру",
-      "url": "https://olluorg.github.io/mimi/match_shapes_01.json",
-      "ageMin": 2, "ageMax": 5
+      "url": "https://olluorg.github.io/mimi/match_shapes_01/match_shapes_01.json"
     },
     {
       "id": "sort_food_01",
-      "title": "Фрукты и овощи",
-      "description": "Рассортируй еду по корзинам",
-      "url": "https://olluorg.github.io/mimi/sort_food_01.json",
-      "ageMin": 3, "ageMax": 6
+      "url": "https://olluorg.github.io/mimi/sort_food_01/sort_food_01.json"
     },
     {
       "id": "match_numbers_01",
-      "title": "Считаем вместе",
-      "description": "Сопоставь цифру с нужным количеством точек",
-      "url": "https://olluorg.github.io/mimi/match_numbers_01.json",
-      "ageMin": 3, "ageMax": 6
+      "url": "https://olluorg.github.io/mimi/match_numbers_01/match_numbers_01.json"
+    },
+    {
+      "id": "tap_sequence_01",
+      "url": "https://olluorg.github.io/mimi/tap_sequence_01/tap_sequence_01.json"
+    },
+    {
+      "id": "trace_line_01",
+      "url": "https://olluorg.github.io/mimi/trace_line_01/trace_line_01.json"
+    },
+    {
+      "id": "find_animal_01",
+      "url": "https://olluorg.github.io/mimi/find_animal_01/find_animal_01.json"
+    },
+    {
+      "id": "trace_circle_01",
+      "url": "https://olluorg.github.io/mimi/trace_circle_01/trace_circle_01.json"
+    },
+    {
+      "id": "memory_cards_01",
+      "url": "https://olluorg.github.io/mimi/memory_cards_01/memory_cards_01.json"
+    },
+    {
+      "id": "big_small_01",
+      "url": "https://olluorg.github.io/mimi/big_small_01/big_small_01.json"
+    },
+    {
+      "id": "continue_pattern_01",
+      "url": "https://olluorg.github.io/mimi/continue_pattern_01/continue_pattern_01.json"
+    },
+    {
+      "id": "ultimate_stress_test_01",
+      "url": "https://olluorg.github.io/mimi/ultimate_stress_test_01/ultimate_stress_test_01.json"
     }
   ]
 }

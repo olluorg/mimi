@@ -1,0 +1,145 @@
+{
+  "sceneId": "memory_cards_01",
+
+  "entities": [
+    {
+      "id": "card_1",
+      "components": ["tap"],
+      "behaviors": [],
+      "properties": {
+        "position":  { "type": "vec2", "x": 200.0, "y": 300.0 },
+        "pairId":    { "type": "text", "value": "apple" },
+        "face":      { "type": "text", "value": "🍎" },
+        "cardState": { "type": "text", "value": "hidden" }
+      },
+      "tags": { "group": "cards" },
+      "zOrder": 0
+    },
+    {
+      "id": "card_2",
+      "components": ["tap"],
+      "behaviors": [],
+      "properties": {
+        "position":  { "type": "vec2", "x": 500.0, "y": 300.0 },
+        "pairId":    { "type": "text", "value": "banana" },
+        "face":      { "type": "text", "value": "🍌" },
+        "cardState": { "type": "text", "value": "hidden" }
+      },
+      "tags": { "group": "cards" },
+      "zOrder": 0
+    },
+    {
+      "id": "card_3",
+      "components": ["tap"],
+      "behaviors": [],
+      "properties": {
+        "position":  { "type": "vec2", "x": 800.0, "y": 300.0 },
+        "pairId":    { "type": "text", "value": "apple" },
+        "face":      { "type": "text", "value": "🍎" },
+        "cardState": { "type": "text", "value": "hidden" }
+      },
+      "tags": { "group": "cards" },
+      "zOrder": 0
+    },
+    {
+      "id": "card_4",
+      "components": ["tap"],
+      "behaviors": [],
+      "properties": {
+        "position":  { "type": "vec2", "x": 500.0, "y": 650.0 },
+        "pairId":    { "type": "text", "value": "banana" },
+        "face":      { "type": "text", "value": "🍌" },
+        "cardState": { "type": "text", "value": "hidden" }
+      },
+      "tags": { "group": "cards" },
+      "zOrder": 0
+    }
+  ],
+
+  "objectives": [
+    {
+      "id": "obj1",
+      "type": "allPairsMatched",
+      "config": {
+        "group": "cards"
+      },
+      "requires": null
+    }
+  ],
+
+  "behaviors": [
+    {
+      "behaviorRef": {
+        "type": "memoryFlipController",
+        "config": {
+          "group":           "cards",
+          "maxOpenCards":    "2",
+          "flipBackDelayMs": "800"
+        }
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "pairMatchValidator",
+        "config": {
+          "group":         "cards",
+          "matchProperty": "pairId"
+        }
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "progressTracker",
+        "config": {}
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "adaptiveHint",
+        "config": {}
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "playSoundOnEvent",
+        "config": {
+          "on":    "pairMatched",
+          "sound": "correct"
+        }
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "playSoundOnEvent",
+        "config": {
+          "on":    "sceneCompleted",
+          "sound": "complete"
+        }
+      },
+      "entityId": null
+    }
+  ],
+
+  "fieldPolicies": {
+    "cardState": "LAST_WINS",
+    "progress":  "PRIORITY"
+  },
+
+  "idleTimeout": 15,
+  "onIdle": "HINT",
+  "metadata": {},
+  "meta": {
+    "title":       "Найди пару",
+    "description": "Открывай карточки и найди одинаковые пары",
+    "ageMin": 3,
+    "ageMax": 6,
+    "version": 1,
+    "tags":   ["memory", "matching", "attention"],
+    "skills": ["memory", "visual_attention", "matching", "task_completion", "impulse_control"]
+  }
+}

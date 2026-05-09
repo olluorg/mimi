@@ -5,14 +5,10 @@ import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.scaleIn
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
+import androidx.compose.material3.*
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -29,6 +25,7 @@ import mimi.core.world.SceneDefinition
 import org.ollu.mini.feedback.HintStateChannel
 import org.ollu.mini.feedback.LogFeedbackChannel
 import org.ollu.mini.feedback.SoundFeedbackChannel
+import org.ollu.mini.feedback.TtsFeedbackChannel
 import org.ollu.mini.progress.ProgressRepository
 import org.ollu.mini.renderer.SceneRenderer
 
@@ -42,24 +39,67 @@ fun GameScreen(
 
     val hintChannel = remember { HintStateChannel() }
 
-    val session = remember(scene) {
-        val constraintRegistry = DefaultConstraintRegistry().also { it.registerBuiltins() }
-        val feedbackRegistry   = DefaultFeedbackRegistry().also {
-            it.register(LogFeedbackChannel)
-            it.register(SoundFeedbackChannel())
-            it.register(hintChannel)
+    val sessionResult = remember(scene) {
+        runCatching {
+            val constraintRegistry = DefaultConstraintRegistry().also { it.registerBuiltins() }
+            val feedbackRegistry   = DefaultFeedbackRegistry().also {
+                it.register(LogFeedbackChannel)
+                it.register(SoundFeedbackChannel())
+                it.register(TtsFeedbackChannel())
+                it.register(hintChannel)
+            }
+            EngineBuilder()
+                .withDefaultPlugins(constraintRegistry)
+                .withFeedbackRegistry(feedbackRegistry)
+                .build(scene, scope)
         }
-        EngineBuilder()
-            .withDefaultPlugins(constraintRegistry)
-            .withFeedbackRegistry(feedbackRegistry)
-            .build(scene, scope)
     }
+
+    val session    = sessionResult.getOrNull()
+    val buildError = sessionResult.exceptionOrNull()
 
     DisposableEffect(session) {
-        onDispose { session.close() }
+        onDispose { session?.close() }
     }
 
-    val snapshot      by session.worldState.collectAsState()
+    if (buildError != null) {
+        Box(Modifier.fillMaxSize().background(Color(0xFFFFF8E1))) {
+            if (onBack != null) {
+                TextButton(
+                    onClick  = onBack,
+                    modifier = Modifier.align(Alignment.TopStart).padding(8.dp)
+                ) { Text("← Back", color = Color(0xFF666666)) }
+            }
+            Column(
+                modifier            = Modifier.align(Alignment.Center).padding(32.dp),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = androidx.compose.foundation.layout.Arrangement.spacedBy(12.dp)
+            ) {
+                Text("⚠️", fontSize = 48.sp)
+                Text(
+                    "Сцена не запустилась",
+                    style      = MaterialTheme.typography.titleMedium,
+                    color      = Color(0xFFB00020),
+                    fontWeight = FontWeight.SemiBold
+                )
+                Surface(
+                    shape    = RoundedCornerShape(8.dp),
+                    color    = Color(0xFFFFEBEE),
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    Text(
+                        buildError.message ?: buildError.toString(),
+                        style    = MaterialTheme.typography.bodySmall,
+                        color    = Color(0xFFB00020),
+                        modifier = Modifier.padding(12.dp)
+                    )
+                }
+            }
+        }
+        return
+    }
+
+    val snapshot       by session!!.worldState.collectAsState()
     val hintedEntityId by hintChannel.hintedEntityId.collectAsState()
 
     val isComplete = scene.objectives.any { obj ->

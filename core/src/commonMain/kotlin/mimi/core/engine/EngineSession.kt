@@ -34,6 +34,7 @@ class EngineSession(
     private var idleJob: Job? = null
 
     init {
+        scope.launch { dispatch(GameEvent.SceneStarted(tick = 0L)) }
         startIdleLoop()
         startHintCheckLoop()
     }

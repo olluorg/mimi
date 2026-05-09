@@ -35,6 +35,13 @@ object AllMatchedEvaluator : ObjectiveEvaluator {
     }
 }
 
+object AllPairsMatchedEvaluator : ObjectiveEvaluator {
+    override val type = "allPairsMatched"
+
+    override fun evaluate(objectiveId: ObjectiveId, definition: mimi.core.world.ObjectiveDefinition, world: WorldSnapshot): ObjectiveState =
+        AllMatchedEvaluator.evaluate(objectiveId, definition, world)
+}
+
 object AllSortedEvaluator : ObjectiveEvaluator {
     override val type = "allSorted"
 
@@ -74,6 +81,26 @@ object SequenceCompleteEvaluator : ObjectiveEvaluator {
     }
 }
 
+// Group-based sequence completion: all entities with tag group=<value> must be TENTATIVE/LOCKED.
+// Identical logic to AllMatchedEvaluator; separate type for semantic clarity in scene JSON.
+object SequenceCompletedEvaluator : ObjectiveEvaluator {
+    override val type = "sequenceCompleted"
+
+    override fun evaluate(objectiveId: ObjectiveId, definition: mimi.core.world.ObjectiveDefinition, world: WorldSnapshot): ObjectiveState {
+        val group    = definition.config["group"] ?: return ObjectiveState.INACTIVE
+        val entities = world.getEntitiesByTag("group", group)
+        if (entities.isEmpty()) return ObjectiveState.INACTIVE
+        val done = entities.filter {
+            it.state == EntityLifecycleState.TENTATIVE || it.state == EntityLifecycleState.LOCKED
+        }
+        return when {
+            done.isEmpty()             -> ObjectiveState.INACTIVE
+            done.size == entities.size -> ObjectiveState.TENTATIVE_COMPLETE
+            else                       -> ObjectiveState.PROGRESSING
+        }
+    }
+}
+
 object TraceCompleteEvaluator : ObjectiveEvaluator {
     override val type = "traceComplete"
 
@@ -84,6 +111,69 @@ object TraceCompleteEvaluator : ObjectiveEvaluator {
             ?: world.getNum(SCENE_ENTITY_ID, "traceProgress.$pathId")?.toFloat()
             ?: return ObjectiveState.INACTIVE
         return if (progress >= minAccuracy) ObjectiveState.TENTATIVE_COMPLETE else ObjectiveState.PROGRESSING
+    }
+}
+
+// Fires when any entity whose property==value reaches TENTATIVE or LOCKED.
+object EntitySelectedEvaluator : ObjectiveEvaluator {
+    override val type = "entitySelected"
+
+    override fun evaluate(objectiveId: ObjectiveId, definition: mimi.core.world.ObjectiveDefinition, world: WorldSnapshot): ObjectiveState {
+        val property = definition.config["property"] ?: return ObjectiveState.INACTIVE
+        val value    = definition.config["value"]    ?: return ObjectiveState.INACTIVE
+        val match    = world.getAllEntities().any { entity ->
+            entity.text(property) == value &&
+            (entity.state == EntityLifecycleState.TENTATIVE || entity.state == EntityLifecycleState.LOCKED)
+        }
+        return if (match) ObjectiveState.TENTATIVE_COMPLETE else ObjectiveState.INACTIVE
+    }
+}
+
+object GeometrySelectionEvaluator : ObjectiveEvaluator {
+    override val type = "geometrySelection"
+
+    override fun evaluate(objectiveId: ObjectiveId, definition: mimi.core.world.ObjectiveDefinition, world: WorldSnapshot): ObjectiveState {
+        val group = definition.config["group"] ?: return ObjectiveState.INACTIVE
+        val select = definition.config["select"] ?: "largest"
+        val entities = world.getEntitiesByTag("group", group)
+        if (entities.isEmpty()) return ObjectiveState.INACTIVE
+
+        val selected = entities.filter {
+            it.state == EntityLifecycleState.TENTATIVE || it.state == EntityLifecycleState.LOCKED
+        }
+        if (selected.isEmpty()) return ObjectiveState.INACTIVE
+
+        val target = when (select) {
+            "smallest" -> entities.minByOrNull { geometryArea(it) }
+            else       -> entities.maxByOrNull { geometryArea(it) }
+        } ?: return ObjectiveState.INACTIVE
+
+        return if (selected.any { it.id == target.id }) ObjectiveState.TENTATIVE_COMPLETE else ObjectiveState.PROGRESSING
+    }
+
+    private fun geometryArea(entity: EntitySnapshot): Double {
+        val width = entity.num("width") ?: entity.num("radius")?.let { it * 2.0 } ?: 90.0
+        val height = entity.num("height") ?: entity.num("radius")?.let { it * 2.0 } ?: width
+        return width * height
+    }
+}
+
+// Group-based trace completion: all traceTarget entities in the group must be TENTATIVE/LOCKED.
+object TraceCompletedEvaluator : ObjectiveEvaluator {
+    override val type = "traceCompleted"
+
+    override fun evaluate(objectiveId: ObjectiveId, definition: mimi.core.world.ObjectiveDefinition, world: WorldSnapshot): ObjectiveState {
+        val group    = definition.config["group"] ?: return ObjectiveState.INACTIVE
+        val entities = world.getEntitiesByTag("group", group)
+        if (entities.isEmpty()) return ObjectiveState.INACTIVE
+        val done = entities.filter {
+            it.state == EntityLifecycleState.TENTATIVE || it.state == EntityLifecycleState.LOCKED
+        }
+        return when {
+            done.isEmpty()             -> ObjectiveState.INACTIVE
+            done.size == entities.size -> ObjectiveState.TENTATIVE_COMPLETE
+            else                       -> ObjectiveState.PROGRESSING
+        }
     }
 }
 
@@ -178,10 +268,15 @@ class ObjectiveSystem(
 
     companion object {
         fun defaultEvaluators(): Map<String, ObjectiveEvaluator> = mapOf(
-            AllMatchedEvaluator.type       to AllMatchedEvaluator,
-            AllSortedEvaluator.type        to AllSortedEvaluator,
-            SequenceCompleteEvaluator.type to SequenceCompleteEvaluator,
-            TraceCompleteEvaluator.type    to TraceCompleteEvaluator
+            AllMatchedEvaluator.type         to AllMatchedEvaluator,
+            AllPairsMatchedEvaluator.type    to AllPairsMatchedEvaluator,
+            AllSortedEvaluator.type          to AllSortedEvaluator,
+            SequenceCompleteEvaluator.type   to SequenceCompleteEvaluator,
+            SequenceCompletedEvaluator.type  to SequenceCompletedEvaluator,
+            TraceCompleteEvaluator.type      to TraceCompleteEvaluator,
+            TraceCompletedEvaluator.type     to TraceCompletedEvaluator,
+            EntitySelectedEvaluator.type     to EntitySelectedEvaluator,
+            GeometrySelectionEvaluator.type  to GeometrySelectionEvaluator
         )
     }
 }

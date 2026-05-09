@@ -1,0 +1,114 @@
+{
+  "sceneId": "trace_circle_01",
+
+  "entities": [
+    {
+      "id": "circle_path",
+      "components": ["traceTarget"],
+      "behaviors": [],
+      "properties": {
+        "center": {
+          "type": "vec2",
+          "x": 500.0,
+          "y": 400.0
+        },
+        "radius": {
+          "type": "num",
+          "value": 200.0
+        },
+        "tolerance": {
+          "type": "num",
+          "value": 60.0
+        },
+        "resolution": {
+          "type": "num",
+          "value": 64
+        },
+        "direction": {
+          "type": "text",
+          "value": "clockwise"
+        }
+      },
+      "tags": {
+        "group": "trace"
+      },
+      "zOrder": 0
+    }
+  ],
+
+  "objectives": [
+    {
+      "id": "obj1",
+      "type": "traceCompleted",
+      "config": {
+        "group": "trace",
+        "minProgress": 0.9
+      },
+      "requires": null
+    }
+  ],
+
+  "behaviors": [
+    {
+      "behaviorRef": {
+        "type": "circleTraceValidator",
+        "config": {
+          "group": "trace",
+          "snapTolerance": 60.0,
+          "progressMode": "arcLength"
+        }
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "progressTracker",
+        "config": {}
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "adaptiveHint",
+        "config": {
+          "mode": "trace"
+        }
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "playSoundOnEvent",
+        "config": {
+          "on": "traceCompleted",
+          "sound": "complete"
+        }
+      },
+      "entityId": null
+    }
+  ],
+
+  "fieldPolicies": {
+    "progress": "PRIORITY",
+    "traceState": "MERGE"
+  },
+
+  "idleTimeout": 12,
+  "onIdle": "HINT",
+  "metadata": {},
+  "meta": {
+    "title": "Обведи круг",
+    "description": "Проведи пальцем по кругу, не отрывая линию",
+    "ageMin": 2,
+    "ageMax": 5,
+    "version": 1,
+    "tags": ["trace", "shapes", "motor"],
+    "skills": [
+      "fine_motor",
+      "trace_control",
+      "hand_eye_coordination",
+      "visual_attention",
+      "task_completion"
+    ]
+  }
+}

@@ -9,6 +9,8 @@ import io.ktor.serialization.kotlinx.json.*
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.channelFlow
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.sync.Mutex
+import kotlinx.coroutines.sync.withLock
 import kotlinx.serialization.json.Json
 import mimi.core.scene.SceneLoader
 import mimi.core.world.SceneDefinition
@@ -32,33 +34,51 @@ class SceneRepository {
         install(ContentNegotiation) { json(json) }
     }
 
-    init { cache.seedBuiltins() }
+    private val seedMutex = Mutex()
+    private var seedDone  = false
 
-    // Emits cached state immediately, then refreshes from network in background
+    private suspend fun ensureSeeded() {
+        if (seedDone) return
+        seedMutex.withLock {
+            if (!seedDone) {
+                cache.seedFromBundle()
+                seedDone = true
+            }
+        }
+    }
+
     fun catalogFlow(catalogUrl: String): Flow<CatalogState> = channelFlow {
-        // Step 1: instant — whatever is in cache (builtins always present after seedBuiltins)
-        send(CatalogState(entries = cache.getDisplayCatalog().scenes, isRefreshing = true))
+        ensureSeeded()
 
-        // Step 2: network refresh
+        // Instant: bundle is always seeded above
+        send(CatalogState(entries = cache.getDisplayEntries(), isRefreshing = true))
+
         try {
-            val networkCatalog: Catalog = client.get(catalogUrl).body()
-            cache.putCatalog(networkCatalog)
-            send(CatalogState(entries = cache.getDisplayCatalog().scenes, isRefreshing = false))
+            // Fetch updated index from network
+            val networkIndex: CatalogIndex = client.get(catalogUrl).body()
 
-            // Prefetch new scenes into cache in the background (non-blocking for the UI)
-            for (entry in networkCatalog.scenes) {
-                if (cache.getCachedScene(entry.id) == null) {
+            // Merge: bundled scenes are a floor — network can only add, never remove
+            val current    = cache.getCachedIndex()?.scenes ?: emptyList()
+            val currentIds = current.map { it.id }.toSet()
+            val merged     = current + networkIndex.scenes.filter { it.id !in currentIds }
+            cache.putIndex(CatalogIndex(scenes = merged))
+
+            // Prefetch scene JSONs that aren't in cache yet (new scenes not in bundle)
+            for (ref in networkIndex.scenes) {
+                if (cache.getCachedScene(ref.id) == null) {
                     launch {
                         runCatching {
-                            val text = client.get(entry.url).bodyAsText()
-                            cache.putScene(entry.id, text)
+                            val sceneJson = client.get(ref.url).bodyAsText()
+                            cache.putScene(ref.id, sceneJson)
                         }
                     }
                 }
             }
+
+            send(CatalogState(entries = cache.getDisplayEntries(), isRefreshing = false))
         } catch (e: Exception) {
             send(CatalogState(
-                entries        = cache.getDisplayCatalog().scenes,
+                entries        = cache.getDisplayEntries(),
                 isRefreshing   = false,
                 offlineWarning = true
             ))
@@ -66,12 +86,11 @@ class SceneRepository {
     }
 
     suspend fun fetchScene(entry: CatalogEntry): SceneDefinition {
-        // Cache hit covers both local:// builtins and previously fetched network scenes
+        ensureSeeded()
         cache.getCachedScene(entry.id)?.let { return SceneLoader.load(it) }
-        // Network fetch + cache for the future
-        val text = client.get(entry.url).bodyAsText()
-        cache.putScene(entry.id, text)
-        return SceneLoader.load(text)
+        val sceneJson = client.get(entry.url).bodyAsText()
+        cache.putScene(entry.id, sceneJson)
+        return SceneLoader.load(sceneJson)
     }
 
     fun close() = client.close()

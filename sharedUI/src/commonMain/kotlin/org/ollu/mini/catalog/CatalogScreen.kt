@@ -2,9 +2,11 @@ package org.ollu.mini.catalog
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
@@ -23,17 +25,82 @@ import org.ollu.mini.progress.ProgressRepository
 
 private val BG = Color(0xFFFFF8E1)
 
+private val skillLabel = mapOf(
+    "attention"             to "Внимание",
+    "visual_attention"      to "Зрит. внимание",
+    "selective_attention"   to "Избир. внимание",
+    "sustained_attention"   to "Устойч. внимание",
+    "fine_motor"            to "Мелкая моторика",
+    "hand_eye_coordination" to "Глаз-рука",
+    "gesture_control"       to "Жесты",
+    "trace_control"         to "Обводка",
+    "matching"              to "Соответствие",
+    "categorization"        to "Категоризация",
+    "sequencing"            to "Последовательность",
+    "memory"                to "Память",
+    "problem_solving"       to "Решение задач",
+    "receptive_speech"      to "Понимание речи",
+    "expressive_speech"     to "Активная речь",
+    "word_association"      to "Ассоциации",
+    "phonemic_awareness"    to "Фонем. слух",
+    "color_recognition"     to "Цвета",
+    "shape_recognition"     to "Формы",
+    "size_comparison"       to "Размеры",
+    "pattern_recognition"   to "Паттерны",
+    "numbers"               to "Цифры",
+    "counting"              to "Счёт",
+    "letters"               to "Буквы",
+    "reading_readiness"     to "Подгот. к чтению",
+    "task_completion"       to "Завершение",
+    "turn_taking"           to "Очерёдность",
+    "patience"              to "Терпение",
+    "impulse_control"       to "Контроль импульсов"
+)
+
+private val skillColor = mapOf(
+    "attention"             to Color(0xFF5C9BD6),
+    "visual_attention"      to Color(0xFF5C9BD6),
+    "selective_attention"   to Color(0xFF5C9BD6),
+    "sustained_attention"   to Color(0xFF5C9BD6),
+    "fine_motor"            to Color(0xFFFF8A65),
+    "hand_eye_coordination" to Color(0xFFFF8A65),
+    "gesture_control"       to Color(0xFFFF8A65),
+    "trace_control"         to Color(0xFFFF8A65),
+    "matching"              to Color(0xFF9C7BB8),
+    "categorization"        to Color(0xFF9C7BB8),
+    "sequencing"            to Color(0xFF9C7BB8),
+    "memory"                to Color(0xFF9C7BB8),
+    "problem_solving"       to Color(0xFF9C7BB8),
+    "receptive_speech"      to Color(0xFF66BB6A),
+    "expressive_speech"     to Color(0xFF66BB6A),
+    "word_association"      to Color(0xFF66BB6A),
+    "phonemic_awareness"    to Color(0xFF66BB6A),
+    "color_recognition"     to Color(0xFF26C6DA),
+    "shape_recognition"     to Color(0xFF26C6DA),
+    "size_comparison"       to Color(0xFF26C6DA),
+    "pattern_recognition"   to Color(0xFF26C6DA),
+    "numbers"               to Color(0xFFEF5350),
+    "counting"              to Color(0xFFEF5350),
+    "letters"               to Color(0xFFEF5350),
+    "reading_readiness"     to Color(0xFFEF5350),
+    "task_completion"       to Color(0xFFFFB300),
+    "turn_taking"           to Color(0xFFFFB300),
+    "patience"              to Color(0xFFFFB300),
+    "impulse_control"       to Color(0xFFFFB300)
+)
+
 @Composable
 fun CatalogScreen(
-    catalogUrl:         String            = DEFAULT_CATALOG_URL,
+    catalogUrl:         String             = DEFAULT_CATALOG_URL,
     onSceneSelected:    (SceneDefinition) -> Unit,
     progressRepository: ProgressRepository? = null
 ) {
     val repo = remember { SceneRepository() }
     DisposableEffect(repo) { onDispose { repo.close() } }
 
-    var uiState      by remember { mutableStateOf(CatalogState(isRefreshing = true)) }
-    var completedIds by remember { mutableStateOf(progressRepository?.getCompletedSceneIds() ?: emptySet<String>()) }
+    var uiState        by remember { mutableStateOf(CatalogState(isRefreshing = true)) }
+    var completedIds   by remember { mutableStateOf(progressRepository?.getCompletedSceneIds() ?: emptySet<String>()) }
+    var selectedSkills by remember { mutableStateOf(emptySet<String>()) }
 
     LaunchedEffect(catalogUrl) {
         repo.catalogFlow(catalogUrl).collect { state ->
@@ -42,10 +109,19 @@ fun CatalogScreen(
         }
     }
 
+    val allSkills = remember(uiState.entries) {
+        uiState.entries.flatMap { it.skills }.distinct()
+            .sortedBy { skillLabel[it] ?: it }
+    }
+
+    val displayedEntries = remember(uiState.entries, selectedSkills) {
+        if (selectedSkills.isEmpty()) uiState.entries
+        else uiState.entries.filter { entry -> entry.skills.any { it in selectedSkills } }
+    }
+
     Box(Modifier.fillMaxSize().background(BG)) {
 
         when {
-            // First launch: cache is empty and still loading
             uiState.entries.isEmpty() && uiState.isRefreshing -> {
                 Column(
                     Modifier.align(Alignment.Center),
@@ -68,8 +144,8 @@ fun CatalogScreen(
                     if (uiState.offlineWarning) {
                         item {
                             Surface(
-                                shape = RoundedCornerShape(8.dp),
-                                color = Color(0xFFFFF3CD),
+                                shape    = RoundedCornerShape(8.dp),
+                                color    = Color(0xFFFFF3CD),
                                 modifier = Modifier.fillMaxWidth()
                             ) {
                                 Text(
@@ -82,13 +158,31 @@ fun CatalogScreen(
                         }
                     }
 
-                    items(uiState.entries) { entry ->
-                        var loading by remember(entry.id) { mutableStateOf(false) }
+                    if (allSkills.isNotEmpty()) {
+                        item {
+                            SkillFilterBar(
+                                allSkills      = allSkills,
+                                selectedSkills = selectedSkills,
+                                onToggle       = { skill ->
+                                    selectedSkills = if (skill in selectedSkills)
+                                        selectedSkills - skill
+                                    else
+                                        selectedSkills + skill
+                                },
+                                onClearAll     = { selectedSkills = emptySet() }
+                            )
+                        }
+                    }
+
+                    items(displayedEntries) { entry ->
+                        var loading   by remember(entry.id) { mutableStateOf(false) }
+                        var loadError by remember(entry.id) { mutableStateOf<String?>(null) }
                         SceneCard(
                             entry     = entry,
                             loading   = loading,
                             completed = entry.id in completedIds,
-                            onClick   = { if (!loading) loading = true }
+                            error     = loadError,
+                            onClick   = { if (!loading) { loading = true; loadError = null } }
                         )
                         if (loading) {
                             LaunchedEffect(entry.id) {
@@ -96,21 +190,152 @@ fun CatalogScreen(
                                     val scene = repo.fetchScene(entry)
                                     onSceneSelected(scene)
                                 } catch (e: Exception) {
-                                    loading = false
+                                    loading   = false
+                                    loadError = e.message ?: e::class.simpleName ?: "Неизвестная ошибка"
                                 }
                             }
                         }
                     }
                 }
 
-                // Subtle refresh bar at top while network catalog is loading
                 if (uiState.isRefreshing) {
                     LinearProgressIndicator(
-                        modifier = Modifier.fillMaxWidth().align(Alignment.TopCenter).height(3.dp),
-                        color    = Color(0xFF4A90D9),
+                        modifier   = Modifier.fillMaxWidth().align(Alignment.TopCenter).height(3.dp),
+                        color      = Color(0xFF4A90D9),
                         trackColor = Color.Transparent
                     )
                 }
+            }
+        }
+    }
+}
+
+@Composable
+private fun SkillFilterBar(
+    allSkills:      List<String>,
+    selectedSkills: Set<String>,
+    onToggle:       (String) -> Unit,
+    onClearAll:     () -> Unit
+) {
+    Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            Text(
+                "Фильтр по навыкам",
+                style = MaterialTheme.typography.labelMedium,
+                color = Color(0xFF888888)
+            )
+            if (selectedSkills.isNotEmpty()) {
+                Spacer(Modifier.width(8.dp))
+                TextButton(
+                    onClick        = onClearAll,
+                    contentPadding = PaddingValues(horizontal = 8.dp, vertical = 0.dp),
+                    modifier       = Modifier.height(24.dp)
+                ) {
+                    Text("Сбросить", fontSize = 12.sp, color = Color(0xFF4A90D9))
+                }
+            }
+        }
+        Row(
+            modifier              = Modifier.horizontalScroll(rememberScrollState()),
+            horizontalArrangement = Arrangement.spacedBy(8.dp)
+        ) {
+            allSkills.forEach { skill ->
+                val selected = skill in selectedSkills
+                val color    = skillColor[skill] ?: Color(0xFF888888)
+                FilterChip(
+                    selected = selected,
+                    onClick  = { onToggle(skill) },
+                    label    = {
+                        Text(
+                            skillLabel[skill] ?: skill,
+                            fontSize = 12.sp,
+                            maxLines = 1
+                        )
+                    },
+                    colors = FilterChipDefaults.filterChipColors(
+                        selectedContainerColor  = color,
+                        selectedLabelColor      = Color.White
+                    )
+                )
+            }
+        }
+    }
+}
+
+@Composable
+private fun SceneCard(entry: CatalogEntry, loading: Boolean, completed: Boolean, error: String?, onClick: () -> Unit) {
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .background(Color.White, RoundedCornerShape(16.dp))
+            .clickable(enabled = !loading, onClick = onClick)
+            .padding(16.dp),
+        verticalArrangement = Arrangement.spacedBy(8.dp)
+    ) {
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            Box {
+                Text("🎮", fontSize = 40.sp)
+                if (completed) {
+                    Box(
+                        modifier         = Modifier.align(Alignment.TopEnd).size(18.dp)
+                            .background(Color(0xFF4CAF50), CircleShape),
+                        contentAlignment = Alignment.Center
+                    ) { Text("✓", fontSize = 10.sp, color = Color.White, fontWeight = FontWeight.Bold) }
+                }
+            }
+            Spacer(Modifier.width(16.dp))
+            Column(Modifier.weight(1f)) {
+                Text(entry.title, style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.SemiBold)
+                if (entry.description.isNotBlank()) {
+                    Text(entry.description, style = MaterialTheme.typography.bodySmall, color = Color(0xFF888888))
+                }
+                Text(
+                    "Возраст ${entry.ageMin}–${entry.ageMax}",
+                    style = MaterialTheme.typography.labelSmall,
+                    color = Color(0xFFAAAAAA)
+                )
+            }
+            if (loading) CircularProgressIndicator(Modifier.size(24.dp), strokeWidth = 2.dp)
+            else Text("▶", fontSize = 24.sp, color = Color(0xFF4A90D9))
+        }
+
+        if (entry.skills.isNotEmpty()) {
+            SkillChips(entry.skills)
+        }
+
+        if (error != null) {
+            Text(
+                "⚠️ $error",
+                fontSize = 11.sp,
+                color    = Color(0xFFB00020),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .background(Color(0xFFFFEBEE), RoundedCornerShape(6.dp))
+                    .padding(horizontal = 8.dp, vertical = 4.dp)
+            )
+        }
+    }
+}
+
+@Composable
+private fun SkillChips(skills: List<String>) {
+    Row(
+        modifier              = Modifier.horizontalScroll(rememberScrollState()),
+        horizontalArrangement = Arrangement.spacedBy(6.dp)
+    ) {
+        skills.forEach { skill ->
+            val color = skillColor[skill] ?: Color(0xFF888888)
+            Box(
+                modifier         = Modifier
+                    .background(color.copy(alpha = 0.15f), RoundedCornerShape(4.dp))
+                    .padding(horizontal = 6.dp, vertical = 2.dp)
+            ) {
+                Text(
+                    skillLabel[skill] ?: skill,
+                    fontSize = 10.sp,
+                    color    = color,
+                    maxLines = 1
+                )
             }
         }
     }
@@ -156,39 +381,5 @@ private fun ChildNameHeader(progressRepository: ProgressRepository?) {
         }
         Spacer(Modifier.height(4.dp))
         Text("Выбери игру", style = MaterialTheme.typography.titleMedium, color = Color(0xFF888888))
-    }
-}
-
-@Composable
-private fun SceneCard(entry: CatalogEntry, loading: Boolean, completed: Boolean, onClick: () -> Unit) {
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .background(Color.White, RoundedCornerShape(16.dp))
-            .clickable(enabled = !loading, onClick = onClick)
-            .padding(16.dp),
-        verticalAlignment = Alignment.CenterVertically
-    ) {
-        Box {
-            Text("🎮", fontSize = 40.sp)
-            if (completed) {
-                Box(
-                    modifier         = Modifier.align(Alignment.TopEnd).size(18.dp)
-                        .background(Color(0xFF4CAF50), CircleShape),
-                    contentAlignment = Alignment.Center
-                ) { Text("✓", fontSize = 10.sp, color = Color.White, fontWeight = FontWeight.Bold) }
-            }
-        }
-        Spacer(Modifier.width(16.dp))
-        Column(Modifier.weight(1f)) {
-            Text(entry.title, style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.SemiBold)
-            if (entry.description.isNotBlank()) {
-                Text(entry.description, style = MaterialTheme.typography.bodySmall, color = Color(0xFF888888))
-            }
-            Text("Возраст ${entry.ageMin}–${entry.ageMax}",
-                style = MaterialTheme.typography.labelSmall, color = Color(0xFFAAAAAA))
-        }
-        if (loading) CircularProgressIndicator(Modifier.size(24.dp), strokeWidth = 2.dp)
-        else Text("▶", fontSize = 24.sp, color = Color(0xFF4A90D9))
     }
 }

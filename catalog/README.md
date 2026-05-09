@@ -1,78 +1,156 @@
 # Mimi — Каталог игр
 
-Здесь лежат JSON-файлы всех сцен и инструкция по созданию новых игр.
+Здесь лежат JSON-файлы всех сцен. Kotlin-код для добавления игр **не нужен**.
 
 ---
 
-## Быстрый старт (локально, без интернета)
+## Архитектура
 
-```bash
-# 1. Запустить десктопное приложение
-./gradlew :desktopApp:run
+Сцены — это JSON. Приложение читает их из встроенных ресурсов (бандл), затем обновляет по сети.
 
-# 2. Все встроенные игры уже в кэше — интернет не нужен
+```
+catalog/                   ← источник правды, коммитить в git
+├── catalog.json           ← индекс всех сцен
+├── sort_fruits_01.json    ← данные сцены
+└── ...
 ```
 
-Приложение при старте загружает сцены из `BuiltinScenes.kt`. Изменил файл → перезапустил → видишь результат.
+При сборке Gradle копирует `catalog/*.json` в бандл → офлайн-доступ без интернета.  
+После пуша GitHub Actions деплоит обновления на GitHub Pages → приложения обновляют каталог
+без перевыпуска.
 
 ---
 
 ## Как добавить новую игру
 
-### Шаг 1. Добавить сцену в `BuiltinScenes.kt`
+### Шаг 1. Написать JSON сцены
 
-Файл: `sharedUI/src/commonMain/kotlin/org/ollu/mini/scenes/BuiltinScenes.kt`
+Создай файл `catalog/my_game_01.json`:
 
-```kotlin
-object BuiltinScenes {
-    val all = listOf(
-        // ... существующие ...
-        entry("my_game_01", "Моя игра", "Описание для каталога", 3, 6) to myGameScene(),
-    )
-}
-
-private fun myGameScene(): SceneDefinition {
-    // ... описание сцены ...
+```json
+{
+  "sceneId": "my_game_01",
+  "entities": [
+    {
+      "id": "apple",
+      "components": ["drag"],
+      "behaviors": [],
+      "properties": {
+        "position":  { "type": "vec2", "x": 200.0, "y": 250.0 },
+        "zOrder":    { "type": "num",  "value": 1.0 },
+        "emoji":     { "type": "text", "value": "🍎" },
+        "category":  { "type": "text", "value": "fruit" }
+      },
+      "tags": { "group": "items" },
+      "zOrder": 0
+    },
+    {
+      "id": "basket",
+      "components": ["dropTarget"],
+      "behaviors": [],
+      "properties": {
+        "position":        { "type": "vec2", "x": 500.0, "y": 700.0 },
+        "zOrder":          { "type": "num",  "value": 0.0 },
+        "emoji":           { "type": "text", "value": "🧺" },
+        "constraintType":  { "type": "text", "value": "propertyEquals" },
+        "source":          { "type": "text", "value": "category" },
+        "target":          { "type": "text", "value": "acceptsCategory" },
+        "acceptsCategory": { "type": "text", "value": "fruit" }
+      },
+      "tags": {},
+      "zOrder": 0
+    }
+  ],
+  "objectives": [
+    { "id": "win", "type": "allMatched", "config": { "group": "items" }, "requires": null }
+  ],
+  "behaviors": [
+    { "behaviorRef": { "type": "progressTracker",  "config": {} }, "entityId": null },
+    { "behaviorRef": { "type": "snapToTarget",     "config": {} }, "entityId": null },
+    { "behaviorRef": { "type": "adaptiveHint",     "config": {} }, "entityId": null },
+    { "behaviorRef": { "type": "playSoundOnEvent", "config": { "on": "sceneCompleted", "sound": "complete" } }, "entityId": null }
+  ],
+  "fieldPolicies": {},
+  "idleTimeout": 30,
+  "onIdle": "HINT",
+  "metadata": {}
 }
 ```
 
-### Шаг 2. Запустить локально
+### Шаг 2. Добавить запись в `catalog/catalog.json`
+
+```json
+{ "id": "my_game_01", "url": "https://olluorg.github.io/mimi/my_game_01.json" }
+```
+
+Вставь эту строку в массив `scenes`. Название и возраст брать отсюда не нужно — они уже есть в scene JSON.
+
+### Шаг 3. Проверить локально
 
 ```bash
 ./gradlew :desktopApp:run
 ```
 
-Игра сразу появится в каталоге.
+Gradle скопирует `catalog/*.json` в бандл автоматически — игра появится в каталоге.
 
-### Шаг 3. Опубликовать (GitHub Pages)
+### Шаг 4. Опубликовать
 
 ```bash
-# Регенерировать catalog/*.json
-./gradlew :desktopApp:generateCatalog
-
-# Закоммитить и запушить — GitHub Actions задеплоит автоматически
-git add catalog/ sharedUI/src/commonMain/kotlin/org/ollu/mini/scenes/BuiltinScenes.kt
+git add catalog/my_game_01.json catalog/catalog.json
 git commit -m "feat: add my_game_01"
 git push
 ```
+
+GitHub Actions задеплоит на GitHub Pages. Приложения получат новую сцену без обновления.
 
 ---
 
 ## Анатомия сцены
 
-```kotlin
-SceneDefinition(
-    sceneId    = "sort_fruits_01",          // уникальный ID, совпадает с именем файла
-    entities   = listOf(/* ... */),         // все объекты на экране
-    objectives = listOf(/* ... */),         // условия победы
-    behaviors  = sharedBehaviors()          // логика сцены (обычно sharedBehaviors())
-)
+Каждый файл содержит полное описание сцены включая метаданные для отображения в каталоге.
+
+```json
+{
+  "sceneId": "уникальный_id",
+  "meta": {
+    "title":       "Разложи фрукты",
+    "description": "Перетащи фрукты в корзину",
+    "ageMin":      2,
+    "ageMax":      5,
+    "version":     1,
+    "tags":        ["sorting", "fruits"]
+  },
+  "entities":      [ ... ],
+  "objectives":    [ ... ],
+  "behaviors":     [ ... ],
+  "fieldPolicies": {},
+  "idleTimeout":   30,
+  "onIdle":        "HINT",
+  "metadata":      {}
+}
+```
+
+### catalog.json
+
+Генерируется автоматически в CI из scene-файлов. Содержит только ID и URL:
+
+```json
+{
+  "version": 2,
+  "scenes": [
+    { "id": "sort_fruits_01", "url": "https://olluorg.github.io/mimi/sort_fruits_01.json" }
+  ]
+}
+```
+
+Приложение читает этот индекс, сравнивает с тем что уже есть в кэше, и подтягивает недостающие сцены.
+Метаданные (название, описание, возраст) берёт из самих scene JSON — не из `catalog.json`.
 ```
 
 ### Координатная система
 
 Логическое пространство — **1000 × 1000** единиц.  
-Начало (0, 0) — верхний левый угол. Ось Y направлена вниз.
+Начало `(0, 0)` — верхний левый угол, ось Y направлена вниз.
 
 ```
 (0,0) ──────────── (1000,0)
@@ -84,237 +162,181 @@ SceneDefinition(
 (0,1000) ─────── (1000,1000)
 ```
 
-Физические пиксели вычисляются автоматически через letterbox-маппинг.
-
 ---
 
-## Сущности (EntityDefinition)
+## Сущности (entities)
 
-```kotlin
-EntityDefinition(
-    id         = "apple",                          // уникальный ID в сцене
-    components = listOf("drag"),                   // поведение объекта (см. ниже)
-    properties = mapOf(
-        "position" to PropertyValue.Vec2(200f, 250f),
-        "zOrder"   to PropertyValue.Num(1.0),
-        "emoji"    to PropertyValue.Text("🍎"),
-        // любые пользовательские свойства:
-        "category" to PropertyValue.Text("fruit")
-    ),
-    tags = mapOf("group" to "fruits"),              // для групповых условий победы
-    behaviors = listOf(/* entity-level behaviors */)
-)
+```json
+{
+  "id": "apple",
+  "components": ["drag"],
+  "behaviors": [],
+  "properties": {
+    "position": { "type": "vec2", "x": 200.0, "y": 250.0 },
+    "zOrder":   { "type": "num",  "value": 1.0 },
+    "emoji":    { "type": "text", "value": "🍎" },
+    "category": { "type": "text", "value": "fruit" }
+  },
+  "tags": { "group": "fruits" },
+  "zOrder": 0
+}
 ```
 
-### Типы PropertyValue
+### Типы свойств
 
-| Тип | Пример | Применение |
+| Тип | Формат | Применение |
 |-----|--------|------------|
-| `Vec2(x, y)` | `Vec2(200f, 300f)` | позиция |
-| `Text(s)` | `Text("fruit")` | строковые свойства, ключи ограничений |
-| `Num(d)` | `Num(1.0)` | числовые свойства, zOrder |
-| `Ref(id)` | `Ref("basket")` | ссылка на другую сущность |
-| `TextList(list)` | `TextList(listOf("a","b"))` | список значений для `propertyIncludes` |
-| `Bool(b)` | `Bool(true)` | флаги |
+| `vec2` | `{"type":"vec2","x":200.0,"y":300.0}` | позиция |
+| `text` | `{"type":"text","value":"fruit"}` | строковые свойства |
+| `num`  | `{"type":"num","value":1.0}` | числа, zOrder |
+| `bool` | `{"type":"bool","value":true}` | флаги |
+| `textList` | `{"type":"textList","values":["a","b"]}` | список для `propertyIncludes` |
+| `ref`  | `{"type":"ref","entityId":"basket"}` | ссылка на сущность |
 
 ### Зарезервированные свойства
 
 | Свойство | Тип | Описание |
 |----------|-----|----------|
-| `position` | Vec2 | позиция на экране (обязательно) |
-| `zOrder` | Num | порядок отрисовки (выше = поверх) |
-| `emoji` | Text | эмодзи, отображаемый на тайле |
+| `position` | vec2 | позиция (обязательно) |
+| `zOrder`   | num  | порядок отрисовки (выше = поверх) |
+| `emoji`    | text | эмодзи на тайле |
 
 ---
 
 ## Компоненты
 
-Компонент определяет, как объект взаимодействует с движком.
-
 ### `"drag"` — перетаскиваемый объект
 
-```kotlin
-components = listOf("drag")
-```
+Пользователь может взять и перетащить. При отпускании над `dropTarget` проверяется ограничение.
 
-Пользователь может взять объект и перетащить. При отпускании над `dropTarget` генерируется событие `Drop`.
+```json
+"components": ["drag"]
+```
 
 ### `"dropTarget"` — зона сброса
 
-```kotlin
-components = listOf("dropTarget"),
-properties = mapOf(
-    "constraintType" to PropertyValue.Text("propertyEquals"),
-    "source"         to PropertyValue.Text("category"),   // свойство у drag-объекта
-    "target"         to PropertyValue.Text("category"),   // свойство у dropTarget
-    "category"       to PropertyValue.Text("fruit"),      // ожидаемое значение
-    // ...
-)
-```
+Принимает drag-объекты. Ограничение задаётся через свойства:
 
-Движок вызывает ограничение при каждом Drop. Если ограничение проходит — объект «защёлкивается» (MarkMatched).
+```json
+"components": ["dropTarget"],
+"properties": {
+  "constraintType": { "type": "text", "value": "propertyEquals" },
+  "source":         { "type": "text", "value": "color" },
+  "target":         { "type": "text", "value": "color" },
+  "color":          { "type": "text", "value": "red" }
+}
+```
 
 ---
 
-## Ограничения (Constraints)
-
-Ограничение определяет, допустим ли конкретный сброс.
+## Ограничения (constraintType)
 
 ### `propertyEquals` ★ (чаще всего)
 
 Проходит, если свойство drag-объекта равно свойству цели.
 
-```kotlin
-// На dropTarget:
-"constraintType" to Text("propertyEquals"),
-"source"         to Text("color"),    // ключ свойства у drag-объекта
-"target"         to Text("color"),    // ключ свойства у dropTarget
-"color"          to Text("red"),      // значение, которое должно совпасть
+```json
+"constraintType": { "type": "text", "value": "propertyEquals" },
+"source":         { "type": "text", "value": "color" },
+"target":         { "type": "text", "value": "color" },
+"color":          { "type": "text", "value": "red" }
 ```
 
 Пример: круг `color=red` подходит только к ящику `color=red`.
 
 ### `propertyIncludes`
 
-Проходит, если значение drag-объекта содержится в списке значений цели.
+Проходит, если значение drag-объекта входит в список значений цели.
 
-```kotlin
-"constraintType" to Text("propertyIncludes"),
-"source"         to Text("shape"),
-"target"         to Text("acceptedShapes"),
-"acceptedShapes" to PropertyValue.TextList(listOf("circle", "oval")),
+```json
+"constraintType":   { "type": "text",     "value": "propertyIncludes" },
+"source":           { "type": "text",     "value": "shape" },
+"target":           { "type": "text",     "value": "acceptedShapes" },
+"acceptedShapes":   { "type": "textList", "values": ["circle", "oval"] }
 ```
 
 ### `tagMatch`
 
 Проходит, если drag-объект и цель имеют одинаковое значение указанного тега.
 
-```kotlin
-"constraintType" to Text("tagMatch"),
-"tagKey"         to Text("color"),
+```json
+"constraintType": { "type": "text", "value": "tagMatch" },
+"tagKey":         { "type": "text", "value": "color" }
 ```
 
 ### `allOf` / `anyOf`
 
 Комбинируют несколько ограничений.
 
-```kotlin
-"constraintType" to Text("allOf"),
-"types"          to Text("propertyEquals,tagMatch"),
-// + параметры для каждого из типов
+```json
+"constraintType": { "type": "text", "value": "allOf" },
+"types":          { "type": "text", "value": "propertyEquals,tagMatch" }
 ```
 
 ---
 
-## Поведения (Behaviors)
+## Поведения (behaviors)
 
-Поведения добавляются на уровне сцены. Все стандартные сцены используют `sharedBehaviors()`.
+Стандартный набор для большинства сцен:
 
-### Стандартный набор `sharedBehaviors()`
-
-```kotlin
-private fun sharedBehaviors() = listOf(
-    SceneBehaviorBinding(BehaviorRef("progressTracker")),
-    SceneBehaviorBinding(BehaviorRef("snapToTarget")),
-    SceneBehaviorBinding(BehaviorRef("adaptiveHint")),
-    SceneBehaviorBinding(BehaviorRef("playSoundOnEvent",
-        mapOf("on" to "sceneCompleted", "sound" to "complete")))
-)
+```json
+"behaviors": [
+  { "behaviorRef": { "type": "progressTracker",  "config": {} }, "entityId": null },
+  { "behaviorRef": { "type": "snapToTarget",     "config": {} }, "entityId": null },
+  { "behaviorRef": { "type": "adaptiveHint",     "config": {} }, "entityId": null },
+  { "behaviorRef": { "type": "playSoundOnEvent", "config": { "on": "sceneCompleted", "sound": "complete" } }, "entityId": null }
+]
 ```
 
 ### Справочник поведений
 
 #### `progressTracker`
-Считает матчи и ошибки в мета-свойствах сцены (`matches`, `mistakes`). Без параметров.
+Считает матчи и ошибки. Без параметров.
 
 #### `snapToTarget`
-Основная механика drag-and-drop. Оценивает ограничение, при успехе перемещает объект к цели.
+Основная механика drag-and-drop.
 
 | Параметр | По умолчанию | Описание |
 |----------|-------------|----------|
-| `snapRadius` | `80` | радиус захвата цели (логические единицы) |
-| `priority` | `100` | приоритет команды в CRL |
+| `snapRadius` | `80` | радиус захвата (логические единицы) |
 
 #### `adaptiveHint`
-Показывает подсказки (пульсация объекта), если ребёнок не взаимодействует с экраном.
+Пульсирует объект если ребёнок не взаимодействует с экраном.
 
 | Параметр | По умолчанию | Описание |
 |----------|-------------|----------|
 | `cooldownMin` | `600` (10с) | минимальная пауза между подсказками (тики) |
 | `cooldownMax` | `900` (15с) | максимальная пауза |
 
-Уровни подсказок (автоматически):
-- **SUBTLE** — после 4 сек / 1 ошибки
-- **DIRECTIONAL** — после 8 сек / 2 ошибок
-- **ASSIST** — после 12 сек / 3 ошибок
+Уровни (автоматически): **SUBTLE** → **DIRECTIONAL** → **ASSIST**
 
 #### `playSoundOnEvent`
-Воспроизводит звук при наступлении события.
 
-| Параметр | Значения | Описание |
-|----------|----------|----------|
-| `on` | `matchSuccess`, `matchFail`, `sceneCompleted` | событие-триггер |
-| `sound` | `success`, `fail`, `complete`, `hint` | имя звука |
-
-```kotlin
-SceneBehaviorBinding(BehaviorRef("playSoundOnEvent",
-    mapOf("on" to "sceneCompleted", "sound" to "complete")))
-```
-
-#### `difficultyScaler`
-Автоматически адаптирует сложность по метрикам успешности. Без параметров для стандартного использования.
-
-#### `visibilityToggle`
-Переключает видимость сущностей при событии.
-
-| Параметр | Значения | Описание |
-|----------|----------|----------|
-| `targets` | `"id1,id2"` | ID сущностей (через запятую) |
-| `on` | `tap`, `matchSuccess` | событие-триггер |
-
-```kotlin
-EntityDefinition(
-    id = "hint_arrow",
-    behaviors = listOf(BehaviorRef("visibilityToggle",
-        mapOf("targets" to "hint_arrow", "on" to "tap")))
-)
-```
-
-#### `lockOnComplete`
-При завершении сцены переводит все TENTATIVE-объекты в LOCKED (серые). Без параметров.
+| Параметр | Значения |
+|----------|----------|
+| `on`    | `matchSuccess`, `matchFail`, `sceneCompleted` |
+| `sound` | `success`, `fail`, `complete`, `hint` |
 
 ---
 
-## Условия победы (Objectives)
-
-```kotlin
-objectives = listOf(
-    ObjectiveDefinition(
-        id     = "obj1",
-        type   = "allMatched",
-        config = mapOf("group" to "fruits")
-    )
-)
-```
+## Условия победы (objectives)
 
 ### `allMatched`
 
-Срабатывает, когда **все** объекты с тегом `group = <value>` находятся в состоянии TENTATIVE или LOCKED.
+Срабатывает, когда **все** объекты с тегом `group` совмещены с целями.
 
-```kotlin
-// Объекты должны иметь:
-tags = mapOf("group" to "fruits")
-
-// Условие:
-ObjectiveDefinition("win", "allMatched", mapOf("group" to "fruits"))
+```json
+{ "id": "win", "type": "allMatched", "config": { "group": "fruits" }, "requires": null }
 ```
+
+Объекты должны иметь тег `"group": "fruits"`.
 
 ### `allSorted`
 
-Срабатывает, когда все объекты, помеченные определённым тегом, отсортированы.
+Срабатывает, когда все объекты с тегом `sortable` отсортированы.
 
-```kotlin
-ObjectiveDefinition("win", "allSorted", mapOf("tag" to "sortable"))
+```json
+{ "id": "win", "type": "allSorted", "config": { "tag": "sortable" }, "requires": null }
 ```
 
 ---
@@ -323,72 +345,91 @@ ObjectiveDefinition("win", "allSorted", mapOf("tag" to "sortable"))
 
 ```
 ACTIVE → TENTATIVE → LOCKED
-          ↑             ↑
-     (matched)    (scene complete)
+  ↑           ↑          ↑
+(старт)  (matched)  (сцена завершена)
 ```
 
 | Состояние | Цвет | Описание |
 |-----------|------|----------|
-| `ACTIVE` | синий | исходное, можно перетаскивать |
+| `ACTIVE`    | синий  | исходное, можно перетаскивать |
 | `TENTATIVE` | зелёный | правильно совмещён с целью |
-| `LOCKED` | серый | зафиксирован (после завершения сцены) |
-| `INACTIVE` | скрыт | не отображается |
+| `LOCKED`    | серый  | зафиксирован после завершения |
+| `INACTIVE`  | скрыт  | не отображается |
 
 ---
 
 ## Полный пример: «Совмести буквы»
 
-```kotlin
-private fun matchLettersScene(): SceneDefinition {
-    fun letter(id: String, char: String, x: Float) = EntityDefinition(
-        id         = id,
-        components = listOf("drag"),
-        properties = mapOf(
-            "position" to PropertyValue.Vec2(x, 250f),
-            "zOrder"   to PropertyValue.Num(1.0),
-            "letter"   to PropertyValue.Text(char),
-            "emoji"    to PropertyValue.Text(char)
-        ),
-        tags = mapOf("group" to "letters")
-    )
+`catalog/match_letters_01.json`:
 
-    fun slot(id: String, char: String, x: Float) = EntityDefinition(
-        id         = id,
-        components = listOf("dropTarget"),
-        properties = mapOf(
-            "position"       to PropertyValue.Vec2(x, 700f),
-            "zOrder"         to PropertyValue.Num(0.0),
-            "constraintType" to PropertyValue.Text("propertyEquals"),
-            "source"         to PropertyValue.Text("letter"),
-            "target"         to PropertyValue.Text("letter"),
-            "letter"         to PropertyValue.Text(char),
-            "emoji"          to PropertyValue.Text(char.lowercase())
-        )
-    )
-
-    return SceneDefinition(
-        sceneId    = "match_letters_01",
-        entities   = listOf(
-            letter("A", "A", 200f),
-            letter("B", "B", 500f),
-            letter("C", "C", 800f),
-            slot("a", "A", 200f),
-            slot("b", "B", 500f),
-            slot("c", "C", 800f),
-        ),
-        objectives = listOf(
-            ObjectiveDefinition("obj1", "allMatched", mapOf("group" to "letters"))
-        ),
-        behaviors  = sharedBehaviors()
-    )
+```json
+{
+  "sceneId": "match_letters_01",
+  "entities": [
+    {
+      "id": "letter_A", "components": ["drag"], "behaviors": [],
+      "properties": {
+        "position": { "type": "vec2", "x": 200.0, "y": 250.0 },
+        "zOrder":   { "type": "num",  "value": 1.0 },
+        "emoji":    { "type": "text", "value": "A" },
+        "letter":   { "type": "text", "value": "A" }
+      },
+      "tags": { "group": "letters" }, "zOrder": 0
+    },
+    {
+      "id": "letter_B", "components": ["drag"], "behaviors": [],
+      "properties": {
+        "position": { "type": "vec2", "x": 500.0, "y": 250.0 },
+        "zOrder":   { "type": "num",  "value": 1.0 },
+        "emoji":    { "type": "text", "value": "B" },
+        "letter":   { "type": "text", "value": "B" }
+      },
+      "tags": { "group": "letters" }, "zOrder": 0
+    },
+    {
+      "id": "slot_A", "components": ["dropTarget"], "behaviors": [],
+      "properties": {
+        "position":       { "type": "vec2", "x": 200.0, "y": 700.0 },
+        "zOrder":         { "type": "num",  "value": 0.0 },
+        "emoji":          { "type": "text", "value": "a" },
+        "constraintType": { "type": "text", "value": "propertyEquals" },
+        "source":         { "type": "text", "value": "letter" },
+        "target":         { "type": "text", "value": "letter" },
+        "letter":         { "type": "text", "value": "A" }
+      },
+      "tags": {}, "zOrder": 0
+    },
+    {
+      "id": "slot_B", "components": ["dropTarget"], "behaviors": [],
+      "properties": {
+        "position":       { "type": "vec2", "x": 500.0, "y": 700.0 },
+        "zOrder":         { "type": "num",  "value": 0.0 },
+        "emoji":          { "type": "text", "value": "b" },
+        "constraintType": { "type": "text", "value": "propertyEquals" },
+        "source":         { "type": "text", "value": "letter" },
+        "target":         { "type": "text", "value": "letter" },
+        "letter":         { "type": "text", "value": "B" }
+      },
+      "tags": {}, "zOrder": 0
+    }
+  ],
+  "objectives": [
+    { "id": "win", "type": "allMatched", "config": { "group": "letters" }, "requires": null }
+  ],
+  "behaviors": [
+    { "behaviorRef": { "type": "progressTracker",  "config": {} }, "entityId": null },
+    { "behaviorRef": { "type": "snapToTarget",     "config": {} }, "entityId": null },
+    { "behaviorRef": { "type": "adaptiveHint",     "config": {} }, "entityId": null },
+    { "behaviorRef": { "type": "playSoundOnEvent", "config": { "on": "sceneCompleted", "sound": "complete" } }, "entityId": null }
+  ],
+  "fieldPolicies": {}, "idleTimeout": 30, "onIdle": "HINT", "metadata": {}
 }
 ```
 
-Затем в `BuiltinScenes.all`:
+Затем в `catalog/catalog.json`:
 
-```kotlin
-entry("match_letters_01", "Буквы А Б В", "Совмести заглавную букву с маленькой", 4, 6)
-    to matchLettersScene(),
+```json
+{ "id": "match_letters_01", "title": "Буквы А Б", "description": "Совмести заглавную букву с маленькой", "url": "https://olluorg.github.io/mimi/match_letters_01.json", "ageMin": 4, "ageMax": 6 }
 ```
 
 ---
@@ -396,26 +437,15 @@ entry("match_letters_01", "Буквы А Б В", "Совмести заглав�
 ## Структура проекта
 
 ```
-sharedUI/src/commonMain/kotlin/org/ollu/mini/
-├── scenes/
-│   ├── BuiltinScenes.kt   ← ВСЕ встроенные сцены — правь здесь
-│   └── DemoScene.kt
-├── catalog/
-│   ├── CatalogCache.kt    ← кэш через multiplatform-settings
-│   ├── SceneRepository.kt ← Flow-based загрузка: кэш → сеть
-│   ├── CatalogScreen.kt
-│   └── CatalogEntry.kt
-└── ...
-
-catalog/                   ← сгенерированные JSON (не редактировать вручную)
-├── catalog.json
+catalog/                   ← ПИШИ ЗДЕСЬ (источник правды)
+├── catalog.json           ← индекс сцен
 ├── sort_fruits_01.json
 └── ...
+
+sharedUI/.../composeResources/files/catalog/   ← gitignored, копируется при сборке
 ```
 
-> **catalog/*.json генерируется автоматически** из `BuiltinScenes.kt` командой  
-> `./gradlew :desktopApp:generateCatalog`  
-> Не редактируй JSON вручную.
+> Файлы в `composeResources/` перезаписываются при каждой сборке — не редактируй их вручную.
 
 ---
 
@@ -425,5 +455,5 @@ catalog/                   ← сгенерированные JSON (не ред�
 - **Расстановка**: 3 объекта — x = 200, 500, 800; 4 объекта — 150, 380, 620, 850.
 - **Emoji**: один символ отображается крупно; двойные (`🔴🔴`) работают, но выглядят хуже.
 - **Группы**: все drag-объекты одной механики должны иметь одинаковый тег `group`.
-- **zOrder**: drag-объекты = 1.0, цели = 0.0 (чтобы drag рисовался поверх).
+- **zOrder**: drag-объекты = 1.0, цели = 0.0 (drag рисуется поверх).
 - **Возраст**: 2–4 года — 3 объекта, 1 цель; 4–6 лет — 4 объекта, 2+ цели.

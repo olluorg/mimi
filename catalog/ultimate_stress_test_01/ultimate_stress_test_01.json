@@ -1,0 +1,188 @@
+{
+  "sceneId": "ultimate_stress_test_01",
+
+  "entities": [
+    {
+      "id": "item_1",
+      "components": ["drag", "tap"],
+      "behaviors": [],
+      "properties": {
+        "position": { "type": "vec2", "x": 150.0, "y": 200.0 },
+        "sequenceIndex": { "type": "num", "value": 1.0 },
+        "pairId": { "type": "text", "value": "a" },
+        "traceAnchor": { "type": "flag", "value": true },
+        "emoji": { "type": "text", "value": "1️⃣" }
+      },
+      "tags": { "group": "mixed" },
+      "zOrder": 1
+    },
+
+    {
+      "id": "item_2",
+      "components": ["drag", "tap"],
+      "behaviors": [],
+      "properties": {
+        "position": { "type": "vec2", "x": 400.0, "y": 200.0 },
+        "sequenceIndex": { "type": "num", "value": 2.0 },
+        "pairId": { "type": "text", "value": "b" },
+        "traceAnchor": { "type": "flag", "value": false },
+        "emoji": { "type": "text", "value": "2️⃣" }
+      },
+      "tags": { "group": "mixed" },
+      "zOrder": 1
+    },
+
+    {
+      "id": "item_3",
+      "components": ["drag", "tap"],
+      "behaviors": [],
+      "properties": {
+        "position": { "type": "vec2", "x": 650.0, "y": 200.0 },
+        "sequenceIndex": { "type": "num", "value": 3.0 },
+        "pairId": { "type": "text", "value": "a" },
+        "traceAnchor": { "type": "flag", "value": true },
+        "emoji": { "type": "text", "value": "3️⃣" }
+      },
+      "tags": { "group": "mixed" },
+      "zOrder": 1
+    },
+    {
+      "id": "trace_path",
+      "components": ["traceTarget"],
+      "behaviors": [],
+      "properties": {
+        "waypoints": {
+          "type": "points",
+          "value": [
+            { "x": 100.0, "y": 500.0, "radius": 80.0 },
+            { "x": 300.0, "y": 600.0, "radius": 80.0 },
+            { "x": 600.0, "y": 500.0, "radius": 80.0 }
+          ]
+        },
+        "direction": { "type": "text", "value": "forward" }
+      },
+      "tags": { "group": "trace" },
+      "zOrder": 0
+    }
+  ],
+
+  "objectives": [
+    {
+      "id": "obj1",
+      "type": "sequenceCompleted",
+      "config": {
+        "property": "sequenceIndex",
+        "group": "mixed"
+      }
+    },
+
+    {
+      "id": "obj2",
+      "type": "allPairsMatched",
+      "config": {
+        "property": "pairId",
+        "group": "mixed"
+      }
+    },
+
+    {
+      "id": "obj3",
+      "type": "traceCompleted",
+      "config": {
+        "group": "trace",
+        "minProgress": "0.85"
+      },
+      "requires": null
+    }
+  ],
+
+  "behaviors": [
+    {
+      "behaviorRef": {
+        "type": "sequenceValidator",
+        "config": {
+          "group": "mixed",
+          "property": "sequenceIndex"
+        }
+      }
+    },
+
+    {
+      "behaviorRef": {
+        "type": "pairMatchValidator",
+        "config": {
+          "group": "mixed",
+          "property": "pairId"
+        }
+      }
+    },
+
+    {
+      "behaviorRef": {
+        "type": "memoryFlipController",
+        "config": {
+          "group": "mixed",
+          "maxOpenCards": "2",
+          "flipBackDelayMs": "700"
+        }
+      },
+      "entityId": null
+    },
+
+    {
+      "behaviorRef": {
+        "type": "traceValidator",
+        "config": {
+          "group": "trace",
+          "allowBacktracking": "true"
+        }
+      },
+      "entityId": null
+    },
+
+    {
+      "behaviorRef": {
+        "type": "progressTracker",
+        "config": {}
+      }
+    },
+
+    {
+      "behaviorRef": {
+        "type": "adaptiveHint",
+        "config": {
+          "mode": "mixed"
+        }
+      }
+    }
+  ],
+
+  "fieldPolicies": {
+    "state": "PRIORITY",
+    "progress": "PRIORITY",
+    "selection": "LAST_WINS"
+  },
+
+  "idleTimeout": 10,
+  "onIdle": "HINT",
+
+  "metadata": {
+    "difficulty": "hard"
+  },
+  "meta": {
+    "title": "Ultimate Stress Test",
+    "description": "Mixed interaction: sequence + memory + trace + drag conflict test",
+    "ageMin": 3,
+    "ageMax": 6,
+    "version": 1,
+    "tags": ["stress_test", "mixed_mechanics", "system_validation"],
+    "skills": [
+      "attention",
+      "memory",
+      "sequencing",
+      "fine_motor",
+      "trace_control",
+      "problem_solving"
+    ]
+  }
+}

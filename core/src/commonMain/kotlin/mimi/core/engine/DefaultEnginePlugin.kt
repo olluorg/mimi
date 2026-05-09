@@ -10,9 +10,17 @@ fun EngineBuilder.withDefaultPlugins(constraintRegistry: ConstraintRegistry): En
     return this
         .withPlugin(ProgressTrackerPlugin())
         .withPlugin(SnapToTargetPlugin(constraintRegistry))
+        .withPlugin(SequenceValidatorPlugin())
+        .withPlugin(TraceValidatorPlugin())
+        .withPlugin(AudioPromptPlugin())
+        .withPlugin(PropertySelectionValidatorPlugin())
+        .withPlugin(GeometrySelectionValidatorPlugin())
         .withPlugin(PlaySoundOnEventPlugin())
         .withPlugin(AdaptiveHintPlugin())
         .withPlugin(DifficultyScalerPlugin())
         .withPlugin(VisibilityTogglePlugin())
         .withPlugin(LockOnCompletePlugin())
+        .withPlugin(CircleTraceValidatorPlugin())
+        .withPlugin(MemoryFlipControllerPlugin())
+        .withPlugin(PairMatchValidatorPlugin())
 }

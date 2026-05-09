@@ -40,7 +40,13 @@ sealed class PropertyValue {
 
     @Serializable @SerialName("list")
     data class TextList(val values: List<String>)   : PropertyValue()
+
+    @Serializable @SerialName("points")
+    data class PointList(val value: List<Waypoint>) : PropertyValue()
 }
+
+@Serializable
+data class Waypoint(val x: Float, val y: Float, val radius: Float = 40f)
 
 // ── Entity Snapshot ───────────────────────────────────────────────────────────
 
@@ -55,8 +61,9 @@ data class EntitySnapshot(
     fun num(key: PropertyKey): Double?             = (properties[key] as? PropertyValue.Num)?.value
     fun text(key: PropertyKey): String?            = (properties[key] as? PropertyValue.Text)?.value
     fun flag(key: PropertyKey): Boolean?           = (properties[key] as? PropertyValue.Flag)?.value
-    fun vec2(key: PropertyKey): PropertyValue.Vec2? = properties[key] as? PropertyValue.Vec2
-    fun tag(key: TagKey): String?                  = tags[key]
+    fun vec2(key: PropertyKey): PropertyValue.Vec2?      = properties[key] as? PropertyValue.Vec2
+    fun waypoints(key: PropertyKey): List<Waypoint>?     = (properties[key] as? PropertyValue.PointList)?.value
+    fun tag(key: TagKey): String?                        = tags[key]
     fun hasComponent(type: ComponentType): Boolean = type in components
     fun hasTag(key: TagKey): Boolean               = key in tags
     fun hasTag(key: TagKey, value: String): Boolean = tags[key] == value

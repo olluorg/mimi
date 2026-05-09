@@ -22,6 +22,8 @@ class CoordinateMapper(val canvasSize: Size) {
         y = letterboxRect.top  + logical.y * scale
     )
 
+    fun logicalLengthToScreen(length: Float): Float = length * scale
+
     fun screenToLogical(screen: Offset): PropertyValue.Vec2 = PropertyValue.Vec2(
         x = ((screen.x - letterboxRect.left) / scale).coerceIn(0f, LOGICAL_SIZE),
         y = ((screen.y - letterboxRect.top)  / scale).coerceIn(0f, LOGICAL_SIZE)

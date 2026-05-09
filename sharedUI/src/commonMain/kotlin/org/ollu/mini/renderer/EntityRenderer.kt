@@ -3,6 +3,7 @@ package org.ollu.mini.renderer
 import androidx.compose.animation.core.*
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -32,7 +33,8 @@ fun EntityRenderer(
     entity:          EntitySnapshot,
     mapper:          CoordinateMapper,
     dragOverridePos: PropertyValue.Vec2? = null,
-    isHinted:        Boolean             = false
+    isHinted:        Boolean             = false,
+    onTap:           (() -> Unit)?       = null
 ) {
     val pos = dragOverridePos ?: entity.vec2("position") ?: return
     if (entity.state == EntityLifecycleState.INACTIVE) return
@@ -51,11 +53,19 @@ fun EntityRenderer(
 
     val isDragging   = dragOverridePos != null
     val isDragTarget = entity.hasComponent("dropTarget")
-    val emoji        = entity.text("emoji")
+    val cardState    = entity.text("cardState")
+    val emoji        = when (cardState) {
+        "hidden" -> "?"
+        "revealed", "matched" -> entity.text("face") ?: entity.text("emoji")
+        else -> entity.text("emoji")
+    }
     val screenPos    = mapper.logicalToScreen(pos)
 
     val bgColor = when {
         isDragTarget -> Color(0x33795548)          // semi-transparent brown fill
+        cardState == "hidden"                          -> Color(0xFF6D8EC7)
+        cardState == "revealed"                        -> Color(0xFFFFF3C4)
+        cardState == "matched"                         -> Color(0xFF66BB6A)
         entity.state == EntityLifecycleState.ACTIVE    -> Color(0xFF5C9FD4)
         entity.state == EntityLifecycleState.TENTATIVE -> Color(0xFF66BB6A)
         entity.state == EntityLifecycleState.LOCKED    -> Color(0xFFB0BEC5)
@@ -68,7 +78,14 @@ fun EntityRenderer(
         else -> Color.Transparent
     }
 
-    val size = if (isDragTarget) BASKET_SIZE else FRUIT_SIZE
+    val widthDp = entity.num("width")?.toFloat()?.dp ?: entity.num("radius")?.let { (it * 2.0).toFloat().dp }
+    val heightDp = entity.num("height")?.toFloat()?.dp ?: entity.num("radius")?.let { (it * 2.0).toFloat().dp }
+    val sizeModifier = when {
+        isDragTarget -> Modifier.size(BASKET_SIZE)
+        widthDp != null && heightDp != null -> Modifier.size(widthDp, heightDp)
+        widthDp != null -> Modifier.size(widthDp)
+        else -> Modifier.size(FRUIT_SIZE)
+    }
 
     Box(
         modifier = Modifier
@@ -85,9 +102,10 @@ fun EntityRenderer(
                     )
                 }
             }
-            .size(size)
+            .then(sizeModifier)
             .background(bgColor, RoundedCornerShape(CORNER))
-            .border(3.dp, borderColor, RoundedCornerShape(CORNER)),
+            .border(3.dp, borderColor, RoundedCornerShape(CORNER))
+            .then(if (onTap != null) Modifier.clickable(onClick = onTap) else Modifier),
         contentAlignment = Alignment.Center
     ) {
         if (emoji != null) {

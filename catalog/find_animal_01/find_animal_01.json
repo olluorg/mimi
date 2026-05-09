@@ -1,0 +1,131 @@
+{
+  "sceneId": "find_animal_01",
+
+  "entities": [
+    {
+      "id": "cat",
+      "components": ["tap"],
+      "behaviors": [],
+      "properties": {
+        "position": { "type": "vec2", "x": 200.0, "y": 400.0 },
+        "category": { "type": "text", "value": "animal" },
+        "name": { "type": "text", "value": "cat" },
+        "emoji": { "type": "text", "value": "🐱" }
+      },
+      "tags": {
+        "group": "choices"
+      },
+      "zOrder": 0
+    },
+
+    {
+      "id": "dog",
+      "components": ["tap"],
+      "behaviors": [],
+      "properties": {
+        "position": { "type": "vec2", "x": 500.0, "y": 400.0 },
+        "category": { "type": "text", "value": "animal" },
+        "name": { "type": "text", "value": "dog" },
+        "emoji": { "type": "text", "value": "🐶" }
+      },
+      "tags": {
+        "group": "choices"
+      },
+      "zOrder": 0
+    },
+
+    {
+      "id": "car",
+      "components": ["tap"],
+      "behaviors": [],
+      "properties": {
+        "position": { "type": "vec2", "x": 800.0, "y": 400.0 },
+        "category": { "type": "text", "value": "vehicle" },
+        "name": { "type": "text", "value": "car" },
+        "emoji": { "type": "text", "value": "🚗" }
+      },
+      "tags": {
+        "group": "choices"
+      },
+      "zOrder": 0
+    }
+  ],
+
+  "objectives": [
+    {
+      "id": "obj1",
+      "type": "entitySelected",
+      "config": {
+        "property": "name",
+        "value": "cat"
+      },
+      "requires": null
+    }
+  ],
+
+  "behaviors": [
+    {
+      "behaviorRef": {
+        "type": "audioPrompt",
+        "config": {
+          "on": "sceneStarted",
+          "sound": "find_animal_01/media/meow.mp3"
+        }
+      },
+      "entityId": null
+    },
+
+    {
+      "behaviorRef": {
+        "type": "propertySelectionValidator",
+        "config": {
+          "property": "name",
+          "expected": "cat"
+        }
+      },
+      "entityId": null
+    },
+
+    {
+      "behaviorRef": {
+        "type": "adaptiveHint",
+        "config": {}
+      },
+      "entityId": null
+    },
+
+    {
+      "behaviorRef": {
+        "type": "playSoundOnEvent",
+        "config": {
+          "on": "sceneCompleted",
+          "sound": "complete"
+        }
+      },
+      "entityId": null
+    }
+  ],
+
+  "idleTimeout": 10,
+
+  "onIdle": "HINT",
+
+  "metadata": {
+    "skill": "receptive_speech"
+  },
+  "meta": {
+    "title": "Найди животное",
+    "description": "Слушай внимательно и нажми на правильное животное",
+    "ageMin": 2,
+    "ageMax": 6,
+    "version": 1,
+    "tags": ["matching", "colors"],
+    "skills": [
+      "receptive_speech",
+      "word_association",
+      "selective_attention",
+      "visual_attention",
+      "task_completion"
+    ]
+  }
+}

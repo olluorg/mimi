@@ -106,6 +106,28 @@ room {
     schemaDirectory("$projectDir/schemas")
 }
 
+// ── Bundled catalog sync ──────────────────────────────────────────────────────
+// Copies catalog/**  into composeResources so scenes are available offline.
+// Flat scenes:  catalog/*.json  → files/catalog/*.json
+// Rich scenes:  catalog/<id>/*.json + media/**  → files/catalog/<id>/...
+val syncBundledCatalog by tasks.registering(Sync::class) {
+    val src = rootProject.file("catalog")
+    onlyIf { src.exists() }
+    from(src)
+    into("${projectDir}/src/commonMain/composeResources/files/catalog")
+    include("*.json")       // flat scene JSONs and catalog.json
+    include("*/*.json")     // nested scene JSONs (e.g. find_animal_01/find_animal_01.json)
+    include("*/media/**")   // media assets (mp3, ogg, …)
+    exclude("README.md")
+    // preserve .gitkeep so the directory stays tracked when catalog/ is empty
+    preserve { include(".gitkeep") }
+}
+
+afterEvaluate {
+    tasks.matching { it.name.contains("ComposeResources") || it.name.contains("NonXmlValueResources") }
+        .configureEach { dependsOn(syncBundledCatalog) }
+}
+
 dependencies {
     with(libs.room.compiler) {
         add("kspAndroid", this)

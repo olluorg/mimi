@@ -1,45 +1,78 @@
 {
   "sceneId": "tap_sequence_01",
-
   "entities": [
     {
       "id": "step_1",
-      "components": ["tap"],
+      "components": [
+        "tap"
+      ],
       "behaviors": [],
       "properties": {
-        "position": { "type": "vec2", "x": 200.0, "y": 400.0 },
-        "sequenceIndex": { "type": "num", "value": 1.0 },
-        "emoji": { "type": "text", "value": "1️⃣" }
+        "position": {
+          "type": "vec2",
+          "x": 200.0,
+          "y": 400.0
+        },
+        "sequenceIndex": {
+          "type": "num",
+          "value": 1.0
+        },
+        "emoji": {
+          "type": "text",
+          "value": "1️⃣"
+        }
       },
       "tags": {
         "group": "sequence"
       },
       "zOrder": 0
     },
-
     {
       "id": "step_2",
-      "components": ["tap"],
+      "components": [
+        "tap"
+      ],
       "behaviors": [],
       "properties": {
-        "position": { "type": "vec2", "x": 500.0, "y": 400.0 },
-        "sequenceIndex": { "type": "num", "value": 2.0 },
-        "emoji": { "type": "text", "value": "2️⃣" }
+        "position": {
+          "type": "vec2",
+          "x": 500.0,
+          "y": 400.0
+        },
+        "sequenceIndex": {
+          "type": "num",
+          "value": 2.0
+        },
+        "emoji": {
+          "type": "text",
+          "value": "2️⃣"
+        }
       },
       "tags": {
         "group": "sequence"
       },
       "zOrder": 0
     },
-
     {
       "id": "step_3",
-      "components": ["tap"],
+      "components": [
+        "tap"
+      ],
       "behaviors": [],
       "properties": {
-        "position": { "type": "vec2", "x": 800.0, "y": 400.0 },
-        "sequenceIndex": { "type": "num", "value": 3.0 },
-        "emoji": { "type": "text", "value": "3️⃣" }
+        "position": {
+          "type": "vec2",
+          "x": 800.0,
+          "y": 400.0
+        },
+        "sequenceIndex": {
+          "type": "num",
+          "value": 3.0
+        },
+        "emoji": {
+          "type": "text",
+          "value": "3️⃣"
+        }
       },
       "tags": {
         "group": "sequence"
@@ -47,7 +80,6 @@
       "zOrder": 0
     }
   ],
-
   "objectives": [
     {
       "id": "obj1",
@@ -58,7 +90,6 @@
       "requires": null
     }
   ],
-
   "behaviors": [
     {
       "behaviorRef": {
@@ -70,7 +101,6 @@
       },
       "entityId": null
     },
-
     {
       "behaviorRef": {
         "type": "progressTracker",
@@ -78,7 +108,6 @@
       },
       "entityId": null
     },
-
     {
       "behaviorRef": {
         "type": "playSoundOnEvent",
@@ -89,7 +118,6 @@
       },
       "entityId": null
     },
-
     {
       "behaviorRef": {
         "type": "playSoundOnEvent",
@@ -101,14 +129,28 @@
       "entityId": null
     }
   ],
-
   "fieldPolicies": {},
-
   "idleTimeout": 20,
-
   "onIdle": "HINT",
-
   "metadata": {
     "difficulty": "easy"
+  },
+  "meta": {
+    "title": "Нажми по порядку",
+    "description": "Нажимай на цифры по порядку",
+    "ageMin": 3,
+    "ageMax": 6,
+    "version": 1,
+    "tags": [
+      "sequence",
+      "tap"
+    ],
+    "skills": [
+      "sequencing",
+      "numbers",
+      "selective_attention",
+      "impulse_control",
+      "task_completion"
+    ]
   }
 }
