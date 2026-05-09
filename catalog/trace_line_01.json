@@ -1,0 +1,103 @@
+{
+  "sceneId": "trace_line_01",
+
+  "entities": [
+    {
+      "id": "trace_path",
+
+      "components": ["traceTarget"],
+
+      "behaviors": [],
+
+      "properties": {
+        "waypoints": {
+          "type": "points",
+          "value": [
+            { "x": 200.0, "y": 400.0, "radius": 80.0 },
+            { "x": 400.0, "y": 400.0, "radius": 80.0 },
+            { "x": 600.0, "y": 400.0, "radius": 80.0 },
+            { "x": 800.0, "y": 400.0, "radius": 80.0 }
+          ]
+        },
+
+        "direction": {
+          "type": "text",
+          "value": "forward"
+        }
+      },
+
+      "tags": {
+        "group": "trace"
+      },
+
+      "zOrder": 0
+    }
+  ],
+
+  "objectives": [
+    {
+      "id": "obj1",
+
+      "type": "traceCompleted",
+
+      "config": {
+        "group": "trace"
+      },
+
+      "requires": null
+    }
+  ],
+
+  "behaviors": [
+    {
+      "behaviorRef": {
+        "type": "traceValidator",
+        "config": {
+          "group": "trace",
+          "allowBacktracking": true
+        }
+      },
+      "entityId": null
+    },
+
+    {
+      "behaviorRef": {
+        "type": "progressTracker",
+        "config": {}
+      },
+      "entityId": null
+    },
+
+    {
+      "behaviorRef": {
+        "type": "playSoundOnEvent",
+        "config": {
+          "on": "traceCheckpointReached",
+          "sound": "checkpoint"
+        }
+      },
+      "entityId": null
+    },
+
+    {
+      "behaviorRef": {
+        "type": "playSoundOnEvent",
+        "config": {
+          "on": "sceneCompleted",
+          "sound": "complete"
+        }
+      },
+      "entityId": null
+    }
+  ],
+
+  "fieldPolicies": {},
+
+  "idleTimeout": 15,
+
+  "onIdle": "HINT",
+
+  "metadata": {
+    "difficulty": "easy"
+  }
+}

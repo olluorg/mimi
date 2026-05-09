@@ -6,21 +6,53 @@
       "title": "Sort the Fruits",
       "description": "Drag fruits into the basket",
       "url": "https://olluorg.github.io/mimi/sort_fruits_01.json",
-      "ageMin": 2, "ageMax": 5
+      "ageMin": 2,
+      "ageMax": 5
     },
+
     {
       "id": "match_colors_01",
       "title": "Match the Colors",
       "description": "Match each circle to its colored square",
       "url": "https://olluorg.github.io/mimi/match_colors_01.json",
-      "ageMin": 2, "ageMax": 6
+      "ageMin": 2,
+      "ageMax": 6
     },
+
     {
       "id": "sort_animals_01",
       "title": "Animals Go Home",
       "description": "Help each animal find its home",
       "url": "https://olluorg.github.io/mimi/sort_animals_01.json",
-      "ageMin": 3, "ageMax": 6
+      "ageMin": 3,
+      "ageMax": 6
+    },
+
+    {
+      "id": "tap_sequence_01",
+      "title": "Tap in Order",
+      "description": "Tap numbers in the correct order",
+      "url": "https://olluorg.github.io/mimi/tap_sequence_01.json",
+      "ageMin": 3,
+      "ageMax": 6
+    },
+
+    {
+      "id": "trace_line_01",
+      "title": "Trace the Line",
+      "description": "Follow the path from start to finish",
+      "url": "https://olluorg.github.io/mimi/trace_line_01.json",
+      "ageMin": 2,
+      "ageMax": 5
+    },
+
+    {
+      "id": "find_animal_01",
+      "title": "Find the Animal",
+      "description": "Listen carefully and tap the correct animal",
+      "url": "https://olluorg.github.io/mimi/find_animal_01.json",
+      "ageMin": 2,
+      "ageMax": 6
     }
   ]
 }

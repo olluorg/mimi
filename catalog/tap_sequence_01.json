@@ -1,0 +1,114 @@
+{
+  "sceneId": "tap_sequence_01",
+
+  "entities": [
+    {
+      "id": "step_1",
+      "components": ["tap"],
+      "behaviors": [],
+      "properties": {
+        "position": { "type": "vec2", "x": 200.0, "y": 400.0 },
+        "sequenceIndex": { "type": "num", "value": 1.0 },
+        "emoji": { "type": "text", "value": "1️⃣" }
+      },
+      "tags": {
+        "group": "sequence"
+      },
+      "zOrder": 0
+    },
+
+    {
+      "id": "step_2",
+      "components": ["tap"],
+      "behaviors": [],
+      "properties": {
+        "position": { "type": "vec2", "x": 500.0, "y": 400.0 },
+        "sequenceIndex": { "type": "num", "value": 2.0 },
+        "emoji": { "type": "text", "value": "2️⃣" }
+      },
+      "tags": {
+        "group": "sequence"
+      },
+      "zOrder": 0
+    },
+
+    {
+      "id": "step_3",
+      "components": ["tap"],
+      "behaviors": [],
+      "properties": {
+        "position": { "type": "vec2", "x": 800.0, "y": 400.0 },
+        "sequenceIndex": { "type": "num", "value": 3.0 },
+        "emoji": { "type": "text", "value": "3️⃣" }
+      },
+      "tags": {
+        "group": "sequence"
+      },
+      "zOrder": 0
+    }
+  ],
+
+  "objectives": [
+    {
+      "id": "obj1",
+      "type": "sequenceCompleted",
+      "config": {
+        "group": "sequence"
+      },
+      "requires": null
+    }
+  ],
+
+  "behaviors": [
+    {
+      "behaviorRef": {
+        "type": "sequenceValidator",
+        "config": {
+          "group": "sequence",
+          "property": "sequenceIndex"
+        }
+      },
+      "entityId": null
+    },
+
+    {
+      "behaviorRef": {
+        "type": "progressTracker",
+        "config": {}
+      },
+      "entityId": null
+    },
+
+    {
+      "behaviorRef": {
+        "type": "playSoundOnEvent",
+        "config": {
+          "on": "sequenceStepCorrect",
+          "sound": "tap_ok"
+        }
+      },
+      "entityId": null
+    },
+
+    {
+      "behaviorRef": {
+        "type": "playSoundOnEvent",
+        "config": {
+          "on": "sceneCompleted",
+          "sound": "complete"
+        }
+      },
+      "entityId": null
+    }
+  ],
+
+  "fieldPolicies": {},
+
+  "idleTimeout": 20,
+
+  "onIdle": "HINT",
+
+  "metadata": {
+    "difficulty": "easy"
+  }
+}
