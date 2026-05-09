@@ -22,7 +22,12 @@ import mimi.core.world.WorldSnapshot
 private val BG_COLOR = Color(0xFFFFF8E1)   // warm cream
 
 @Composable
-fun SceneRenderer(snapshot: WorldSnapshot, session: EngineSession, scope: CoroutineScope) {
+fun SceneRenderer(
+    snapshot:        WorldSnapshot,
+    session:         EngineSession,
+    scope:           CoroutineScope,
+    hintedEntityId:  String? = null
+) {
     val currentSession  by rememberUpdatedState(session)
     val currentScope    by rememberUpdatedState(scope)
     val currentSnapshot by rememberUpdatedState(snapshot)
@@ -95,7 +100,10 @@ fun SceneRenderer(snapshot: WorldSnapshot, session: EngineSession, scope: Corout
                 .sortedBy { it.num("zOrder") ?: 0.0 }
                 .forEach { entity ->
                     val overridePos = if (entity.id == draggedEntityId) dragVisualPos else null
-                    key(entity.id) { EntityRenderer(entity, mapper, overridePos) }
+                    key(entity.id) {
+                        EntityRenderer(entity, mapper, overridePos,
+                            isHinted = entity.id == hintedEntityId)
+                    }
                 }
         }
     }

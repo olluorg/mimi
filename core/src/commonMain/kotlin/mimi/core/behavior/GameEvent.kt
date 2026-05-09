@@ -153,4 +153,11 @@ sealed class GameEvent {
         override val source: EntityId? = null,
         override val target: EntityId? = null
     ) : GameEvent()
+
+    @Serializable @SerialName("idle_check")
+    data class IdleCheck(
+        override val tick:   Tick,
+        override val source: EntityId? = null,
+        override val target: EntityId? = null
+    ) : GameEvent()
 }

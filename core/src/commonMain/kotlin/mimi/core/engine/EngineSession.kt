@@ -33,7 +33,10 @@ class EngineSession(
 
     private var idleJob: Job? = null
 
-    init { startIdleLoop() }
+    init {
+        startIdleLoop()
+        startHintCheckLoop()
+    }
 
     // ── Public API ────────────────────────────────────────────────────────────
 
@@ -125,6 +128,10 @@ class EngineSession(
     private fun handlesEvent(behavior: Behavior, event: GameEvent): Boolean =
         behavior.eventTypes.isEmpty() || event::class in behavior.eventTypes
 
+    private fun isSceneComplete() = scene.objectives.any {
+        world.getObjectiveState(it.id) == ObjectiveState.LOCKED_COMPLETE
+    }
+
     // ── Idle Tick Loop ────────────────────────────────────────────────────────
 
     private fun startIdleLoop() {
@@ -143,6 +150,21 @@ class EngineSession(
                     )
                     world = world.apply(listOf(idleCmd))
                     _worldState.value = world.snapshot()
+                }
+            }
+        }
+    }
+
+    private fun startHintCheckLoop() {
+        scope.launch {
+            delay(4000L)
+            while (isActive) {
+                delay(2000L)
+                mutex.withLock {
+                    if (!isSceneComplete() && world.snapshot().idleTicks() >= secondsToTicks(4)) {
+                        tickCount++
+                        processEvent(GameEvent.IdleCheck(tick = tickCount))
+                    }
                 }
             }
         }

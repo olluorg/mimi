@@ -17,7 +17,8 @@ class AdaptiveHintBehavior(
     override val eventTypes = setOf<KClass<out GameEvent>>(
         GameEvent.MatchFail::class,
         GameEvent.Tap::class,
-        GameEvent.DragStart::class
+        GameEvent.DragStart::class,
+        GameEvent.IdleCheck::class
     )
 
     override fun handle(event: GameEvent, ctx: BehaviorContext): List<Command> {
@@ -101,7 +102,8 @@ class AdaptiveHintPlugin : BehaviorPlugin {
     override val eventTypes = setOf<KClass<out GameEvent>>(
         GameEvent.MatchFail::class,
         GameEvent.Tap::class,
-        GameEvent.DragStart::class
+        GameEvent.DragStart::class,
+        GameEvent.IdleCheck::class
     )
 
     override fun create(config: Map<String, String>, entityId: EntityId?): Behavior =

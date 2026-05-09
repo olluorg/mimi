@@ -20,7 +20,10 @@ fun generateCatalog(outputDir: File) {
     val scenes = listOf(
         DemoScene.scene.copy(sceneId = "sort_fruits_01"),
         matchColors(),
-        sortAnimals()
+        sortAnimals(),
+        matchShapes(),
+        sortFood(),
+        matchNumbers()
     )
 
     for (scene in scenes) {
@@ -121,8 +124,137 @@ private fun sortAnimals(): SceneDefinition {
 private fun sharedBehaviors() = listOf(
     SceneBehaviorBinding(BehaviorRef("progressTracker")),
     SceneBehaviorBinding(BehaviorRef("snapToTarget")),
+    SceneBehaviorBinding(BehaviorRef("adaptiveHint")),
     SceneBehaviorBinding(BehaviorRef("playSoundOnEvent", mapOf("on" to "sceneCompleted", "sound" to "complete")))
 )
+
+// ── New Scenes ────────────────────────────────────────────────────────────────
+
+private fun matchShapes(): SceneDefinition {
+    fun shape(id: String, shape: String, emoji: String, x: Float) = EntityDefinition(
+        id         = id,
+        components = listOf("drag"),
+        properties = mapOf(
+            "position" to PropertyValue.Vec2(x, 250f),
+            "zOrder"   to PropertyValue.Num(1.0),
+            "shape"    to PropertyValue.Text(shape),
+            "emoji"    to PropertyValue.Text(emoji)
+        ),
+        tags = mapOf("group" to "shapes")
+    )
+
+    fun outline(id: String, shape: String, emoji: String, x: Float) = EntityDefinition(
+        id         = id,
+        components = listOf("dropTarget"),
+        properties = mapOf(
+            "position"       to PropertyValue.Vec2(x, 700f),
+            "zOrder"         to PropertyValue.Num(0.0),
+            "constraintType" to PropertyValue.Text("propertyEquals"),
+            "source"         to PropertyValue.Text("shape"),
+            "target"         to PropertyValue.Text("shape"),
+            "shape"          to PropertyValue.Text(shape),
+            "emoji"          to PropertyValue.Text(emoji)
+        )
+    )
+
+    return SceneDefinition(
+        sceneId    = "match_shapes_01",
+        entities   = listOf(
+            shape("circle",   "circle",   "🔵", 200f),
+            shape("triangle", "triangle", "🔺", 500f),
+            shape("square",   "square",   "🟦", 800f),
+            outline("circle_target",   "circle",   "⭕", 200f),
+            outline("triangle_target", "triangle", "🔻", 500f),
+            outline("square_target",   "square",   "🔲", 800f)
+        ),
+        objectives = listOf(ObjectiveDefinition("obj1", "allMatched", mapOf("group" to "shapes"))),
+        behaviors  = sharedBehaviors()
+    )
+}
+
+private fun sortFood(): SceneDefinition {
+    fun food(id: String, type: String, emoji: String, x: Float, y: Float) = EntityDefinition(
+        id         = id,
+        components = listOf("drag"),
+        properties = mapOf(
+            "position" to PropertyValue.Vec2(x, y),
+            "zOrder"   to PropertyValue.Num(1.0),
+            "type"     to PropertyValue.Text(type),
+            "emoji"    to PropertyValue.Text(emoji)
+        ),
+        tags = mapOf("group" to "food")
+    )
+
+    fun bin(id: String, type: String, emoji: String, x: Float) = EntityDefinition(
+        id         = id,
+        components = listOf("dropTarget"),
+        properties = mapOf(
+            "position"       to PropertyValue.Vec2(x, 750f),
+            "zOrder"         to PropertyValue.Num(0.0),
+            "constraintType" to PropertyValue.Text("propertyEquals"),
+            "source"         to PropertyValue.Text("type"),
+            "target"         to PropertyValue.Text("type"),
+            "type"           to PropertyValue.Text(type),
+            "emoji"          to PropertyValue.Text(emoji)
+        )
+    )
+
+    return SceneDefinition(
+        sceneId    = "sort_food_01",
+        entities   = listOf(
+            food("apple",    "fruit",     "🍎", 150f, 200f),
+            food("banana",   "fruit",     "🍌", 420f, 280f),
+            food("carrot",   "vegetable", "🥕", 580f, 200f),
+            food("broccoli", "vegetable", "🥦", 850f, 280f),
+            bin("fruit_bin", "fruit",     "🍱", 300f),
+            bin("veggie_bin","vegetable", "🥗", 700f)
+        ),
+        objectives = listOf(ObjectiveDefinition("obj1", "allMatched", mapOf("group" to "food"))),
+        behaviors  = sharedBehaviors()
+    )
+}
+
+private fun matchNumbers(): SceneDefinition {
+    fun card(id: String, number: String, emoji: String, x: Float) = EntityDefinition(
+        id         = id,
+        components = listOf("drag"),
+        properties = mapOf(
+            "position" to PropertyValue.Vec2(x, 250f),
+            "zOrder"   to PropertyValue.Num(1.0),
+            "number"   to PropertyValue.Text(number),
+            "emoji"    to PropertyValue.Text(emoji)
+        ),
+        tags = mapOf("group" to "numbers")
+    )
+
+    fun dots(id: String, number: String, emoji: String, x: Float) = EntityDefinition(
+        id         = id,
+        components = listOf("dropTarget"),
+        properties = mapOf(
+            "position"       to PropertyValue.Vec2(x, 700f),
+            "zOrder"         to PropertyValue.Num(0.0),
+            "constraintType" to PropertyValue.Text("propertyEquals"),
+            "source"         to PropertyValue.Text("number"),
+            "target"         to PropertyValue.Text("number"),
+            "number"         to PropertyValue.Text(number),
+            "emoji"          to PropertyValue.Text(emoji)
+        )
+    )
+
+    return SceneDefinition(
+        sceneId    = "match_numbers_01",
+        entities   = listOf(
+            card("one",   "1", "1️⃣", 200f),
+            card("two",   "2", "2️⃣", 500f),
+            card("three", "3", "3️⃣", 800f),
+            dots("one_dots",   "1", "⚀", 200f),
+            dots("two_dots",   "2", "⚁", 500f),
+            dots("three_dots", "3", "⚂", 800f)
+        ),
+        objectives = listOf(ObjectiveDefinition("obj1", "allMatched", mapOf("group" to "numbers"))),
+        behaviors  = sharedBehaviors()
+    )
+}
 
 private fun buildCatalogJson() = """
 {
@@ -130,23 +262,44 @@ private fun buildCatalogJson() = """
   "scenes": [
     {
       "id": "sort_fruits_01",
-      "title": "Sort the Fruits",
-      "description": "Drag fruits into the basket",
+      "title": "Разложи фрукты",
+      "description": "Перетащи фрукты в корзину",
       "url": "$BASE_URL/sort_fruits_01.json",
       "ageMin": 2, "ageMax": 5
     },
     {
       "id": "match_colors_01",
-      "title": "Match the Colors",
-      "description": "Match each circle to its colored square",
+      "title": "Совмести цвета",
+      "description": "Перетащи каждый кружок к квадрату своего цвета",
       "url": "$BASE_URL/match_colors_01.json",
       "ageMin": 2, "ageMax": 6
     },
     {
       "id": "sort_animals_01",
-      "title": "Animals Go Home",
-      "description": "Help each animal find its home",
+      "title": "Животные идут домой",
+      "description": "Помоги каждому животному найти свой дом",
       "url": "$BASE_URL/sort_animals_01.json",
+      "ageMin": 3, "ageMax": 6
+    },
+    {
+      "id": "match_shapes_01",
+      "title": "Совмести фигуры",
+      "description": "Перетащи каждую фигуру к её контуру",
+      "url": "$BASE_URL/match_shapes_01.json",
+      "ageMin": 2, "ageMax": 5
+    },
+    {
+      "id": "sort_food_01",
+      "title": "Фрукты и овощи",
+      "description": "Рассортируй еду по корзинам",
+      "url": "$BASE_URL/sort_food_01.json",
+      "ageMin": 3, "ageMax": 6
+    },
+    {
+      "id": "match_numbers_01",
+      "title": "Считаем вместе",
+      "description": "Сопоставь цифру с нужным количеством точек",
+      "url": "$BASE_URL/match_numbers_01.json",
       "ageMin": 3, "ageMax": 6
     }
   ]

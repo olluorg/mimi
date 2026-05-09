@@ -1,5 +1,6 @@
 package org.ollu.mini.renderer
 
+import androidx.compose.animation.core.*
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
@@ -7,9 +8,11 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.layout
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
@@ -28,10 +31,23 @@ private val CORNER      = 16.dp
 fun EntityRenderer(
     entity:          EntitySnapshot,
     mapper:          CoordinateMapper,
-    dragOverridePos: PropertyValue.Vec2? = null
+    dragOverridePos: PropertyValue.Vec2? = null,
+    isHinted:        Boolean             = false
 ) {
     val pos = dragOverridePos ?: entity.vec2("position") ?: return
     if (entity.state == EntityLifecycleState.INACTIVE) return
+
+    val hintScale by if (isHinted) {
+        rememberInfiniteTransition(label = "hint")
+            .animateFloat(
+                initialValue    = 1f,
+                targetValue     = 1.18f,
+                animationSpec   = infiniteRepeatable(tween(550), RepeatMode.Reverse),
+                label           = "hintScale"
+            )
+    } else {
+        androidx.compose.runtime.remember { androidx.compose.runtime.mutableStateOf(1f) }
+    }
 
     val isDragging   = dragOverridePos != null
     val isDragTarget = entity.hasComponent("dropTarget")
@@ -57,6 +73,7 @@ fun EntityRenderer(
     Box(
         modifier = Modifier
             .zIndex(if (isDragging) 10f else (entity.num("zOrder") ?: 0.0).toFloat())
+            .graphicsLayer { scaleX = hintScale; scaleY = hintScale }
             .layout { measurable, constraints ->
                 val placeable = measurable.measure(constraints)
                 layout(placeable.width, placeable.height) {
