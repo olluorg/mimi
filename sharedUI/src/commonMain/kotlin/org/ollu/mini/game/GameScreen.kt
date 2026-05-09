@@ -33,7 +33,9 @@ import org.ollu.mini.renderer.SceneRenderer
 fun GameScreen(
     scene:              SceneDefinition,
     onBack:             (() -> Unit)? = null,
-    progressRepository: ProgressRepository? = null
+    progressRepository: ProgressRepository? = null,
+    onCompleted:        (() -> Unit)? = null,
+    completedActionText: String? = null
 ) {
     val scope = rememberCoroutineScope()
 
@@ -63,7 +65,7 @@ fun GameScreen(
     }
 
     if (buildError != null) {
-        Box(Modifier.fillMaxSize().background(Color(0xFFFFF8E1))) {
+        Box(Modifier.fillMaxSize().background(Color(0xFFF5F7FA))) {
             if (onBack != null) {
                 TextButton(
                     onClick  = onBack,
@@ -106,8 +108,13 @@ fun GameScreen(
         snapshot.getObjectiveState(obj.id) == ObjectiveState.LOCKED_COMPLETE
     }
 
+    var completionReported by remember(scene.sceneId) { mutableStateOf(false) }
     LaunchedEffect(isComplete) {
-        if (isComplete) progressRepository?.markCompleted(scene.sceneId)
+        if (isComplete && !completionReported) {
+            completionReported = true
+            progressRepository?.markCompleted(scene.sceneId)
+            onCompleted?.invoke()
+        }
     }
 
     Box(Modifier.fillMaxSize()) {
@@ -122,7 +129,7 @@ fun GameScreen(
             TextButton(
                 onClick  = onBack,
                 modifier = Modifier.align(Alignment.TopStart).padding(8.dp)
-            ) { Text("← Back", color = Color(0xFF666666)) }
+            ) { Text("← Назад", color = Color(0xFF666666)) }
         }
 
         AnimatedVisibility(
@@ -134,16 +141,30 @@ fun GameScreen(
                 contentAlignment = Alignment.Center
             ) {
                 Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                    Text("🎉", fontSize = 72.sp)
-                    Text(
-                        text     = "Молодец!",
-                        style    = MaterialTheme.typography.displayMedium,
-                        color    = Color.White,
-                        modifier = Modifier
-                            .padding(top = 16.dp)
-                            .background(Color(0xFF4CAF50), RoundedCornerShape(16.dp))
-                            .padding(horizontal = 32.dp, vertical = 12.dp)
-                    )
+                    Surface(
+                        shape = RoundedCornerShape(8.dp),
+                        color = Color.White,
+                        modifier = Modifier.padding(24.dp)
+                    ) {
+                        Column(
+                            modifier = Modifier.padding(horizontal = 28.dp, vertical = 24.dp),
+                            horizontalAlignment = Alignment.CenterHorizontally
+                        ) {
+                            Text("Готово", style = MaterialTheme.typography.displaySmall, color = Color(0xFF1D3557), fontWeight = FontWeight.Bold)
+                            Spacer(Modifier.height(8.dp))
+                            Text("Сцена завершена", style = MaterialTheme.typography.bodyLarge, color = Color(0xFF687381))
+                            if (completedActionText != null && onBack != null) {
+                                Spacer(Modifier.height(18.dp))
+                                Button(
+                                    onClick = onBack,
+                                    colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF2A9D8F)),
+                                    modifier = Modifier.fillMaxWidth()
+                                ) {
+                                    Text(completedActionText)
+                                }
+                            }
+                        }
+                    }
                 }
             }
         }

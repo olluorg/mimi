@@ -23,7 +23,7 @@ import androidx.compose.ui.unit.sp
 import mimi.core.world.SceneDefinition
 import org.ollu.mini.progress.ProgressRepository
 
-private val BG = Color(0xFFFFF8E1)
+private val BG = Color(0xFFF5F7FA)
 
 private val skillLabel = mapOf(
     "attention"             to "Внимание",
@@ -92,8 +92,9 @@ private val skillColor = mapOf(
 @Composable
 fun CatalogScreen(
     catalogUrl:         String             = DEFAULT_CATALOG_URL,
-    onSceneSelected:    (SceneDefinition) -> Unit,
-    progressRepository: ProgressRepository? = null
+    onSceneSelected:    (CatalogEntry, SceneDefinition) -> Unit,
+    progressRepository: ProgressRepository? = null,
+    onBack:             (() -> Unit)? = null
 ) {
     val repo = remember { SceneRepository() }
     DisposableEffect(repo) { onDispose { repo.close() } }
@@ -139,19 +140,19 @@ fun CatalogScreen(
                     verticalArrangement = Arrangement.spacedBy(12.dp),
                     modifier            = Modifier.fillMaxSize()
                 ) {
-                    item { ChildNameHeader(progressRepository) }
+                    item { ChildNameHeader(progressRepository, onBack) }
 
                     if (uiState.offlineWarning) {
                         item {
                             Surface(
                                 shape    = RoundedCornerShape(8.dp),
-                                color    = Color(0xFFFFF3CD),
+                                color    = Color(0xFFFFF4D8),
                                 modifier = Modifier.fillMaxWidth()
                             ) {
                                 Text(
-                                    "📶 Нет интернета — показаны загруженные игры",
+                                    "Нет интернета: показаны загруженные игры",
                                     style    = MaterialTheme.typography.bodySmall,
-                                    color    = Color(0xFF856404),
+                                    color    = Color(0xFF7A5600),
                                     modifier = Modifier.padding(horizontal = 12.dp, vertical = 8.dp)
                                 )
                             }
@@ -188,7 +189,7 @@ fun CatalogScreen(
                             LaunchedEffect(entry.id) {
                                 try {
                                     val scene = repo.fetchScene(entry)
-                                    onSceneSelected(scene)
+                                    onSceneSelected(entry, scene)
                                 } catch (e: Exception) {
                                     loading   = false
                                     loadError = e.message ?: e::class.simpleName ?: "Неизвестная ошибка"
@@ -267,14 +268,19 @@ private fun SceneCard(entry: CatalogEntry, loading: Boolean, completed: Boolean,
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .background(Color.White, RoundedCornerShape(16.dp))
+            .background(Color.White, RoundedCornerShape(8.dp))
             .clickable(enabled = !loading, onClick = onClick)
             .padding(16.dp),
         verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
         Row(verticalAlignment = Alignment.CenterVertically) {
-            Box {
-                Text("🎮", fontSize = 40.sp)
+            Box(
+                modifier = Modifier
+                    .size(48.dp)
+                    .background(Color(0xFFE8F1FA), RoundedCornerShape(8.dp)),
+                contentAlignment = Alignment.Center
+            ) {
+                Text(entry.title.firstOrNull()?.uppercase() ?: "M", fontSize = 20.sp, color = Color(0xFF457B9D), fontWeight = FontWeight.Bold)
                 if (completed) {
                     Box(
                         modifier         = Modifier.align(Alignment.TopEnd).size(18.dp)
@@ -285,18 +291,18 @@ private fun SceneCard(entry: CatalogEntry, loading: Boolean, completed: Boolean,
             }
             Spacer(Modifier.width(16.dp))
             Column(Modifier.weight(1f)) {
-                Text(entry.title, style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.SemiBold)
+                Text(entry.title, style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.SemiBold, color = Color(0xFF263445))
                 if (entry.description.isNotBlank()) {
-                    Text(entry.description, style = MaterialTheme.typography.bodySmall, color = Color(0xFF888888))
+                    Text(entry.description, style = MaterialTheme.typography.bodySmall, color = Color(0xFF687381))
                 }
                 Text(
                     "Возраст ${entry.ageMin}–${entry.ageMax}",
                     style = MaterialTheme.typography.labelSmall,
-                    color = Color(0xFFAAAAAA)
+                    color = Color(0xFF8B96A3)
                 )
             }
             if (loading) CircularProgressIndicator(Modifier.size(24.dp), strokeWidth = 2.dp)
-            else Text("▶", fontSize = 24.sp, color = Color(0xFF4A90D9))
+            else Text("›", fontSize = 28.sp, color = Color(0xFF457B9D))
         }
 
         if (entry.skills.isNotEmpty()) {
@@ -327,7 +333,7 @@ private fun SkillChips(skills: List<String>) {
             val color = skillColor[skill] ?: Color(0xFF888888)
             Box(
                 modifier         = Modifier
-                    .background(color.copy(alpha = 0.15f), RoundedCornerShape(4.dp))
+                    .background(color.copy(alpha = 0.14f), RoundedCornerShape(4.dp))
                     .padding(horizontal = 6.dp, vertical = 2.dp)
             ) {
                 Text(
@@ -342,13 +348,19 @@ private fun SkillChips(skills: List<String>) {
 }
 
 @Composable
-private fun ChildNameHeader(progressRepository: ProgressRepository?) {
+private fun ChildNameHeader(progressRepository: ProgressRepository?, onBack: (() -> Unit)?) {
     var name    by remember { mutableStateOf(progressRepository?.getChildName() ?: "") }
     var editing by remember { mutableStateOf(name.isEmpty()) }
 
     Column(Modifier.padding(bottom = 8.dp)) {
+        if (onBack != null) {
+            TextButton(onClick = onBack, contentPadding = PaddingValues(0.dp)) {
+                Text("← Назад", color = Color(0xFF666666))
+            }
+        }
         if (editing) {
-            Row(verticalAlignment = Alignment.CenterVertically) {
+            Surface(shape = RoundedCornerShape(8.dp), color = Color.White, modifier = Modifier.fillMaxWidth()) {
+            Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.padding(12.dp)) {
                 OutlinedTextField(
                     value           = name,
                     onValueChange   = { name = it },
@@ -368,18 +380,22 @@ private fun ChildNameHeader(progressRepository: ProgressRepository?) {
                     colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF4CAF50))
                 ) { Text("OK") }
             }
+            }
         } else {
-            Row(verticalAlignment = Alignment.CenterVertically) {
-                Text(
-                    "Привет, $name! 👋",
-                    style      = MaterialTheme.typography.headlineMedium,
-                    fontWeight = FontWeight.Bold
-                )
-                Spacer(Modifier.width(8.dp))
-                TextButton(onClick = { editing = true }) { Text("✏️", fontSize = 18.sp) }
+            Surface(shape = RoundedCornerShape(8.dp), color = Color.White, modifier = Modifier.fillMaxWidth()) {
+                Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.padding(16.dp)) {
+                    Column(Modifier.weight(1f)) {
+                        Text(
+                            "Привет, $name",
+                            style      = MaterialTheme.typography.headlineSmall,
+                            fontWeight = FontWeight.Bold,
+                            color = Color(0xFF263445)
+                        )
+                        Text("Свободный режим", style = MaterialTheme.typography.bodyMedium, color = Color(0xFF687381))
+                    }
+                    TextButton(onClick = { editing = true }) { Text("Изменить", color = Color(0xFF457B9D)) }
+                }
             }
         }
-        Spacer(Modifier.height(4.dp))
-        Text("Выбери игру", style = MaterialTheme.typography.titleMedium, color = Color(0xFF888888))
     }
 }
