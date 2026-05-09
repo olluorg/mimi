@@ -20,110 +20,96 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import mimi.core.world.SceneDefinition
 import org.ollu.mini.progress.ProgressRepository
-import org.ollu.mini.scenes.DemoScene
 
 private val BG = Color(0xFFFFF8E1)
 
 @Composable
 fun CatalogScreen(
-    catalogUrl:         String           = DEFAULT_CATALOG_URL,
+    catalogUrl:         String            = DEFAULT_CATALOG_URL,
     onSceneSelected:    (SceneDefinition) -> Unit,
     progressRepository: ProgressRepository? = null
 ) {
     val repo = remember { SceneRepository() }
     DisposableEffect(repo) { onDispose { repo.close() } }
 
-    var state        by remember { mutableStateOf<CatalogUiState>(CatalogUiState.Loading) }
-    var completedIds by remember { mutableStateOf(progressRepository?.getCompletedSceneIds() ?: emptySet()) }
+    var uiState      by remember { mutableStateOf(CatalogState(isRefreshing = true)) }
+    var completedIds by remember { mutableStateOf(progressRepository?.getCompletedSceneIds() ?: emptySet<String>()) }
 
     LaunchedEffect(catalogUrl) {
-        state = CatalogUiState.Loading
-        state = try {
-            val catalog = repo.fetchCatalog(catalogUrl)
-            CatalogUiState.Ready(catalog.scenes)
-        } catch (e: Exception) {
-            CatalogUiState.Error(e.message ?: "Network error")
+        repo.catalogFlow(catalogUrl).collect { state ->
+            uiState      = state
+            completedIds = progressRepository?.getCompletedSceneIds() ?: emptySet()
         }
     }
 
-    // Refresh completed IDs when screen recomposes (e.g. after returning from a game)
-    LaunchedEffect(Unit) {
-        completedIds = progressRepository?.getCompletedSceneIds() ?: emptySet()
-    }
+    Box(Modifier.fillMaxSize().background(BG)) {
 
-    Box(
-        Modifier.fillMaxSize().background(BG),
-        contentAlignment = Alignment.Center
-    ) {
-        when (val s = state) {
-            is CatalogUiState.Loading -> Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                CircularProgressIndicator(color = Color(0xFF4A90D9))
-                Spacer(Modifier.height(16.dp))
-                Text("Загружаем игры…", color = Color(0xFF666666))
+        when {
+            // First launch: cache is empty and still loading
+            uiState.entries.isEmpty() && uiState.isRefreshing -> {
+                Column(
+                    Modifier.align(Alignment.Center),
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    CircularProgressIndicator(color = Color(0xFF4A90D9))
+                    Spacer(Modifier.height(16.dp))
+                    Text("Загружаем игры…", color = Color(0xFF666666))
+                }
             }
 
-            is CatalogUiState.Error -> Column(
-                horizontalAlignment = Alignment.CenterHorizontally,
-                modifier = Modifier.padding(32.dp)
-            ) {
-                Text("⚠️", fontSize = 48.sp)
-                Spacer(Modifier.height(8.dp))
-                Text(
-                    "Не удалось загрузить список игр",
-                    style = MaterialTheme.typography.titleMedium,
-                    color = Color(0xFF666666)
-                )
-                Text(
-                    s.message,
-                    style    = MaterialTheme.typography.bodySmall,
-                    color    = Color(0xFF999999),
-                    modifier = Modifier.padding(top = 4.dp)
-                )
-                Spacer(Modifier.height(24.dp))
-                Button(
-                    onClick = { onSceneSelected(DemoScene.scene) },
-                    colors  = ButtonDefaults.buttonColors(containerColor = Color(0xFF4CAF50))
-                ) { Text("🎮  Играть демо") }
-            }
+            uiState.entries.isNotEmpty() -> {
+                LazyColumn(
+                    contentPadding      = PaddingValues(start = 16.dp, end = 16.dp, top = 16.dp, bottom = 16.dp),
+                    verticalArrangement = Arrangement.spacedBy(12.dp),
+                    modifier            = Modifier.fillMaxSize()
+                ) {
+                    item { ChildNameHeader(progressRepository) }
 
-            is CatalogUiState.Ready -> {
-                if (s.entries.isEmpty()) {
-                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                        Text("Нет доступных игр", color = Color(0xFF666666))
-                        Spacer(Modifier.height(16.dp))
-                        Button(onClick = { onSceneSelected(DemoScene.scene) }) {
-                            Text("🎮  Играть демо")
+                    if (uiState.offlineWarning) {
+                        item {
+                            Surface(
+                                shape = RoundedCornerShape(8.dp),
+                                color = Color(0xFFFFF3CD),
+                                modifier = Modifier.fillMaxWidth()
+                            ) {
+                                Text(
+                                    "📶 Нет интернета — показаны загруженные игры",
+                                    style    = MaterialTheme.typography.bodySmall,
+                                    color    = Color(0xFF856404),
+                                    modifier = Modifier.padding(horizontal = 12.dp, vertical = 8.dp)
+                                )
+                            }
                         }
                     }
-                } else {
-                    LazyColumn(
-                        contentPadding      = PaddingValues(16.dp),
-                        verticalArrangement = Arrangement.spacedBy(12.dp),
-                        modifier            = Modifier.fillMaxSize()
-                    ) {
-                        item {
-                            ChildNameHeader(progressRepository)
-                        }
-                        items(s.entries) { entry ->
-                            var loading by remember(entry.id) { mutableStateOf(false) }
-                            SceneCard(
-                                entry     = entry,
-                                loading   = loading,
-                                completed = entry.id in completedIds,
-                                onClick   = { if (!loading) loading = true }
-                            )
-                            if (loading) {
-                                LaunchedEffect(entry.id) {
-                                    try {
-                                        val scene = repo.fetchScene(entry)
-                                        onSceneSelected(scene)
-                                    } catch (e: Exception) {
-                                        loading = false
-                                    }
+
+                    items(uiState.entries) { entry ->
+                        var loading by remember(entry.id) { mutableStateOf(false) }
+                        SceneCard(
+                            entry     = entry,
+                            loading   = loading,
+                            completed = entry.id in completedIds,
+                            onClick   = { if (!loading) loading = true }
+                        )
+                        if (loading) {
+                            LaunchedEffect(entry.id) {
+                                try {
+                                    val scene = repo.fetchScene(entry)
+                                    onSceneSelected(scene)
+                                } catch (e: Exception) {
+                                    loading = false
                                 }
                             }
                         }
                     }
+                }
+
+                // Subtle refresh bar at top while network catalog is loading
+                if (uiState.isRefreshing) {
+                    LinearProgressIndicator(
+                        modifier = Modifier.fillMaxWidth().align(Alignment.TopCenter).height(3.dp),
+                        color    = Color(0xFF4A90D9),
+                        trackColor = Color.Transparent
+                    )
                 }
             }
         }
@@ -139,26 +125,20 @@ private fun ChildNameHeader(progressRepository: ProgressRepository?) {
         if (editing) {
             Row(verticalAlignment = Alignment.CenterVertically) {
                 OutlinedTextField(
-                    value         = name,
-                    onValueChange = { name = it },
-                    placeholder   = { Text("Имя ребёнка") },
-                    singleLine    = true,
+                    value           = name,
+                    onValueChange   = { name = it },
+                    placeholder     = { Text("Имя ребёнка") },
+                    singleLine      = true,
                     keyboardOptions = KeyboardOptions(imeAction = ImeAction.Done),
                     keyboardActions = KeyboardActions(onDone = {
-                        if (name.isNotBlank()) {
-                            progressRepository?.setChildName(name)
-                            editing = false
-                        }
+                        if (name.isNotBlank()) { progressRepository?.setChildName(name); editing = false }
                     }),
                     modifier = Modifier.weight(1f)
                 )
                 Spacer(Modifier.width(8.dp))
                 Button(
                     onClick = {
-                        if (name.isNotBlank()) {
-                            progressRepository?.setChildName(name)
-                            editing = false
-                        }
+                        if (name.isNotBlank()) { progressRepository?.setChildName(name); editing = false }
                     },
                     colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF4CAF50))
                 ) { Text("OK") }
@@ -171,27 +151,16 @@ private fun ChildNameHeader(progressRepository: ProgressRepository?) {
                     fontWeight = FontWeight.Bold
                 )
                 Spacer(Modifier.width(8.dp))
-                TextButton(onClick = { editing = true }) {
-                    Text("✏️", fontSize = 18.sp)
-                }
+                TextButton(onClick = { editing = true }) { Text("✏️", fontSize = 18.sp) }
             }
         }
         Spacer(Modifier.height(4.dp))
-        Text(
-            "Выбери игру",
-            style      = MaterialTheme.typography.titleMedium,
-            color      = Color(0xFF888888)
-        )
+        Text("Выбери игру", style = MaterialTheme.typography.titleMedium, color = Color(0xFF888888))
     }
 }
 
 @Composable
-private fun SceneCard(
-    entry:     CatalogEntry,
-    loading:   Boolean,
-    completed: Boolean,
-    onClick:   () -> Unit
-) {
+private fun SceneCard(entry: CatalogEntry, loading: Boolean, completed: Boolean, onClick: () -> Unit) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -204,46 +173,22 @@ private fun SceneCard(
             Text("🎮", fontSize = 40.sp)
             if (completed) {
                 Box(
-                    modifier = Modifier
-                        .align(Alignment.TopEnd)
-                        .size(18.dp)
+                    modifier         = Modifier.align(Alignment.TopEnd).size(18.dp)
                         .background(Color(0xFF4CAF50), CircleShape),
                     contentAlignment = Alignment.Center
-                ) {
-                    Text("✓", fontSize = 10.sp, color = Color.White, fontWeight = FontWeight.Bold)
-                }
+                ) { Text("✓", fontSize = 10.sp, color = Color.White, fontWeight = FontWeight.Bold) }
             }
         }
         Spacer(Modifier.width(16.dp))
         Column(Modifier.weight(1f)) {
-            Text(
-                entry.title,
-                style      = MaterialTheme.typography.titleMedium,
-                fontWeight = FontWeight.SemiBold
-            )
+            Text(entry.title, style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.SemiBold)
             if (entry.description.isNotBlank()) {
-                Text(
-                    entry.description,
-                    style = MaterialTheme.typography.bodySmall,
-                    color = Color(0xFF888888)
-                )
+                Text(entry.description, style = MaterialTheme.typography.bodySmall, color = Color(0xFF888888))
             }
-            Text(
-                "Возраст ${entry.ageMin}–${entry.ageMax}",
-                style = MaterialTheme.typography.labelSmall,
-                color = Color(0xFFAAAAAA)
-            )
+            Text("Возраст ${entry.ageMin}–${entry.ageMax}",
+                style = MaterialTheme.typography.labelSmall, color = Color(0xFFAAAAAA))
         }
-        if (loading) {
-            CircularProgressIndicator(Modifier.size(24.dp), strokeWidth = 2.dp)
-        } else {
-            Text("▶", fontSize = 24.sp, color = Color(0xFF4A90D9))
-        }
+        if (loading) CircularProgressIndicator(Modifier.size(24.dp), strokeWidth = 2.dp)
+        else Text("▶", fontSize = 24.sp, color = Color(0xFF4A90D9))
     }
-}
-
-private sealed class CatalogUiState {
-    object Loading : CatalogUiState()
-    data class Ready(val entries: List<CatalogEntry>) : CatalogUiState()
-    data class Error(val message: String) : CatalogUiState()
 }
