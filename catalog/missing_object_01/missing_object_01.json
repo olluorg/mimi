@@ -1,0 +1,74 @@
+{
+  "sceneId": "missing_object_01",
+  "entities": [
+    {
+      "id": "missing_banana",
+      "components": ["tap"],
+      "behaviors": [],
+      "properties": {
+        "position": { "type": "vec2", "x": 260.0, "y": 430.0 },
+        "missing": { "type": "text", "value": "true" },
+        "emoji": { "type": "text", "value": "🍌" }
+      },
+      "tags": { "group": "choices" },
+      "zOrder": 0
+    },
+    {
+      "id": "present_apple",
+      "components": ["tap"],
+      "behaviors": [],
+      "properties": {
+        "position": { "type": "vec2", "x": 500.0, "y": 430.0 },
+        "missing": { "type": "text", "value": "false" },
+        "emoji": { "type": "text", "value": "🍎" }
+      },
+      "tags": { "group": "choices" },
+      "zOrder": 0
+    },
+    {
+      "id": "present_cherry",
+      "components": ["tap"],
+      "behaviors": [],
+      "properties": {
+        "position": { "type": "vec2", "x": 740.0, "y": 430.0 },
+        "missing": { "type": "text", "value": "false" },
+        "emoji": { "type": "text", "value": "🍒" }
+      },
+      "tags": { "group": "choices" },
+      "zOrder": 0
+    }
+  ],
+  "objectives": [
+    {
+      "id": "obj1",
+      "type": "entitySelected",
+      "config": { "property": "missing", "value": "true" },
+      "requires": null
+    }
+  ],
+  "behaviors": [
+    {
+      "behaviorRef": {
+        "type": "propertySelectionValidator",
+        "config": { "property": "missing", "expected": "true" }
+      },
+      "entityId": null
+    },
+    { "behaviorRef": { "type": "progressTracker", "config": {} }, "entityId": null },
+    { "behaviorRef": { "type": "adaptiveHint", "config": { "mode": "missing_object" } }, "entityId": null },
+    { "behaviorRef": { "type": "playSoundOnEvent", "config": { "on": "sceneCompleted", "sound": "complete" } }, "entityId": null }
+  ],
+  "fieldPolicies": {},
+  "idleTimeout": 15,
+  "onIdle": "HINT",
+  "metadata": { "difficulty": "easy" },
+  "meta": {
+    "title": "Missing Object",
+    "description": "Find the object that disappeared",
+    "ageMin": 3,
+    "ageMax": 6,
+    "version": 1,
+    "tags": ["memory", "visual_memory"],
+    "skills": ["visual_memory", "working_memory", "selective_attention", "task_completion"]
+  }
+}

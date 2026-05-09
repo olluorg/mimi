@@ -1,0 +1,74 @@
+{
+  "sceneId": "what_changed_01",
+  "entities": [
+    {
+      "id": "changed_star",
+      "components": ["tap"],
+      "behaviors": [],
+      "properties": {
+        "position": { "type": "vec2", "x": 260.0, "y": 420.0 },
+        "changed": { "type": "text", "value": "true" },
+        "emoji": { "type": "text", "value": "⭐" }
+      },
+      "tags": { "group": "choices" },
+      "zOrder": 0
+    },
+    {
+      "id": "same_ball",
+      "components": ["tap"],
+      "behaviors": [],
+      "properties": {
+        "position": { "type": "vec2", "x": 500.0, "y": 420.0 },
+        "changed": { "type": "text", "value": "false" },
+        "emoji": { "type": "text", "value": "⚽" }
+      },
+      "tags": { "group": "choices" },
+      "zOrder": 0
+    },
+    {
+      "id": "same_car",
+      "components": ["tap"],
+      "behaviors": [],
+      "properties": {
+        "position": { "type": "vec2", "x": 740.0, "y": 420.0 },
+        "changed": { "type": "text", "value": "false" },
+        "emoji": { "type": "text", "value": "🚗" }
+      },
+      "tags": { "group": "choices" },
+      "zOrder": 0
+    }
+  ],
+  "objectives": [
+    {
+      "id": "obj1",
+      "type": "entitySelected",
+      "config": { "property": "changed", "value": "true" },
+      "requires": null
+    }
+  ],
+  "behaviors": [
+    {
+      "behaviorRef": {
+        "type": "propertySelectionValidator",
+        "config": { "property": "changed", "expected": "true" }
+      },
+      "entityId": null
+    },
+    { "behaviorRef": { "type": "progressTracker", "config": {} }, "entityId": null },
+    { "behaviorRef": { "type": "adaptiveHint", "config": { "mode": "visual_change" } }, "entityId": null },
+    { "behaviorRef": { "type": "playSoundOnEvent", "config": { "on": "sceneCompleted", "sound": "complete" } }, "entityId": null }
+  ],
+  "fieldPolicies": {},
+  "idleTimeout": 15,
+  "onIdle": "HINT",
+  "metadata": { "difficulty": "easy" },
+  "meta": {
+    "title": "What Changed?",
+    "description": "Find the object that changed",
+    "ageMin": 3,
+    "ageMax": 6,
+    "version": 1,
+    "tags": ["memory", "visual_change"],
+    "skills": ["working_memory", "visual_memory", "visual_attention", "task_completion"]
+  }
+}

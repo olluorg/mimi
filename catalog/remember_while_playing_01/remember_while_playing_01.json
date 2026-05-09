@@ -1,0 +1,119 @@
+{
+  "sceneId": "remember_while_playing_01",
+  "entities": [
+    {
+      "id": "red_circle",
+      "components": ["drag"],
+      "behaviors": [],
+      "properties": {
+        "position": { "type": "vec2", "x": 220.0, "y": 220.0 },
+        "zOrder": { "type": "num", "value": 1.0 },
+        "color": { "type": "text", "value": "red" },
+        "memoryCue": { "type": "text", "value": "first" },
+        "emoji": { "type": "text", "value": "🔴" }
+      },
+      "tags": { "group": "attention_memory" },
+      "zOrder": 0
+    },
+    {
+      "id": "blue_circle",
+      "components": ["drag"],
+      "behaviors": [],
+      "properties": {
+        "position": { "type": "vec2", "x": 500.0, "y": 220.0 },
+        "zOrder": { "type": "num", "value": 1.0 },
+        "color": { "type": "text", "value": "blue" },
+        "memoryCue": { "type": "text", "value": "second" },
+        "emoji": { "type": "text", "value": "🔵" }
+      },
+      "tags": { "group": "attention_memory" },
+      "zOrder": 0
+    },
+    {
+      "id": "yellow_circle",
+      "components": ["drag"],
+      "behaviors": [],
+      "properties": {
+        "position": { "type": "vec2", "x": 780.0, "y": 220.0 },
+        "zOrder": { "type": "num", "value": 1.0 },
+        "color": { "type": "text", "value": "yellow" },
+        "memoryCue": { "type": "text", "value": "third" },
+        "emoji": { "type": "text", "value": "🟡" }
+      },
+      "tags": { "group": "attention_memory" },
+      "zOrder": 0
+    },
+    {
+      "id": "red_target",
+      "components": ["dropTarget"],
+      "behaviors": [],
+      "properties": {
+        "position": { "type": "vec2", "x": 220.0, "y": 690.0 },
+        "constraintType": { "type": "text", "value": "propertyEquals" },
+        "source": { "type": "text", "value": "color" },
+        "target": { "type": "text", "value": "color" },
+        "color": { "type": "text", "value": "red" },
+        "emoji": { "type": "text", "value": "🟥" }
+      },
+      "tags": {},
+      "zOrder": 0
+    },
+    {
+      "id": "blue_target",
+      "components": ["dropTarget"],
+      "behaviors": [],
+      "properties": {
+        "position": { "type": "vec2", "x": 500.0, "y": 690.0 },
+        "constraintType": { "type": "text", "value": "propertyEquals" },
+        "source": { "type": "text", "value": "color" },
+        "target": { "type": "text", "value": "color" },
+        "color": { "type": "text", "value": "blue" },
+        "emoji": { "type": "text", "value": "🟦" }
+      },
+      "tags": {},
+      "zOrder": 0
+    },
+    {
+      "id": "yellow_target",
+      "components": ["dropTarget"],
+      "behaviors": [],
+      "properties": {
+        "position": { "type": "vec2", "x": 780.0, "y": 690.0 },
+        "constraintType": { "type": "text", "value": "propertyEquals" },
+        "source": { "type": "text", "value": "color" },
+        "target": { "type": "text", "value": "color" },
+        "color": { "type": "text", "value": "yellow" },
+        "emoji": { "type": "text", "value": "🟨" }
+      },
+      "tags": {},
+      "zOrder": 0
+    }
+  ],
+  "objectives": [
+    {
+      "id": "obj1",
+      "type": "allMatched",
+      "config": { "group": "attention_memory" },
+      "requires": null
+    }
+  ],
+  "behaviors": [
+    { "behaviorRef": { "type": "snapToTarget", "config": {} }, "entityId": null },
+    { "behaviorRef": { "type": "progressTracker", "config": {} }, "entityId": null },
+    { "behaviorRef": { "type": "adaptiveHint", "config": { "mode": "attention_memory" } }, "entityId": null },
+    { "behaviorRef": { "type": "playSoundOnEvent", "config": { "on": "sceneCompleted", "sound": "complete" } }, "entityId": null }
+  ],
+  "fieldPolicies": {},
+  "idleTimeout": 25,
+  "onIdle": "HINT",
+  "metadata": { "difficulty": "hard" },
+  "meta": {
+    "title": "Remember While Playing",
+    "description": "Match colors while keeping the sequence in mind",
+    "ageMin": 4,
+    "ageMax": 6,
+    "version": 1,
+    "tags": ["memory", "attention", "advanced"],
+    "skills": ["working_memory", "sustained_attention", "hand_eye_coordination", "color_recognition", "task_completion"]
+  }
+}

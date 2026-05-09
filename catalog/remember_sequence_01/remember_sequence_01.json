@@ -1,0 +1,74 @@
+{
+  "sceneId": "remember_sequence_01",
+  "entities": [
+    {
+      "id": "apple",
+      "components": ["tap"],
+      "behaviors": [],
+      "properties": {
+        "position": { "type": "vec2", "x": 220.0, "y": 430.0 },
+        "sequenceIndex": { "type": "num", "value": 1.0 },
+        "emoji": { "type": "text", "value": "🍎" }
+      },
+      "tags": { "group": "sequence" },
+      "zOrder": 0
+    },
+    {
+      "id": "banana",
+      "components": ["tap"],
+      "behaviors": [],
+      "properties": {
+        "position": { "type": "vec2", "x": 500.0, "y": 430.0 },
+        "sequenceIndex": { "type": "num", "value": 2.0 },
+        "emoji": { "type": "text", "value": "🍌" }
+      },
+      "tags": { "group": "sequence" },
+      "zOrder": 0
+    },
+    {
+      "id": "cherry",
+      "components": ["tap"],
+      "behaviors": [],
+      "properties": {
+        "position": { "type": "vec2", "x": 780.0, "y": 430.0 },
+        "sequenceIndex": { "type": "num", "value": 3.0 },
+        "emoji": { "type": "text", "value": "🍒" }
+      },
+      "tags": { "group": "sequence" },
+      "zOrder": 0
+    }
+  ],
+  "objectives": [
+    {
+      "id": "obj1",
+      "type": "sequenceCompleted",
+      "config": { "group": "sequence" },
+      "requires": null
+    }
+  ],
+  "behaviors": [
+    {
+      "behaviorRef": {
+        "type": "sequenceValidator",
+        "config": { "group": "sequence", "property": "sequenceIndex" }
+      },
+      "entityId": null
+    },
+    { "behaviorRef": { "type": "progressTracker", "config": {} }, "entityId": null },
+    { "behaviorRef": { "type": "adaptiveHint", "config": { "mode": "memory_sequence" } }, "entityId": null },
+    { "behaviorRef": { "type": "playSoundOnEvent", "config": { "on": "sceneCompleted", "sound": "complete" } }, "entityId": null }
+  ],
+  "fieldPolicies": {},
+  "idleTimeout": 15,
+  "onIdle": "HINT",
+  "metadata": { "difficulty": "easy" },
+  "meta": {
+    "title": "Remember Sequence",
+    "description": "Repeat the objects in order",
+    "ageMin": 3,
+    "ageMax": 6,
+    "version": 1,
+    "tags": ["memory", "sequence"],
+    "skills": ["working_memory", "sequencing", "visual_attention", "task_completion"]
+  }
+}

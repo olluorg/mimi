@@ -56,6 +56,46 @@
     {
       "id": "ultimate_stress_test_01",
       "url": "https://olluorg.github.io/mimi/ultimate_stress_test_01/ultimate_stress_test_01.json"
+    },
+    {
+      "id": "remember_sequence_01",
+      "url": "https://olluorg.github.io/mimi/remember_sequence_01/remember_sequence_01.json"
+    },
+    {
+      "id": "what_changed_01",
+      "url": "https://olluorg.github.io/mimi/what_changed_01/what_changed_01.json"
+    },
+    {
+      "id": "show_hide_01",
+      "url": "https://olluorg.github.io/mimi/show_hide_01/show_hide_01.json"
+    },
+    {
+      "id": "missing_object_01",
+      "url": "https://olluorg.github.io/mimi/missing_object_01/missing_object_01.json"
+    },
+    {
+      "id": "color_recall_01",
+      "url": "https://olluorg.github.io/mimi/color_recall_01/color_recall_01.json"
+    },
+    {
+      "id": "tap_repeat_01",
+      "url": "https://olluorg.github.io/mimi/tap_repeat_01/tap_repeat_01.json"
+    },
+    {
+      "id": "order_reconstruction_01",
+      "url": "https://olluorg.github.io/mimi/order_reconstruction_01/order_reconstruction_01.json"
+    },
+    {
+      "id": "animal_sound_match_01",
+      "url": "https://olluorg.github.io/mimi/animal_sound_match_01/animal_sound_match_01.json"
+    },
+    {
+      "id": "object_category_recall_01",
+      "url": "https://olluorg.github.io/mimi/object_category_recall_01/object_category_recall_01.json"
+    },
+    {
+      "id": "remember_while_playing_01",
+      "url": "https://olluorg.github.io/mimi/remember_while_playing_01/remember_while_playing_01.json"
     }
   ]
 }

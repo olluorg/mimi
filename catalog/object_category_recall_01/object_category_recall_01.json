@@ -1,0 +1,114 @@
+{
+  "sceneId": "object_category_recall_01",
+  "entities": [
+    {
+      "id": "apple",
+      "components": ["drag"],
+      "behaviors": [],
+      "properties": {
+        "position": { "type": "vec2", "x": 180.0, "y": 240.0 },
+        "zOrder": { "type": "num", "value": 1.0 },
+        "category": { "type": "text", "value": "fruit" },
+        "emoji": { "type": "text", "value": "🍎" }
+      },
+      "tags": { "group": "recall" },
+      "zOrder": 0
+    },
+    {
+      "id": "banana",
+      "components": ["drag"],
+      "behaviors": [],
+      "properties": {
+        "position": { "type": "vec2", "x": 420.0, "y": 240.0 },
+        "zOrder": { "type": "num", "value": 1.0 },
+        "category": { "type": "text", "value": "fruit" },
+        "emoji": { "type": "text", "value": "🍌" }
+      },
+      "tags": { "group": "recall" },
+      "zOrder": 0
+    },
+    {
+      "id": "cat",
+      "components": ["drag"],
+      "behaviors": [],
+      "properties": {
+        "position": { "type": "vec2", "x": 660.0, "y": 240.0 },
+        "zOrder": { "type": "num", "value": 1.0 },
+        "category": { "type": "text", "value": "animal" },
+        "emoji": { "type": "text", "value": "🐱" }
+      },
+      "tags": { "group": "recall" },
+      "zOrder": 0
+    },
+    {
+      "id": "dog",
+      "components": ["drag"],
+      "behaviors": [],
+      "properties": {
+        "position": { "type": "vec2", "x": 860.0, "y": 240.0 },
+        "zOrder": { "type": "num", "value": 1.0 },
+        "category": { "type": "text", "value": "animal" },
+        "emoji": { "type": "text", "value": "🐶" }
+      },
+      "tags": { "group": "recall" },
+      "zOrder": 0
+    },
+    {
+      "id": "fruit_bin",
+      "components": ["dropTarget"],
+      "behaviors": [],
+      "properties": {
+        "position": { "type": "vec2", "x": 320.0, "y": 700.0 },
+        "constraintType": { "type": "text", "value": "propertyEquals" },
+        "source": { "type": "text", "value": "category" },
+        "target": { "type": "text", "value": "category" },
+        "category": { "type": "text", "value": "fruit" },
+        "emoji": { "type": "text", "value": "🧺" }
+      },
+      "tags": {},
+      "zOrder": 0
+    },
+    {
+      "id": "animal_home",
+      "components": ["dropTarget"],
+      "behaviors": [],
+      "properties": {
+        "position": { "type": "vec2", "x": 700.0, "y": 700.0 },
+        "constraintType": { "type": "text", "value": "propertyEquals" },
+        "source": { "type": "text", "value": "category" },
+        "target": { "type": "text", "value": "category" },
+        "category": { "type": "text", "value": "animal" },
+        "emoji": { "type": "text", "value": "🏠" }
+      },
+      "tags": {},
+      "zOrder": 0
+    }
+  ],
+  "objectives": [
+    {
+      "id": "obj1",
+      "type": "allMatched",
+      "config": { "group": "recall" },
+      "requires": null
+    }
+  ],
+  "behaviors": [
+    { "behaviorRef": { "type": "snapToTarget", "config": {} }, "entityId": null },
+    { "behaviorRef": { "type": "progressTracker", "config": {} }, "entityId": null },
+    { "behaviorRef": { "type": "adaptiveHint", "config": { "mode": "category_recall" } }, "entityId": null },
+    { "behaviorRef": { "type": "playSoundOnEvent", "config": { "on": "sceneCompleted", "sound": "complete" } }, "entityId": null }
+  ],
+  "fieldPolicies": {},
+  "idleTimeout": 25,
+  "onIdle": "HINT",
+  "metadata": { "difficulty": "medium" },
+  "meta": {
+    "title": "Object-Category Recall",
+    "description": "Remember which objects belong together",
+    "ageMin": 3,
+    "ageMax": 6,
+    "version": 1,
+    "tags": ["memory", "categories"],
+    "skills": ["associative_memory", "categorization", "hand_eye_coordination", "task_completion"]
+  }
+}

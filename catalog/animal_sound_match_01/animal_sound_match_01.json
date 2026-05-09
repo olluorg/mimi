@@ -1,0 +1,81 @@
+{
+  "sceneId": "animal_sound_match_01",
+  "entities": [
+    {
+      "id": "cat",
+      "components": ["tap"],
+      "behaviors": [],
+      "properties": {
+        "position": { "type": "vec2", "x": 260.0, "y": 430.0 },
+        "animal": { "type": "text", "value": "cat" },
+        "emoji": { "type": "text", "value": "🐱" }
+      },
+      "tags": { "group": "choices" },
+      "zOrder": 0
+    },
+    {
+      "id": "dog",
+      "components": ["tap"],
+      "behaviors": [],
+      "properties": {
+        "position": { "type": "vec2", "x": 500.0, "y": 430.0 },
+        "animal": { "type": "text", "value": "dog" },
+        "emoji": { "type": "text", "value": "🐶" }
+      },
+      "tags": { "group": "choices" },
+      "zOrder": 0
+    },
+    {
+      "id": "cow",
+      "components": ["tap"],
+      "behaviors": [],
+      "properties": {
+        "position": { "type": "vec2", "x": 740.0, "y": 430.0 },
+        "animal": { "type": "text", "value": "cow" },
+        "emoji": { "type": "text", "value": "🐮" }
+      },
+      "tags": { "group": "choices" },
+      "zOrder": 0
+    }
+  ],
+  "objectives": [
+    {
+      "id": "obj1",
+      "type": "entitySelected",
+      "config": { "property": "animal", "value": "cat" },
+      "requires": null
+    }
+  ],
+  "behaviors": [
+    {
+      "behaviorRef": {
+        "type": "audioPrompt",
+        "config": { "on": "sceneStarted", "text": "Find the cat" }
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "propertySelectionValidator",
+        "config": { "property": "animal", "expected": "cat" }
+      },
+      "entityId": null
+    },
+    { "behaviorRef": { "type": "progressTracker", "config": {} }, "entityId": null },
+    { "behaviorRef": { "type": "adaptiveHint", "config": { "mode": "sound_match" } }, "entityId": null },
+    { "behaviorRef": { "type": "playSoundOnEvent", "config": { "on": "sceneCompleted", "sound": "complete" } }, "entityId": null }
+  ],
+  "fieldPolicies": {},
+  "idleTimeout": 15,
+  "onIdle": "HINT",
+  "metadata": { "difficulty": "easy" },
+  "meta": {
+    "title": "Animal Sound Match",
+    "description": "Listen and choose the animal",
+    "ageMin": 2,
+    "ageMax": 6,
+    "version": 1,
+    "tags": ["memory", "sound", "animals"],
+    "skills": ["associative_memory", "receptive_speech", "word_association", "selective_attention", "task_completion"]
+  }
+}
