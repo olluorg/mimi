@@ -1,0 +1,407 @@
+{
+  "sceneId": "tap_repeat_02",
+  "entities": [
+    {
+      "id": "display_red",
+      "components": [],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 110.0,
+          "y": 230.0
+        },
+        "emoji": {
+          "type": "text",
+          "value": "🔴"
+        }
+      },
+      "tags": {
+        "group": "display"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "display_green",
+      "components": [],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 270.0,
+          "y": 230.0
+        },
+        "emoji": {
+          "type": "text",
+          "value": "🟢"
+        }
+      },
+      "tags": {
+        "group": "display"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "display_blue",
+      "components": [],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 430.0,
+          "y": 230.0
+        },
+        "emoji": {
+          "type": "text",
+          "value": "🔵"
+        }
+      },
+      "tags": {
+        "group": "display"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "display_yellow",
+      "components": [],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 590.0,
+          "y": 230.0
+        },
+        "emoji": {
+          "type": "text",
+          "value": "🟡"
+        }
+      },
+      "tags": {
+        "group": "display"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "display_purple",
+      "components": [],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 750.0,
+          "y": 230.0
+        },
+        "emoji": {
+          "type": "text",
+          "value": "🟣"
+        }
+      },
+      "tags": {
+        "group": "display"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "red",
+      "components": [
+        "tap"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 110.0,
+          "y": 560.0
+        },
+        "sequenceIndex": {
+          "type": "num",
+          "value": 1.0
+        },
+        "emoji": {
+          "type": "text",
+          "value": "🔴"
+        }
+      },
+      "tags": {
+        "group": "sequence"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "green",
+      "components": [
+        "tap"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 270.0,
+          "y": 560.0
+        },
+        "sequenceIndex": {
+          "type": "num",
+          "value": 3.0
+        },
+        "emoji": {
+          "type": "text",
+          "value": "🟢"
+        }
+      },
+      "tags": {
+        "group": "sequence"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "blue",
+      "components": [
+        "tap"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 430.0,
+          "y": 560.0
+        },
+        "sequenceIndex": {
+          "type": "num",
+          "value": 4.0
+        },
+        "emoji": {
+          "type": "text",
+          "value": "🔵"
+        }
+      },
+      "tags": {
+        "group": "sequence"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "yellow",
+      "components": [
+        "tap"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 590.0,
+          "y": 560.0
+        },
+        "sequenceIndex": {
+          "type": "num",
+          "value": 2.0
+        },
+        "emoji": {
+          "type": "text",
+          "value": "🟡"
+        }
+      },
+      "tags": {
+        "group": "sequence"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "purple",
+      "components": [
+        "tap"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 750.0,
+          "y": 560.0
+        },
+        "sequenceIndex": {
+          "type": "num",
+          "value": 5.0
+        },
+        "emoji": {
+          "type": "text",
+          "value": "🟣"
+        }
+      },
+      "tags": {
+        "group": "sequence"
+      },
+      "zOrder": 0
+    }
+  ],
+  "objectives": [
+    {
+      "id": "obj1",
+      "type": "sequenceCompleted",
+      "config": {
+        "group": "sequence"
+      },
+      "requires": null
+    }
+  ],
+  "behaviors": [
+    {
+      "behaviorRef": {
+        "type": "sequenceValidator",
+        "config": {
+          "group": "sequence",
+          "property": "sequenceIndex"
+        }
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "progressTracker",
+        "config": {}
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "adaptiveHint",
+        "config": {
+          "mode": "tap_repeat"
+        }
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "playSoundOnEvent",
+        "config": {
+          "on": "sceneCompleted",
+          "sound": "complete"
+        }
+      },
+      "entityId": null
+    }
+  ],
+  "fieldPolicies": {},
+  "stateMachine": {
+    "initialState": "show",
+    "states": [
+      {
+        "id": "show",
+        "durationMs": 2500,
+        "inputEnabled": false,
+        "onEnter": [
+          {
+            "type": "setEntityState",
+            "entityId": "red",
+            "state": "INACTIVE"
+          },
+          {
+            "type": "setEntityState",
+            "entityId": "green",
+            "state": "INACTIVE"
+          },
+          {
+            "type": "setEntityState",
+            "entityId": "blue",
+            "state": "INACTIVE"
+          },
+          {
+            "type": "setEntityState",
+            "entityId": "yellow",
+            "state": "INACTIVE"
+          },
+          {
+            "type": "setEntityState",
+            "entityId": "purple",
+            "state": "INACTIVE"
+          }
+        ]
+      },
+      {
+        "id": "recall",
+        "inputEnabled": true,
+        "onEnter": [
+          {
+            "type": "setEntityState",
+            "entityId": "display_red",
+            "state": "INACTIVE"
+          },
+          {
+            "type": "setEntityState",
+            "entityId": "display_green",
+            "state": "INACTIVE"
+          },
+          {
+            "type": "setEntityState",
+            "entityId": "display_blue",
+            "state": "INACTIVE"
+          },
+          {
+            "type": "setEntityState",
+            "entityId": "display_yellow",
+            "state": "INACTIVE"
+          },
+          {
+            "type": "setEntityState",
+            "entityId": "display_purple",
+            "state": "INACTIVE"
+          },
+          {
+            "type": "setEntityState",
+            "entityId": "red",
+            "state": "ACTIVE"
+          },
+          {
+            "type": "setEntityState",
+            "entityId": "green",
+            "state": "ACTIVE"
+          },
+          {
+            "type": "setEntityState",
+            "entityId": "blue",
+            "state": "ACTIVE"
+          },
+          {
+            "type": "setEntityState",
+            "entityId": "yellow",
+            "state": "ACTIVE"
+          },
+          {
+            "type": "setEntityState",
+            "entityId": "purple",
+            "state": "ACTIVE"
+          }
+        ]
+      }
+    ],
+    "transitions": [
+      {
+        "from": "show",
+        "to": "recall",
+        "afterMs": 2500
+      }
+    ]
+  },
+  "idleTimeout": 20,
+  "onIdle": "HINT",
+  "metadata": {
+    "difficulty": "hard"
+  },
+  "meta": {
+    "title": "Повтори 5 цветов",
+    "description": "Запомни и повтори последовательность из 5 цветов",
+    "ageMin": 4,
+    "ageMax": 7,
+    "version": 1,
+    "tags": [
+      "memory",
+      "simon"
+    ],
+    "skills": [
+      "sequential_memory",
+      "working_memory",
+      "impulse_control",
+      "task_completion"
+    ],
+    "icon": "🟣"
+  }
+}

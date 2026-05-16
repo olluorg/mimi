@@ -1,0 +1,436 @@
+{
+  "sceneId": "sort_colors_01",
+  "entities": [
+    {
+      "id": "apple",
+      "components": [
+        "drag"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 170.0,
+          "y": 150.0
+        },
+        "color": {
+          "type": "text",
+          "value": "red"
+        },
+        "emoji": {
+          "type": "text",
+          "value": "🍎"
+        }
+      },
+      "tags": {
+        "group": "items"
+      },
+      "zOrder": 1
+    },
+    {
+      "id": "car_blue",
+      "components": [
+        "drag"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 500.0,
+          "y": 150.0
+        },
+        "color": {
+          "type": "text",
+          "value": "blue"
+        },
+        "emoji": {
+          "type": "text",
+          "value": "🚙"
+        }
+      },
+      "tags": {
+        "group": "items"
+      },
+      "zOrder": 1
+    },
+    {
+      "id": "sun",
+      "components": [
+        "drag"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 830.0,
+          "y": 150.0
+        },
+        "color": {
+          "type": "text",
+          "value": "yellow"
+        },
+        "emoji": {
+          "type": "text",
+          "value": "🌻"
+        }
+      },
+      "tags": {
+        "group": "items"
+      },
+      "zOrder": 1
+    },
+    {
+      "id": "rose",
+      "components": [
+        "drag"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 170.0,
+          "y": 340.0
+        },
+        "color": {
+          "type": "text",
+          "value": "red"
+        },
+        "emoji": {
+          "type": "text",
+          "value": "🌹"
+        }
+      },
+      "tags": {
+        "group": "items"
+      },
+      "zOrder": 1
+    },
+    {
+      "id": "whale",
+      "components": [
+        "drag"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 500.0,
+          "y": 340.0
+        },
+        "color": {
+          "type": "text",
+          "value": "blue"
+        },
+        "emoji": {
+          "type": "text",
+          "value": "🐋"
+        }
+      },
+      "tags": {
+        "group": "items"
+      },
+      "zOrder": 1
+    },
+    {
+      "id": "lemon",
+      "components": [
+        "drag"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 830.0,
+          "y": 340.0
+        },
+        "color": {
+          "type": "text",
+          "value": "yellow"
+        },
+        "emoji": {
+          "type": "text",
+          "value": "🍋"
+        }
+      },
+      "tags": {
+        "group": "items"
+      },
+      "zOrder": 1
+    },
+    {
+      "id": "firetruck",
+      "components": [
+        "drag"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 170.0,
+          "y": 530.0
+        },
+        "color": {
+          "type": "text",
+          "value": "red"
+        },
+        "emoji": {
+          "type": "text",
+          "value": "🚒"
+        }
+      },
+      "tags": {
+        "group": "items"
+      },
+      "zOrder": 1
+    },
+    {
+      "id": "blueberry",
+      "components": [
+        "drag"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 500.0,
+          "y": 530.0
+        },
+        "color": {
+          "type": "text",
+          "value": "blue"
+        },
+        "emoji": {
+          "type": "text",
+          "value": "🫐"
+        }
+      },
+      "tags": {
+        "group": "items"
+      },
+      "zOrder": 1
+    },
+    {
+      "id": "star",
+      "components": [
+        "drag"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 830.0,
+          "y": 530.0
+        },
+        "color": {
+          "type": "text",
+          "value": "yellow"
+        },
+        "emoji": {
+          "type": "text",
+          "value": "⭐"
+        }
+      },
+      "tags": {
+        "group": "items"
+      },
+      "zOrder": 1
+    },
+    {
+      "id": "basket_red",
+      "components": [
+        "dropTarget"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 170.0,
+          "y": 710.0
+        },
+        "constraintType": {
+          "type": "text",
+          "value": "propertyEquals"
+        },
+        "source": {
+          "type": "text",
+          "value": "color"
+        },
+        "target": {
+          "type": "text",
+          "value": "acceptsColor"
+        },
+        "acceptsColor": {
+          "type": "text",
+          "value": "red"
+        },
+        "emoji": {
+          "type": "text",
+          "value": "🔴"
+        },
+        "label": {
+          "type": "text",
+          "value": "Красный"
+        }
+      },
+      "tags": {},
+      "zOrder": 0
+    },
+    {
+      "id": "basket_blue",
+      "components": [
+        "dropTarget"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 500.0,
+          "y": 710.0
+        },
+        "constraintType": {
+          "type": "text",
+          "value": "propertyEquals"
+        },
+        "source": {
+          "type": "text",
+          "value": "color"
+        },
+        "target": {
+          "type": "text",
+          "value": "acceptsColor"
+        },
+        "acceptsColor": {
+          "type": "text",
+          "value": "blue"
+        },
+        "emoji": {
+          "type": "text",
+          "value": "🔵"
+        },
+        "label": {
+          "type": "text",
+          "value": "Синий"
+        }
+      },
+      "tags": {},
+      "zOrder": 0
+    },
+    {
+      "id": "basket_yellow",
+      "components": [
+        "dropTarget"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 830.0,
+          "y": 710.0
+        },
+        "constraintType": {
+          "type": "text",
+          "value": "propertyEquals"
+        },
+        "source": {
+          "type": "text",
+          "value": "color"
+        },
+        "target": {
+          "type": "text",
+          "value": "acceptsColor"
+        },
+        "acceptsColor": {
+          "type": "text",
+          "value": "yellow"
+        },
+        "emoji": {
+          "type": "text",
+          "value": "🟡"
+        },
+        "label": {
+          "type": "text",
+          "value": "Жёлтый"
+        }
+      },
+      "tags": {},
+      "zOrder": 0
+    }
+  ],
+  "objectives": [
+    {
+      "id": "obj1",
+      "type": "allMatched",
+      "config": {
+        "group": "items"
+      },
+      "requires": null
+    }
+  ],
+  "behaviors": [
+    {
+      "behaviorRef": {
+        "type": "audioPrompt",
+        "config": {
+          "on": "sceneStarted",
+          "text": "Разложи предметы по цвету"
+        }
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "snapToTarget",
+        "config": {}
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "progressTracker",
+        "config": {}
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "adaptiveHint",
+        "config": {}
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "playSoundOnEvent",
+        "config": {
+          "on": "sceneCompleted",
+          "sound": "complete"
+        }
+      },
+      "entityId": null
+    }
+  ],
+  "fieldPolicies": {},
+  "idleTimeout": 30,
+  "onIdle": "HINT",
+  "metadata": {},
+  "meta": {
+    "title": "Разложи по цвету",
+    "description": "Перетащи предметы в корзины по цвету: красный, синий, жёлтый",
+    "ageMin": 3,
+    "ageMax": 6,
+    "version": 1,
+    "tags": [
+      "colors",
+      "sorting",
+      "categorization"
+    ],
+    "skills": [
+      "color_recognition",
+      "categorization",
+      "hand_eye_coordination",
+      "visual_attention",
+      "task_completion"
+    ],
+    "icon": "🎨"
+  }
+}

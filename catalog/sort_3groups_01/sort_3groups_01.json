@@ -1,0 +1,436 @@
+{
+  "sceneId": "sort_3groups_01",
+  "entities": [
+    {
+      "id": "dog",
+      "components": [
+        "drag"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 170.0,
+          "y": 150.0
+        },
+        "category": {
+          "type": "text",
+          "value": "animal"
+        },
+        "emoji": {
+          "type": "text",
+          "value": "🐶"
+        }
+      },
+      "tags": {
+        "group": "items"
+      },
+      "zOrder": 1
+    },
+    {
+      "id": "car",
+      "components": [
+        "drag"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 500.0,
+          "y": 150.0
+        },
+        "category": {
+          "type": "text",
+          "value": "vehicle"
+        },
+        "emoji": {
+          "type": "text",
+          "value": "🚗"
+        }
+      },
+      "tags": {
+        "group": "items"
+      },
+      "zOrder": 1
+    },
+    {
+      "id": "apple2",
+      "components": [
+        "drag"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 830.0,
+          "y": 150.0
+        },
+        "category": {
+          "type": "text",
+          "value": "food"
+        },
+        "emoji": {
+          "type": "text",
+          "value": "🍎"
+        }
+      },
+      "tags": {
+        "group": "items"
+      },
+      "zOrder": 1
+    },
+    {
+      "id": "cat",
+      "components": [
+        "drag"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 170.0,
+          "y": 340.0
+        },
+        "category": {
+          "type": "text",
+          "value": "animal"
+        },
+        "emoji": {
+          "type": "text",
+          "value": "🐱"
+        }
+      },
+      "tags": {
+        "group": "items"
+      },
+      "zOrder": 1
+    },
+    {
+      "id": "train",
+      "components": [
+        "drag"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 500.0,
+          "y": 340.0
+        },
+        "category": {
+          "type": "text",
+          "value": "vehicle"
+        },
+        "emoji": {
+          "type": "text",
+          "value": "🚂"
+        }
+      },
+      "tags": {
+        "group": "items"
+      },
+      "zOrder": 1
+    },
+    {
+      "id": "pizza",
+      "components": [
+        "drag"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 830.0,
+          "y": 340.0
+        },
+        "category": {
+          "type": "text",
+          "value": "food"
+        },
+        "emoji": {
+          "type": "text",
+          "value": "🍕"
+        }
+      },
+      "tags": {
+        "group": "items"
+      },
+      "zOrder": 1
+    },
+    {
+      "id": "rabbit",
+      "components": [
+        "drag"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 170.0,
+          "y": 530.0
+        },
+        "category": {
+          "type": "text",
+          "value": "animal"
+        },
+        "emoji": {
+          "type": "text",
+          "value": "🐰"
+        }
+      },
+      "tags": {
+        "group": "items"
+      },
+      "zOrder": 1
+    },
+    {
+      "id": "plane",
+      "components": [
+        "drag"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 500.0,
+          "y": 530.0
+        },
+        "category": {
+          "type": "text",
+          "value": "vehicle"
+        },
+        "emoji": {
+          "type": "text",
+          "value": "✈️"
+        }
+      },
+      "tags": {
+        "group": "items"
+      },
+      "zOrder": 1
+    },
+    {
+      "id": "icecream",
+      "components": [
+        "drag"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 830.0,
+          "y": 530.0
+        },
+        "category": {
+          "type": "text",
+          "value": "food"
+        },
+        "emoji": {
+          "type": "text",
+          "value": "🍦"
+        }
+      },
+      "tags": {
+        "group": "items"
+      },
+      "zOrder": 1
+    },
+    {
+      "id": "basket_animal",
+      "components": [
+        "dropTarget"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 170.0,
+          "y": 710.0
+        },
+        "constraintType": {
+          "type": "text",
+          "value": "propertyEquals"
+        },
+        "source": {
+          "type": "text",
+          "value": "category"
+        },
+        "target": {
+          "type": "text",
+          "value": "acceptsCategory"
+        },
+        "acceptsCategory": {
+          "type": "text",
+          "value": "animal"
+        },
+        "emoji": {
+          "type": "text",
+          "value": "🐾"
+        },
+        "label": {
+          "type": "text",
+          "value": "Животные"
+        }
+      },
+      "tags": {},
+      "zOrder": 0
+    },
+    {
+      "id": "basket_vehicle",
+      "components": [
+        "dropTarget"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 500.0,
+          "y": 710.0
+        },
+        "constraintType": {
+          "type": "text",
+          "value": "propertyEquals"
+        },
+        "source": {
+          "type": "text",
+          "value": "category"
+        },
+        "target": {
+          "type": "text",
+          "value": "acceptsCategory"
+        },
+        "acceptsCategory": {
+          "type": "text",
+          "value": "vehicle"
+        },
+        "emoji": {
+          "type": "text",
+          "value": "🚗"
+        },
+        "label": {
+          "type": "text",
+          "value": "Транспорт"
+        }
+      },
+      "tags": {},
+      "zOrder": 0
+    },
+    {
+      "id": "basket_food",
+      "components": [
+        "dropTarget"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 830.0,
+          "y": 710.0
+        },
+        "constraintType": {
+          "type": "text",
+          "value": "propertyEquals"
+        },
+        "source": {
+          "type": "text",
+          "value": "category"
+        },
+        "target": {
+          "type": "text",
+          "value": "acceptsCategory"
+        },
+        "acceptsCategory": {
+          "type": "text",
+          "value": "food"
+        },
+        "emoji": {
+          "type": "text",
+          "value": "🍽️"
+        },
+        "label": {
+          "type": "text",
+          "value": "Еда"
+        }
+      },
+      "tags": {},
+      "zOrder": 0
+    }
+  ],
+  "objectives": [
+    {
+      "id": "obj1",
+      "type": "allMatched",
+      "config": {
+        "group": "items"
+      },
+      "requires": null
+    }
+  ],
+  "behaviors": [
+    {
+      "behaviorRef": {
+        "type": "audioPrompt",
+        "config": {
+          "on": "sceneStarted",
+          "text": "Разложи по группам: животные, транспорт и еда"
+        }
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "snapToTarget",
+        "config": {}
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "progressTracker",
+        "config": {}
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "adaptiveHint",
+        "config": {}
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "playSoundOnEvent",
+        "config": {
+          "on": "sceneCompleted",
+          "sound": "complete"
+        }
+      },
+      "entityId": null
+    }
+  ],
+  "fieldPolicies": {},
+  "idleTimeout": 30,
+  "onIdle": "HINT",
+  "metadata": {},
+  "meta": {
+    "title": "Животные, транспорт, еда",
+    "description": "Разложи предметы по трём группам: животные, транспорт и еда",
+    "ageMin": 3,
+    "ageMax": 6,
+    "version": 1,
+    "tags": [
+      "categories",
+      "sorting",
+      "categorization"
+    ],
+    "skills": [
+      "categorization",
+      "problem_solving",
+      "hand_eye_coordination",
+      "visual_attention",
+      "task_completion"
+    ],
+    "icon": "🗂️"
+  }
+}

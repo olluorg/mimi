@@ -1,0 +1,407 @@
+{
+  "sceneId": "sort_big_small_02",
+  "entities": [
+    {
+      "id": "big_elephant",
+      "components": [
+        "drag"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 200.0,
+          "y": 160.0
+        },
+        "width": {
+          "type": "num",
+          "value": 125.0
+        },
+        "height": {
+          "type": "num",
+          "value": 125.0
+        },
+        "size": {
+          "type": "text",
+          "value": "big"
+        },
+        "emoji": {
+          "type": "text",
+          "value": "🐘"
+        }
+      },
+      "tags": {
+        "group": "animals"
+      },
+      "zOrder": 1
+    },
+    {
+      "id": "big_lion",
+      "components": [
+        "drag"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 780.0,
+          "y": 160.0
+        },
+        "width": {
+          "type": "num",
+          "value": 125.0
+        },
+        "height": {
+          "type": "num",
+          "value": 125.0
+        },
+        "size": {
+          "type": "text",
+          "value": "big"
+        },
+        "emoji": {
+          "type": "text",
+          "value": "🦁"
+        }
+      },
+      "tags": {
+        "group": "animals"
+      },
+      "zOrder": 1
+    },
+    {
+      "id": "med_cow",
+      "components": [
+        "drag"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 200.0,
+          "y": 370.0
+        },
+        "width": {
+          "type": "num",
+          "value": 88.0
+        },
+        "height": {
+          "type": "num",
+          "value": 88.0
+        },
+        "size": {
+          "type": "text",
+          "value": "medium"
+        },
+        "emoji": {
+          "type": "text",
+          "value": "🐮"
+        }
+      },
+      "tags": {
+        "group": "animals"
+      },
+      "zOrder": 1
+    },
+    {
+      "id": "med_rabbit",
+      "components": [
+        "drag"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 780.0,
+          "y": 370.0
+        },
+        "width": {
+          "type": "num",
+          "value": 88.0
+        },
+        "height": {
+          "type": "num",
+          "value": 88.0
+        },
+        "size": {
+          "type": "text",
+          "value": "medium"
+        },
+        "emoji": {
+          "type": "text",
+          "value": "🐇"
+        }
+      },
+      "tags": {
+        "group": "animals"
+      },
+      "zOrder": 1
+    },
+    {
+      "id": "small_mouse",
+      "components": [
+        "drag"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 200.0,
+          "y": 560.0
+        },
+        "width": {
+          "type": "num",
+          "value": 55.0
+        },
+        "height": {
+          "type": "num",
+          "value": 55.0
+        },
+        "size": {
+          "type": "text",
+          "value": "small"
+        },
+        "emoji": {
+          "type": "text",
+          "value": "🐭"
+        }
+      },
+      "tags": {
+        "group": "animals"
+      },
+      "zOrder": 1
+    },
+    {
+      "id": "small_ant",
+      "components": [
+        "drag"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 780.0,
+          "y": 560.0
+        },
+        "width": {
+          "type": "num",
+          "value": 55.0
+        },
+        "height": {
+          "type": "num",
+          "value": 55.0
+        },
+        "size": {
+          "type": "text",
+          "value": "small"
+        },
+        "emoji": {
+          "type": "text",
+          "value": "🐜"
+        }
+      },
+      "tags": {
+        "group": "animals"
+      },
+      "zOrder": 1
+    },
+    {
+      "id": "basket_big",
+      "components": [
+        "dropTarget"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 170.0,
+          "y": 710.0
+        },
+        "constraintType": {
+          "type": "text",
+          "value": "propertyEquals"
+        },
+        "source": {
+          "type": "text",
+          "value": "size"
+        },
+        "target": {
+          "type": "text",
+          "value": "acceptsSize"
+        },
+        "acceptsSize": {
+          "type": "text",
+          "value": "big"
+        },
+        "emoji": {
+          "type": "text",
+          "value": "🧺"
+        },
+        "label": {
+          "type": "text",
+          "value": "Большой"
+        }
+      },
+      "tags": {},
+      "zOrder": 0
+    },
+    {
+      "id": "basket_medium",
+      "components": [
+        "dropTarget"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 500.0,
+          "y": 710.0
+        },
+        "constraintType": {
+          "type": "text",
+          "value": "propertyEquals"
+        },
+        "source": {
+          "type": "text",
+          "value": "size"
+        },
+        "target": {
+          "type": "text",
+          "value": "acceptsSize"
+        },
+        "acceptsSize": {
+          "type": "text",
+          "value": "medium"
+        },
+        "emoji": {
+          "type": "text",
+          "value": "🧺"
+        },
+        "label": {
+          "type": "text",
+          "value": "Средний"
+        }
+      },
+      "tags": {},
+      "zOrder": 0
+    },
+    {
+      "id": "basket_small",
+      "components": [
+        "dropTarget"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 830.0,
+          "y": 710.0
+        },
+        "constraintType": {
+          "type": "text",
+          "value": "propertyEquals"
+        },
+        "source": {
+          "type": "text",
+          "value": "size"
+        },
+        "target": {
+          "type": "text",
+          "value": "acceptsSize"
+        },
+        "acceptsSize": {
+          "type": "text",
+          "value": "small"
+        },
+        "emoji": {
+          "type": "text",
+          "value": "🧺"
+        },
+        "label": {
+          "type": "text",
+          "value": "Маленький"
+        }
+      },
+      "tags": {},
+      "zOrder": 0
+    }
+  ],
+  "objectives": [
+    {
+      "id": "obj1",
+      "type": "allMatched",
+      "config": {
+        "group": "animals"
+      },
+      "requires": null
+    }
+  ],
+  "behaviors": [
+    {
+      "behaviorRef": {
+        "type": "audioPrompt",
+        "config": {
+          "on": "sceneStarted",
+          "text": "Разложи по размеру: большой, средний, маленький"
+        }
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "snapToTarget",
+        "config": {}
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "progressTracker",
+        "config": {}
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "adaptiveHint",
+        "config": {}
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "playSoundOnEvent",
+        "config": {
+          "on": "sceneCompleted",
+          "sound": "complete"
+        }
+      },
+      "entityId": null
+    }
+  ],
+  "fieldPolicies": {},
+  "idleTimeout": 25,
+  "onIdle": "HINT",
+  "metadata": {
+    "difficulty": "medium"
+  },
+  "meta": {
+    "title": "Три размера",
+    "description": "Разложи животных по размеру: большой, средний и маленький",
+    "ageMin": 3,
+    "ageMax": 6,
+    "version": 1,
+    "tags": [
+      "size",
+      "sorting"
+    ],
+    "skills": [
+      "size_comparison",
+      "categorization",
+      "hand_eye_coordination",
+      "visual_attention",
+      "task_completion"
+    ],
+    "icon": "🦁"
+  }
+}

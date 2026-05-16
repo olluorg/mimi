@@ -1,0 +1,461 @@
+{
+  "sceneId": "memory_cards_02",
+  "entities": [
+    {
+      "id": "card_1",
+      "components": [
+        "tap"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 140.0,
+          "y": 190.0
+        },
+        "pairId": {
+          "type": "text",
+          "value": "dog"
+        },
+        "face": {
+          "type": "text",
+          "value": "🐶"
+        },
+        "cardState": {
+          "type": "text",
+          "value": "hidden"
+        }
+      },
+      "tags": {
+        "group": "cards"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "card_2",
+      "components": [
+        "tap"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 370.0,
+          "y": 190.0
+        },
+        "pairId": {
+          "type": "text",
+          "value": "frog"
+        },
+        "face": {
+          "type": "text",
+          "value": "🐸"
+        },
+        "cardState": {
+          "type": "text",
+          "value": "hidden"
+        }
+      },
+      "tags": {
+        "group": "cards"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "card_3",
+      "components": [
+        "tap"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 600.0,
+          "y": 190.0
+        },
+        "pairId": {
+          "type": "text",
+          "value": "lion"
+        },
+        "face": {
+          "type": "text",
+          "value": "🦁"
+        },
+        "cardState": {
+          "type": "text",
+          "value": "hidden"
+        }
+      },
+      "tags": {
+        "group": "cards"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "card_4",
+      "components": [
+        "tap"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 830.0,
+          "y": 190.0
+        },
+        "pairId": {
+          "type": "text",
+          "value": "cat"
+        },
+        "face": {
+          "type": "text",
+          "value": "🐱"
+        },
+        "cardState": {
+          "type": "text",
+          "value": "hidden"
+        }
+      },
+      "tags": {
+        "group": "cards"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "card_5",
+      "components": [
+        "tap"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 140.0,
+          "y": 410.0
+        },
+        "pairId": {
+          "type": "text",
+          "value": "panda"
+        },
+        "face": {
+          "type": "text",
+          "value": "🐼"
+        },
+        "cardState": {
+          "type": "text",
+          "value": "hidden"
+        }
+      },
+      "tags": {
+        "group": "cards"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "card_6",
+      "components": [
+        "tap"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 370.0,
+          "y": 410.0
+        },
+        "pairId": {
+          "type": "text",
+          "value": "rabbit"
+        },
+        "face": {
+          "type": "text",
+          "value": "🐰"
+        },
+        "cardState": {
+          "type": "text",
+          "value": "hidden"
+        }
+      },
+      "tags": {
+        "group": "cards"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "card_7",
+      "components": [
+        "tap"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 600.0,
+          "y": 410.0
+        },
+        "pairId": {
+          "type": "text",
+          "value": "cat"
+        },
+        "face": {
+          "type": "text",
+          "value": "🐱"
+        },
+        "cardState": {
+          "type": "text",
+          "value": "hidden"
+        }
+      },
+      "tags": {
+        "group": "cards"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "card_8",
+      "components": [
+        "tap"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 830.0,
+          "y": 410.0
+        },
+        "pairId": {
+          "type": "text",
+          "value": "panda"
+        },
+        "face": {
+          "type": "text",
+          "value": "🐼"
+        },
+        "cardState": {
+          "type": "text",
+          "value": "hidden"
+        }
+      },
+      "tags": {
+        "group": "cards"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "card_9",
+      "components": [
+        "tap"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 140.0,
+          "y": 630.0
+        },
+        "pairId": {
+          "type": "text",
+          "value": "frog"
+        },
+        "face": {
+          "type": "text",
+          "value": "🐸"
+        },
+        "cardState": {
+          "type": "text",
+          "value": "hidden"
+        }
+      },
+      "tags": {
+        "group": "cards"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "card_10",
+      "components": [
+        "tap"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 370.0,
+          "y": 630.0
+        },
+        "pairId": {
+          "type": "text",
+          "value": "dog"
+        },
+        "face": {
+          "type": "text",
+          "value": "🐶"
+        },
+        "cardState": {
+          "type": "text",
+          "value": "hidden"
+        }
+      },
+      "tags": {
+        "group": "cards"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "card_11",
+      "components": [
+        "tap"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 600.0,
+          "y": 630.0
+        },
+        "pairId": {
+          "type": "text",
+          "value": "rabbit"
+        },
+        "face": {
+          "type": "text",
+          "value": "🐰"
+        },
+        "cardState": {
+          "type": "text",
+          "value": "hidden"
+        }
+      },
+      "tags": {
+        "group": "cards"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "card_12",
+      "components": [
+        "tap"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 830.0,
+          "y": 630.0
+        },
+        "pairId": {
+          "type": "text",
+          "value": "lion"
+        },
+        "face": {
+          "type": "text",
+          "value": "🦁"
+        },
+        "cardState": {
+          "type": "text",
+          "value": "hidden"
+        }
+      },
+      "tags": {
+        "group": "cards"
+      },
+      "zOrder": 0
+    }
+  ],
+  "objectives": [
+    {
+      "id": "obj1",
+      "type": "allPairsMatched",
+      "config": {
+        "group": "cards"
+      },
+      "requires": null
+    }
+  ],
+  "behaviors": [
+    {
+      "behaviorRef": {
+        "type": "memoryFlipController",
+        "config": {
+          "group": "cards",
+          "maxOpenCards": "2",
+          "flipBackDelayMs": "800"
+        }
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "pairMatchValidator",
+        "config": {
+          "group": "cards",
+          "matchProperty": "pairId"
+        }
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "progressTracker",
+        "config": {}
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "adaptiveHint",
+        "config": {}
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "playSoundOnEvent",
+        "config": {
+          "on": "pairMatched",
+          "sound": "correct"
+        }
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "playSoundOnEvent",
+        "config": {
+          "on": "sceneCompleted",
+          "sound": "complete"
+        }
+      },
+      "entityId": null
+    }
+  ],
+  "fieldPolicies": {
+    "cardState": "LAST_WINS",
+    "progress": "PRIORITY"
+  },
+  "idleTimeout": 20,
+  "onIdle": "HINT",
+  "metadata": {
+    "difficulty": "hard"
+  },
+  "meta": {
+    "title": "Найди пару: зверята",
+    "description": "Открывай карточки и найди 6 одинаковых пар",
+    "ageMin": 4,
+    "ageMax": 7,
+    "version": 1,
+    "tags": [
+      "memory",
+      "matching",
+      "attention"
+    ],
+    "skills": [
+      "memory",
+      "visual_memory",
+      "working_memory",
+      "impulse_control",
+      "task_completion"
+    ],
+    "icon": "🃏"
+  }
+}

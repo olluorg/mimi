@@ -1,0 +1,270 @@
+{
+  "sceneId": "match_number_count_02",
+  "entities": [
+    {
+      "id": "num_4",
+      "components": [
+        "drag"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 170.0,
+          "y": 220.0
+        },
+        "count": {
+          "type": "text",
+          "value": "4"
+        },
+        "emoji": {
+          "type": "text",
+          "value": "4️⃣"
+        }
+      },
+      "tags": {
+        "group": "numbers"
+      },
+      "zOrder": 1
+    },
+    {
+      "id": "num_5",
+      "components": [
+        "drag"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 500.0,
+          "y": 220.0
+        },
+        "count": {
+          "type": "text",
+          "value": "5"
+        },
+        "emoji": {
+          "type": "text",
+          "value": "5️⃣"
+        }
+      },
+      "tags": {
+        "group": "numbers"
+      },
+      "zOrder": 1
+    },
+    {
+      "id": "num_6",
+      "components": [
+        "drag"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 830.0,
+          "y": 220.0
+        },
+        "count": {
+          "type": "text",
+          "value": "6"
+        },
+        "emoji": {
+          "type": "text",
+          "value": "6️⃣"
+        }
+      },
+      "tags": {
+        "group": "numbers"
+      },
+      "zOrder": 1
+    },
+    {
+      "id": "target_4",
+      "components": [
+        "dropTarget"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 170.0,
+          "y": 590.0
+        },
+        "constraintType": {
+          "type": "text",
+          "value": "propertyEquals"
+        },
+        "source": {
+          "type": "text",
+          "value": "count"
+        },
+        "target": {
+          "type": "text",
+          "value": "acceptsCount"
+        },
+        "acceptsCount": {
+          "type": "text",
+          "value": "4"
+        },
+        "label": {
+          "type": "text",
+          "value": "● ● ● ●"
+        }
+      },
+      "tags": {},
+      "zOrder": 0
+    },
+    {
+      "id": "target_5",
+      "components": [
+        "dropTarget"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 500.0,
+          "y": 590.0
+        },
+        "constraintType": {
+          "type": "text",
+          "value": "propertyEquals"
+        },
+        "source": {
+          "type": "text",
+          "value": "count"
+        },
+        "target": {
+          "type": "text",
+          "value": "acceptsCount"
+        },
+        "acceptsCount": {
+          "type": "text",
+          "value": "5"
+        },
+        "label": {
+          "type": "text",
+          "value": "● ● ● ● ●"
+        }
+      },
+      "tags": {},
+      "zOrder": 0
+    },
+    {
+      "id": "target_6",
+      "components": [
+        "dropTarget"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 830.0,
+          "y": 590.0
+        },
+        "constraintType": {
+          "type": "text",
+          "value": "propertyEquals"
+        },
+        "source": {
+          "type": "text",
+          "value": "count"
+        },
+        "target": {
+          "type": "text",
+          "value": "acceptsCount"
+        },
+        "acceptsCount": {
+          "type": "text",
+          "value": "6"
+        },
+        "label": {
+          "type": "text",
+          "value": "● ● ● ● ● ●"
+        }
+      },
+      "tags": {},
+      "zOrder": 0
+    }
+  ],
+  "objectives": [
+    {
+      "id": "obj1",
+      "type": "allMatched",
+      "config": {
+        "group": "numbers"
+      },
+      "requires": null
+    }
+  ],
+  "behaviors": [
+    {
+      "behaviorRef": {
+        "type": "audioPrompt",
+        "config": {
+          "on": "sceneStarted",
+          "text": "Положи цифру к нужному количеству точек"
+        }
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "snapToTarget",
+        "config": {}
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "progressTracker",
+        "config": {}
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "adaptiveHint",
+        "config": {}
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "playSoundOnEvent",
+        "config": {
+          "on": "sceneCompleted",
+          "sound": "complete"
+        }
+      },
+      "entityId": null
+    }
+  ],
+  "fieldPolicies": {},
+  "idleTimeout": 25,
+  "onIdle": "HINT",
+  "metadata": {
+    "difficulty": "medium"
+  },
+  "meta": {
+    "title": "Цифры 4–6",
+    "description": "Перетащи цифры 4, 5 и 6 к группам с нужным количеством точек",
+    "ageMin": 4,
+    "ageMax": 7,
+    "version": 1,
+    "tags": [
+      "numbers",
+      "counting",
+      "matching"
+    ],
+    "skills": [
+      "counting",
+      "numbers",
+      "matching",
+      "hand_eye_coordination",
+      "task_completion"
+    ],
+    "icon": "6️⃣"
+  }
+}

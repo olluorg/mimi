@@ -136,6 +136,30 @@
     {
       "id": "match_number_count_01",
       "url": "https://olluorg.github.io/mimi/match_number_count_01/match_number_count_01.json"
+    },
+    {
+      "id": "memory_cards_02",
+      "url": "https://olluorg.github.io/mimi/memory_cards_02/memory_cards_02.json"
+    },
+    {
+      "id": "tap_repeat_02",
+      "url": "https://olluorg.github.io/mimi/tap_repeat_02/tap_repeat_02.json"
+    },
+    {
+      "id": "sort_big_small_02",
+      "url": "https://olluorg.github.io/mimi/sort_big_small_02/sort_big_small_02.json"
+    },
+    {
+      "id": "match_number_count_02",
+      "url": "https://olluorg.github.io/mimi/match_number_count_02/match_number_count_02.json"
+    },
+    {
+      "id": "sort_colors_01",
+      "url": "https://olluorg.github.io/mimi/sort_colors_01/sort_colors_01.json"
+    },
+    {
+      "id": "sort_3groups_01",
+      "url": "https://olluorg.github.io/mimi/sort_3groups_01/sort_3groups_01.json"
     }
   ]
 }
