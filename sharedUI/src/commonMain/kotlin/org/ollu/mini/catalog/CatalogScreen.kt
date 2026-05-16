@@ -116,6 +116,7 @@ fun CatalogScreen(
     var uiState        by remember { mutableStateOf(CatalogState(isRefreshing = true)) }
     var completedIds   by remember { mutableStateOf(progressRepository?.getCompletedSceneIds() ?: emptySet<String>()) }
     var selectedSkills by remember { mutableStateOf(emptySet<String>()) }
+    var ageFilter      by remember { mutableStateOf(0) }  // 0=все 1=2-3 2=4-5 3=6-7
 
     LaunchedEffect(catalogUrl) {
         repo.catalogFlow(catalogUrl).collect { state ->
@@ -129,9 +130,20 @@ fun CatalogScreen(
             .sortedBy { skillLabel[it] ?: it }
     }
 
-    val displayedEntries = remember(uiState.entries, selectedSkills) {
-        if (selectedSkills.isEmpty()) uiState.entries
-        else uiState.entries.filter { entry -> entry.skills.any { it in selectedSkills } }
+    val displayedEntries = remember(uiState.entries, selectedSkills, ageFilter) {
+        uiState.entries
+            .let { list ->
+                when (ageFilter) {
+                    1    -> list.filter { it.ageMin <= 3 && it.ageMax >= 2 }
+                    2    -> list.filter { it.ageMin <= 5 && it.ageMax >= 4 }
+                    3    -> list.filter { it.ageMin <= 7 && it.ageMax >= 6 }
+                    else -> list
+                }
+            }
+            .let { list ->
+                if (selectedSkills.isEmpty()) list
+                else list.filter { entry -> entry.skills.any { it in selectedSkills } }
+            }
     }
 
     Box(Modifier.fillMaxSize().background(BG)) {
@@ -171,6 +183,10 @@ fun CatalogScreen(
                                 )
                             }
                         }
+                    }
+
+                    item {
+                        AgeFilterBar(selected = ageFilter, onSelect = { ageFilter = it })
                     }
 
                     if (allSkills.isNotEmpty()) {
@@ -220,6 +236,31 @@ fun CatalogScreen(
                         trackColor = Color.Transparent
                     )
                 }
+            }
+        }
+    }
+}
+
+@Composable
+private fun AgeFilterBar(selected: Int, onSelect: (Int) -> Unit) {
+    val labels = listOf("Все", "2–3 года", "4–5 лет", "6–7 лет")
+    Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+        labels.forEachIndexed { index, label ->
+            val active = selected == index
+            Surface(
+                onClick = { onSelect(index) },
+                shape   = RoundedCornerShape(20.dp),
+                color   = if (active) Color(0xFF457B9D) else Color.White,
+                tonalElevation = if (active) 0.dp else 1.dp,
+                shadowElevation = if (active) 0.dp else 1.dp
+            ) {
+                Text(
+                    label,
+                    fontSize = 12.sp,
+                    color    = if (active) Color.White else Color(0xFF687381),
+                    fontWeight = if (active) FontWeight.SemiBold else FontWeight.Normal,
+                    modifier = Modifier.padding(horizontal = 12.dp, vertical = 6.dp)
+                )
             }
         }
     }
@@ -294,7 +335,11 @@ private fun SceneCard(entry: CatalogEntry, loading: Boolean, completed: Boolean,
                     .background(Color(0xFFE8F1FA), RoundedCornerShape(8.dp)),
                 contentAlignment = Alignment.Center
             ) {
-                Text(entry.title.firstOrNull()?.uppercase() ?: "M", fontSize = 20.sp, color = Color(0xFF457B9D), fontWeight = FontWeight.Bold)
+                if (entry.icon.isNotBlank()) {
+                    Text(entry.icon, fontSize = 24.sp)
+                } else {
+                    Text(entry.title.firstOrNull()?.uppercase() ?: "M", fontSize = 20.sp, color = Color(0xFF457B9D), fontWeight = FontWeight.Bold)
+                }
                 if (completed) {
                     Box(
                         modifier         = Modifier.align(Alignment.TopEnd).size(18.dp)

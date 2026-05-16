@@ -46,7 +46,8 @@ class CatalogCache {
             url         = ref.url,
             ageMin      = meta.ageMin,
             ageMax      = meta.ageMax,
-            skills      = meta.skills
+            skills      = meta.skills,
+            icon        = meta.icon
         )
     }
 

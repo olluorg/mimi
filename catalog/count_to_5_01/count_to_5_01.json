@@ -3,67 +3,152 @@
   "entities": [
     {
       "id": "star_1",
-      "components": ["tap"],
+      "components": [
+        "tap"
+      ],
       "behaviors": [],
       "properties": {
-        "position": { "type": "vec2", "x": 160.0, "y": 380.0 },
-        "sequenceIndex": { "type": "num", "value": 1.0 },
-        "emoji": { "type": "text", "value": "⭐" },
-        "label": { "type": "text", "value": "1" }
+        "position": {
+          "type": "vec2",
+          "x": 160.0,
+          "y": 380.0
+        },
+        "sequenceIndex": {
+          "type": "num",
+          "value": 1.0
+        },
+        "emoji": {
+          "type": "text",
+          "value": "⭐"
+        },
+        "label": {
+          "type": "text",
+          "value": "1"
+        }
       },
-      "tags": { "group": "stars" },
+      "tags": {
+        "group": "stars"
+      },
       "zOrder": 0
     },
     {
       "id": "star_2",
-      "components": ["tap"],
+      "components": [
+        "tap"
+      ],
       "behaviors": [],
       "properties": {
-        "position": { "type": "vec2", "x": 330.0, "y": 380.0 },
-        "sequenceIndex": { "type": "num", "value": 2.0 },
-        "emoji": { "type": "text", "value": "⭐" },
-        "label": { "type": "text", "value": "2" }
+        "position": {
+          "type": "vec2",
+          "x": 330.0,
+          "y": 380.0
+        },
+        "sequenceIndex": {
+          "type": "num",
+          "value": 2.0
+        },
+        "emoji": {
+          "type": "text",
+          "value": "⭐"
+        },
+        "label": {
+          "type": "text",
+          "value": "2"
+        }
       },
-      "tags": { "group": "stars" },
+      "tags": {
+        "group": "stars"
+      },
       "zOrder": 0
     },
     {
       "id": "star_3",
-      "components": ["tap"],
+      "components": [
+        "tap"
+      ],
       "behaviors": [],
       "properties": {
-        "position": { "type": "vec2", "x": 500.0, "y": 380.0 },
-        "sequenceIndex": { "type": "num", "value": 3.0 },
-        "emoji": { "type": "text", "value": "⭐" },
-        "label": { "type": "text", "value": "3" }
+        "position": {
+          "type": "vec2",
+          "x": 500.0,
+          "y": 380.0
+        },
+        "sequenceIndex": {
+          "type": "num",
+          "value": 3.0
+        },
+        "emoji": {
+          "type": "text",
+          "value": "⭐"
+        },
+        "label": {
+          "type": "text",
+          "value": "3"
+        }
       },
-      "tags": { "group": "stars" },
+      "tags": {
+        "group": "stars"
+      },
       "zOrder": 0
     },
     {
       "id": "star_4",
-      "components": ["tap"],
+      "components": [
+        "tap"
+      ],
       "behaviors": [],
       "properties": {
-        "position": { "type": "vec2", "x": 670.0, "y": 380.0 },
-        "sequenceIndex": { "type": "num", "value": 4.0 },
-        "emoji": { "type": "text", "value": "⭐" },
-        "label": { "type": "text", "value": "4" }
+        "position": {
+          "type": "vec2",
+          "x": 670.0,
+          "y": 380.0
+        },
+        "sequenceIndex": {
+          "type": "num",
+          "value": 4.0
+        },
+        "emoji": {
+          "type": "text",
+          "value": "⭐"
+        },
+        "label": {
+          "type": "text",
+          "value": "4"
+        }
       },
-      "tags": { "group": "stars" },
+      "tags": {
+        "group": "stars"
+      },
       "zOrder": 0
     },
     {
       "id": "star_5",
-      "components": ["tap"],
+      "components": [
+        "tap"
+      ],
       "behaviors": [],
       "properties": {
-        "position": { "type": "vec2", "x": 840.0, "y": 380.0 },
-        "sequenceIndex": { "type": "num", "value": 5.0 },
-        "emoji": { "type": "text", "value": "⭐" },
-        "label": { "type": "text", "value": "5" }
+        "position": {
+          "type": "vec2",
+          "x": 840.0,
+          "y": 380.0
+        },
+        "sequenceIndex": {
+          "type": "num",
+          "value": 5.0
+        },
+        "emoji": {
+          "type": "text",
+          "value": "⭐"
+        },
+        "label": {
+          "type": "text",
+          "value": "5"
+        }
       },
-      "tags": { "group": "stars" },
+      "tags": {
+        "group": "stars"
+      },
       "zOrder": 0
     }
   ],
@@ -71,7 +156,9 @@
     {
       "id": "obj1",
       "type": "sequenceCompleted",
-      "config": { "group": "stars" },
+      "config": {
+        "group": "stars"
+      },
       "requires": null
     }
   ],
@@ -79,32 +166,47 @@
     {
       "behaviorRef": {
         "type": "sequenceValidator",
-        "config": { "group": "stars", "property": "sequenceIndex" }
+        "config": {
+          "group": "stars",
+          "property": "sequenceIndex"
+        }
       },
       "entityId": null
     },
     {
       "behaviorRef": {
         "type": "audioPrompt",
-        "config": { "on": "sceneStarted", "text": "Считай звёзды по порядку!" }
-      },
-      "entityId": null
-    },
-    {
-      "behaviorRef": { "type": "progressTracker", "config": {} },
-      "entityId": null
-    },
-    {
-      "behaviorRef": {
-        "type": "playSoundOnEvent",
-        "config": { "on": "sequenceStepCorrect", "sound": "tap_ok" }
+        "config": {
+          "on": "sceneStarted",
+          "text": "Считай звёзды по порядку!"
+        }
       },
       "entityId": null
     },
     {
       "behaviorRef": {
+        "type": "progressTracker",
+        "config": {}
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
         "type": "playSoundOnEvent",
-        "config": { "on": "sceneCompleted", "sound": "complete" }
+        "config": {
+          "on": "sequenceStepCorrect",
+          "sound": "tap_ok"
+        }
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "playSoundOnEvent",
+        "config": {
+          "on": "sceneCompleted",
+          "sound": "complete"
+        }
       },
       "entityId": null
     }
@@ -112,20 +214,27 @@
   "fieldPolicies": {},
   "idleTimeout": 15,
   "onIdle": "HINT",
-  "metadata": { "difficulty": "easy" },
+  "metadata": {
+    "difficulty": "easy"
+  },
   "meta": {
     "title": "Считай до 5",
     "description": "Нажимай на звёзды по порядку — от 1 до 5",
     "ageMin": 3,
     "ageMax": 6,
     "version": 1,
-    "tags": ["counting", "numbers", "sequence"],
+    "tags": [
+      "counting",
+      "numbers",
+      "sequence"
+    ],
     "skills": [
       "counting",
       "numbers",
       "sequencing",
       "visual_attention",
       "task_completion"
-    ]
+    ],
+    "icon": "⭐"
   }
 }

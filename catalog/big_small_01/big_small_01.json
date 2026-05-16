@@ -1,32 +1,60 @@
 {
   "sceneId": "big_small_01",
-
   "entities": [
     {
       "id": "large_square",
-      "components": ["tap"],
+      "components": [
+        "tap"
+      ],
       "behaviors": [],
       "properties": {
-        "position": { "type": "vec2", "x": 300.0, "y": 350.0 },
-        "width": { "type": "num", "value": 260.0 },
-        "height": { "type": "num", "value": 260.0 },
-        "emoji": { "type": "text", "value": "🟦" }
+        "position": {
+          "type": "vec2",
+          "x": 300.0,
+          "y": 350.0
+        },
+        "width": {
+          "type": "num",
+          "value": 260.0
+        },
+        "height": {
+          "type": "num",
+          "value": 260.0
+        },
+        "emoji": {
+          "type": "text",
+          "value": "🟦"
+        }
       },
       "tags": {
         "group": "choices"
       },
       "zOrder": 0
     },
-
     {
       "id": "small_square",
-      "components": ["tap"],
+      "components": [
+        "tap"
+      ],
       "behaviors": [],
       "properties": {
-        "position": { "type": "vec2", "x": 700.0, "y": 350.0 },
-        "width": { "type": "num", "value": 100.0 },
-        "height": { "type": "num", "value": 100.0 },
-        "emoji": { "type": "text", "value": "🟩" }
+        "position": {
+          "type": "vec2",
+          "x": 700.0,
+          "y": 350.0
+        },
+        "width": {
+          "type": "num",
+          "value": 100.0
+        },
+        "height": {
+          "type": "num",
+          "value": 100.0
+        },
+        "emoji": {
+          "type": "text",
+          "value": "🟩"
+        }
       },
       "tags": {
         "group": "choices"
@@ -34,7 +62,6 @@
       "zOrder": 0
     }
   ],
-
   "objectives": [
     {
       "id": "obj1",
@@ -48,7 +75,6 @@
       "requires": null
     }
   ],
-
   "behaviors": [
     {
       "behaviorRef": {
@@ -62,7 +88,6 @@
       },
       "entityId": null
     },
-
     {
       "behaviorRef": {
         "type": "progressTracker",
@@ -70,7 +95,6 @@
       },
       "entityId": null
     },
-
     {
       "behaviorRef": {
         "type": "adaptiveHint",
@@ -80,7 +104,6 @@
       },
       "entityId": null
     },
-
     {
       "behaviorRef": {
         "type": "playSoundOnEvent",
@@ -92,15 +115,12 @@
       "entityId": null
     }
   ],
-
   "fieldPolicies": {
     "selection": "LAST_WINS",
     "progress": "PRIORITY"
   },
-
   "idleTimeout": 12,
   "onIdle": "HINT",
-
   "metadata": {
     "difficulty": "easy"
   },
@@ -110,12 +130,17 @@
     "ageMin": 2,
     "ageMax": 5,
     "version": 1,
-    "tags": ["comparison", "size", "attention"],
+    "tags": [
+      "comparison",
+      "size",
+      "attention"
+    ],
     "skills": [
       "size_comparison",
       "categorization",
       "visual_attention",
       "task_completion"
-    ]
+    ],
+    "icon": "📏"
   }
 }

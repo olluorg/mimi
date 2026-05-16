@@ -17,6 +17,7 @@ import org.ollu.mini.game.GameScreen
 import org.ollu.mini.learning.LearningModeScreen
 import org.ollu.mini.learning.applyLearningSceneCompletion
 import org.ollu.mini.progress.ProgressRepository
+import org.ollu.mini.progress.ProgressScreen
 import org.ollu.mini.theme.AppTheme
 
 private data class SelectedScene(
@@ -28,6 +29,7 @@ private sealed class Screen {
     object Home : Screen()
     object FreePlay : Screen()
     object Learning : Screen()
+    object Progress : Screen()
     data class FreeGame(val selected: SelectedScene) : Screen()
     data class LearningGame(val selected: SelectedScene) : Screen()
 }
@@ -42,7 +44,12 @@ fun App(
     when (val s = screen) {
         is Screen.Home -> HomeScreen(
             onFreePlay = { screen = Screen.FreePlay },
-            onLearning = { screen = Screen.Learning }
+            onLearning = { screen = Screen.Learning },
+            onProgress = { screen = Screen.Progress }
+        )
+        is Screen.Progress -> ProgressScreen(
+            progressRepository = progressRepository,
+            onBack             = { screen = Screen.Home }
         )
         is Screen.FreePlay -> CatalogScreen(
             onSceneSelected    = { entry, scene -> screen = Screen.FreeGame(SelectedScene(entry, scene)) },
@@ -80,7 +87,8 @@ fun App(
 @Composable
 private fun HomeScreen(
     onFreePlay: () -> Unit,
-    onLearning: () -> Unit
+    onLearning: () -> Unit,
+    onProgress: () -> Unit
 ) {
     Box(Modifier.fillMaxSize().background(Color(0xFFF5F7FA)), contentAlignment = Alignment.Center) {
         Column(
@@ -123,6 +131,12 @@ private fun HomeScreen(
                 subtitle = "Система подбирает следующую сцену по профилю навыков",
                 accent = Color(0xFF2A9D8F),
                 onClick = onLearning
+            )
+            ModeButton(
+                title = "Прогресс",
+                subtitle = "Статистика пройденных игр и развитых навыков",
+                accent = Color(0xFFE76F51),
+                onClick = onProgress
             )
         }
     }

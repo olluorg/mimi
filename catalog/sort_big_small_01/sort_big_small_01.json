@@ -3,60 +3,148 @@
   "entities": [
     {
       "id": "big_elephant",
-      "components": ["drag"],
+      "components": [
+        "drag"
+      ],
       "behaviors": [],
       "properties": {
-        "position": { "type": "vec2", "x": 300.0, "y": 240.0 },
-        "width":    { "type": "num",  "value": 140.0 },
-        "height":   { "type": "num",  "value": 140.0 },
-        "size":     { "type": "text", "value": "big" },
-        "emoji":    { "type": "text", "value": "🐘" }
+        "position": {
+          "type": "vec2",
+          "x": 300.0,
+          "y": 240.0
+        },
+        "width": {
+          "type": "num",
+          "value": 140.0
+        },
+        "height": {
+          "type": "num",
+          "value": 140.0
+        },
+        "size": {
+          "type": "text",
+          "value": "big"
+        },
+        "emoji": {
+          "type": "text",
+          "value": "🐘"
+        }
       },
-      "tags": { "group": "animals" },
+      "tags": {
+        "group": "animals"
+      },
       "zOrder": 1
     },
     {
       "id": "small_mouse",
-      "components": ["drag"],
+      "components": [
+        "drag"
+      ],
       "behaviors": [],
       "properties": {
-        "position": { "type": "vec2", "x": 700.0, "y": 260.0 },
-        "width":    { "type": "num",  "value": 72.0 },
-        "height":   { "type": "num",  "value": 72.0 },
-        "size":     { "type": "text", "value": "small" },
-        "emoji":    { "type": "text", "value": "🐭" }
+        "position": {
+          "type": "vec2",
+          "x": 700.0,
+          "y": 260.0
+        },
+        "width": {
+          "type": "num",
+          "value": 72.0
+        },
+        "height": {
+          "type": "num",
+          "value": 72.0
+        },
+        "size": {
+          "type": "text",
+          "value": "small"
+        },
+        "emoji": {
+          "type": "text",
+          "value": "🐭"
+        }
       },
-      "tags": { "group": "animals" },
+      "tags": {
+        "group": "animals"
+      },
       "zOrder": 1
     },
     {
       "id": "basket_big",
-      "components": ["dropTarget"],
+      "components": [
+        "dropTarget"
+      ],
       "behaviors": [],
       "properties": {
-        "position":       { "type": "vec2", "x": 280.0, "y": 630.0 },
-        "constraintType": { "type": "text", "value": "propertyEquals" },
-        "source":         { "type": "text", "value": "size" },
-        "target":         { "type": "text", "value": "acceptsSize" },
-        "acceptsSize":    { "type": "text", "value": "big" },
-        "emoji":          { "type": "text", "value": "🧺" },
-        "label":          { "type": "text", "value": "Большой" }
+        "position": {
+          "type": "vec2",
+          "x": 280.0,
+          "y": 630.0
+        },
+        "constraintType": {
+          "type": "text",
+          "value": "propertyEquals"
+        },
+        "source": {
+          "type": "text",
+          "value": "size"
+        },
+        "target": {
+          "type": "text",
+          "value": "acceptsSize"
+        },
+        "acceptsSize": {
+          "type": "text",
+          "value": "big"
+        },
+        "emoji": {
+          "type": "text",
+          "value": "🧺"
+        },
+        "label": {
+          "type": "text",
+          "value": "Большой"
+        }
       },
       "tags": {},
       "zOrder": 0
     },
     {
       "id": "basket_small",
-      "components": ["dropTarget"],
+      "components": [
+        "dropTarget"
+      ],
       "behaviors": [],
       "properties": {
-        "position":       { "type": "vec2", "x": 720.0, "y": 630.0 },
-        "constraintType": { "type": "text", "value": "propertyEquals" },
-        "source":         { "type": "text", "value": "size" },
-        "target":         { "type": "text", "value": "acceptsSize" },
-        "acceptsSize":    { "type": "text", "value": "small" },
-        "emoji":          { "type": "text", "value": "🧺" },
-        "label":          { "type": "text", "value": "Маленький" }
+        "position": {
+          "type": "vec2",
+          "x": 720.0,
+          "y": 630.0
+        },
+        "constraintType": {
+          "type": "text",
+          "value": "propertyEquals"
+        },
+        "source": {
+          "type": "text",
+          "value": "size"
+        },
+        "target": {
+          "type": "text",
+          "value": "acceptsSize"
+        },
+        "acceptsSize": {
+          "type": "text",
+          "value": "small"
+        },
+        "emoji": {
+          "type": "text",
+          "value": "🧺"
+        },
+        "label": {
+          "type": "text",
+          "value": "Маленький"
+        }
       },
       "tags": {},
       "zOrder": 0
@@ -66,7 +154,9 @@
     {
       "id": "obj1",
       "type": "allMatched",
-      "config": { "group": "animals" },
+      "config": {
+        "group": "animals"
+      },
       "requires": null
     }
   ],
@@ -74,26 +164,41 @@
     {
       "behaviorRef": {
         "type": "audioPrompt",
-        "config": { "on": "sceneStarted", "text": "Положи большое к большому, маленькое к маленькому" }
+        "config": {
+          "on": "sceneStarted",
+          "text": "Положи большое к большому, маленькое к маленькому"
+        }
       },
       "entityId": null
     },
     {
-      "behaviorRef": { "type": "snapToTarget", "config": {} },
+      "behaviorRef": {
+        "type": "snapToTarget",
+        "config": {}
+      },
       "entityId": null
     },
     {
-      "behaviorRef": { "type": "progressTracker", "config": {} },
+      "behaviorRef": {
+        "type": "progressTracker",
+        "config": {}
+      },
       "entityId": null
     },
     {
-      "behaviorRef": { "type": "adaptiveHint", "config": {} },
+      "behaviorRef": {
+        "type": "adaptiveHint",
+        "config": {}
+      },
       "entityId": null
     },
     {
       "behaviorRef": {
         "type": "playSoundOnEvent",
-        "config": { "on": "sceneCompleted", "sound": "complete" }
+        "config": {
+          "on": "sceneCompleted",
+          "sound": "complete"
+        }
       },
       "entityId": null
     }
@@ -108,13 +213,17 @@
     "ageMin": 2,
     "ageMax": 5,
     "version": 1,
-    "tags": ["size", "sorting"],
+    "tags": [
+      "size",
+      "sorting"
+    ],
     "skills": [
       "size_comparison",
       "categorization",
       "hand_eye_coordination",
       "visual_attention",
       "task_completion"
-    ]
+    ],
+    "icon": "🐘"
   }
 }

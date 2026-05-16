@@ -3,83 +3,194 @@
   "entities": [
     {
       "id": "rabbit",
-      "components": ["connectSource"],
+      "components": [
+        "connectSource"
+      ],
       "behaviors": [],
       "properties": {
-        "position": { "type": "vec2", "x": 220.0, "y": 240.0 },
-        "food": { "type": "text", "value": "carrot" },
-        "emoji": { "type": "text", "value": "🐰" }
+        "position": {
+          "type": "vec2",
+          "x": 220.0,
+          "y": 240.0
+        },
+        "food": {
+          "type": "text",
+          "value": "carrot"
+        },
+        "emoji": {
+          "type": "text",
+          "value": "🐰"
+        }
       },
-      "tags": { "group": "animals" },
+      "tags": {
+        "group": "animals"
+      },
       "zOrder": 1
     },
     {
       "id": "cat",
-      "components": ["connectSource"],
+      "components": [
+        "connectSource"
+      ],
       "behaviors": [],
       "properties": {
-        "position": { "type": "vec2", "x": 220.0, "y": 450.0 },
-        "food": { "type": "text", "value": "fish" },
-        "emoji": { "type": "text", "value": "🐱" }
+        "position": {
+          "type": "vec2",
+          "x": 220.0,
+          "y": 450.0
+        },
+        "food": {
+          "type": "text",
+          "value": "fish"
+        },
+        "emoji": {
+          "type": "text",
+          "value": "🐱"
+        }
       },
-      "tags": { "group": "animals" },
+      "tags": {
+        "group": "animals"
+      },
       "zOrder": 1
     },
     {
       "id": "dog",
-      "components": ["connectSource"],
+      "components": [
+        "connectSource"
+      ],
       "behaviors": [],
       "properties": {
-        "position": { "type": "vec2", "x": 220.0, "y": 660.0 },
-        "food": { "type": "text", "value": "bone" },
-        "emoji": { "type": "text", "value": "🐶" }
+        "position": {
+          "type": "vec2",
+          "x": 220.0,
+          "y": 660.0
+        },
+        "food": {
+          "type": "text",
+          "value": "bone"
+        },
+        "emoji": {
+          "type": "text",
+          "value": "🐶"
+        }
       },
-      "tags": { "group": "animals" },
+      "tags": {
+        "group": "animals"
+      },
       "zOrder": 1
     },
     {
       "id": "fish",
-      "components": ["connectTarget"],
+      "components": [
+        "connectTarget"
+      ],
       "behaviors": [],
       "properties": {
-        "position": { "type": "vec2", "x": 780.0, "y": 240.0 },
-        "constraintType": { "type": "text", "value": "propertyEquals" },
-        "source": { "type": "text", "value": "food" },
-        "target": { "type": "text", "value": "food" },
-        "food": { "type": "text", "value": "fish" },
-        "emoji": { "type": "text", "value": "🐟" }
+        "position": {
+          "type": "vec2",
+          "x": 780.0,
+          "y": 240.0
+        },
+        "constraintType": {
+          "type": "text",
+          "value": "propertyEquals"
+        },
+        "source": {
+          "type": "text",
+          "value": "food"
+        },
+        "target": {
+          "type": "text",
+          "value": "food"
+        },
+        "food": {
+          "type": "text",
+          "value": "fish"
+        },
+        "emoji": {
+          "type": "text",
+          "value": "🐟"
+        }
       },
-      "tags": { "group": "foods" },
+      "tags": {
+        "group": "foods"
+      },
       "zOrder": 1
     },
     {
       "id": "bone",
-      "components": ["connectTarget"],
+      "components": [
+        "connectTarget"
+      ],
       "behaviors": [],
       "properties": {
-        "position": { "type": "vec2", "x": 780.0, "y": 450.0 },
-        "constraintType": { "type": "text", "value": "propertyEquals" },
-        "source": { "type": "text", "value": "food" },
-        "target": { "type": "text", "value": "food" },
-        "food": { "type": "text", "value": "bone" },
-        "emoji": { "type": "text", "value": "🦴" }
+        "position": {
+          "type": "vec2",
+          "x": 780.0,
+          "y": 450.0
+        },
+        "constraintType": {
+          "type": "text",
+          "value": "propertyEquals"
+        },
+        "source": {
+          "type": "text",
+          "value": "food"
+        },
+        "target": {
+          "type": "text",
+          "value": "food"
+        },
+        "food": {
+          "type": "text",
+          "value": "bone"
+        },
+        "emoji": {
+          "type": "text",
+          "value": "🦴"
+        }
       },
-      "tags": { "group": "foods" },
+      "tags": {
+        "group": "foods"
+      },
       "zOrder": 1
     },
     {
       "id": "carrot",
-      "components": ["connectTarget"],
+      "components": [
+        "connectTarget"
+      ],
       "behaviors": [],
       "properties": {
-        "position": { "type": "vec2", "x": 780.0, "y": 660.0 },
-        "constraintType": { "type": "text", "value": "propertyEquals" },
-        "source": { "type": "text", "value": "food" },
-        "target": { "type": "text", "value": "food" },
-        "food": { "type": "text", "value": "carrot" },
-        "emoji": { "type": "text", "value": "🥕" }
+        "position": {
+          "type": "vec2",
+          "x": 780.0,
+          "y": 660.0
+        },
+        "constraintType": {
+          "type": "text",
+          "value": "propertyEquals"
+        },
+        "source": {
+          "type": "text",
+          "value": "food"
+        },
+        "target": {
+          "type": "text",
+          "value": "food"
+        },
+        "food": {
+          "type": "text",
+          "value": "carrot"
+        },
+        "emoji": {
+          "type": "text",
+          "value": "🥕"
+        }
       },
-      "tags": { "group": "foods" },
+      "tags": {
+        "group": "foods"
+      },
       "zOrder": 1
     }
   ],
@@ -137,18 +248,23 @@
     "difficulty": "easy"
   },
   "meta": {
-    "title": "Animal Food Lines",
-    "description": "Connect each animal with its food",
+    "title": "Кто что ест?",
+    "description": "Соедини животных с их едой",
     "ageMin": 3,
     "ageMax": 6,
     "version": 1,
-    "tags": ["matching", "animals", "connect"],
+    "tags": [
+      "matching",
+      "animals",
+      "connect"
+    ],
     "skills": [
       "matching",
       "associative_memory",
       "hand_eye_coordination",
       "visual_attention",
       "task_completion"
-    ]
+    ],
+    "icon": "🔗"
   }
 }

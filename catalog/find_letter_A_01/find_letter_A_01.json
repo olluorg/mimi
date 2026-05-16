@@ -3,50 +3,106 @@
   "entities": [
     {
       "id": "letter_A",
-      "components": ["tap"],
+      "components": [
+        "tap"
+      ],
       "behaviors": [],
       "properties": {
-        "position": { "type": "vec2", "x": 260.0, "y": 280.0 },
-        "letter": { "type": "text", "value": "А" },
-        "label": { "type": "text", "value": "А" }
+        "position": {
+          "type": "vec2",
+          "x": 260.0,
+          "y": 280.0
+        },
+        "letter": {
+          "type": "text",
+          "value": "А"
+        },
+        "label": {
+          "type": "text",
+          "value": "А"
+        }
       },
-      "tags": { "group": "choices" },
+      "tags": {
+        "group": "choices"
+      },
       "zOrder": 0
     },
     {
       "id": "letter_B",
-      "components": ["tap"],
+      "components": [
+        "tap"
+      ],
       "behaviors": [],
       "properties": {
-        "position": { "type": "vec2", "x": 740.0, "y": 280.0 },
-        "letter": { "type": "text", "value": "Б" },
-        "label": { "type": "text", "value": "Б" }
+        "position": {
+          "type": "vec2",
+          "x": 740.0,
+          "y": 280.0
+        },
+        "letter": {
+          "type": "text",
+          "value": "Б"
+        },
+        "label": {
+          "type": "text",
+          "value": "Б"
+        }
       },
-      "tags": { "group": "choices" },
+      "tags": {
+        "group": "choices"
+      },
       "zOrder": 0
     },
     {
       "id": "letter_V",
-      "components": ["tap"],
+      "components": [
+        "tap"
+      ],
       "behaviors": [],
       "properties": {
-        "position": { "type": "vec2", "x": 260.0, "y": 560.0 },
-        "letter": { "type": "text", "value": "В" },
-        "label": { "type": "text", "value": "В" }
+        "position": {
+          "type": "vec2",
+          "x": 260.0,
+          "y": 560.0
+        },
+        "letter": {
+          "type": "text",
+          "value": "В"
+        },
+        "label": {
+          "type": "text",
+          "value": "В"
+        }
       },
-      "tags": { "group": "choices" },
+      "tags": {
+        "group": "choices"
+      },
       "zOrder": 0
     },
     {
       "id": "letter_G",
-      "components": ["tap"],
+      "components": [
+        "tap"
+      ],
       "behaviors": [],
       "properties": {
-        "position": { "type": "vec2", "x": 740.0, "y": 560.0 },
-        "letter": { "type": "text", "value": "Г" },
-        "label": { "type": "text", "value": "Г" }
+        "position": {
+          "type": "vec2",
+          "x": 740.0,
+          "y": 560.0
+        },
+        "letter": {
+          "type": "text",
+          "value": "Г"
+        },
+        "label": {
+          "type": "text",
+          "value": "Г"
+        }
       },
-      "tags": { "group": "choices" },
+      "tags": {
+        "group": "choices"
+      },
       "zOrder": 0
     }
   ],
@@ -54,7 +110,10 @@
     {
       "id": "obj1",
       "type": "entitySelected",
-      "config": { "property": "letter", "value": "А" },
+      "config": {
+        "property": "letter",
+        "value": "А"
+      },
       "requires": null
     }
   ],
@@ -62,36 +121,54 @@
     {
       "behaviorRef": {
         "type": "audioPrompt",
-        "config": { "on": "sceneStarted", "text": "Нажми на букву А" }
+        "config": {
+          "on": "sceneStarted",
+          "text": "Нажми на букву А"
+        }
       },
       "entityId": null
     },
     {
       "behaviorRef": {
         "type": "propertySelectionValidator",
-        "config": { "property": "letter", "expected": "А" }
-      },
-      "entityId": null
-    },
-    {
-      "behaviorRef": { "type": "adaptiveHint", "config": {} },
-      "entityId": null
-    },
-    {
-      "behaviorRef": { "type": "progressTracker", "config": {} },
-      "entityId": null
-    },
-    {
-      "behaviorRef": {
-        "type": "playSoundOnEvent",
-        "config": { "on": "matchSuccess", "sound": "correct" }
+        "config": {
+          "property": "letter",
+          "expected": "А"
+        }
       },
       "entityId": null
     },
     {
       "behaviorRef": {
+        "type": "adaptiveHint",
+        "config": {}
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "progressTracker",
+        "config": {}
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
         "type": "playSoundOnEvent",
-        "config": { "on": "sceneCompleted", "sound": "complete" }
+        "config": {
+          "on": "matchSuccess",
+          "sound": "correct"
+        }
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "playSoundOnEvent",
+        "config": {
+          "on": "sceneCompleted",
+          "sound": "complete"
+        }
       },
       "entityId": null
     }
@@ -99,20 +176,27 @@
   "fieldPolicies": {},
   "idleTimeout": 12,
   "onIdle": "HINT",
-  "metadata": { "difficulty": "easy" },
+  "metadata": {
+    "difficulty": "easy"
+  },
   "meta": {
     "title": "Найди букву А",
     "description": "Слушай и нажми на правильную букву",
     "ageMin": 4,
     "ageMax": 7,
     "version": 1,
-    "tags": ["letters", "receptive_speech", "attention"],
+    "tags": [
+      "letters",
+      "receptive_speech",
+      "attention"
+    ],
     "skills": [
       "letters",
       "reading_readiness",
       "receptive_speech",
       "selective_attention",
       "task_completion"
-    ]
+    ],
+    "icon": "🔤"
   }
 }

@@ -1,21 +1,192 @@
 {
   "sceneId": "order_reconstruction_01",
   "entities": [
-    { "id": "display_first", "components": [], "behaviors": [], "properties": { "position": { "type": "vec2", "x": 260.0, "y": 300.0 }, "emoji": { "type": "text", "value": "🍎" } }, "tags": { "group": "display" }, "zOrder": 0 },
-    { "id": "display_second", "components": [], "behaviors": [], "properties": { "position": { "type": "vec2", "x": 500.0, "y": 300.0 }, "emoji": { "type": "text", "value": "🍌" } }, "tags": { "group": "display" }, "zOrder": 0 },
-    { "id": "display_third", "components": [], "behaviors": [], "properties": { "position": { "type": "vec2", "x": 740.0, "y": 300.0 }, "emoji": { "type": "text", "value": "🍒" } }, "tags": { "group": "display" }, "zOrder": 0 },
-    { "id": "third", "components": ["tap"], "behaviors": [], "properties": { "position": { "type": "vec2", "x": 220.0, "y": 560.0 }, "orderIndex": { "type": "num", "value": 3.0 }, "emoji": { "type": "text", "value": "🍒" } }, "tags": { "group": "order" }, "zOrder": 0 },
-    { "id": "first", "components": ["tap"], "behaviors": [], "properties": { "position": { "type": "vec2", "x": 500.0, "y": 560.0 }, "orderIndex": { "type": "num", "value": 1.0 }, "emoji": { "type": "text", "value": "🍎" } }, "tags": { "group": "order" }, "zOrder": 0 },
-    { "id": "second", "components": ["tap"], "behaviors": [], "properties": { "position": { "type": "vec2", "x": 780.0, "y": 560.0 }, "orderIndex": { "type": "num", "value": 2.0 }, "emoji": { "type": "text", "value": "🍌" } }, "tags": { "group": "order" }, "zOrder": 0 }
+    {
+      "id": "display_first",
+      "components": [],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 260.0,
+          "y": 300.0
+        },
+        "emoji": {
+          "type": "text",
+          "value": "🍎"
+        }
+      },
+      "tags": {
+        "group": "display"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "display_second",
+      "components": [],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 500.0,
+          "y": 300.0
+        },
+        "emoji": {
+          "type": "text",
+          "value": "🍌"
+        }
+      },
+      "tags": {
+        "group": "display"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "display_third",
+      "components": [],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 740.0,
+          "y": 300.0
+        },
+        "emoji": {
+          "type": "text",
+          "value": "🍒"
+        }
+      },
+      "tags": {
+        "group": "display"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "third",
+      "components": [
+        "tap"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 220.0,
+          "y": 560.0
+        },
+        "orderIndex": {
+          "type": "num",
+          "value": 3.0
+        },
+        "emoji": {
+          "type": "text",
+          "value": "🍒"
+        }
+      },
+      "tags": {
+        "group": "order"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "first",
+      "components": [
+        "tap"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 500.0,
+          "y": 560.0
+        },
+        "orderIndex": {
+          "type": "num",
+          "value": 1.0
+        },
+        "emoji": {
+          "type": "text",
+          "value": "🍎"
+        }
+      },
+      "tags": {
+        "group": "order"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "second",
+      "components": [
+        "tap"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 780.0,
+          "y": 560.0
+        },
+        "orderIndex": {
+          "type": "num",
+          "value": 2.0
+        },
+        "emoji": {
+          "type": "text",
+          "value": "🍌"
+        }
+      },
+      "tags": {
+        "group": "order"
+      },
+      "zOrder": 0
+    }
   ],
   "objectives": [
-    { "id": "obj1", "type": "sequenceCompleted", "config": { "group": "order" }, "requires": null }
+    {
+      "id": "obj1",
+      "type": "sequenceCompleted",
+      "config": {
+        "group": "order"
+      },
+      "requires": null
+    }
   ],
   "behaviors": [
-    { "behaviorRef": { "type": "sequenceValidator", "config": { "group": "order", "property": "orderIndex" } }, "entityId": null },
-    { "behaviorRef": { "type": "progressTracker", "config": {} }, "entityId": null },
-    { "behaviorRef": { "type": "adaptiveHint", "config": { "mode": "order_reconstruction" } }, "entityId": null },
-    { "behaviorRef": { "type": "playSoundOnEvent", "config": { "on": "sceneCompleted", "sound": "complete" } }, "entityId": null }
+    {
+      "behaviorRef": {
+        "type": "sequenceValidator",
+        "config": {
+          "group": "order",
+          "property": "orderIndex"
+        }
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "progressTracker",
+        "config": {}
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "adaptiveHint",
+        "config": {
+          "mode": "order_reconstruction"
+        }
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "playSoundOnEvent",
+        "config": {
+          "on": "sceneCompleted",
+          "sound": "complete"
+        }
+      },
+      "entityId": null
+    }
   ],
   "fieldPolicies": {},
   "stateMachine": {
@@ -26,38 +197,89 @@
         "durationMs": 2500,
         "inputEnabled": false,
         "onEnter": [
-          { "type": "setEntityState", "entityId": "third", "state": "INACTIVE" },
-          { "type": "setEntityState", "entityId": "first", "state": "INACTIVE" },
-          { "type": "setEntityState", "entityId": "second", "state": "INACTIVE" }
+          {
+            "type": "setEntityState",
+            "entityId": "third",
+            "state": "INACTIVE"
+          },
+          {
+            "type": "setEntityState",
+            "entityId": "first",
+            "state": "INACTIVE"
+          },
+          {
+            "type": "setEntityState",
+            "entityId": "second",
+            "state": "INACTIVE"
+          }
         ]
       },
       {
         "id": "recall",
         "inputEnabled": true,
         "onEnter": [
-          { "type": "setEntityState", "entityId": "display_first", "state": "INACTIVE" },
-          { "type": "setEntityState", "entityId": "display_second", "state": "INACTIVE" },
-          { "type": "setEntityState", "entityId": "display_third", "state": "INACTIVE" },
-          { "type": "setEntityState", "entityId": "third", "state": "ACTIVE" },
-          { "type": "setEntityState", "entityId": "first", "state": "ACTIVE" },
-          { "type": "setEntityState", "entityId": "second", "state": "ACTIVE" }
+          {
+            "type": "setEntityState",
+            "entityId": "display_first",
+            "state": "INACTIVE"
+          },
+          {
+            "type": "setEntityState",
+            "entityId": "display_second",
+            "state": "INACTIVE"
+          },
+          {
+            "type": "setEntityState",
+            "entityId": "display_third",
+            "state": "INACTIVE"
+          },
+          {
+            "type": "setEntityState",
+            "entityId": "third",
+            "state": "ACTIVE"
+          },
+          {
+            "type": "setEntityState",
+            "entityId": "first",
+            "state": "ACTIVE"
+          },
+          {
+            "type": "setEntityState",
+            "entityId": "second",
+            "state": "ACTIVE"
+          }
         ]
       }
     ],
     "transitions": [
-      { "from": "show", "to": "recall", "afterMs": 2500 }
+      {
+        "from": "show",
+        "to": "recall",
+        "afterMs": 2500
+      }
     ]
   },
   "idleTimeout": 18,
   "onIdle": "HINT",
-  "metadata": { "difficulty": "medium" },
+  "metadata": {
+    "difficulty": "medium"
+  },
   "meta": {
-    "title": "Order Reconstruction",
-    "description": "Remember, hide, then reconstruct the order",
+    "title": "Восстанови порядок",
+    "description": "Запомни и восстанови правильную очерёдность",
     "ageMin": 4,
     "ageMax": 6,
     "version": 1,
-    "tags": ["memory", "sequence"],
-    "skills": ["sequential_memory", "sequencing", "working_memory", "task_completion"]
+    "tags": [
+      "memory",
+      "sequence"
+    ],
+    "skills": [
+      "sequential_memory",
+      "sequencing",
+      "working_memory",
+      "task_completion"
+    ],
+    "icon": "📋"
   }
 }

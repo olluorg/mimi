@@ -3,7 +3,9 @@
   "entities": [
     {
       "id": "trace_path",
-      "components": ["traceTarget"],
+      "components": [
+        "traceTarget"
+      ],
       "behaviors": [],
       "properties": {
         "waypoints": {
@@ -103,13 +105,17 @@
     "ageMin": 2,
     "ageMax": 5,
     "version": 1,
-    "tags": ["trace", "motor"],
+    "tags": [
+      "trace",
+      "motor"
+    ],
     "skills": [
       "trace_control",
       "fine_motor",
       "hand_eye_coordination",
       "sustained_attention",
       "task_completion"
-    ]
+    ],
+    "icon": "✏️"
   }
 }

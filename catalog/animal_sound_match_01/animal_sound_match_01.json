@@ -3,38 +3,80 @@
   "entities": [
     {
       "id": "cat",
-      "components": ["tap"],
+      "components": [
+        "tap"
+      ],
       "behaviors": [],
       "properties": {
-        "position": { "type": "vec2", "x": 260.0, "y": 430.0 },
-        "animal": { "type": "text", "value": "cat" },
-        "emoji": { "type": "text", "value": "🐱" }
+        "position": {
+          "type": "vec2",
+          "x": 260.0,
+          "y": 430.0
+        },
+        "animal": {
+          "type": "text",
+          "value": "cat"
+        },
+        "emoji": {
+          "type": "text",
+          "value": "🐱"
+        }
       },
-      "tags": { "group": "choices" },
+      "tags": {
+        "group": "choices"
+      },
       "zOrder": 0
     },
     {
       "id": "dog",
-      "components": ["tap"],
+      "components": [
+        "tap"
+      ],
       "behaviors": [],
       "properties": {
-        "position": { "type": "vec2", "x": 500.0, "y": 430.0 },
-        "animal": { "type": "text", "value": "dog" },
-        "emoji": { "type": "text", "value": "🐶" }
+        "position": {
+          "type": "vec2",
+          "x": 500.0,
+          "y": 430.0
+        },
+        "animal": {
+          "type": "text",
+          "value": "dog"
+        },
+        "emoji": {
+          "type": "text",
+          "value": "🐶"
+        }
       },
-      "tags": { "group": "choices" },
+      "tags": {
+        "group": "choices"
+      },
       "zOrder": 0
     },
     {
       "id": "cow",
-      "components": ["tap"],
+      "components": [
+        "tap"
+      ],
       "behaviors": [],
       "properties": {
-        "position": { "type": "vec2", "x": 740.0, "y": 430.0 },
-        "animal": { "type": "text", "value": "cow" },
-        "emoji": { "type": "text", "value": "🐮" }
+        "position": {
+          "type": "vec2",
+          "x": 740.0,
+          "y": 430.0
+        },
+        "animal": {
+          "type": "text",
+          "value": "cow"
+        },
+        "emoji": {
+          "type": "text",
+          "value": "🐮"
+        }
       },
-      "tags": { "group": "choices" },
+      "tags": {
+        "group": "choices"
+      },
       "zOrder": 0
     }
   ],
@@ -42,7 +84,10 @@
     {
       "id": "obj1",
       "type": "entitySelected",
-      "config": { "property": "animal", "value": "cat" },
+      "config": {
+        "property": "animal",
+        "value": "cat"
+      },
       "requires": null
     }
   ],
@@ -50,32 +95,74 @@
     {
       "behaviorRef": {
         "type": "audioPrompt",
-        "config": { "on": "sceneStarted", "text": "Find the cat" }
+        "config": {
+          "on": "sceneStarted",
+          "text": "Find the cat"
+        }
       },
       "entityId": null
     },
     {
       "behaviorRef": {
         "type": "propertySelectionValidator",
-        "config": { "property": "animal", "expected": "cat" }
+        "config": {
+          "property": "animal",
+          "expected": "cat"
+        }
       },
       "entityId": null
     },
-    { "behaviorRef": { "type": "progressTracker", "config": {} }, "entityId": null },
-    { "behaviorRef": { "type": "adaptiveHint", "config": { "mode": "sound_match" } }, "entityId": null },
-    { "behaviorRef": { "type": "playSoundOnEvent", "config": { "on": "sceneCompleted", "sound": "complete" } }, "entityId": null }
+    {
+      "behaviorRef": {
+        "type": "progressTracker",
+        "config": {}
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "adaptiveHint",
+        "config": {
+          "mode": "sound_match"
+        }
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "playSoundOnEvent",
+        "config": {
+          "on": "sceneCompleted",
+          "sound": "complete"
+        }
+      },
+      "entityId": null
+    }
   ],
   "fieldPolicies": {},
   "idleTimeout": 15,
   "onIdle": "HINT",
-  "metadata": { "difficulty": "easy" },
+  "metadata": {
+    "difficulty": "easy"
+  },
   "meta": {
-    "title": "Animal Sound Match",
-    "description": "Listen and choose the animal",
+    "title": "Голос животного",
+    "description": "Слушай и выбери нужное животное",
     "ageMin": 2,
     "ageMax": 6,
     "version": 1,
-    "tags": ["memory", "sound", "animals"],
-    "skills": ["associative_memory", "receptive_speech", "word_association", "selective_attention", "task_completion"]
+    "tags": [
+      "memory",
+      "sound",
+      "animals"
+    ],
+    "skills": [
+      "associative_memory",
+      "receptive_speech",
+      "word_association",
+      "selective_attention",
+      "task_completion"
+    ],
+    "icon": "🔊"
   }
 }

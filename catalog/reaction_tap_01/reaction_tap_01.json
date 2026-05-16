@@ -6,12 +6,27 @@
       "components": [],
       "behaviors": [],
       "properties": {
-        "position": { "type": "vec2", "x": 500.0, "y": 210.0 },
-        "width": { "type": "num", "value": 120.0 },
-        "height": { "type": "num", "value": 120.0 },
-        "emoji": { "type": "text", "value": "🔴" }
+        "position": {
+          "type": "vec2",
+          "x": 500.0,
+          "y": 210.0
+        },
+        "width": {
+          "type": "num",
+          "value": 120.0
+        },
+        "height": {
+          "type": "num",
+          "value": 120.0
+        },
+        "emoji": {
+          "type": "text",
+          "value": "🔴"
+        }
       },
-      "tags": { "group": "signal" },
+      "tags": {
+        "group": "signal"
+      },
       "zOrder": 0
     },
     {
@@ -19,12 +34,27 @@
       "components": [],
       "behaviors": [],
       "properties": {
-        "position": { "type": "vec2", "x": 500.0, "y": 360.0 },
-        "width": { "type": "num", "value": 120.0 },
-        "height": { "type": "num", "value": 120.0 },
-        "emoji": { "type": "text", "value": "⚫" }
+        "position": {
+          "type": "vec2",
+          "x": 500.0,
+          "y": 360.0
+        },
+        "width": {
+          "type": "num",
+          "value": 120.0
+        },
+        "height": {
+          "type": "num",
+          "value": 120.0
+        },
+        "emoji": {
+          "type": "text",
+          "value": "⚫"
+        }
       },
-      "tags": { "group": "signal" },
+      "tags": {
+        "group": "signal"
+      },
       "zOrder": 0
     },
     {
@@ -32,26 +62,61 @@
       "components": [],
       "behaviors": [],
       "properties": {
-        "position": { "type": "vec2", "x": 500.0, "y": 510.0 },
-        "width": { "type": "num", "value": 120.0 },
-        "height": { "type": "num", "value": 120.0 },
-        "emoji": { "type": "text", "value": "⚫" }
+        "position": {
+          "type": "vec2",
+          "x": 500.0,
+          "y": 510.0
+        },
+        "width": {
+          "type": "num",
+          "value": 120.0
+        },
+        "height": {
+          "type": "num",
+          "value": 120.0
+        },
+        "emoji": {
+          "type": "text",
+          "value": "⚫"
+        }
       },
-      "tags": { "group": "signal" },
+      "tags": {
+        "group": "signal"
+      },
       "zOrder": 0
     },
     {
       "id": "walk_button",
-      "components": ["tap"],
+      "components": [
+        "tap"
+      ],
       "behaviors": [],
       "properties": {
-        "position": { "type": "vec2", "x": 500.0, "y": 730.0 },
-        "width": { "type": "num", "value": 150.0 },
-        "height": { "type": "num", "value": 150.0 },
-        "ready": { "type": "text", "value": "true" },
-        "emoji": { "type": "text", "value": "🚶" }
+        "position": {
+          "type": "vec2",
+          "x": 500.0,
+          "y": 730.0
+        },
+        "width": {
+          "type": "num",
+          "value": 150.0
+        },
+        "height": {
+          "type": "num",
+          "value": 150.0
+        },
+        "ready": {
+          "type": "text",
+          "value": "true"
+        },
+        "emoji": {
+          "type": "text",
+          "value": "🚶"
+        }
       },
-      "tags": { "group": "reaction" },
+      "tags": {
+        "group": "reaction"
+      },
       "zOrder": 1
     }
   ],
@@ -123,11 +188,45 @@
         "durationMs": 1200,
         "inputEnabled": false,
         "onEnter": [
-          { "type": "setEntityState", "entityId": "walk_button", "state": "INACTIVE" },
-          { "type": "setProperty", "entityId": "red_light", "field": "emoji", "value": { "type": "text", "value": "🔴" } },
-          { "type": "setProperty", "entityId": "yellow_light", "field": "emoji", "value": { "type": "text", "value": "⚫" } },
-          { "type": "setProperty", "entityId": "green_light", "field": "emoji", "value": { "type": "text", "value": "⚫" } },
-          { "type": "triggerFeedback", "feedbackType": "tts", "params": { "text": "Красный" } }
+          {
+            "type": "setEntityState",
+            "entityId": "walk_button",
+            "state": "INACTIVE"
+          },
+          {
+            "type": "setProperty",
+            "entityId": "red_light",
+            "field": "emoji",
+            "value": {
+              "type": "text",
+              "value": "🔴"
+            }
+          },
+          {
+            "type": "setProperty",
+            "entityId": "yellow_light",
+            "field": "emoji",
+            "value": {
+              "type": "text",
+              "value": "⚫"
+            }
+          },
+          {
+            "type": "setProperty",
+            "entityId": "green_light",
+            "field": "emoji",
+            "value": {
+              "type": "text",
+              "value": "⚫"
+            }
+          },
+          {
+            "type": "triggerFeedback",
+            "feedbackType": "tts",
+            "params": {
+              "text": "Красный"
+            }
+          }
         ]
       },
       {
@@ -135,22 +234,90 @@
         "durationMs": 900,
         "inputEnabled": false,
         "onEnter": [
-          { "type": "setEntityState", "entityId": "walk_button", "state": "INACTIVE" },
-          { "type": "setProperty", "entityId": "red_light", "field": "emoji", "value": { "type": "text", "value": "⚫" } },
-          { "type": "setProperty", "entityId": "yellow_light", "field": "emoji", "value": { "type": "text", "value": "🟡" } },
-          { "type": "setProperty", "entityId": "green_light", "field": "emoji", "value": { "type": "text", "value": "⚫" } },
-          { "type": "triggerFeedback", "feedbackType": "tts", "params": { "text": "Жёлтый" } }
+          {
+            "type": "setEntityState",
+            "entityId": "walk_button",
+            "state": "INACTIVE"
+          },
+          {
+            "type": "setProperty",
+            "entityId": "red_light",
+            "field": "emoji",
+            "value": {
+              "type": "text",
+              "value": "⚫"
+            }
+          },
+          {
+            "type": "setProperty",
+            "entityId": "yellow_light",
+            "field": "emoji",
+            "value": {
+              "type": "text",
+              "value": "🟡"
+            }
+          },
+          {
+            "type": "setProperty",
+            "entityId": "green_light",
+            "field": "emoji",
+            "value": {
+              "type": "text",
+              "value": "⚫"
+            }
+          },
+          {
+            "type": "triggerFeedback",
+            "feedbackType": "tts",
+            "params": {
+              "text": "Жёлтый"
+            }
+          }
         ]
       },
       {
         "id": "green",
         "inputEnabled": true,
         "onEnter": [
-          { "type": "setProperty", "entityId": "red_light", "field": "emoji", "value": { "type": "text", "value": "⚫" } },
-          { "type": "setProperty", "entityId": "yellow_light", "field": "emoji", "value": { "type": "text", "value": "⚫" } },
-          { "type": "setProperty", "entityId": "green_light", "field": "emoji", "value": { "type": "text", "value": "🟢" } },
-          { "type": "setEntityState", "entityId": "walk_button", "state": "ACTIVE" },
-          { "type": "triggerFeedback", "feedbackType": "tts", "params": { "text": "Зелёный" } }
+          {
+            "type": "setProperty",
+            "entityId": "red_light",
+            "field": "emoji",
+            "value": {
+              "type": "text",
+              "value": "⚫"
+            }
+          },
+          {
+            "type": "setProperty",
+            "entityId": "yellow_light",
+            "field": "emoji",
+            "value": {
+              "type": "text",
+              "value": "⚫"
+            }
+          },
+          {
+            "type": "setProperty",
+            "entityId": "green_light",
+            "field": "emoji",
+            "value": {
+              "type": "text",
+              "value": "🟢"
+            }
+          },
+          {
+            "type": "setEntityState",
+            "entityId": "walk_button",
+            "state": "ACTIVE"
+          },
+          {
+            "type": "triggerFeedback",
+            "feedbackType": "tts",
+            "params": {
+              "text": "Зелёный"
+            }
+          }
         ]
       }
     ],
@@ -173,17 +340,22 @@
     "difficulty": "easy"
   },
   "meta": {
-    "title": "Traffic Light",
-    "description": "Wait for red, yellow, green, then tap the walk button",
+    "title": "Светофор",
+    "description": "Дождись зелёного сигнала и нажми кнопку",
     "ageMin": 3,
     "ageMax": 6,
     "version": 1,
-    "tags": ["reaction", "attention", "traffic_light"],
+    "tags": [
+      "reaction",
+      "attention",
+      "traffic_light"
+    ],
     "skills": [
       "reaction_speed",
       "impulse_control",
       "selective_attention",
       "task_completion"
-    ]
+    ],
+    "icon": "🚦"
   }
 }

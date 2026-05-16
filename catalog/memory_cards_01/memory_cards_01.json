@@ -1,61 +1,127 @@
 {
   "sceneId": "memory_cards_01",
-
   "entities": [
     {
       "id": "card_1",
-      "components": ["tap"],
+      "components": [
+        "tap"
+      ],
       "behaviors": [],
       "properties": {
-        "position":  { "type": "vec2", "x": 200.0, "y": 300.0 },
-        "pairId":    { "type": "text", "value": "apple" },
-        "face":      { "type": "text", "value": "🍎" },
-        "cardState": { "type": "text", "value": "hidden" }
+        "position": {
+          "type": "vec2",
+          "x": 200.0,
+          "y": 300.0
+        },
+        "pairId": {
+          "type": "text",
+          "value": "apple"
+        },
+        "face": {
+          "type": "text",
+          "value": "🍎"
+        },
+        "cardState": {
+          "type": "text",
+          "value": "hidden"
+        }
       },
-      "tags": { "group": "cards" },
+      "tags": {
+        "group": "cards"
+      },
       "zOrder": 0
     },
     {
       "id": "card_2",
-      "components": ["tap"],
+      "components": [
+        "tap"
+      ],
       "behaviors": [],
       "properties": {
-        "position":  { "type": "vec2", "x": 500.0, "y": 300.0 },
-        "pairId":    { "type": "text", "value": "banana" },
-        "face":      { "type": "text", "value": "🍌" },
-        "cardState": { "type": "text", "value": "hidden" }
+        "position": {
+          "type": "vec2",
+          "x": 500.0,
+          "y": 300.0
+        },
+        "pairId": {
+          "type": "text",
+          "value": "banana"
+        },
+        "face": {
+          "type": "text",
+          "value": "🍌"
+        },
+        "cardState": {
+          "type": "text",
+          "value": "hidden"
+        }
       },
-      "tags": { "group": "cards" },
+      "tags": {
+        "group": "cards"
+      },
       "zOrder": 0
     },
     {
       "id": "card_3",
-      "components": ["tap"],
+      "components": [
+        "tap"
+      ],
       "behaviors": [],
       "properties": {
-        "position":  { "type": "vec2", "x": 800.0, "y": 300.0 },
-        "pairId":    { "type": "text", "value": "apple" },
-        "face":      { "type": "text", "value": "🍎" },
-        "cardState": { "type": "text", "value": "hidden" }
+        "position": {
+          "type": "vec2",
+          "x": 800.0,
+          "y": 300.0
+        },
+        "pairId": {
+          "type": "text",
+          "value": "apple"
+        },
+        "face": {
+          "type": "text",
+          "value": "🍎"
+        },
+        "cardState": {
+          "type": "text",
+          "value": "hidden"
+        }
       },
-      "tags": { "group": "cards" },
+      "tags": {
+        "group": "cards"
+      },
       "zOrder": 0
     },
     {
       "id": "card_4",
-      "components": ["tap"],
+      "components": [
+        "tap"
+      ],
       "behaviors": [],
       "properties": {
-        "position":  { "type": "vec2", "x": 500.0, "y": 650.0 },
-        "pairId":    { "type": "text", "value": "banana" },
-        "face":      { "type": "text", "value": "🍌" },
-        "cardState": { "type": "text", "value": "hidden" }
+        "position": {
+          "type": "vec2",
+          "x": 500.0,
+          "y": 650.0
+        },
+        "pairId": {
+          "type": "text",
+          "value": "banana"
+        },
+        "face": {
+          "type": "text",
+          "value": "🍌"
+        },
+        "cardState": {
+          "type": "text",
+          "value": "hidden"
+        }
       },
-      "tags": { "group": "cards" },
+      "tags": {
+        "group": "cards"
+      },
       "zOrder": 0
     }
   ],
-
   "objectives": [
     {
       "id": "obj1",
@@ -66,14 +132,13 @@
       "requires": null
     }
   ],
-
   "behaviors": [
     {
       "behaviorRef": {
         "type": "memoryFlipController",
         "config": {
-          "group":           "cards",
-          "maxOpenCards":    "2",
+          "group": "cards",
+          "maxOpenCards": "2",
           "flipBackDelayMs": "800"
         }
       },
@@ -83,7 +148,7 @@
       "behaviorRef": {
         "type": "pairMatchValidator",
         "config": {
-          "group":         "cards",
+          "group": "cards",
           "matchProperty": "pairId"
         }
       },
@@ -107,7 +172,7 @@
       "behaviorRef": {
         "type": "playSoundOnEvent",
         "config": {
-          "on":    "pairMatched",
+          "on": "pairMatched",
           "sound": "correct"
         }
       },
@@ -117,29 +182,38 @@
       "behaviorRef": {
         "type": "playSoundOnEvent",
         "config": {
-          "on":    "sceneCompleted",
+          "on": "sceneCompleted",
           "sound": "complete"
         }
       },
       "entityId": null
     }
   ],
-
   "fieldPolicies": {
     "cardState": "LAST_WINS",
-    "progress":  "PRIORITY"
+    "progress": "PRIORITY"
   },
-
   "idleTimeout": 15,
   "onIdle": "HINT",
   "metadata": {},
   "meta": {
-    "title":       "Найди пару",
+    "title": "Найди пару",
     "description": "Открывай карточки и найди одинаковые пары",
     "ageMin": 3,
     "ageMax": 6,
     "version": 1,
-    "tags":   ["memory", "matching", "attention"],
-    "skills": ["memory", "visual_attention", "matching", "task_completion", "impulse_control"]
+    "tags": [
+      "memory",
+      "matching",
+      "attention"
+    ],
+    "skills": [
+      "memory",
+      "visual_attention",
+      "matching",
+      "task_completion",
+      "impulse_control"
+    ],
+    "icon": "🃏"
   }
 }

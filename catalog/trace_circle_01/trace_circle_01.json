@@ -1,10 +1,11 @@
 {
   "sceneId": "trace_circle_01",
-
   "entities": [
     {
       "id": "circle_path",
-      "components": ["traceTarget"],
+      "components": [
+        "traceTarget"
+      ],
       "behaviors": [],
       "properties": {
         "center": {
@@ -35,7 +36,6 @@
       "zOrder": 0
     }
   ],
-
   "objectives": [
     {
       "id": "obj1",
@@ -47,7 +47,6 @@
       "requires": null
     }
   ],
-
   "behaviors": [
     {
       "behaviorRef": {
@@ -87,12 +86,10 @@
       "entityId": null
     }
   ],
-
   "fieldPolicies": {
     "progress": "PRIORITY",
     "traceState": "MERGE"
   },
-
   "idleTimeout": 12,
   "onIdle": "HINT",
   "metadata": {},
@@ -102,13 +99,18 @@
     "ageMin": 2,
     "ageMax": 5,
     "version": 1,
-    "tags": ["trace", "shapes", "motor"],
+    "tags": [
+      "trace",
+      "shapes",
+      "motor"
+    ],
     "skills": [
       "fine_motor",
       "trace_control",
       "hand_eye_coordination",
       "visual_attention",
       "task_completion"
-    ]
+    ],
+    "icon": "⭕"
   }
 }

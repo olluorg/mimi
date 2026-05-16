@@ -1,16 +1,24 @@
 {
   "sceneId": "continue_pattern_01",
-
   "entities": [
     {
       "id": "pattern_1",
       "components": [],
       "behaviors": [],
       "properties": {
-        "position": { "type": "vec2", "x": 180.0, "y": 260.0 },
-        "emoji": { "type": "text", "value": "🔴" }
+        "position": {
+          "type": "vec2",
+          "x": 180.0,
+          "y": 260.0
+        },
+        "emoji": {
+          "type": "text",
+          "value": "🔴"
+        }
       },
-      "tags": { "group": "pattern" },
+      "tags": {
+        "group": "pattern"
+      },
       "zOrder": 0
     },
     {
@@ -18,10 +26,19 @@
       "components": [],
       "behaviors": [],
       "properties": {
-        "position": { "type": "vec2", "x": 340.0, "y": 260.0 },
-        "emoji": { "type": "text", "value": "🔵" }
+        "position": {
+          "type": "vec2",
+          "x": 340.0,
+          "y": 260.0
+        },
+        "emoji": {
+          "type": "text",
+          "value": "🔵"
+        }
       },
-      "tags": { "group": "pattern" },
+      "tags": {
+        "group": "pattern"
+      },
       "zOrder": 0
     },
     {
@@ -29,10 +46,19 @@
       "components": [],
       "behaviors": [],
       "properties": {
-        "position": { "type": "vec2", "x": 500.0, "y": 260.0 },
-        "emoji": { "type": "text", "value": "🔴" }
+        "position": {
+          "type": "vec2",
+          "x": 500.0,
+          "y": 260.0
+        },
+        "emoji": {
+          "type": "text",
+          "value": "🔴"
+        }
       },
-      "tags": { "group": "pattern" },
+      "tags": {
+        "group": "pattern"
+      },
       "zOrder": 0
     },
     {
@@ -40,10 +66,19 @@
       "components": [],
       "behaviors": [],
       "properties": {
-        "position": { "type": "vec2", "x": 660.0, "y": 260.0 },
-        "emoji": { "type": "text", "value": "🔵" }
+        "position": {
+          "type": "vec2",
+          "x": 660.0,
+          "y": 260.0
+        },
+        "emoji": {
+          "type": "text",
+          "value": "🔵"
+        }
       },
-      "tags": { "group": "pattern" },
+      "tags": {
+        "group": "pattern"
+      },
       "zOrder": 0
     },
     {
@@ -51,38 +86,74 @@
       "components": [],
       "behaviors": [],
       "properties": {
-        "position": { "type": "vec2", "x": 820.0, "y": 260.0 },
-        "emoji": { "type": "text", "value": "?" }
+        "position": {
+          "type": "vec2",
+          "x": 820.0,
+          "y": 260.0
+        },
+        "emoji": {
+          "type": "text",
+          "value": "?"
+        }
       },
-      "tags": { "group": "pattern" },
+      "tags": {
+        "group": "pattern"
+      },
       "zOrder": 0
     },
     {
       "id": "choice_red",
-      "components": ["tap"],
+      "components": [
+        "tap"
+      ],
       "behaviors": [],
       "properties": {
-        "position": { "type": "vec2", "x": 360.0, "y": 610.0 },
-        "patternValue": { "type": "text", "value": "red" },
-        "emoji": { "type": "text", "value": "🔴" }
+        "position": {
+          "type": "vec2",
+          "x": 360.0,
+          "y": 610.0
+        },
+        "patternValue": {
+          "type": "text",
+          "value": "red"
+        },
+        "emoji": {
+          "type": "text",
+          "value": "🔴"
+        }
       },
-      "tags": { "group": "choices" },
+      "tags": {
+        "group": "choices"
+      },
       "zOrder": 0
     },
     {
       "id": "choice_blue",
-      "components": ["tap"],
+      "components": [
+        "tap"
+      ],
       "behaviors": [],
       "properties": {
-        "position": { "type": "vec2", "x": 640.0, "y": 610.0 },
-        "patternValue": { "type": "text", "value": "blue" },
-        "emoji": { "type": "text", "value": "🔵" }
+        "position": {
+          "type": "vec2",
+          "x": 640.0,
+          "y": 610.0
+        },
+        "patternValue": {
+          "type": "text",
+          "value": "blue"
+        },
+        "emoji": {
+          "type": "text",
+          "value": "🔵"
+        }
       },
-      "tags": { "group": "choices" },
+      "tags": {
+        "group": "choices"
+      },
       "zOrder": 0
     }
   ],
-
   "objectives": [
     {
       "id": "obj1",
@@ -94,7 +165,6 @@
       "requires": null
     }
   ],
-
   "behaviors": [
     {
       "behaviorRef": {
@@ -143,7 +213,6 @@
       "entityId": null
     }
   ],
-
   "fieldPolicies": {},
   "idleTimeout": 15,
   "onIdle": "HINT",
@@ -151,17 +220,22 @@
     "difficulty": "easy"
   },
   "meta": {
-    "title": "Continue the Pattern",
-    "description": "Choose the shape that comes next",
+    "title": "Продолжи узор",
+    "description": "Выбери фигуру, которая идёт следующей",
     "ageMin": 3,
     "ageMax": 6,
     "version": 1,
-    "tags": ["pattern", "sequence", "attention"],
+    "tags": [
+      "pattern",
+      "sequence",
+      "attention"
+    ],
     "skills": [
       "pattern_recognition",
       "sequencing",
       "visual_attention",
       "task_completion"
-    ]
+    ],
+    "icon": "🔁"
   }
 }

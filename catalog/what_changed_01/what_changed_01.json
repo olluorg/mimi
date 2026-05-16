@@ -6,10 +6,19 @@
       "components": [],
       "behaviors": [],
       "properties": {
-        "position": { "type": "vec2", "x": 260.0, "y": 340.0 },
-        "emoji": { "type": "text", "value": "🌙" }
+        "position": {
+          "type": "vec2",
+          "x": 260.0,
+          "y": 340.0
+        },
+        "emoji": {
+          "type": "text",
+          "value": "🌙"
+        }
       },
-      "tags": { "group": "display" },
+      "tags": {
+        "group": "display"
+      },
       "zOrder": 0
     },
     {
@@ -17,10 +26,19 @@
       "components": [],
       "behaviors": [],
       "properties": {
-        "position": { "type": "vec2", "x": 500.0, "y": 340.0 },
-        "emoji": { "type": "text", "value": "⚽" }
+        "position": {
+          "type": "vec2",
+          "x": 500.0,
+          "y": 340.0
+        },
+        "emoji": {
+          "type": "text",
+          "value": "⚽"
+        }
       },
-      "tags": { "group": "display" },
+      "tags": {
+        "group": "display"
+      },
       "zOrder": 0
     },
     {
@@ -28,46 +46,97 @@
       "components": [],
       "behaviors": [],
       "properties": {
-        "position": { "type": "vec2", "x": 740.0, "y": 340.0 },
-        "emoji": { "type": "text", "value": "🚗" }
+        "position": {
+          "type": "vec2",
+          "x": 740.0,
+          "y": 340.0
+        },
+        "emoji": {
+          "type": "text",
+          "value": "🚗"
+        }
       },
-      "tags": { "group": "display" },
+      "tags": {
+        "group": "display"
+      },
       "zOrder": 0
     },
     {
       "id": "changed_star",
-      "components": ["tap"],
+      "components": [
+        "tap"
+      ],
       "behaviors": [],
       "properties": {
-        "position": { "type": "vec2", "x": 260.0, "y": 560.0 },
-        "changed": { "type": "text", "value": "true" },
-        "emoji": { "type": "text", "value": "⭐" }
+        "position": {
+          "type": "vec2",
+          "x": 260.0,
+          "y": 560.0
+        },
+        "changed": {
+          "type": "text",
+          "value": "true"
+        },
+        "emoji": {
+          "type": "text",
+          "value": "⭐"
+        }
       },
-      "tags": { "group": "choices" },
+      "tags": {
+        "group": "choices"
+      },
       "zOrder": 0
     },
     {
       "id": "same_ball",
-      "components": ["tap"],
+      "components": [
+        "tap"
+      ],
       "behaviors": [],
       "properties": {
-        "position": { "type": "vec2", "x": 500.0, "y": 560.0 },
-        "changed": { "type": "text", "value": "false" },
-        "emoji": { "type": "text", "value": "⚽" }
+        "position": {
+          "type": "vec2",
+          "x": 500.0,
+          "y": 560.0
+        },
+        "changed": {
+          "type": "text",
+          "value": "false"
+        },
+        "emoji": {
+          "type": "text",
+          "value": "⚽"
+        }
       },
-      "tags": { "group": "choices" },
+      "tags": {
+        "group": "choices"
+      },
       "zOrder": 0
     },
     {
       "id": "same_car",
-      "components": ["tap"],
+      "components": [
+        "tap"
+      ],
       "behaviors": [],
       "properties": {
-        "position": { "type": "vec2", "x": 740.0, "y": 560.0 },
-        "changed": { "type": "text", "value": "false" },
-        "emoji": { "type": "text", "value": "🚗" }
+        "position": {
+          "type": "vec2",
+          "x": 740.0,
+          "y": 560.0
+        },
+        "changed": {
+          "type": "text",
+          "value": "false"
+        },
+        "emoji": {
+          "type": "text",
+          "value": "🚗"
+        }
       },
-      "tags": { "group": "choices" },
+      "tags": {
+        "group": "choices"
+      },
       "zOrder": 0
     }
   ],
@@ -75,7 +144,10 @@
     {
       "id": "obj1",
       "type": "entitySelected",
-      "config": { "property": "changed", "value": "true" },
+      "config": {
+        "property": "changed",
+        "value": "true"
+      },
       "requires": null
     }
   ],
@@ -83,13 +155,39 @@
     {
       "behaviorRef": {
         "type": "propertySelectionValidator",
-        "config": { "property": "changed", "expected": "true" }
+        "config": {
+          "property": "changed",
+          "expected": "true"
+        }
       },
       "entityId": null
     },
-    { "behaviorRef": { "type": "progressTracker", "config": {} }, "entityId": null },
-    { "behaviorRef": { "type": "adaptiveHint", "config": { "mode": "visual_change" } }, "entityId": null },
-    { "behaviorRef": { "type": "playSoundOnEvent", "config": { "on": "sceneCompleted", "sound": "complete" } }, "entityId": null }
+    {
+      "behaviorRef": {
+        "type": "progressTracker",
+        "config": {}
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "adaptiveHint",
+        "config": {
+          "mode": "visual_change"
+        }
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "playSoundOnEvent",
+        "config": {
+          "on": "sceneCompleted",
+          "sound": "complete"
+        }
+      },
+      "entityId": null
+    }
   ],
   "fieldPolicies": {},
   "stateMachine": {
@@ -100,38 +198,89 @@
         "durationMs": 2500,
         "inputEnabled": false,
         "onEnter": [
-          { "type": "setEntityState", "entityId": "changed_star", "state": "INACTIVE" },
-          { "type": "setEntityState", "entityId": "same_ball", "state": "INACTIVE" },
-          { "type": "setEntityState", "entityId": "same_car", "state": "INACTIVE" }
+          {
+            "type": "setEntityState",
+            "entityId": "changed_star",
+            "state": "INACTIVE"
+          },
+          {
+            "type": "setEntityState",
+            "entityId": "same_ball",
+            "state": "INACTIVE"
+          },
+          {
+            "type": "setEntityState",
+            "entityId": "same_car",
+            "state": "INACTIVE"
+          }
         ]
       },
       {
         "id": "recall",
         "inputEnabled": true,
         "onEnter": [
-          { "type": "setEntityState", "entityId": "original_star", "state": "INACTIVE" },
-          { "type": "setEntityState", "entityId": "original_ball", "state": "INACTIVE" },
-          { "type": "setEntityState", "entityId": "original_car", "state": "INACTIVE" },
-          { "type": "setEntityState", "entityId": "changed_star", "state": "ACTIVE" },
-          { "type": "setEntityState", "entityId": "same_ball", "state": "ACTIVE" },
-          { "type": "setEntityState", "entityId": "same_car", "state": "ACTIVE" }
+          {
+            "type": "setEntityState",
+            "entityId": "original_star",
+            "state": "INACTIVE"
+          },
+          {
+            "type": "setEntityState",
+            "entityId": "original_ball",
+            "state": "INACTIVE"
+          },
+          {
+            "type": "setEntityState",
+            "entityId": "original_car",
+            "state": "INACTIVE"
+          },
+          {
+            "type": "setEntityState",
+            "entityId": "changed_star",
+            "state": "ACTIVE"
+          },
+          {
+            "type": "setEntityState",
+            "entityId": "same_ball",
+            "state": "ACTIVE"
+          },
+          {
+            "type": "setEntityState",
+            "entityId": "same_car",
+            "state": "ACTIVE"
+          }
         ]
       }
     ],
     "transitions": [
-      { "from": "show", "to": "recall", "afterMs": 2500 }
+      {
+        "from": "show",
+        "to": "recall",
+        "afterMs": 2500
+      }
     ]
   },
   "idleTimeout": 15,
   "onIdle": "HINT",
-  "metadata": { "difficulty": "easy" },
+  "metadata": {
+    "difficulty": "easy"
+  },
   "meta": {
-    "title": "What Changed?",
-    "description": "Find the object that changed",
+    "title": "Что изменилось?",
+    "description": "Найди предмет, который стал другим",
     "ageMin": 3,
     "ageMax": 6,
     "version": 1,
-    "tags": ["memory", "visual_change"],
-    "skills": ["working_memory", "visual_memory", "visual_attention", "task_completion"]
+    "tags": [
+      "memory",
+      "visual_change"
+    ],
+    "skills": [
+      "working_memory",
+      "visual_memory",
+      "visual_attention",
+      "task_completion"
+    ],
+    "icon": "👁"
   }
 }

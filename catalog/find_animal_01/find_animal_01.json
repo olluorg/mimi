@@ -1,48 +1,90 @@
 {
   "sceneId": "find_animal_01",
-
   "entities": [
     {
       "id": "cat",
-      "components": ["tap"],
+      "components": [
+        "tap"
+      ],
       "behaviors": [],
       "properties": {
-        "position": { "type": "vec2", "x": 200.0, "y": 400.0 },
-        "category": { "type": "text", "value": "animal" },
-        "name": { "type": "text", "value": "cat" },
-        "emoji": { "type": "text", "value": "🐱" }
+        "position": {
+          "type": "vec2",
+          "x": 200.0,
+          "y": 400.0
+        },
+        "category": {
+          "type": "text",
+          "value": "animal"
+        },
+        "name": {
+          "type": "text",
+          "value": "cat"
+        },
+        "emoji": {
+          "type": "text",
+          "value": "🐱"
+        }
       },
       "tags": {
         "group": "choices"
       },
       "zOrder": 0
     },
-
     {
       "id": "dog",
-      "components": ["tap"],
+      "components": [
+        "tap"
+      ],
       "behaviors": [],
       "properties": {
-        "position": { "type": "vec2", "x": 500.0, "y": 400.0 },
-        "category": { "type": "text", "value": "animal" },
-        "name": { "type": "text", "value": "dog" },
-        "emoji": { "type": "text", "value": "🐶" }
+        "position": {
+          "type": "vec2",
+          "x": 500.0,
+          "y": 400.0
+        },
+        "category": {
+          "type": "text",
+          "value": "animal"
+        },
+        "name": {
+          "type": "text",
+          "value": "dog"
+        },
+        "emoji": {
+          "type": "text",
+          "value": "🐶"
+        }
       },
       "tags": {
         "group": "choices"
       },
       "zOrder": 0
     },
-
     {
       "id": "car",
-      "components": ["tap"],
+      "components": [
+        "tap"
+      ],
       "behaviors": [],
       "properties": {
-        "position": { "type": "vec2", "x": 800.0, "y": 400.0 },
-        "category": { "type": "text", "value": "vehicle" },
-        "name": { "type": "text", "value": "car" },
-        "emoji": { "type": "text", "value": "🚗" }
+        "position": {
+          "type": "vec2",
+          "x": 800.0,
+          "y": 400.0
+        },
+        "category": {
+          "type": "text",
+          "value": "vehicle"
+        },
+        "name": {
+          "type": "text",
+          "value": "car"
+        },
+        "emoji": {
+          "type": "text",
+          "value": "🚗"
+        }
       },
       "tags": {
         "group": "choices"
@@ -50,7 +92,6 @@
       "zOrder": 0
     }
   ],
-
   "objectives": [
     {
       "id": "obj1",
@@ -62,7 +103,6 @@
       "requires": null
     }
   ],
-
   "behaviors": [
     {
       "behaviorRef": {
@@ -74,7 +114,6 @@
       },
       "entityId": null
     },
-
     {
       "behaviorRef": {
         "type": "propertySelectionValidator",
@@ -85,7 +124,6 @@
       },
       "entityId": null
     },
-
     {
       "behaviorRef": {
         "type": "adaptiveHint",
@@ -93,7 +131,6 @@
       },
       "entityId": null
     },
-
     {
       "behaviorRef": {
         "type": "playSoundOnEvent",
@@ -105,11 +142,8 @@
       "entityId": null
     }
   ],
-
   "idleTimeout": 10,
-
   "onIdle": "HINT",
-
   "metadata": {
     "skill": "receptive_speech"
   },
@@ -119,13 +153,17 @@
     "ageMin": 2,
     "ageMax": 6,
     "version": 1,
-    "tags": ["matching", "colors"],
+    "tags": [
+      "matching",
+      "colors"
+    ],
     "skills": [
       "receptive_speech",
       "word_association",
       "selective_attention",
       "visual_attention",
       "task_completion"
-    ]
+    ],
+    "icon": "🔍"
   }
 }
