@@ -145,6 +145,22 @@ sealed class GameEvent {
         override val target: EntityId? = null
     ) : GameEvent()
 
+    @Serializable @SerialName("scene_state_entered")
+    data class SceneStateEntered(
+        val stateId:        String,
+        override val tick:  Tick,
+        override val source: EntityId? = null,
+        override val target: EntityId? = null
+    ) : GameEvent()
+
+    @Serializable @SerialName("scene_state_timeout")
+    data class SceneStateTimeout(
+        val stateId:        String,
+        override val tick:  Tick,
+        override val source: EntityId? = null,
+        override val target: EntityId? = null
+    ) : GameEvent()
+
     @Serializable @SerialName("hint_triggered")
     data class HintTriggered(
         val entityId:        EntityId?,

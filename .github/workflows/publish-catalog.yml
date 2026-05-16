@@ -4,7 +4,7 @@ on:
   push:
     branches: [main]
     paths:
-      - 'catalog/*.json'
+      - 'catalog/**'
       - '.github/workflows/publish-catalog.yml'
   workflow_dispatch:
 
@@ -36,15 +36,24 @@ jobs:
           catalog_dir = pathlib.Path("catalog")
 
           scenes = []
-          for path in sorted(catalog_dir.glob("*.json")):
-              if path.name == "catalog.json":
+          seen_ids = set()
+
+          # Scan subdirectories: catalog/{id}/{id}.json
+          for sub in sorted(catalog_dir.iterdir()):
+              if not sub.is_dir():
+                  continue
+              scene_file = sub / f"{sub.name}.json"
+              if not scene_file.exists():
                   continue
               try:
-                  data = json.loads(path.read_text())
-                  scene_id = data.get("sceneId") or path.stem
-                  scenes.append({"id": scene_id, "url": f"{BASE_URL}/{path.name}"})
+                  data = json.loads(scene_file.read_text())
+                  scene_id = data.get("sceneId") or sub.name
+                  if scene_id in seen_ids:
+                      continue
+                  seen_ids.add(scene_id)
+                  scenes.append({"id": scene_id, "url": f"{BASE_URL}/{sub.name}/{scene_file.name}"})
               except Exception as e:
-                  print(f"WARNING: skipping {path.name}: {e}", file=sys.stderr)
+                  print(f"WARNING: skipping {scene_file}: {e}", file=sys.stderr)
 
           index = {"version": 2, "scenes": scenes}
           (catalog_dir / "catalog.json").write_text(json.dumps(index, ensure_ascii=False, indent=2))

@@ -1,0 +1,154 @@
+{
+  "sceneId": "connect_animals_food_01",
+  "entities": [
+    {
+      "id": "rabbit",
+      "components": ["connectSource"],
+      "behaviors": [],
+      "properties": {
+        "position": { "type": "vec2", "x": 220.0, "y": 240.0 },
+        "food": { "type": "text", "value": "carrot" },
+        "emoji": { "type": "text", "value": "🐰" }
+      },
+      "tags": { "group": "animals" },
+      "zOrder": 1
+    },
+    {
+      "id": "cat",
+      "components": ["connectSource"],
+      "behaviors": [],
+      "properties": {
+        "position": { "type": "vec2", "x": 220.0, "y": 450.0 },
+        "food": { "type": "text", "value": "fish" },
+        "emoji": { "type": "text", "value": "🐱" }
+      },
+      "tags": { "group": "animals" },
+      "zOrder": 1
+    },
+    {
+      "id": "dog",
+      "components": ["connectSource"],
+      "behaviors": [],
+      "properties": {
+        "position": { "type": "vec2", "x": 220.0, "y": 660.0 },
+        "food": { "type": "text", "value": "bone" },
+        "emoji": { "type": "text", "value": "🐶" }
+      },
+      "tags": { "group": "animals" },
+      "zOrder": 1
+    },
+    {
+      "id": "fish",
+      "components": ["connectTarget"],
+      "behaviors": [],
+      "properties": {
+        "position": { "type": "vec2", "x": 780.0, "y": 240.0 },
+        "constraintType": { "type": "text", "value": "propertyEquals" },
+        "source": { "type": "text", "value": "food" },
+        "target": { "type": "text", "value": "food" },
+        "food": { "type": "text", "value": "fish" },
+        "emoji": { "type": "text", "value": "🐟" }
+      },
+      "tags": { "group": "foods" },
+      "zOrder": 1
+    },
+    {
+      "id": "bone",
+      "components": ["connectTarget"],
+      "behaviors": [],
+      "properties": {
+        "position": { "type": "vec2", "x": 780.0, "y": 450.0 },
+        "constraintType": { "type": "text", "value": "propertyEquals" },
+        "source": { "type": "text", "value": "food" },
+        "target": { "type": "text", "value": "food" },
+        "food": { "type": "text", "value": "bone" },
+        "emoji": { "type": "text", "value": "🦴" }
+      },
+      "tags": { "group": "foods" },
+      "zOrder": 1
+    },
+    {
+      "id": "carrot",
+      "components": ["connectTarget"],
+      "behaviors": [],
+      "properties": {
+        "position": { "type": "vec2", "x": 780.0, "y": 660.0 },
+        "constraintType": { "type": "text", "value": "propertyEquals" },
+        "source": { "type": "text", "value": "food" },
+        "target": { "type": "text", "value": "food" },
+        "food": { "type": "text", "value": "carrot" },
+        "emoji": { "type": "text", "value": "🥕" }
+      },
+      "tags": { "group": "foods" },
+      "zOrder": 1
+    }
+  ],
+  "objectives": [
+    {
+      "id": "obj1",
+      "type": "allMatched",
+      "config": {
+        "group": "animals"
+      },
+      "requires": null
+    }
+  ],
+  "behaviors": [
+    {
+      "behaviorRef": {
+        "type": "lineConnectValidator",
+        "config": {}
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "progressTracker",
+        "config": {}
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "adaptiveHint",
+        "config": {
+          "mode": "connect"
+        }
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "playSoundOnEvent",
+        "config": {
+          "on": "sceneCompleted",
+          "sound": "complete"
+        }
+      },
+      "entityId": null
+    }
+  ],
+  "fieldPolicies": {
+    "connectedTo": "LAST_WINS"
+  },
+  "idleTimeout": 20,
+  "onIdle": "HINT",
+  "metadata": {
+    "difficulty": "easy"
+  },
+  "meta": {
+    "title": "Animal Food Lines",
+    "description": "Connect each animal with its food",
+    "ageMin": 3,
+    "ageMax": 6,
+    "version": 1,
+    "tags": ["matching", "animals", "connect"],
+    "skills": [
+      "matching",
+      "associative_memory",
+      "hand_eye_coordination",
+      "visual_attention",
+      "task_completion"
+    ]
+  }
+}

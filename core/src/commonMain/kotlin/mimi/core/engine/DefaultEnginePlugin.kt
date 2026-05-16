@@ -10,8 +10,10 @@ fun EngineBuilder.withDefaultPlugins(constraintRegistry: ConstraintRegistry): En
     return this
         .withPlugin(ProgressTrackerPlugin())
         .withPlugin(SnapToTargetPlugin(constraintRegistry))
+        .withPlugin(LineConnectValidatorPlugin(constraintRegistry))
         .withPlugin(SequenceValidatorPlugin())
         .withPlugin(TraceValidatorPlugin())
+        .withPlugin(MazeValidatorPlugin())
         .withPlugin(AudioPromptPlugin())
         .withPlugin(PropertySelectionValidatorPlugin())
         .withPlugin(GeometrySelectionValidatorPlugin())

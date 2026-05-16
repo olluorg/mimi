@@ -1,70 +1,59 @@
 {
   "sceneId": "remember_sequence_01",
   "entities": [
-    {
-      "id": "apple",
-      "components": ["tap"],
-      "behaviors": [],
-      "properties": {
-        "position": { "type": "vec2", "x": 220.0, "y": 430.0 },
-        "sequenceIndex": { "type": "num", "value": 1.0 },
-        "emoji": { "type": "text", "value": "🍎" }
-      },
-      "tags": { "group": "sequence" },
-      "zOrder": 0
-    },
-    {
-      "id": "banana",
-      "components": ["tap"],
-      "behaviors": [],
-      "properties": {
-        "position": { "type": "vec2", "x": 500.0, "y": 430.0 },
-        "sequenceIndex": { "type": "num", "value": 2.0 },
-        "emoji": { "type": "text", "value": "🍌" }
-      },
-      "tags": { "group": "sequence" },
-      "zOrder": 0
-    },
-    {
-      "id": "cherry",
-      "components": ["tap"],
-      "behaviors": [],
-      "properties": {
-        "position": { "type": "vec2", "x": 780.0, "y": 430.0 },
-        "sequenceIndex": { "type": "num", "value": 3.0 },
-        "emoji": { "type": "text", "value": "🍒" }
-      },
-      "tags": { "group": "sequence" },
-      "zOrder": 0
-    }
+    { "id": "display_apple", "components": [], "behaviors": [], "properties": { "position": { "type": "vec2", "x": 220.0, "y": 330.0 }, "emoji": { "type": "text", "value": "🍎" } }, "tags": { "group": "display" }, "zOrder": 0 },
+    { "id": "display_banana", "components": [], "behaviors": [], "properties": { "position": { "type": "vec2", "x": 500.0, "y": 330.0 }, "emoji": { "type": "text", "value": "🍌" } }, "tags": { "group": "display" }, "zOrder": 0 },
+    { "id": "display_cherry", "components": [], "behaviors": [], "properties": { "position": { "type": "vec2", "x": 780.0, "y": 330.0 }, "emoji": { "type": "text", "value": "🍒" } }, "tags": { "group": "display" }, "zOrder": 0 },
+    { "id": "choice_cherry", "components": ["tap"], "behaviors": [], "properties": { "position": { "type": "vec2", "x": 220.0, "y": 560.0 }, "sequenceIndex": { "type": "num", "value": 3.0 }, "emoji": { "type": "text", "value": "🍒" } }, "tags": { "group": "sequence" }, "zOrder": 0 },
+    { "id": "choice_apple", "components": ["tap"], "behaviors": [], "properties": { "position": { "type": "vec2", "x": 500.0, "y": 560.0 }, "sequenceIndex": { "type": "num", "value": 1.0 }, "emoji": { "type": "text", "value": "🍎" } }, "tags": { "group": "sequence" }, "zOrder": 0 },
+    { "id": "choice_banana", "components": ["tap"], "behaviors": [], "properties": { "position": { "type": "vec2", "x": 780.0, "y": 560.0 }, "sequenceIndex": { "type": "num", "value": 2.0 }, "emoji": { "type": "text", "value": "🍌" } }, "tags": { "group": "sequence" }, "zOrder": 0 }
   ],
   "objectives": [
-    {
-      "id": "obj1",
-      "type": "sequenceCompleted",
-      "config": { "group": "sequence" },
-      "requires": null
-    }
+    { "id": "obj1", "type": "sequenceCompleted", "config": { "group": "sequence" }, "requires": null }
   ],
   "behaviors": [
-    {
-      "behaviorRef": {
-        "type": "sequenceValidator",
-        "config": { "group": "sequence", "property": "sequenceIndex" }
-      },
-      "entityId": null
-    },
+    { "behaviorRef": { "type": "sequenceValidator", "config": { "group": "sequence", "property": "sequenceIndex" } }, "entityId": null },
     { "behaviorRef": { "type": "progressTracker", "config": {} }, "entityId": null },
     { "behaviorRef": { "type": "adaptiveHint", "config": { "mode": "memory_sequence" } }, "entityId": null },
     { "behaviorRef": { "type": "playSoundOnEvent", "config": { "on": "sceneCompleted", "sound": "complete" } }, "entityId": null }
   ],
   "fieldPolicies": {},
+  "stateMachine": {
+    "initialState": "show",
+    "states": [
+      {
+        "id": "show",
+        "durationMs": 2500,
+        "inputEnabled": false,
+        "onEnter": [
+          { "type": "setEntityState", "entityId": "choice_cherry", "state": "INACTIVE" },
+          { "type": "setEntityState", "entityId": "choice_apple", "state": "INACTIVE" },
+          { "type": "setEntityState", "entityId": "choice_banana", "state": "INACTIVE" }
+        ]
+      },
+      {
+        "id": "recall",
+        "inputEnabled": true,
+        "onEnter": [
+          { "type": "setEntityState", "entityId": "display_apple", "state": "INACTIVE" },
+          { "type": "setEntityState", "entityId": "display_banana", "state": "INACTIVE" },
+          { "type": "setEntityState", "entityId": "display_cherry", "state": "INACTIVE" },
+          { "type": "setEntityState", "entityId": "choice_cherry", "state": "ACTIVE" },
+          { "type": "setEntityState", "entityId": "choice_apple", "state": "ACTIVE" },
+          { "type": "setEntityState", "entityId": "choice_banana", "state": "ACTIVE" }
+        ]
+      }
+    ],
+    "transitions": [
+      { "from": "show", "to": "recall", "afterMs": 2500 }
+    ]
+  },
   "idleTimeout": 15,
   "onIdle": "HINT",
   "metadata": { "difficulty": "easy" },
   "meta": {
     "title": "Remember Sequence",
-    "description": "Repeat the objects in order",
+    "description": "Remember, hide, then repeat the order",
     "ageMin": 3,
     "ageMax": 6,
     "version": 1,

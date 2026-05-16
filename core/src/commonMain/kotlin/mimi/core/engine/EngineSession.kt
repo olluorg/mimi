@@ -32,9 +32,16 @@ class EngineSession(
     private val pendingSystemEvents = ArrayDeque<GameEvent>()
 
     private var idleJob: Job? = null
+    private var fsmTimerJob: Job? = null
+    private var currentSceneState: String? = scene.stateMachine?.initialState
 
     init {
-        scope.launch { dispatch(GameEvent.SceneStarted(tick = 0L)) }
+        scope.launch {
+            mutex.withLock {
+                enterSceneState(currentSceneState, tick = 0L, runEnterActions = true)
+            }
+            dispatch(GameEvent.SceneStarted(tick = 0L))
+        }
         startIdleLoop()
         startHintCheckLoop()
     }
@@ -58,13 +65,19 @@ class EngineSession(
             mutex.withLock {
                 world      = DefaultWorldStateFactory.fromScene(scene)
                 tickCount  = 0L
+                currentSceneState = scene.stateMachine?.initialState
                 pendingSystemEvents.clear()
+                fsmTimerJob?.cancel()
+                enterSceneState(currentSceneState, tick = 0L, runEnterActions = true)
                 _worldState.value = world.snapshot()
             }
         }
     }
 
-    fun close() { scope.cancel() }
+    fun close() {
+        fsmTimerJob?.cancel()
+        scope.cancel()
+    }
 
     // ── Internal Pipeline ─────────────────────────────────────────────────────
 
@@ -73,6 +86,10 @@ class EngineSession(
         val snapshot = world.snapshot()
         val ctx      = DefaultBehaviorContext(snapshot, tickCount)
         val buffer   = DefaultCommandBuffer()
+
+        if (isInputEvent(event) && !isInputEnabledForCurrentState()) {
+            return
+        }
 
         // Reset idle counter on any input event
         if (event !is GameEvent.SceneCompleted && event !is GameEvent.ObjectiveProgressed) {
@@ -117,6 +134,8 @@ class EngineSession(
         // Dispatch feedback
         val fbCtx = FeedbackContext(world.snapshot(), tickCount)
         feedback.forEach { feedbackRegistry.dispatch(it.feedbackType, it.params, fbCtx) }
+
+        applyFsmTransitions(event)
     }
 
     private suspend fun drainPendingSystemEvents() {
@@ -132,6 +151,159 @@ class EngineSession(
     private fun isSceneComplete() = scene.objectives.any {
         world.getObjectiveState(it.id) == ObjectiveState.LOCKED_COMPLETE
     }
+
+    private fun isInputEvent(event: GameEvent): Boolean = when (event) {
+        is GameEvent.Tap,
+        is GameEvent.DragStart,
+        is GameEvent.DragMove,
+        is GameEvent.Drop,
+        is GameEvent.Hold,
+        is GameEvent.TracePoint,
+        is GameEvent.TraceComplete -> true
+        else -> false
+    }
+
+    private fun isInputEnabledForCurrentState(): Boolean {
+        val stateId = currentSceneState ?: return true
+        return scene.stateMachine?.states?.firstOrNull { it.id == stateId }?.inputEnabled ?: true
+    }
+
+    private fun eventName(event: GameEvent): String = when (event) {
+        is GameEvent.Tap -> "tap"
+        is GameEvent.DragStart -> "drag_start"
+        is GameEvent.DragMove -> "drag_move"
+        is GameEvent.Drop -> "drop"
+        is GameEvent.Hold -> "hold"
+        is GameEvent.TracePoint -> "trace_point"
+        is GameEvent.TraceComplete -> "trace_complete"
+        is GameEvent.MatchSuccess -> "match_success"
+        is GameEvent.MatchFail -> "match_fail"
+        is GameEvent.ObjectiveProgressed -> "objective_progressed"
+        is GameEvent.ObjectiveCompleted -> "objective_completed"
+        is GameEvent.ObjectiveReverted -> "objective_reverted"
+        is GameEvent.ObjectiveLocked -> "objective_locked"
+        is GameEvent.SceneStarted -> "scene_started"
+        is GameEvent.SceneCompleted -> "scene_completed"
+        is GameEvent.SceneReset -> "scene_reset"
+        is GameEvent.SceneStateEntered -> "scene_state_entered"
+        is GameEvent.SceneStateTimeout -> "scene_state_timeout"
+        is GameEvent.HintTriggered -> "hint_triggered"
+        is GameEvent.IdleCheck -> "idle_check"
+    }
+
+    private fun applyFsmTransitions(event: GameEvent) {
+        val stateMachine = scene.stateMachine ?: return
+        val current = currentSceneState ?: return
+        val name = eventName(event)
+        val transition = stateMachine.transitions.firstOrNull { transition ->
+            transition.from == current && when {
+                event is GameEvent.SceneStateTimeout -> transition.afterMs != null &&
+                    (transition.onEvent == null || transition.onEvent == name)
+                else -> transition.onEvent == name
+            }
+        } ?: return
+
+        applyFsmActions(transition.actions, tickCount)
+        enterSceneState(transition.to, tickCount, runEnterActions = true)
+    }
+
+    private fun enterSceneState(stateId: String?, tick: Tick, runEnterActions: Boolean) {
+        val stateMachine = scene.stateMachine ?: return
+        val nextId = stateId ?: return
+        val state = stateMachine.states.firstOrNull { it.id == nextId } ?: return
+
+        currentSceneState = nextId
+        fsmTimerJob?.cancel()
+
+        val commands = mutableListOf<Command>(
+            Command.SetProperty(
+                target = SCENE_ENTITY_ID,
+                field = "sceneState",
+                value = PropertyValue.Text(nextId),
+                priority = 500,
+                source = "scene_fsm",
+                tick = tick
+            ),
+            Command.SetProperty(
+                target = SCENE_ENTITY_ID,
+                field = "inputEnabled",
+                value = PropertyValue.Flag(state.inputEnabled),
+                priority = 500,
+                source = "scene_fsm",
+                tick = tick
+            )
+        )
+        if (runEnterActions) commands += fsmCommands(state.onEnter, tick)
+        commitFsmCommands(commands)
+        _worldState.value = world.snapshot()
+
+        val timeout = state.durationMs
+            ?: stateMachine.transitions.firstOrNull { it.from == nextId && it.afterMs != null }?.afterMs
+        if (timeout != null && timeout > 0L) {
+            fsmTimerJob = scope.launch {
+                delay(timeout)
+                dispatch(GameEvent.SceneStateTimeout(stateId = nextId, tick = 0L))
+            }
+        }
+    }
+
+    private fun applyFsmActions(actions: List<SceneFsmActionDefinition>, tick: Tick) {
+        val commands = fsmCommands(actions, tick)
+        if (commands.isEmpty()) return
+        commitFsmCommands(commands)
+        _worldState.value = world.snapshot()
+    }
+
+    private fun commitFsmCommands(commands: List<Command>) {
+        val feedback = commands.filterIsInstance<Command.TriggerFeedback>()
+        val regular = commands.filterNot { it is Command.TriggerFeedback }
+        if (regular.isNotEmpty()) {
+            world = world.apply(regular)
+        }
+        val fbCtx = FeedbackContext(world.snapshot(), tickCount)
+        feedback.forEach { feedbackRegistry.dispatch(it.feedbackType, it.params, fbCtx) }
+    }
+
+    private fun fsmCommands(actions: List<SceneFsmActionDefinition>, tick: Tick): List<Command> =
+        actions.mapNotNull { action ->
+            when (action.type) {
+                "setProperty" -> {
+                    val entityId = action.entityId ?: return@mapNotNull null
+                    val field = action.field ?: return@mapNotNull null
+                    val value = action.value ?: return@mapNotNull null
+                    Command.SetProperty(
+                        target = entityId,
+                        field = field,
+                        value = value,
+                        priority = 500,
+                        source = "scene_fsm",
+                        tick = tick
+                    )
+                }
+                "setEntityState" -> {
+                    val entityId = action.entityId ?: return@mapNotNull null
+                    val state = action.state ?: return@mapNotNull null
+                    Command.SetEntityState(
+                        target = entityId,
+                        state = state,
+                        priority = 500,
+                        source = "scene_fsm",
+                        tick = tick
+                    )
+                }
+                "triggerFeedback" -> {
+                    val feedbackType = action.feedbackType ?: return@mapNotNull null
+                    Command.TriggerFeedback(
+                        feedbackType = feedbackType,
+                        params = action.params,
+                        priority = 500,
+                        source = "scene_fsm",
+                        tick = tick
+                    )
+                }
+                else -> null
+            }
+        }
 
     // ── Idle Tick Loop ────────────────────────────────────────────────────────
 

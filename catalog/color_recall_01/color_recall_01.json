@@ -2,6 +2,39 @@
   "sceneId": "color_recall_01",
   "entities": [
     {
+      "id": "display_red",
+      "components": [],
+      "behaviors": [],
+      "properties": {
+        "position": { "type": "vec2", "x": 220.0, "y": 680.0 },
+        "emoji": { "type": "text", "value": "🔴" }
+      },
+      "tags": { "group": "display" },
+      "zOrder": 0
+    },
+    {
+      "id": "display_blue",
+      "components": [],
+      "behaviors": [],
+      "properties": {
+        "position": { "type": "vec2", "x": 500.0, "y": 680.0 },
+        "emoji": { "type": "text", "value": "🔵" }
+      },
+      "tags": { "group": "display" },
+      "zOrder": 0
+    },
+    {
+      "id": "display_green",
+      "components": [],
+      "behaviors": [],
+      "properties": {
+        "position": { "type": "vec2", "x": 780.0, "y": 680.0 },
+        "emoji": { "type": "text", "value": "🟢" }
+      },
+      "tags": { "group": "display" },
+      "zOrder": 0
+    },
+    {
       "id": "red_circle",
       "components": ["drag"],
       "behaviors": [],
@@ -101,6 +134,42 @@
     { "behaviorRef": { "type": "playSoundOnEvent", "config": { "on": "sceneCompleted", "sound": "complete" } }, "entityId": null }
   ],
   "fieldPolicies": {},
+  "stateMachine": {
+    "initialState": "show",
+    "states": [
+      {
+        "id": "show",
+        "durationMs": 2500,
+        "inputEnabled": false,
+        "onEnter": [
+          { "type": "setEntityState", "entityId": "red_circle", "state": "INACTIVE" },
+          { "type": "setEntityState", "entityId": "blue_circle", "state": "INACTIVE" },
+          { "type": "setEntityState", "entityId": "green_circle", "state": "INACTIVE" },
+          { "type": "setEntityState", "entityId": "red_spot", "state": "INACTIVE" },
+          { "type": "setEntityState", "entityId": "blue_spot", "state": "INACTIVE" },
+          { "type": "setEntityState", "entityId": "green_spot", "state": "INACTIVE" }
+        ]
+      },
+      {
+        "id": "recall",
+        "inputEnabled": true,
+        "onEnter": [
+          { "type": "setEntityState", "entityId": "display_red", "state": "INACTIVE" },
+          { "type": "setEntityState", "entityId": "display_blue", "state": "INACTIVE" },
+          { "type": "setEntityState", "entityId": "display_green", "state": "INACTIVE" },
+          { "type": "setEntityState", "entityId": "red_circle", "state": "ACTIVE" },
+          { "type": "setEntityState", "entityId": "blue_circle", "state": "ACTIVE" },
+          { "type": "setEntityState", "entityId": "green_circle", "state": "ACTIVE" },
+          { "type": "setEntityState", "entityId": "red_spot", "state": "ACTIVE" },
+          { "type": "setEntityState", "entityId": "blue_spot", "state": "ACTIVE" },
+          { "type": "setEntityState", "entityId": "green_spot", "state": "ACTIVE" }
+        ]
+      }
+    ],
+    "transitions": [
+      { "from": "show", "to": "recall", "afterMs": 2500 }
+    ]
+  },
   "idleTimeout": 20,
   "onIdle": "HINT",
   "metadata": { "difficulty": "medium" },

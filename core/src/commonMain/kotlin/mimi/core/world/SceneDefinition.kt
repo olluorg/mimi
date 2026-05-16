@@ -12,6 +12,7 @@ data class SceneDefinition(
     val objectives:    List<ObjectiveDefinition>          = emptyList(),
     val behaviors:     List<SceneBehaviorBinding>         = emptyList(),
     val fieldPolicies: Map<PropertyKey, ResolutionPolicy> = emptyMap(),
+    val stateMachine:  SceneStateMachineDefinition?        = null,
     val idleTimeout:   Int                                = 30,
     val onIdle:        OnIdleAction                       = OnIdleAction.HINT,
     val metadata:      Map<String, String>                = emptyMap()
@@ -39,6 +40,41 @@ data class ObjectiveDefinition(
 data class SceneBehaviorBinding(
     val behaviorRef: BehaviorRef,
     val entityId:    EntityId? = null   // null = scene-global
+)
+
+@Serializable
+data class SceneStateMachineDefinition(
+    val initialState: String,
+    val states:       List<SceneFsmStateDefinition> = emptyList(),
+    val transitions:  List<SceneFsmTransitionDefinition> = emptyList()
+)
+
+@Serializable
+data class SceneFsmStateDefinition(
+    val id:          String,
+    val onEnter:     List<SceneFsmActionDefinition> = emptyList(),
+    val durationMs:  Long? = null,
+    val inputEnabled: Boolean = true
+)
+
+@Serializable
+data class SceneFsmTransitionDefinition(
+    val from:    String,
+    val to:      String,
+    val onEvent: String? = null,
+    val afterMs: Long? = null,
+    val actions: List<SceneFsmActionDefinition> = emptyList()
+)
+
+@Serializable
+data class SceneFsmActionDefinition(
+    val type:     String,
+    val entityId: EntityId? = null,
+    val field:    PropertyKey? = null,
+    val value:    PropertyValue? = null,
+    val state:    EntityLifecycleState? = null,
+    val feedbackType: String? = null,
+    val params: Map<String, String> = emptyMap()
 )
 
 @Serializable

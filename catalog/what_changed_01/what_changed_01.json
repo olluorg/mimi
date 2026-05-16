@@ -2,11 +2,44 @@
   "sceneId": "what_changed_01",
   "entities": [
     {
+      "id": "original_star",
+      "components": [],
+      "behaviors": [],
+      "properties": {
+        "position": { "type": "vec2", "x": 260.0, "y": 340.0 },
+        "emoji": { "type": "text", "value": "🌙" }
+      },
+      "tags": { "group": "display" },
+      "zOrder": 0
+    },
+    {
+      "id": "original_ball",
+      "components": [],
+      "behaviors": [],
+      "properties": {
+        "position": { "type": "vec2", "x": 500.0, "y": 340.0 },
+        "emoji": { "type": "text", "value": "⚽" }
+      },
+      "tags": { "group": "display" },
+      "zOrder": 0
+    },
+    {
+      "id": "original_car",
+      "components": [],
+      "behaviors": [],
+      "properties": {
+        "position": { "type": "vec2", "x": 740.0, "y": 340.0 },
+        "emoji": { "type": "text", "value": "🚗" }
+      },
+      "tags": { "group": "display" },
+      "zOrder": 0
+    },
+    {
       "id": "changed_star",
       "components": ["tap"],
       "behaviors": [],
       "properties": {
-        "position": { "type": "vec2", "x": 260.0, "y": 420.0 },
+        "position": { "type": "vec2", "x": 260.0, "y": 560.0 },
         "changed": { "type": "text", "value": "true" },
         "emoji": { "type": "text", "value": "⭐" }
       },
@@ -18,7 +51,7 @@
       "components": ["tap"],
       "behaviors": [],
       "properties": {
-        "position": { "type": "vec2", "x": 500.0, "y": 420.0 },
+        "position": { "type": "vec2", "x": 500.0, "y": 560.0 },
         "changed": { "type": "text", "value": "false" },
         "emoji": { "type": "text", "value": "⚽" }
       },
@@ -30,7 +63,7 @@
       "components": ["tap"],
       "behaviors": [],
       "properties": {
-        "position": { "type": "vec2", "x": 740.0, "y": 420.0 },
+        "position": { "type": "vec2", "x": 740.0, "y": 560.0 },
         "changed": { "type": "text", "value": "false" },
         "emoji": { "type": "text", "value": "🚗" }
       },
@@ -59,6 +92,36 @@
     { "behaviorRef": { "type": "playSoundOnEvent", "config": { "on": "sceneCompleted", "sound": "complete" } }, "entityId": null }
   ],
   "fieldPolicies": {},
+  "stateMachine": {
+    "initialState": "show",
+    "states": [
+      {
+        "id": "show",
+        "durationMs": 2500,
+        "inputEnabled": false,
+        "onEnter": [
+          { "type": "setEntityState", "entityId": "changed_star", "state": "INACTIVE" },
+          { "type": "setEntityState", "entityId": "same_ball", "state": "INACTIVE" },
+          { "type": "setEntityState", "entityId": "same_car", "state": "INACTIVE" }
+        ]
+      },
+      {
+        "id": "recall",
+        "inputEnabled": true,
+        "onEnter": [
+          { "type": "setEntityState", "entityId": "original_star", "state": "INACTIVE" },
+          { "type": "setEntityState", "entityId": "original_ball", "state": "INACTIVE" },
+          { "type": "setEntityState", "entityId": "original_car", "state": "INACTIVE" },
+          { "type": "setEntityState", "entityId": "changed_star", "state": "ACTIVE" },
+          { "type": "setEntityState", "entityId": "same_ball", "state": "ACTIVE" },
+          { "type": "setEntityState", "entityId": "same_car", "state": "ACTIVE" }
+        ]
+      }
+    ],
+    "transitions": [
+      { "from": "show", "to": "recall", "afterMs": 2500 }
+    ]
+  },
   "idleTimeout": 15,
   "onIdle": "HINT",
   "metadata": { "difficulty": "easy" },

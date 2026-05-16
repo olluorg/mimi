@@ -1,0 +1,141 @@
+{
+  "sceneId": "match_number_count_01",
+  "entities": [
+    {
+      "id": "num_1",
+      "components": ["drag"],
+      "behaviors": [],
+      "properties": {
+        "position": { "type": "vec2", "x": 170.0, "y": 220.0 },
+        "count":    { "type": "text", "value": "1" },
+        "emoji":    { "type": "text", "value": "1️⃣" }
+      },
+      "tags": { "group": "numbers" },
+      "zOrder": 1
+    },
+    {
+      "id": "num_2",
+      "components": ["drag"],
+      "behaviors": [],
+      "properties": {
+        "position": { "type": "vec2", "x": 500.0, "y": 220.0 },
+        "count":    { "type": "text", "value": "2" },
+        "emoji":    { "type": "text", "value": "2️⃣" }
+      },
+      "tags": { "group": "numbers" },
+      "zOrder": 1
+    },
+    {
+      "id": "num_3",
+      "components": ["drag"],
+      "behaviors": [],
+      "properties": {
+        "position": { "type": "vec2", "x": 830.0, "y": 220.0 },
+        "count":    { "type": "text", "value": "3" },
+        "emoji":    { "type": "text", "value": "3️⃣" }
+      },
+      "tags": { "group": "numbers" },
+      "zOrder": 1
+    },
+    {
+      "id": "target_1",
+      "components": ["dropTarget"],
+      "behaviors": [],
+      "properties": {
+        "position":       { "type": "vec2", "x": 170.0, "y": 590.0 },
+        "constraintType": { "type": "text", "value": "propertyEquals" },
+        "source":         { "type": "text", "value": "count" },
+        "target":         { "type": "text", "value": "acceptsCount" },
+        "acceptsCount":   { "type": "text", "value": "1" },
+        "label":          { "type": "text", "value": "●" }
+      },
+      "tags": {},
+      "zOrder": 0
+    },
+    {
+      "id": "target_2",
+      "components": ["dropTarget"],
+      "behaviors": [],
+      "properties": {
+        "position":       { "type": "vec2", "x": 500.0, "y": 590.0 },
+        "constraintType": { "type": "text", "value": "propertyEquals" },
+        "source":         { "type": "text", "value": "count" },
+        "target":         { "type": "text", "value": "acceptsCount" },
+        "acceptsCount":   { "type": "text", "value": "2" },
+        "label":          { "type": "text", "value": "● ●" }
+      },
+      "tags": {},
+      "zOrder": 0
+    },
+    {
+      "id": "target_3",
+      "components": ["dropTarget"],
+      "behaviors": [],
+      "properties": {
+        "position":       { "type": "vec2", "x": 830.0, "y": 590.0 },
+        "constraintType": { "type": "text", "value": "propertyEquals" },
+        "source":         { "type": "text", "value": "count" },
+        "target":         { "type": "text", "value": "acceptsCount" },
+        "acceptsCount":   { "type": "text", "value": "3" },
+        "label":          { "type": "text", "value": "● ● ●" }
+      },
+      "tags": {},
+      "zOrder": 0
+    }
+  ],
+  "objectives": [
+    {
+      "id": "obj1",
+      "type": "allMatched",
+      "config": { "group": "numbers" },
+      "requires": null
+    }
+  ],
+  "behaviors": [
+    {
+      "behaviorRef": {
+        "type": "audioPrompt",
+        "config": { "on": "sceneStarted", "text": "Положи цифру к нужному количеству точек" }
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": { "type": "snapToTarget", "config": {} },
+      "entityId": null
+    },
+    {
+      "behaviorRef": { "type": "progressTracker", "config": {} },
+      "entityId": null
+    },
+    {
+      "behaviorRef": { "type": "adaptiveHint", "config": {} },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "playSoundOnEvent",
+        "config": { "on": "sceneCompleted", "sound": "complete" }
+      },
+      "entityId": null
+    }
+  ],
+  "fieldPolicies": {},
+  "idleTimeout": 25,
+  "onIdle": "HINT",
+  "metadata": {},
+  "meta": {
+    "title": "Цифры и точки",
+    "description": "Перетащи цифру к группе с нужным количеством точек",
+    "ageMin": 3,
+    "ageMax": 6,
+    "version": 1,
+    "tags": ["numbers", "counting", "matching"],
+    "skills": [
+      "counting",
+      "numbers",
+      "matching",
+      "hand_eye_coordination",
+      "task_completion"
+    ]
+  }
+}

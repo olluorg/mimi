@@ -44,7 +44,7 @@
       "zOrder": 0
     },
     {
-      "id": "red_target",
+      "id": "red_basket",
       "components": ["dropTarget"],
       "behaviors": [],
       "properties": {
@@ -53,13 +53,13 @@
         "source": { "type": "text", "value": "color" },
         "target": { "type": "text", "value": "color" },
         "color": { "type": "text", "value": "red" },
-        "emoji": { "type": "text", "value": "🟥" }
+        "emoji": { "type": "text", "value": "🧺" }
       },
       "tags": {},
       "zOrder": 0
     },
     {
-      "id": "blue_target",
+      "id": "blue_basket",
       "components": ["dropTarget"],
       "behaviors": [],
       "properties": {
@@ -68,13 +68,13 @@
         "source": { "type": "text", "value": "color" },
         "target": { "type": "text", "value": "color" },
         "color": { "type": "text", "value": "blue" },
-        "emoji": { "type": "text", "value": "🟦" }
+        "emoji": { "type": "text", "value": "🧺" }
       },
       "tags": {},
       "zOrder": 0
     },
     {
-      "id": "yellow_target",
+      "id": "yellow_basket",
       "components": ["dropTarget"],
       "behaviors": [],
       "properties": {
@@ -83,7 +83,7 @@
         "source": { "type": "text", "value": "color" },
         "target": { "type": "text", "value": "color" },
         "color": { "type": "text", "value": "yellow" },
-        "emoji": { "type": "text", "value": "🟨" }
+        "emoji": { "type": "text", "value": "🧺" }
       },
       "tags": {},
       "zOrder": 0

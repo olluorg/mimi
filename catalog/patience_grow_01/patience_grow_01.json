@@ -1,0 +1,107 @@
+{
+  "sceneId": "patience_grow_01",
+  "entities": [
+    {
+      "id": "plant",
+      "components": ["tap"],
+      "behaviors": [],
+      "properties": {
+        "position": { "type": "vec2", "x": 500.0, "y": 380.0 },
+        "width":    { "type": "num",  "value": 130.0 },
+        "height":   { "type": "num",  "value": 130.0 },
+        "ready":    { "type": "text", "value": "true" },
+        "emoji":    { "type": "text", "value": "🌱" }
+      },
+      "tags": { "group": "plant" },
+      "zOrder": 1
+    }
+  ],
+  "objectives": [
+    {
+      "id": "obj1",
+      "type": "entitySelected",
+      "config": { "property": "ready", "value": "true" },
+      "requires": null
+    }
+  ],
+  "behaviors": [
+    {
+      "behaviorRef": {
+        "type": "propertySelectionValidator",
+        "config": { "property": "ready", "expected": "true" }
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": { "type": "progressTracker", "config": {} },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "playSoundOnEvent",
+        "config": { "on": "sceneCompleted", "sound": "complete" }
+      },
+      "entityId": null
+    }
+  ],
+  "fieldPolicies": {},
+  "stateMachine": {
+    "initialState": "seed",
+    "states": [
+      {
+        "id": "seed",
+        "durationMs": 1800,
+        "inputEnabled": false,
+        "onEnter": [
+          { "type": "setEntityState", "entityId": "plant", "state": "INACTIVE" },
+          { "type": "setProperty", "entityId": "plant", "field": "emoji",
+            "value": { "type": "text", "value": "🌱" } },
+          { "type": "triggerFeedback", "feedbackType": "tts",
+            "params": { "text": "Подожди, растение растёт..." } }
+        ]
+      },
+      {
+        "id": "sprout",
+        "durationMs": 1800,
+        "inputEnabled": false,
+        "onEnter": [
+          { "type": "setEntityState", "entityId": "plant", "state": "INACTIVE" },
+          { "type": "setProperty", "entityId": "plant", "field": "emoji",
+            "value": { "type": "text", "value": "🌿" } }
+        ]
+      },
+      {
+        "id": "bloom",
+        "inputEnabled": true,
+        "onEnter": [
+          { "type": "setProperty", "entityId": "plant", "field": "emoji",
+            "value": { "type": "text", "value": "🌸" } },
+          { "type": "setEntityState", "entityId": "plant", "state": "ACTIVE" },
+          { "type": "triggerFeedback", "feedbackType": "tts",
+            "params": { "text": "Расцвело! Нажми на цветок!" } }
+        ]
+      }
+    ],
+    "transitions": [
+      { "from": "seed",   "to": "sprout", "afterMs": 1800 },
+      { "from": "sprout", "to": "bloom",  "afterMs": 1800 }
+    ]
+  },
+  "idleTimeout": 30,
+  "onIdle": "NONE",
+  "metadata": {},
+  "meta": {
+    "title": "Вырасти цветок",
+    "description": "Подожди, пока растение вырастет, и нажми на цветок",
+    "ageMin": 2,
+    "ageMax": 5,
+    "version": 1,
+    "tags": ["patience", "waiting", "attention"],
+    "skills": [
+      "patience",
+      "impulse_control",
+      "sustained_attention",
+      "task_completion"
+    ]
+  }
+}

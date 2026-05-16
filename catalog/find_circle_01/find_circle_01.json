@@ -1,0 +1,111 @@
+{
+  "sceneId": "find_circle_01",
+  "entities": [
+    {
+      "id": "shape_circle",
+      "components": ["tap"],
+      "behaviors": [],
+      "properties": {
+        "position": { "type": "vec2", "x": 250.0, "y": 280.0 },
+        "shape": { "type": "text", "value": "circle" },
+        "emoji": { "type": "text", "value": "🔵" }
+      },
+      "tags": { "group": "choices" },
+      "zOrder": 0
+    },
+    {
+      "id": "shape_triangle",
+      "components": ["tap"],
+      "behaviors": [],
+      "properties": {
+        "position": { "type": "vec2", "x": 700.0, "y": 280.0 },
+        "shape": { "type": "text", "value": "triangle" },
+        "emoji": { "type": "text", "value": "🔺" }
+      },
+      "tags": { "group": "choices" },
+      "zOrder": 0
+    },
+    {
+      "id": "shape_square",
+      "components": ["tap"],
+      "behaviors": [],
+      "properties": {
+        "position": { "type": "vec2", "x": 250.0, "y": 580.0 },
+        "shape": { "type": "text", "value": "square" },
+        "emoji": { "type": "text", "value": "🟦" }
+      },
+      "tags": { "group": "choices" },
+      "zOrder": 0
+    },
+    {
+      "id": "shape_star",
+      "components": ["tap"],
+      "behaviors": [],
+      "properties": {
+        "position": { "type": "vec2", "x": 700.0, "y": 580.0 },
+        "shape": { "type": "text", "value": "star" },
+        "emoji": { "type": "text", "value": "⭐" }
+      },
+      "tags": { "group": "choices" },
+      "zOrder": 0
+    }
+  ],
+  "objectives": [
+    {
+      "id": "obj1",
+      "type": "entitySelected",
+      "config": { "property": "shape", "value": "circle" },
+      "requires": null
+    }
+  ],
+  "behaviors": [
+    {
+      "behaviorRef": {
+        "type": "audioPrompt",
+        "config": { "on": "sceneStarted", "text": "Нажми на круг" }
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "propertySelectionValidator",
+        "config": { "property": "shape", "expected": "circle" }
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": { "type": "progressTracker", "config": {} },
+      "entityId": null
+    },
+    {
+      "behaviorRef": { "type": "adaptiveHint", "config": {} },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "playSoundOnEvent",
+        "config": { "on": "sceneCompleted", "sound": "complete" }
+      },
+      "entityId": null
+    }
+  ],
+  "fieldPolicies": {},
+  "idleTimeout": 12,
+  "onIdle": "HINT",
+  "metadata": {},
+  "meta": {
+    "title": "Найди круг",
+    "description": "Нажми на круг среди других фигур",
+    "ageMin": 2,
+    "ageMax": 5,
+    "version": 1,
+    "tags": ["shapes", "attention"],
+    "skills": [
+      "shape_recognition",
+      "receptive_speech",
+      "selective_attention",
+      "visual_attention",
+      "task_completion"
+    ]
+  }
+}

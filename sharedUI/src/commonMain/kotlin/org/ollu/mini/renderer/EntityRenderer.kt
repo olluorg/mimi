@@ -5,6 +5,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
@@ -15,6 +16,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.layout
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -54,14 +56,17 @@ fun EntityRenderer(
     val isDragging   = dragOverridePos != null
     val isDragTarget = entity.hasComponent("dropTarget")
     val cardState    = entity.text("cardState")
+    val entityColor  = entity.text("color")
     val emoji        = when (cardState) {
         "hidden" -> "?"
         "revealed", "matched" -> entity.text("face") ?: entity.text("emoji")
         else -> entity.text("emoji")
     }
+    val label        = entity.text("label")
     val screenPos    = mapper.logicalToScreen(pos)
 
     val bgColor = when {
+        isDragTarget && entityColor != null -> targetTint(entityColor).copy(alpha = 0.22f)
         isDragTarget -> Color(0x33795548)          // semi-transparent brown fill
         cardState == "hidden"                          -> Color(0xFF6D8EC7)
         cardState == "revealed"                        -> Color(0xFFFFF3C4)
@@ -72,6 +77,7 @@ fun EntityRenderer(
         else -> return
     }
     val borderColor = when {
+        isDragTarget && entityColor != null -> targetTint(entityColor)
         isDragTarget -> Color(0xFF795548)
         entity.state == EntityLifecycleState.TENTATIVE -> Color(0xFF388E3C)
         entity.state == EntityLifecycleState.LOCKED    -> Color(0xFF90A4AE)
@@ -108,10 +114,25 @@ fun EntityRenderer(
             .then(if (onTap != null) Modifier.clickable(onClick = onTap) else Modifier),
         contentAlignment = Alignment.Center
     ) {
-        if (emoji != null) {
+        if (emoji != null && label != null) {
+            Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                Text(emoji, fontSize = if (isDragTarget) 42.sp else 34.sp)
+                Text(label, color = Color.White, fontSize = 12.sp, textAlign = TextAlign.Center)
+            }
+        } else if (emoji != null) {
             Text(emoji, fontSize = if (isDragTarget) 48.sp else 40.sp)
+        } else if (label != null) {
+            Text(label, color = Color.White, fontSize = 14.sp, textAlign = TextAlign.Center)
         } else {
             Text(entity.id, color = Color.White, fontSize = 12.sp)
         }
     }
+}
+
+private fun targetTint(color: String): Color = when (color) {
+    "red"    -> Color(0xFFE53935)
+    "blue"   -> Color(0xFF1E88E5)
+    "yellow" -> Color(0xFFFBC02D)
+    "green"  -> Color(0xFF43A047)
+    else     -> Color(0xFF795548)
 }

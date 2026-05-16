@@ -96,6 +96,46 @@
     {
       "id": "remember_while_playing_01",
       "url": "https://olluorg.github.io/mimi/remember_while_playing_01/remember_while_playing_01.json"
+    },
+    {
+      "id": "reaction_tap_01",
+      "url": "https://olluorg.github.io/mimi/reaction_tap_01/reaction_tap_01.json"
+    },
+    {
+      "id": "connect_animals_food_01",
+      "url": "https://olluorg.github.io/mimi/connect_animals_food_01/connect_animals_food_01.json"
+    },
+    {
+      "id": "maze_mouse_cheese_01",
+      "url": "https://olluorg.github.io/mimi/maze_mouse_cheese_01/maze_mouse_cheese_01.json"
+    },
+    {
+      "id": "count_to_5_01",
+      "url": "https://olluorg.github.io/mimi/count_to_5_01/count_to_5_01.json"
+    },
+    {
+      "id": "find_letter_A_01",
+      "url": "https://olluorg.github.io/mimi/find_letter_A_01/find_letter_A_01.json"
+    },
+    {
+      "id": "find_circle_01",
+      "url": "https://olluorg.github.io/mimi/find_circle_01/find_circle_01.json"
+    },
+    {
+      "id": "odd_one_out_01",
+      "url": "https://olluorg.github.io/mimi/odd_one_out_01/odd_one_out_01.json"
+    },
+    {
+      "id": "sort_big_small_01",
+      "url": "https://olluorg.github.io/mimi/sort_big_small_01/sort_big_small_01.json"
+    },
+    {
+      "id": "patience_grow_01",
+      "url": "https://olluorg.github.io/mimi/patience_grow_01/patience_grow_01.json"
+    },
+    {
+      "id": "match_number_count_01",
+      "url": "https://olluorg.github.io/mimi/match_number_count_01/match_number_count_01.json"
     }
   ]
 }

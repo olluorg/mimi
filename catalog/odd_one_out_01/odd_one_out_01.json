@@ -1,0 +1,111 @@
+{
+  "sceneId": "odd_one_out_01",
+  "entities": [
+    {
+      "id": "cat",
+      "components": ["tap"],
+      "behaviors": [],
+      "properties": {
+        "position": { "type": "vec2", "x": 175.0, "y": 400.0 },
+        "category": { "type": "text", "value": "animal" },
+        "emoji": { "type": "text", "value": "🐱" }
+      },
+      "tags": { "group": "choices" },
+      "zOrder": 0
+    },
+    {
+      "id": "dog",
+      "components": ["tap"],
+      "behaviors": [],
+      "properties": {
+        "position": { "type": "vec2", "x": 400.0, "y": 400.0 },
+        "category": { "type": "text", "value": "animal" },
+        "emoji": { "type": "text", "value": "🐶" }
+      },
+      "tags": { "group": "choices" },
+      "zOrder": 0
+    },
+    {
+      "id": "rabbit",
+      "components": ["tap"],
+      "behaviors": [],
+      "properties": {
+        "position": { "type": "vec2", "x": 625.0, "y": 400.0 },
+        "category": { "type": "text", "value": "animal" },
+        "emoji": { "type": "text", "value": "🐰" }
+      },
+      "tags": { "group": "choices" },
+      "zOrder": 0
+    },
+    {
+      "id": "car",
+      "components": ["tap"],
+      "behaviors": [],
+      "properties": {
+        "position": { "type": "vec2", "x": 850.0, "y": 400.0 },
+        "category": { "type": "text", "value": "vehicle" },
+        "emoji": { "type": "text", "value": "🚗" }
+      },
+      "tags": { "group": "choices" },
+      "zOrder": 0
+    }
+  ],
+  "objectives": [
+    {
+      "id": "obj1",
+      "type": "entitySelected",
+      "config": { "property": "category", "value": "vehicle" },
+      "requires": null
+    }
+  ],
+  "behaviors": [
+    {
+      "behaviorRef": {
+        "type": "audioPrompt",
+        "config": { "on": "sceneStarted", "text": "Что здесь лишнее?" }
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "propertySelectionValidator",
+        "config": { "property": "category", "expected": "vehicle" }
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": { "type": "progressTracker", "config": {} },
+      "entityId": null
+    },
+    {
+      "behaviorRef": { "type": "adaptiveHint", "config": {} },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "playSoundOnEvent",
+        "config": { "on": "sceneCompleted", "sound": "complete" }
+      },
+      "entityId": null
+    }
+  ],
+  "fieldPolicies": {},
+  "idleTimeout": 15,
+  "onIdle": "HINT",
+  "metadata": {},
+  "meta": {
+    "title": "Что лишнее?",
+    "description": "Найди предмет, который не подходит к остальным",
+    "ageMin": 3,
+    "ageMax": 6,
+    "version": 1,
+    "tags": ["categories", "logic"],
+    "skills": [
+      "problem_solving",
+      "categorization",
+      "selective_attention",
+      "visual_attention",
+      "task_completion"
+    ]
+  }
+}

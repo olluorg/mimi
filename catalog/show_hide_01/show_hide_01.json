@@ -2,11 +2,44 @@
   "sceneId": "show_hide_01",
   "entities": [
     {
-      "id": "seen_apple",
+      "id": "display_apple",
+      "components": [],
+      "behaviors": [],
+      "properties": {
+        "position": { "type": "vec2", "x": 280.0, "y": 350.0 },
+        "emoji": { "type": "text", "value": "🍎" }
+      },
+      "tags": { "group": "display" },
+      "zOrder": 0
+    },
+    {
+      "id": "display_car",
+      "components": [],
+      "behaviors": [],
+      "properties": {
+        "position": { "type": "vec2", "x": 500.0, "y": 350.0 },
+        "emoji": { "type": "text", "value": "🚗" }
+      },
+      "tags": { "group": "display" },
+      "zOrder": 0
+    },
+    {
+      "id": "display_star",
+      "components": [],
+      "behaviors": [],
+      "properties": {
+        "position": { "type": "vec2", "x": 720.0, "y": 350.0 },
+        "emoji": { "type": "text", "value": "⭐" }
+      },
+      "tags": { "group": "display" },
+      "zOrder": 0
+    },
+    {
+      "id": "choice_apple",
       "components": ["tap"],
       "behaviors": [],
       "properties": {
-        "position": { "type": "vec2", "x": 180.0, "y": 390.0 },
+        "position": { "type": "vec2", "x": 200.0, "y": 560.0 },
         "seen": { "type": "text", "value": "true" },
         "emoji": { "type": "text", "value": "🍎" }
       },
@@ -14,11 +47,11 @@
       "zOrder": 0
     },
     {
-      "id": "seen_car",
+      "id": "choice_car",
       "components": ["tap"],
       "behaviors": [],
       "properties": {
-        "position": { "type": "vec2", "x": 380.0, "y": 390.0 },
+        "position": { "type": "vec2", "x": 400.0, "y": 560.0 },
         "seen": { "type": "text", "value": "true" },
         "emoji": { "type": "text", "value": "🚗" }
       },
@@ -26,11 +59,11 @@
       "zOrder": 0
     },
     {
-      "id": "seen_star",
+      "id": "choice_star",
       "components": ["tap"],
       "behaviors": [],
       "properties": {
-        "position": { "type": "vec2", "x": 580.0, "y": 390.0 },
+        "position": { "type": "vec2", "x": 600.0, "y": 560.0 },
         "seen": { "type": "text", "value": "true" },
         "emoji": { "type": "text", "value": "⭐" }
       },
@@ -38,11 +71,11 @@
       "zOrder": 0
     },
     {
-      "id": "distractor_ball",
+      "id": "choice_ball",
       "components": ["tap"],
       "behaviors": [],
       "properties": {
-        "position": { "type": "vec2", "x": 780.0, "y": 390.0 },
+        "position": { "type": "vec2", "x": 800.0, "y": 560.0 },
         "seen": { "type": "text", "value": "false" },
         "emoji": { "type": "text", "value": "⚽" }
       },
@@ -71,6 +104,38 @@
     { "behaviorRef": { "type": "playSoundOnEvent", "config": { "on": "sceneCompleted", "sound": "complete" } }, "entityId": null }
   ],
   "fieldPolicies": {},
+  "stateMachine": {
+    "initialState": "show",
+    "states": [
+      {
+        "id": "show",
+        "durationMs": 2500,
+        "inputEnabled": false,
+        "onEnter": [
+          { "type": "setEntityState", "entityId": "choice_apple", "state": "INACTIVE" },
+          { "type": "setEntityState", "entityId": "choice_car", "state": "INACTIVE" },
+          { "type": "setEntityState", "entityId": "choice_star", "state": "INACTIVE" },
+          { "type": "setEntityState", "entityId": "choice_ball", "state": "INACTIVE" }
+        ]
+      },
+      {
+        "id": "recall",
+        "inputEnabled": true,
+        "onEnter": [
+          { "type": "setEntityState", "entityId": "display_apple", "state": "INACTIVE" },
+          { "type": "setEntityState", "entityId": "display_car", "state": "INACTIVE" },
+          { "type": "setEntityState", "entityId": "display_star", "state": "INACTIVE" },
+          { "type": "setEntityState", "entityId": "choice_apple", "state": "ACTIVE" },
+          { "type": "setEntityState", "entityId": "choice_car", "state": "ACTIVE" },
+          { "type": "setEntityState", "entityId": "choice_star", "state": "ACTIVE" },
+          { "type": "setEntityState", "entityId": "choice_ball", "state": "ACTIVE" }
+        ]
+      }
+    ],
+    "transitions": [
+      { "from": "show", "to": "recall", "afterMs": 2500 }
+    ]
+  },
   "idleTimeout": 20,
   "onIdle": "HINT",
   "metadata": { "difficulty": "easy" },

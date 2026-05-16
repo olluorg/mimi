@@ -58,7 +58,10 @@ private val skillLabel = mapOf(
     "task_completion"       to "Завершение",
     "turn_taking"           to "Очерёдность",
     "patience"              to "Терпение",
-    "impulse_control"       to "Контроль импульсов"
+    "impulse_control"       to "Контроль импульсов",
+    "reaction_speed"        to "Реакция",
+    "visual_planning"       to "Планирование",
+    "inhibitory_control"    to "Торможение"
 )
 
 private val skillColor = mapOf(
@@ -94,7 +97,10 @@ private val skillColor = mapOf(
     "task_completion"       to Color(0xFFFFB300),
     "turn_taking"           to Color(0xFFFFB300),
     "patience"              to Color(0xFFFFB300),
-    "impulse_control"       to Color(0xFFFFB300)
+    "impulse_control"       to Color(0xFFFFB300),
+    "reaction_speed"        to Color(0xFFEF5350),
+    "visual_planning"       to Color(0xFF9C7BB8),
+    "inhibitory_control"    to Color(0xFFFFB300)
 )
 
 @Composable

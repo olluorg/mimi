@@ -47,7 +47,65 @@ object SceneValidator {
             }
         }
 
+        val fsm = scene.stateMachine
+        if (fsm != null) {
+            val stateIds = fsm.states.map { it.id }
+            val stateIdSet = stateIds.toSet()
+            val duplicateStateIds = stateIds.groupBy { it }.filter { it.value.size > 1 }.keys
+            if (duplicateStateIds.isNotEmpty()) {
+                errors += "Duplicate FSM state IDs: $duplicateStateIds"
+            }
+            if (fsm.initialState !in stateIdSet) {
+                errors += "FSM initial state '${fsm.initialState}' is not declared"
+            }
+            for (transition in fsm.transitions) {
+                if (transition.from !in stateIdSet) {
+                    errors += "FSM transition references unknown from state '${transition.from}'"
+                }
+                if (transition.to !in stateIdSet) {
+                    errors += "FSM transition references unknown to state '${transition.to}'"
+                }
+                if (transition.onEvent == null && transition.afterMs == null) {
+                    errors += "FSM transition '${transition.from}' -> '${transition.to}' needs onEvent or afterMs"
+                }
+            }
+            val entityIdsWithScene = objIdSet + scene.entities.map { it.id }
+            for (state in fsm.states) {
+                validateFsmActions(state.onEnter, entityIdsWithScene, errors)
+            }
+            for (transition in fsm.transitions) {
+                validateFsmActions(transition.actions, entityIdsWithScene, errors)
+            }
+        }
+
         return if (errors.isEmpty()) ValidationResult.Valid else ValidationResult.Invalid(errors)
+    }
+
+    private fun validateFsmActions(actions: List<mimi.core.world.SceneFsmActionDefinition>, ids: Set<String>, errors: MutableList<String>) {
+        for (action in actions) {
+            val entityId = action.entityId
+            if (entityId != null && entityId !in ids && entityId != mimi.core.model.SCENE_ENTITY_ID) {
+                errors += "FSM action references unknown entity '$entityId'"
+            }
+            when (action.type) {
+                "setProperty" -> {
+                    if (action.entityId == null || action.field == null || action.value == null) {
+                        errors += "FSM setProperty action requires entityId, field, and value"
+                    }
+                }
+                "setEntityState" -> {
+                    if (action.entityId == null || action.state == null) {
+                        errors += "FSM setEntityState action requires entityId and state"
+                    }
+                }
+                "triggerFeedback" -> {
+                    if (action.feedbackType == null) {
+                        errors += "FSM triggerFeedback action requires feedbackType"
+                    }
+                }
+                else -> errors += "Unknown FSM action type '${action.type}'"
+            }
+        }
     }
 
     private fun hasPrereqCycle(scene: SceneDefinition): Boolean {

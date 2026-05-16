@@ -1,42 +1,12 @@
 {
   "sceneId": "tap_repeat_01",
   "entities": [
-    {
-      "id": "red",
-      "components": ["tap"],
-      "behaviors": [],
-      "properties": {
-        "position": { "type": "vec2", "x": 260.0, "y": 360.0 },
-        "sequenceIndex": { "type": "num", "value": 1.0 },
-        "emoji": { "type": "text", "value": "🔴" }
-      },
-      "tags": { "group": "sequence" },
-      "zOrder": 0
-    },
-    {
-      "id": "blue",
-      "components": ["tap"],
-      "behaviors": [],
-      "properties": {
-        "position": { "type": "vec2", "x": 500.0, "y": 360.0 },
-        "sequenceIndex": { "type": "num", "value": 2.0 },
-        "emoji": { "type": "text", "value": "🔵" }
-      },
-      "tags": { "group": "sequence" },
-      "zOrder": 0
-    },
-    {
-      "id": "yellow",
-      "components": ["tap"],
-      "behaviors": [],
-      "properties": {
-        "position": { "type": "vec2", "x": 740.0, "y": 360.0 },
-        "sequenceIndex": { "type": "num", "value": 3.0 },
-        "emoji": { "type": "text", "value": "🟡" }
-      },
-      "tags": { "group": "sequence" },
-      "zOrder": 0
-    }
+    { "id": "display_red", "components": [], "behaviors": [], "properties": { "position": { "type": "vec2", "x": 260.0, "y": 300.0 }, "emoji": { "type": "text", "value": "🔴" } }, "tags": { "group": "display" }, "zOrder": 0 },
+    { "id": "display_blue", "components": [], "behaviors": [], "properties": { "position": { "type": "vec2", "x": 500.0, "y": 300.0 }, "emoji": { "type": "text", "value": "🔵" } }, "tags": { "group": "display" }, "zOrder": 0 },
+    { "id": "display_yellow", "components": [], "behaviors": [], "properties": { "position": { "type": "vec2", "x": 740.0, "y": 300.0 }, "emoji": { "type": "text", "value": "🟡" } }, "tags": { "group": "display" }, "zOrder": 0 },
+    { "id": "red", "components": ["tap"], "behaviors": [], "properties": { "position": { "type": "vec2", "x": 260.0, "y": 560.0 }, "sequenceIndex": { "type": "num", "value": 1.0 }, "emoji": { "type": "text", "value": "🔴" } }, "tags": { "group": "sequence" }, "zOrder": 0 },
+    { "id": "yellow", "components": ["tap"], "behaviors": [], "properties": { "position": { "type": "vec2", "x": 500.0, "y": 560.0 }, "sequenceIndex": { "type": "num", "value": 3.0 }, "emoji": { "type": "text", "value": "🟡" } }, "tags": { "group": "sequence" }, "zOrder": 0 },
+    { "id": "blue", "components": ["tap"], "behaviors": [], "properties": { "position": { "type": "vec2", "x": 740.0, "y": 560.0 }, "sequenceIndex": { "type": "num", "value": 2.0 }, "emoji": { "type": "text", "value": "🔵" } }, "tags": { "group": "sequence" }, "zOrder": 0 }
   ],
   "objectives": [
     { "id": "obj1", "type": "sequenceCompleted", "config": { "group": "sequence" }, "requires": null }
@@ -48,12 +18,42 @@
     { "behaviorRef": { "type": "playSoundOnEvent", "config": { "on": "sceneCompleted", "sound": "complete" } }, "entityId": null }
   ],
   "fieldPolicies": {},
+  "stateMachine": {
+    "initialState": "show",
+    "states": [
+      {
+        "id": "show",
+        "durationMs": 2200,
+        "inputEnabled": false,
+        "onEnter": [
+          { "type": "setEntityState", "entityId": "red", "state": "INACTIVE" },
+          { "type": "setEntityState", "entityId": "yellow", "state": "INACTIVE" },
+          { "type": "setEntityState", "entityId": "blue", "state": "INACTIVE" }
+        ]
+      },
+      {
+        "id": "recall",
+        "inputEnabled": true,
+        "onEnter": [
+          { "type": "setEntityState", "entityId": "display_red", "state": "INACTIVE" },
+          { "type": "setEntityState", "entityId": "display_blue", "state": "INACTIVE" },
+          { "type": "setEntityState", "entityId": "display_yellow", "state": "INACTIVE" },
+          { "type": "setEntityState", "entityId": "red", "state": "ACTIVE" },
+          { "type": "setEntityState", "entityId": "yellow", "state": "ACTIVE" },
+          { "type": "setEntityState", "entityId": "blue", "state": "ACTIVE" }
+        ]
+      }
+    ],
+    "transitions": [
+      { "from": "show", "to": "recall", "afterMs": 2200 }
+    ]
+  },
   "idleTimeout": 15,
   "onIdle": "HINT",
   "metadata": { "difficulty": "easy" },
   "meta": {
     "title": "Tap Repeat",
-    "description": "Repeat the color sequence",
+    "description": "Watch, hide, then repeat the color sequence",
     "ageMin": 3,
     "ageMax": 6,
     "version": 1,
