@@ -456,6 +456,9 @@
       "impulse_control",
       "task_completion"
     ],
-    "icon": "🃏"
+    "icon": "🃏",
+    "requires": [
+      "memory_cards_01"
+    ]
   }
 }

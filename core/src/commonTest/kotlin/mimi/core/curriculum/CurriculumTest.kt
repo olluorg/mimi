@@ -51,6 +51,41 @@ class CurriculumTest {
     }
 
     @Test
+    fun plannerBlocksLockedScenes() {
+        val context = CurriculumContext(
+            childState = ChildSkillState(
+                childId = "child_1",
+                skills = mapOf("memory" to 0.8)
+            ),
+            availableScenes = listOf(
+                SceneCatalogEntry("memory_cards_01", mapOf("memory" to 1.0)),
+                SceneCatalogEntry("memory_cards_02", mapOf("memory" to 1.0), requires = listOf("memory_cards_01"))
+            ),
+            completedSceneIds = emptySet()
+        )
+        // _02 is locked, so only _01 is eligible
+        assertEquals("memory_cards_01", BalancedSkillPlanner().selectNextScene(context))
+    }
+
+    @Test
+    fun plannerUnlocksSceneAfterPrereqCompleted() {
+        val context = CurriculumContext(
+            childState = ChildSkillState(
+                childId = "child_1",
+                skills = mapOf("memory" to 0.8)
+            ),
+            availableScenes = listOf(
+                SceneCatalogEntry("memory_cards_01", mapOf("memory" to 1.0)),
+                SceneCatalogEntry("memory_cards_02", mapOf("memory" to 1.0), requires = listOf("memory_cards_01"))
+            ),
+            recentSceneIds = listOf("memory_cards_01"),
+            completedSceneIds = setOf("memory_cards_01")
+        )
+        // _01 is recent (excluded from candidates), _02 is now unlocked
+        assertEquals("memory_cards_02", BalancedSkillPlanner().selectNextScene(context))
+    }
+
+    @Test
     fun plannerUsesDeterministicReinforcementCadence() {
         val context = CurriculumContext(
             childState = ChildSkillState(

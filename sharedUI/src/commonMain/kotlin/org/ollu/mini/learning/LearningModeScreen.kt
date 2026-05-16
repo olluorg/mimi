@@ -148,16 +148,18 @@ private fun selectNextEntry(
     progressRepository: ProgressRepository,
     skillState: ChildSkillState
 ): CatalogEntry? {
+    val completedIds = progressRepository.getCompletedSceneIds()
     val plannerEntries = entries
         .filter { it.skills.isNotEmpty() }
-        .map { PlannerSceneEntry(it.id, sceneSkillWeights(it.skills)) }
+        .map { PlannerSceneEntry(it.id, sceneSkillWeights(it.skills), it.requires) }
 
     val nextId = BalancedSkillPlanner().selectNextScene(
         CurriculumContext(
             childState = skillState,
             availableScenes = plannerEntries,
-            recentSceneIds = progressRepository.getCompletedSceneIds().toList(),
-            completedSceneCount = progressRepository.getCompletedSceneIds().size
+            recentSceneIds = completedIds.toList(),
+            completedSceneCount = completedIds.size,
+            completedSceneIds = completedIds
         )
     ) ?: return entries.firstOrNull()
 

@@ -402,6 +402,9 @@
       "visual_attention",
       "task_completion"
     ],
-    "icon": "🦁"
+    "icon": "🦁",
+    "requires": [
+      "sort_big_small_01"
+    ]
   }
 }

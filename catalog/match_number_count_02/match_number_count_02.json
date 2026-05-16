@@ -265,6 +265,9 @@
       "hand_eye_coordination",
       "task_completion"
     ],
-    "icon": "6️⃣"
+    "icon": "6️⃣",
+    "requires": [
+      "match_number_count_01"
+    ]
   }
 }

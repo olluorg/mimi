@@ -123,7 +123,8 @@ class DefaultSkillMapper(
 @Serializable
 data class SceneCatalogEntry(
     val sceneId: SceneId,
-    val skillWeights: Map<SkillId, Double>
+    val skillWeights: Map<SkillId, Double>,
+    val requires: List<SceneId> = emptyList()
 ) {
     fun normalizedWeights(): Map<SkillId, Double> =
         skillWeights
@@ -135,7 +136,8 @@ data class CurriculumContext(
     val childState: ChildSkillState,
     val availableScenes: List<SceneCatalogEntry>,
     val recentSceneIds: List<SceneId> = emptyList(),
-    val completedSceneCount: Int = 0
+    val completedSceneCount: Int = 0,
+    val completedSceneIds: Set<SceneId> = emptySet()
 )
 
 interface CurriculumPlanner {
@@ -150,9 +152,13 @@ class BalancedSkillPlanner(
     override fun selectNextScene(context: CurriculumContext): SceneId? {
         if (context.availableScenes.isEmpty()) return null
 
-        val candidates = context.availableScenes
-            .filterNot { it.sceneId in context.recentSceneIds.takeLast(recentWindow) }
+        val unlocked = context.availableScenes
+            .filter { entry -> entry.requires.all { it in context.completedSceneIds } }
             .ifEmpty { context.availableScenes }
+
+        val candidates = unlocked
+            .filterNot { it.sceneId in context.recentSceneIds.takeLast(recentWindow) }
+            .ifEmpty { unlocked }
 
         val mode = if (
             reinforcementEvery > 0 &&

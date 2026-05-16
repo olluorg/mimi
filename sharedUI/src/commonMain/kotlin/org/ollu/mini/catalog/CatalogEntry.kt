@@ -29,7 +29,8 @@ data class SceneMeta(
     val version:     Int          = 1,
     val tags:        List<String> = emptyList(),
     val skills:      List<String> = emptyList(),
-    val icon:        String       = ""
+    val icon:        String       = "",
+    val requires:    List<String> = emptyList()
 )
 
 @Serializable
@@ -49,7 +50,8 @@ data class CatalogEntry(
     val ageMin:      Int,
     val ageMax:      Int,
     val skills:      List<String> = emptyList(),
-    val icon:        String       = ""
+    val icon:        String       = "",
+    val requires:    List<String> = emptyList()
 )
 
 const val DEFAULT_CATALOG_URL = "https://olluorg.github.io/mimi/catalog.json"
