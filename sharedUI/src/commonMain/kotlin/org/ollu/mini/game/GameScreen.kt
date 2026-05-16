@@ -32,6 +32,7 @@ import org.ollu.mini.renderer.SceneRenderer
 
 data class CompletionAction(
     val label:   String,
+    val icon:    String = "",
     val primary: Boolean = false,
     val onClick: () -> Unit
 )
@@ -77,7 +78,7 @@ fun GameScreen(
                 TextButton(
                     onClick  = onBack,
                     modifier = Modifier.align(Alignment.TopStart).padding(8.dp)
-                ) { Text("← Back", color = Color(0xFF666666)) }
+                ) { Text("⬅  Назад", color = Color(0xFF666666)) }
             }
             Column(
                 modifier            = Modifier.align(Alignment.Center).padding(32.dp),
@@ -111,7 +112,7 @@ fun GameScreen(
     val snapshot       by session!!.worldState.collectAsState()
     val hintedEntityId by hintChannel.hintedEntityId.collectAsState()
 
-    val isComplete = scene.objectives.any { obj ->
+    val isComplete = snapshot.allLevelsComplete() || scene.objectives.any { obj ->
         snapshot.getObjectiveState(obj.id) == ObjectiveState.LOCKED_COMPLETE
     }
 
@@ -136,7 +137,7 @@ fun GameScreen(
             TextButton(
                 onClick  = onBack,
                 modifier = Modifier.align(Alignment.TopStart).padding(8.dp)
-            ) { Text("← Назад", color = Color(0xFF666666)) }
+            ) { Text("⬅  Назад", color = Color(0xFF666666)) }
         }
 
         val totalLevels  = snapshot.totalLevels()
@@ -193,12 +194,24 @@ fun GameScreen(
                                                 onClick = action.onClick,
                                                 colors  = ButtonDefaults.buttonColors(containerColor = Color(0xFF2A9D8F)),
                                                 modifier = Modifier.fillMaxWidth()
-                                            ) { Text(action.label) }
+                                            ) {
+                                                if (action.icon.isNotBlank()) {
+                                                    Text(action.icon, fontSize = 18.sp)
+                                                    Spacer(Modifier.width(6.dp))
+                                                }
+                                                Text(action.label)
+                                            }
                                         } else {
                                             OutlinedButton(
                                                 onClick  = action.onClick,
                                                 modifier = Modifier.fillMaxWidth()
-                                            ) { Text(action.label) }
+                                            ) {
+                                                if (action.icon.isNotBlank()) {
+                                                    Text(action.icon, fontSize = 18.sp)
+                                                    Spacer(Modifier.width(6.dp))
+                                                }
+                                                Text(action.label)
+                                            }
                                         }
                                     }
                                 }

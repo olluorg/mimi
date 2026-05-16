@@ -22,6 +22,7 @@ interface WorldSnapshot {
     fun idleTicks(): Long        = getCounter("idleTicks")
     fun mistakes(): Long         = getCounter("mistakes")
     fun matches(): Long          = getCounter("matches")
-    fun currentLevel(): Int      = getNum(SCENE_ENTITY_ID, "level")?.toInt() ?: 0
-    fun totalLevels(): Int       = getNum(SCENE_ENTITY_ID, "totalLevels")?.toInt() ?: 1
+    fun currentLevel(): Int       = getNum(SCENE_ENTITY_ID, "level")?.toInt() ?: 0
+    fun totalLevels(): Int        = getNum(SCENE_ENTITY_ID, "totalLevels")?.toInt() ?: 1
+    fun allLevelsComplete(): Boolean = getNum(SCENE_ENTITY_ID, "allLevelsComplete")?.toInt() == 1
 }

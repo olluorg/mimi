@@ -157,6 +157,19 @@ class EngineSession(
         val fbCtx = FeedbackContext(world.snapshot(), tickCount)
         feedback.forEach { feedbackRegistry.dispatch(it.feedbackType, it.params, fbCtx) }
 
+        // Mark the scene fully complete so the UI can show the completion overlay
+        if (event is GameEvent.SceneCompleted) {
+            world = world.apply(listOf(Command.SetProperty(
+                target   = SCENE_ENTITY_ID,
+                field    = "allLevelsComplete",
+                value    = PropertyValue.Num(1.0),
+                priority = 500,
+                source   = "engine",
+                tick     = tickCount
+            )))
+            _worldState.value = world.snapshot()
+        }
+
         applyFsmTransitions(event)
     }
 
