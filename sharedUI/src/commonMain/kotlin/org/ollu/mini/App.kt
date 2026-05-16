@@ -1,6 +1,7 @@
 package org.ollu.mini
 
 import androidx.compose.runtime.*
+import kotlinx.coroutines.launch
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -11,14 +12,21 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import org.ollu.mini.catalog.CatalogEntry
+import org.ollu.mini.catalog.SceneRepository
 import mimi.core.world.SceneDefinition
 import org.ollu.mini.catalog.CatalogScreen
+import org.ollu.mini.game.CompletionAction
 import org.ollu.mini.game.GameScreen
 import org.ollu.mini.learning.LearningModeScreen
 import org.ollu.mini.learning.applyLearningSceneCompletion
 import org.ollu.mini.progress.ProgressRepository
 import org.ollu.mini.progress.ProgressScreen
 import org.ollu.mini.theme.AppTheme
+
+private fun findSimilar(current: CatalogEntry, all: List<CatalogEntry>): CatalogEntry? =
+    all.filter { it.id != current.id && it.skills.isNotEmpty() }
+        .maxByOrNull { candidate -> candidate.skills.count { it in current.skills } }
+        ?.takeIf { it.skills.any { s -> s in current.skills } }
 
 private data class SelectedScene(
     val entry: CatalogEntry,
@@ -39,7 +47,11 @@ fun App(
     onThemeChanged: @Composable (isDark: Boolean) -> Unit = {}
 ) = AppTheme(onThemeChanged) {
     val progressRepository = remember { ProgressRepository() }
-    var screen by remember { mutableStateOf<Screen>(Screen.Home) }
+    val fetchRepo          = remember { SceneRepository() }
+    var catalogEntries     by remember { mutableStateOf(emptyList<CatalogEntry>()) }
+    var screen             by remember { mutableStateOf<Screen>(Screen.Home) }
+
+    DisposableEffect(fetchRepo) { onDispose { fetchRepo.close() } }
 
     when (val s = screen) {
         is Screen.Home -> HomeScreen(
@@ -54,23 +66,52 @@ fun App(
         is Screen.FreePlay -> CatalogScreen(
             onSceneSelected    = { entry, scene -> screen = Screen.FreeGame(SelectedScene(entry, scene)) },
             progressRepository = progressRepository,
-            onBack             = { screen = Screen.Home }
+            onBack             = { screen = Screen.Home },
+            onEntriesUpdated   = { catalogEntries = it }
         )
         is Screen.Learning -> LearningModeScreen(
             progressRepository = progressRepository,
             onStartScene = { entry, scene -> screen = Screen.LearningGame(SelectedScene(entry, scene)) },
             onBack = { screen = Screen.Home }
         )
-        is Screen.FreeGame -> GameScreen(
-            scene              = s.selected.scene,
-            onBack             = { screen = Screen.FreePlay },
-            progressRepository = progressRepository
-        )
+        is Screen.FreeGame -> {
+            val scope = rememberCoroutineScope()
+            var nextSimilar by remember(s.selected.entry.id) { mutableStateOf<SelectedScene?>(null) }
+            GameScreen(
+                scene              = s.selected.scene,
+                onBack             = { screen = Screen.FreePlay },
+                progressRepository = progressRepository,
+                onCompleted        = {
+                    val similar = findSimilar(s.selected.entry, catalogEntries)
+                    if (similar != null) {
+                        scope.launch {
+                            runCatching {
+                                val def = fetchRepo.fetchScene(similar)
+                                nextSimilar = SelectedScene(similar, def)
+                            }
+                        }
+                    }
+                },
+                completionActions  = buildList {
+                    add(CompletionAction("Ещё раз", primary = true) {
+                        screen = Screen.FreeGame(s.selected)
+                    })
+                    nextSimilar?.let { next ->
+                        add(CompletionAction("Следующая похожая") {
+                            screen = Screen.FreeGame(next)
+                        })
+                    }
+                    add(CompletionAction("В каталог") { screen = Screen.FreePlay })
+                }
+            )
+        }
         is Screen.LearningGame -> GameScreen(
             scene              = s.selected.scene,
             onBack             = { screen = Screen.Learning },
             progressRepository = progressRepository,
-            completedActionText = "Следующая сцена",
+            completionActions  = listOf(
+                CompletionAction("Следующая сцена", primary = true) { screen = Screen.Learning }
+            ),
             onCompleted = {
                 val childId = progressRepository.getChildName().ifBlank { "default_child" }
                 applyLearningSceneCompletion(

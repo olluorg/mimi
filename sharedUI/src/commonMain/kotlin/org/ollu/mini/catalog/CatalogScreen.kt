@@ -108,7 +108,8 @@ fun CatalogScreen(
     catalogUrl:         String             = DEFAULT_CATALOG_URL,
     onSceneSelected:    (CatalogEntry, SceneDefinition) -> Unit,
     progressRepository: ProgressRepository? = null,
-    onBack:             (() -> Unit)? = null
+    onBack:             (() -> Unit)? = null,
+    onEntriesUpdated:   ((List<CatalogEntry>) -> Unit)? = null
 ) {
     val repo = remember { SceneRepository() }
     DisposableEffect(repo) { onDispose { repo.close() } }
@@ -122,6 +123,7 @@ fun CatalogScreen(
         repo.catalogFlow(catalogUrl).collect { state ->
             uiState      = state
             completedIds = progressRepository?.getCompletedSceneIds() ?: emptySet()
+            if (state.entries.isNotEmpty()) onEntriesUpdated?.invoke(state.entries)
         }
     }
 

@@ -29,13 +29,19 @@ import org.ollu.mini.feedback.TtsFeedbackChannel
 import org.ollu.mini.progress.ProgressRepository
 import org.ollu.mini.renderer.SceneRenderer
 
+data class CompletionAction(
+    val label:   String,
+    val primary: Boolean = false,
+    val onClick: () -> Unit
+)
+
 @Composable
 fun GameScreen(
-    scene:              SceneDefinition,
-    onBack:             (() -> Unit)? = null,
+    scene:             SceneDefinition,
+    onBack:            (() -> Unit)? = null,
     progressRepository: ProgressRepository? = null,
-    onCompleted:        (() -> Unit)? = null,
-    completedActionText: String? = null
+    onCompleted:       (() -> Unit)? = null,
+    completionActions: List<CompletionAction> = emptyList()
 ) {
     val scope = rememberCoroutineScope()
 
@@ -153,14 +159,26 @@ fun GameScreen(
                             Text("Готово", style = MaterialTheme.typography.displaySmall, color = Color(0xFF1D3557), fontWeight = FontWeight.Bold)
                             Spacer(Modifier.height(8.dp))
                             Text("Сцена завершена", style = MaterialTheme.typography.bodyLarge, color = Color(0xFF687381))
-                            if (completedActionText != null && onBack != null) {
+                            if (completionActions.isNotEmpty()) {
                                 Spacer(Modifier.height(18.dp))
-                                Button(
-                                    onClick = onBack,
-                                    colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF2A9D8F)),
+                                Column(
+                                    verticalArrangement = Arrangement.spacedBy(8.dp),
                                     modifier = Modifier.fillMaxWidth()
                                 ) {
-                                    Text(completedActionText)
+                                    completionActions.forEach { action ->
+                                        if (action.primary) {
+                                            Button(
+                                                onClick = action.onClick,
+                                                colors  = ButtonDefaults.buttonColors(containerColor = Color(0xFF2A9D8F)),
+                                                modifier = Modifier.fillMaxWidth()
+                                            ) { Text(action.label) }
+                                        } else {
+                                            OutlinedButton(
+                                                onClick  = action.onClick,
+                                                modifier = Modifier.fillMaxWidth()
+                                            ) { Text(action.label) }
+                                        }
+                                    }
                                 }
                             }
                         }
