@@ -6,6 +6,7 @@ import androidx.compose.animation.fadeIn
 import androidx.compose.animation.scaleIn
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.ui.text.font.FontWeight
@@ -136,6 +137,27 @@ fun GameScreen(
                 onClick  = onBack,
                 modifier = Modifier.align(Alignment.TopStart).padding(8.dp)
             ) { Text("← Назад", color = Color(0xFF666666)) }
+        }
+
+        val totalLevels  = snapshot.totalLevels()
+        val currentLevel = snapshot.currentLevel()
+        if (totalLevels > 1) {
+            Row(
+                modifier              = Modifier.align(Alignment.TopEnd).padding(12.dp),
+                horizontalArrangement = Arrangement.spacedBy(6.dp),
+                verticalAlignment     = Alignment.CenterVertically
+            ) {
+                repeat(totalLevels) { i ->
+                    Box(
+                        Modifier
+                            .size(if (i == currentLevel) 12.dp else 8.dp)
+                            .background(
+                                if (i <= currentLevel) Color(0xFF2A9D8F) else Color.White.copy(alpha = 0.45f),
+                                CircleShape
+                            )
+                    )
+                }
+            }
         }
 
         AnimatedVisibility(

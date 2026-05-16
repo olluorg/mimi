@@ -116,26 +116,50 @@ class DefaultWorldState(
 // ── Factory ───────────────────────────────────────────────────────────────────
 
 object DefaultWorldStateFactory {
-    fun fromScene(scene: SceneDefinition): DefaultWorldState {
+
+    fun fromScene(scene: SceneDefinition): DefaultWorldState =
+        build(
+            entities   = scene.entitiesForLevel(0),
+            objectives = scene.objectivesForLevel(0),
+            level      = 0,
+            totalLevels = if (scene.isMultiLevel) scene.levels.size else 1
+        )
+
+    fun forLevel(scene: SceneDefinition, levelIndex: Int): DefaultWorldState =
+        build(
+            entities    = scene.entitiesForLevel(levelIndex),
+            objectives  = scene.objectivesForLevel(levelIndex),
+            level       = levelIndex,
+            totalLevels = scene.levels.size
+        )
+
+    private fun build(
+        entities:    List<EntityDefinition>,
+        objectives:  List<ObjectiveDefinition>,
+        level:       Int,
+        totalLevels: Int
+    ): DefaultWorldState {
         val sceneEntity = EntitySnapshot(
             id         = SCENE_ENTITY_ID,
             components = emptyList(),
             properties = mapOf(
-                "difficulty"          to PropertyValue.Num(0.5),
-                "hintLevel"           to PropertyValue.Num(0.0),
-                "successRateWindow"   to PropertyValue.Num(1.0),
-                "idleTicks"           to PropertyValue.Num(0.0),
-                "mistakes"            to PropertyValue.Num(0.0),
-                "matches"             to PropertyValue.Num(0.0),
-                "hints"               to PropertyValue.Num(0.0)
+                "difficulty"        to PropertyValue.Num(0.5),
+                "hintLevel"         to PropertyValue.Num(0.0),
+                "successRateWindow" to PropertyValue.Num(1.0),
+                "idleTicks"         to PropertyValue.Num(0.0),
+                "mistakes"          to PropertyValue.Num(0.0),
+                "matches"           to PropertyValue.Num(0.0),
+                "hints"             to PropertyValue.Num(0.0),
+                "level"             to PropertyValue.Num(level.toDouble()),
+                "totalLevels"       to PropertyValue.Num(totalLevels.toDouble())
             ),
-            state      = EntityLifecycleState.ACTIVE,
-            tags       = emptyMap()
+            state = EntityLifecycleState.ACTIVE,
+            tags  = emptyMap()
         )
 
-        val entities = buildMap<EntityId, EntitySnapshot> {
+        val entityMap = buildMap<EntityId, EntitySnapshot> {
             put(SCENE_ENTITY_ID, sceneEntity)
-            for (def in scene.entities) {
+            for (def in entities) {
                 put(def.id, EntitySnapshot(
                     id         = def.id,
                     components = def.components,
@@ -146,8 +170,8 @@ object DefaultWorldStateFactory {
             }
         }
 
-        val objectives = scene.objectives.associate { it.id to ObjectiveState.INACTIVE }
+        val objMap = objectives.associate { it.id to ObjectiveState.INACTIVE }
 
-        return DefaultWorldState(tick = 0L, entities = entities, objectives = objectives, counters = emptyMap())
+        return DefaultWorldState(tick = 0L, entities = entityMap, objectives = objMap, counters = emptyMap())
     }
 }

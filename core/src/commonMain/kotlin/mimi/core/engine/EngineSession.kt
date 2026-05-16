@@ -34,6 +34,10 @@ class EngineSession(
     private var idleJob: Job? = null
     private var fsmTimerJob: Job? = null
     private var currentSceneState: String? = scene.stateMachine?.initialState
+    private var currentLevelIndex: Int = 0
+
+    private fun effectiveObjectives() = scene.objectivesForLevel(currentLevelIndex)
+    private fun hasNextLevel() = scene.isMultiLevel && currentLevelIndex < scene.levels.lastIndex
 
     init {
         scope.launch {
@@ -63,8 +67,9 @@ class EngineSession(
     fun reset() {
         scope.launch {
             mutex.withLock {
-                world      = DefaultWorldStateFactory.fromScene(scene)
-                tickCount  = 0L
+                currentLevelIndex = 0
+                world             = DefaultWorldStateFactory.fromScene(scene)
+                tickCount         = 0L
                 currentSceneState = scene.stateMachine?.initialState
                 pendingSystemEvents.clear()
                 fsmTimerJob?.cancel()
@@ -72,6 +77,17 @@ class EngineSession(
                 _worldState.value = world.snapshot()
             }
         }
+    }
+
+    private fun advanceLevel() {
+        currentLevelIndex++
+        world             = DefaultWorldStateFactory.forLevel(scene, currentLevelIndex)
+        tickCount         = 0L
+        currentSceneState = scene.stateMachine?.initialState
+        pendingSystemEvents.clear()
+        fsmTimerJob?.cancel()
+        enterSceneState(currentSceneState, tick = 0L, runEnterActions = true)
+        _worldState.value = world.snapshot()
     }
 
     fun close() {
@@ -119,17 +135,23 @@ class EngineSession(
         world = world.apply(resolved)
         _worldState.value = world.snapshot()
 
-        // Objective evaluation
-        val prevObjStates = scene.objectives.associate { it.id to world.getObjectiveState(it.id) }
-        val objResult     = objectiveSystem.evaluate(scene.objectives, world.snapshot(), prevObjStates, tickCount)
+        // Objective evaluation (use current level's objectives)
+        val activeObjectives = effectiveObjectives()
+        val prevObjStates    = activeObjectives.associate { it.id to world.getObjectiveState(it.id) }
+        val objResult        = objectiveSystem.evaluate(activeObjectives, world.snapshot(), prevObjStates, tickCount)
 
         if (objResult.stateCommands.isNotEmpty()) {
             world = world.apply(objResult.stateCommands)
             _worldState.value = world.snapshot()
         }
 
-        // Queue system events for next tick
-        pendingSystemEvents.addAll(objResult.systemEvents)
+        // Queue system events; intercept SceneCompleted when more levels remain
+        val eventsToQueue = objResult.systemEvents.map { ev ->
+            if (ev is GameEvent.SceneCompleted && hasNextLevel())
+                GameEvent.LevelCompleted(currentLevelIndex, scene.levels[currentLevelIndex].levelId, tickCount)
+            else ev
+        }
+        pendingSystemEvents.addAll(eventsToQueue)
 
         // Dispatch feedback
         val fbCtx = FeedbackContext(world.snapshot(), tickCount)
@@ -142,13 +164,22 @@ class EngineSession(
         while (pendingSystemEvents.isNotEmpty()) {
             val sysEvent = pendingSystemEvents.removeFirst()
             processEvent(sysEvent)
+            if (sysEvent is GameEvent.LevelCompleted) {
+                // Let behaviors (sounds, animations) finish, then advance
+                scope.launch {
+                    delay(1200L)
+                    mutex.withLock { advanceLevel() }
+                    dispatch(GameEvent.SceneStarted(tick = tickCount))
+                }
+                break
+            }
         }
     }
 
     private fun handlesEvent(behavior: Behavior, event: GameEvent): Boolean =
         behavior.eventTypes.isEmpty() || event::class in behavior.eventTypes
 
-    private fun isSceneComplete() = scene.objectives.any {
+    private fun isSceneComplete() = effectiveObjectives().any {
         world.getObjectiveState(it.id) == ObjectiveState.LOCKED_COMPLETE
     }
 
@@ -189,6 +220,7 @@ class EngineSession(
         is GameEvent.SceneStateTimeout -> "scene_state_timeout"
         is GameEvent.HintTriggered -> "hint_triggered"
         is GameEvent.IdleCheck -> "idle_check"
+        is GameEvent.LevelCompleted -> "level_completed"
     }
 
     private fun applyFsmTransitions(event: GameEvent) {

@@ -160,6 +160,10 @@
     {
       "id": "sort_3groups_01",
       "url": "https://olluorg.github.io/mimi/sort_3groups_01/sort_3groups_01.json"
+    },
+    {
+      "id": "memory_cards_levels",
+      "url": "https://olluorg.github.io/mimi/memory_cards_levels/memory_cards_levels.json"
     }
   ]
 }

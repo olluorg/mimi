@@ -6,6 +6,13 @@ import kotlinx.serialization.Serializable
 // ── Scene Definition (loaded from JSON) ───────────────────────────────────────
 
 @Serializable
+data class LevelDefinition(
+    val levelId:    String,
+    val entities:   List<EntityDefinition>    = emptyList(),
+    val objectives: List<ObjectiveDefinition> = emptyList()
+)
+
+@Serializable
 data class SceneDefinition(
     val sceneId:       String,
     val entities:      List<EntityDefinition>             = emptyList(),
@@ -15,8 +22,18 @@ data class SceneDefinition(
     val stateMachine:  SceneStateMachineDefinition?        = null,
     val idleTimeout:   Int                                = 30,
     val onIdle:        OnIdleAction                       = OnIdleAction.HINT,
-    val metadata:      Map<String, String>                = emptyMap()
-)
+    val metadata:      Map<String, String>                = emptyMap(),
+    val levels:        List<LevelDefinition>              = emptyList()
+) {
+    // If multi-level, level 0's entities/objectives override top-level fields.
+    fun entitiesForLevel(index: Int): List<EntityDefinition> =
+        levels.getOrNull(index)?.entities ?: entities
+
+    fun objectivesForLevel(index: Int): List<ObjectiveDefinition> =
+        levels.getOrNull(index)?.objectives ?: objectives
+
+    val isMultiLevel: Boolean get() = levels.isNotEmpty()
+}
 
 @Serializable
 data class EntityDefinition(

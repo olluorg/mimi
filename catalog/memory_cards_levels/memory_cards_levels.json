@@ -1,0 +1,866 @@
+{
+  "sceneId": "memory_cards_levels",
+  "entities": [],
+  "objectives": [],
+  "behaviors": [
+    {
+      "behaviorRef": {
+        "type": "audioPrompt",
+        "config": {
+          "on": "sceneStarted",
+          "text": "Открывай карточки и найди одинаковые пары"
+        }
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "memoryFlipController",
+        "config": {
+          "group": "cards",
+          "maxOpenCards": "2",
+          "flipBackDelayMs": "800"
+        }
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "pairMatchValidator",
+        "config": {
+          "group": "cards",
+          "matchProperty": "pairId"
+        }
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "progressTracker",
+        "config": {}
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "adaptiveHint",
+        "config": {}
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "playSoundOnEvent",
+        "config": {
+          "on": "pairMatched",
+          "sound": "correct"
+        }
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "playSoundOnEvent",
+        "config": {
+          "on": "sceneCompleted",
+          "sound": "complete"
+        }
+      },
+      "entityId": null
+    }
+  ],
+  "fieldPolicies": {
+    "cardState": "LAST_WINS",
+    "progress": "PRIORITY"
+  },
+  "levels": [
+    {
+      "levelId": "1",
+      "entities": [
+        {
+          "id": "c1",
+          "components": [
+            "tap"
+          ],
+          "behaviors": [],
+          "properties": {
+            "position": {
+              "type": "vec2",
+              "x": 220,
+              "y": 290
+            },
+            "pairId": {
+              "type": "text",
+              "value": "apple"
+            },
+            "face": {
+              "type": "text",
+              "value": "🍎"
+            },
+            "cardState": {
+              "type": "text",
+              "value": "hidden"
+            }
+          },
+          "tags": {
+            "group": "cards"
+          },
+          "zOrder": 0
+        },
+        {
+          "id": "c2",
+          "components": [
+            "tap"
+          ],
+          "behaviors": [],
+          "properties": {
+            "position": {
+              "type": "vec2",
+              "x": 560,
+              "y": 290
+            },
+            "pairId": {
+              "type": "text",
+              "value": "banana"
+            },
+            "face": {
+              "type": "text",
+              "value": "🍌"
+            },
+            "cardState": {
+              "type": "text",
+              "value": "hidden"
+            }
+          },
+          "tags": {
+            "group": "cards"
+          },
+          "zOrder": 0
+        },
+        {
+          "id": "c3",
+          "components": [
+            "tap"
+          ],
+          "behaviors": [],
+          "properties": {
+            "position": {
+              "type": "vec2",
+              "x": 220,
+              "y": 560
+            },
+            "pairId": {
+              "type": "text",
+              "value": "apple"
+            },
+            "face": {
+              "type": "text",
+              "value": "🍎"
+            },
+            "cardState": {
+              "type": "text",
+              "value": "hidden"
+            }
+          },
+          "tags": {
+            "group": "cards"
+          },
+          "zOrder": 0
+        },
+        {
+          "id": "c4",
+          "components": [
+            "tap"
+          ],
+          "behaviors": [],
+          "properties": {
+            "position": {
+              "type": "vec2",
+              "x": 560,
+              "y": 560
+            },
+            "pairId": {
+              "type": "text",
+              "value": "banana"
+            },
+            "face": {
+              "type": "text",
+              "value": "🍌"
+            },
+            "cardState": {
+              "type": "text",
+              "value": "hidden"
+            }
+          },
+          "tags": {
+            "group": "cards"
+          },
+          "zOrder": 0
+        }
+      ],
+      "objectives": [
+        {
+          "id": "obj1",
+          "type": "allPairsMatched",
+          "config": {
+            "group": "cards"
+          },
+          "requires": null
+        }
+      ]
+    },
+    {
+      "levelId": "2",
+      "entities": [
+        {
+          "id": "c1",
+          "components": [
+            "tap"
+          ],
+          "behaviors": [],
+          "properties": {
+            "position": {
+              "type": "vec2",
+              "x": 145,
+              "y": 260
+            },
+            "pairId": {
+              "type": "text",
+              "value": "apple"
+            },
+            "face": {
+              "type": "text",
+              "value": "🍎"
+            },
+            "cardState": {
+              "type": "text",
+              "value": "hidden"
+            }
+          },
+          "tags": {
+            "group": "cards"
+          },
+          "zOrder": 0
+        },
+        {
+          "id": "c2",
+          "components": [
+            "tap"
+          ],
+          "behaviors": [],
+          "properties": {
+            "position": {
+              "type": "vec2",
+              "x": 370,
+              "y": 260
+            },
+            "pairId": {
+              "type": "text",
+              "value": "orange"
+            },
+            "face": {
+              "type": "text",
+              "value": "🍊"
+            },
+            "cardState": {
+              "type": "text",
+              "value": "hidden"
+            }
+          },
+          "tags": {
+            "group": "cards"
+          },
+          "zOrder": 0
+        },
+        {
+          "id": "c3",
+          "components": [
+            "tap"
+          ],
+          "behaviors": [],
+          "properties": {
+            "position": {
+              "type": "vec2",
+              "x": 595,
+              "y": 260
+            },
+            "pairId": {
+              "type": "text",
+              "value": "banana"
+            },
+            "face": {
+              "type": "text",
+              "value": "🍌"
+            },
+            "cardState": {
+              "type": "text",
+              "value": "hidden"
+            }
+          },
+          "tags": {
+            "group": "cards"
+          },
+          "zOrder": 0
+        },
+        {
+          "id": "c4",
+          "components": [
+            "tap"
+          ],
+          "behaviors": [],
+          "properties": {
+            "position": {
+              "type": "vec2",
+              "x": 820,
+              "y": 260
+            },
+            "pairId": {
+              "type": "text",
+              "value": "grape"
+            },
+            "face": {
+              "type": "text",
+              "value": "🍇"
+            },
+            "cardState": {
+              "type": "text",
+              "value": "hidden"
+            }
+          },
+          "tags": {
+            "group": "cards"
+          },
+          "zOrder": 0
+        },
+        {
+          "id": "c5",
+          "components": [
+            "tap"
+          ],
+          "behaviors": [],
+          "properties": {
+            "position": {
+              "type": "vec2",
+              "x": 145,
+              "y": 540
+            },
+            "pairId": {
+              "type": "text",
+              "value": "grape"
+            },
+            "face": {
+              "type": "text",
+              "value": "🍇"
+            },
+            "cardState": {
+              "type": "text",
+              "value": "hidden"
+            }
+          },
+          "tags": {
+            "group": "cards"
+          },
+          "zOrder": 0
+        },
+        {
+          "id": "c6",
+          "components": [
+            "tap"
+          ],
+          "behaviors": [],
+          "properties": {
+            "position": {
+              "type": "vec2",
+              "x": 370,
+              "y": 540
+            },
+            "pairId": {
+              "type": "text",
+              "value": "apple"
+            },
+            "face": {
+              "type": "text",
+              "value": "🍎"
+            },
+            "cardState": {
+              "type": "text",
+              "value": "hidden"
+            }
+          },
+          "tags": {
+            "group": "cards"
+          },
+          "zOrder": 0
+        },
+        {
+          "id": "c7",
+          "components": [
+            "tap"
+          ],
+          "behaviors": [],
+          "properties": {
+            "position": {
+              "type": "vec2",
+              "x": 595,
+              "y": 540
+            },
+            "pairId": {
+              "type": "text",
+              "value": "orange"
+            },
+            "face": {
+              "type": "text",
+              "value": "🍊"
+            },
+            "cardState": {
+              "type": "text",
+              "value": "hidden"
+            }
+          },
+          "tags": {
+            "group": "cards"
+          },
+          "zOrder": 0
+        },
+        {
+          "id": "c8",
+          "components": [
+            "tap"
+          ],
+          "behaviors": [],
+          "properties": {
+            "position": {
+              "type": "vec2",
+              "x": 820,
+              "y": 540
+            },
+            "pairId": {
+              "type": "text",
+              "value": "banana"
+            },
+            "face": {
+              "type": "text",
+              "value": "🍌"
+            },
+            "cardState": {
+              "type": "text",
+              "value": "hidden"
+            }
+          },
+          "tags": {
+            "group": "cards"
+          },
+          "zOrder": 0
+        }
+      ],
+      "objectives": [
+        {
+          "id": "obj1",
+          "type": "allPairsMatched",
+          "config": {
+            "group": "cards"
+          },
+          "requires": null
+        }
+      ]
+    },
+    {
+      "levelId": "3",
+      "entities": [
+        {
+          "id": "c1",
+          "components": [
+            "tap"
+          ],
+          "behaviors": [],
+          "properties": {
+            "position": {
+              "type": "vec2",
+              "x": 145,
+              "y": 190
+            },
+            "pairId": {
+              "type": "text",
+              "value": "apple"
+            },
+            "face": {
+              "type": "text",
+              "value": "🍎"
+            },
+            "cardState": {
+              "type": "text",
+              "value": "hidden"
+            }
+          },
+          "tags": {
+            "group": "cards"
+          },
+          "zOrder": 0
+        },
+        {
+          "id": "c2",
+          "components": [
+            "tap"
+          ],
+          "behaviors": [],
+          "properties": {
+            "position": {
+              "type": "vec2",
+              "x": 370,
+              "y": 190
+            },
+            "pairId": {
+              "type": "text",
+              "value": "orange"
+            },
+            "face": {
+              "type": "text",
+              "value": "🍊"
+            },
+            "cardState": {
+              "type": "text",
+              "value": "hidden"
+            }
+          },
+          "tags": {
+            "group": "cards"
+          },
+          "zOrder": 0
+        },
+        {
+          "id": "c3",
+          "components": [
+            "tap"
+          ],
+          "behaviors": [],
+          "properties": {
+            "position": {
+              "type": "vec2",
+              "x": 595,
+              "y": 190
+            },
+            "pairId": {
+              "type": "text",
+              "value": "cherry"
+            },
+            "face": {
+              "type": "text",
+              "value": "🍒"
+            },
+            "cardState": {
+              "type": "text",
+              "value": "hidden"
+            }
+          },
+          "tags": {
+            "group": "cards"
+          },
+          "zOrder": 0
+        },
+        {
+          "id": "c4",
+          "components": [
+            "tap"
+          ],
+          "behaviors": [],
+          "properties": {
+            "position": {
+              "type": "vec2",
+              "x": 820,
+              "y": 190
+            },
+            "pairId": {
+              "type": "text",
+              "value": "banana"
+            },
+            "face": {
+              "type": "text",
+              "value": "🍌"
+            },
+            "cardState": {
+              "type": "text",
+              "value": "hidden"
+            }
+          },
+          "tags": {
+            "group": "cards"
+          },
+          "zOrder": 0
+        },
+        {
+          "id": "c5",
+          "components": [
+            "tap"
+          ],
+          "behaviors": [],
+          "properties": {
+            "position": {
+              "type": "vec2",
+              "x": 145,
+              "y": 420
+            },
+            "pairId": {
+              "type": "text",
+              "value": "grape"
+            },
+            "face": {
+              "type": "text",
+              "value": "🍇"
+            },
+            "cardState": {
+              "type": "text",
+              "value": "hidden"
+            }
+          },
+          "tags": {
+            "group": "cards"
+          },
+          "zOrder": 0
+        },
+        {
+          "id": "c6",
+          "components": [
+            "tap"
+          ],
+          "behaviors": [],
+          "properties": {
+            "position": {
+              "type": "vec2",
+              "x": 370,
+              "y": 420
+            },
+            "pairId": {
+              "type": "text",
+              "value": "strawberry"
+            },
+            "face": {
+              "type": "text",
+              "value": "🍓"
+            },
+            "cardState": {
+              "type": "text",
+              "value": "hidden"
+            }
+          },
+          "tags": {
+            "group": "cards"
+          },
+          "zOrder": 0
+        },
+        {
+          "id": "c7",
+          "components": [
+            "tap"
+          ],
+          "behaviors": [],
+          "properties": {
+            "position": {
+              "type": "vec2",
+              "x": 595,
+              "y": 420
+            },
+            "pairId": {
+              "type": "text",
+              "value": "cherry"
+            },
+            "face": {
+              "type": "text",
+              "value": "🍒"
+            },
+            "cardState": {
+              "type": "text",
+              "value": "hidden"
+            }
+          },
+          "tags": {
+            "group": "cards"
+          },
+          "zOrder": 0
+        },
+        {
+          "id": "c8",
+          "components": [
+            "tap"
+          ],
+          "behaviors": [],
+          "properties": {
+            "position": {
+              "type": "vec2",
+              "x": 820,
+              "y": 420
+            },
+            "pairId": {
+              "type": "text",
+              "value": "apple"
+            },
+            "face": {
+              "type": "text",
+              "value": "🍎"
+            },
+            "cardState": {
+              "type": "text",
+              "value": "hidden"
+            }
+          },
+          "tags": {
+            "group": "cards"
+          },
+          "zOrder": 0
+        },
+        {
+          "id": "c9",
+          "components": [
+            "tap"
+          ],
+          "behaviors": [],
+          "properties": {
+            "position": {
+              "type": "vec2",
+              "x": 145,
+              "y": 640
+            },
+            "pairId": {
+              "type": "text",
+              "value": "strawberry"
+            },
+            "face": {
+              "type": "text",
+              "value": "🍓"
+            },
+            "cardState": {
+              "type": "text",
+              "value": "hidden"
+            }
+          },
+          "tags": {
+            "group": "cards"
+          },
+          "zOrder": 0
+        },
+        {
+          "id": "c10",
+          "components": [
+            "tap"
+          ],
+          "behaviors": [],
+          "properties": {
+            "position": {
+              "type": "vec2",
+              "x": 370,
+              "y": 640
+            },
+            "pairId": {
+              "type": "text",
+              "value": "banana"
+            },
+            "face": {
+              "type": "text",
+              "value": "🍌"
+            },
+            "cardState": {
+              "type": "text",
+              "value": "hidden"
+            }
+          },
+          "tags": {
+            "group": "cards"
+          },
+          "zOrder": 0
+        },
+        {
+          "id": "c11",
+          "components": [
+            "tap"
+          ],
+          "behaviors": [],
+          "properties": {
+            "position": {
+              "type": "vec2",
+              "x": 595,
+              "y": 640
+            },
+            "pairId": {
+              "type": "text",
+              "value": "orange"
+            },
+            "face": {
+              "type": "text",
+              "value": "🍊"
+            },
+            "cardState": {
+              "type": "text",
+              "value": "hidden"
+            }
+          },
+          "tags": {
+            "group": "cards"
+          },
+          "zOrder": 0
+        },
+        {
+          "id": "c12",
+          "components": [
+            "tap"
+          ],
+          "behaviors": [],
+          "properties": {
+            "position": {
+              "type": "vec2",
+              "x": 820,
+              "y": 640
+            },
+            "pairId": {
+              "type": "text",
+              "value": "grape"
+            },
+            "face": {
+              "type": "text",
+              "value": "🍇"
+            },
+            "cardState": {
+              "type": "text",
+              "value": "hidden"
+            }
+          },
+          "tags": {
+            "group": "cards"
+          },
+          "zOrder": 0
+        }
+      ],
+      "objectives": [
+        {
+          "id": "obj1",
+          "type": "allPairsMatched",
+          "config": {
+            "group": "cards"
+          },
+          "requires": null
+        }
+      ]
+    }
+  ],
+  "idleTimeout": 20,
+  "onIdle": "HINT",
+  "metadata": {},
+  "meta": {
+    "title": "Найди пару (3 уровня)",
+    "description": "Три уровня сложности: от 2 до 6 пар фруктов",
+    "ageMin": 3,
+    "ageMax": 7,
+    "version": 1,
+    "tags": [
+      "memory",
+      "matching",
+      "levels"
+    ],
+    "skills": [
+      "memory",
+      "visual_memory",
+      "working_memory",
+      "impulse_control",
+      "task_completion"
+    ],
+    "icon": "🃏"
+  }
+}

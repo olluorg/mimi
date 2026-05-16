@@ -176,4 +176,13 @@ sealed class GameEvent {
         override val source: EntityId? = null,
         override val target: EntityId? = null
     ) : GameEvent()
+
+    @Serializable @SerialName("level_completed")
+    data class LevelCompleted(
+        val levelIndex:      Int,
+        val levelId:         String,
+        override val tick:   Tick,
+        override val source: EntityId? = null,
+        override val target: EntityId? = null
+    ) : GameEvent()
 }
