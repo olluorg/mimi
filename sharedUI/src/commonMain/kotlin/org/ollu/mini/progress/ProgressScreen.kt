@@ -112,7 +112,7 @@ fun ProgressScreen(
         ) {
             item {
                 TextButton(onClick = onBack, contentPadding = PaddingValues(0.dp)) {
-                    Text("← Назад", color = Color(0xFF666666))
+                    Text("⬅  Назад", color = Color(0xFF666666))
                 }
             }
 

@@ -29,6 +29,8 @@ import org.ollu.mini.feedback.SoundFeedbackChannel
 import org.ollu.mini.feedback.TtsFeedbackChannel
 import org.ollu.mini.progress.ProgressRepository
 import org.ollu.mini.renderer.SceneRenderer
+import org.ollu.mini.sound.rememberTtsPlayer
+import androidx.compose.ui.text.style.TextAlign
 
 data class CompletionAction(
     val label:   String,
@@ -165,61 +167,86 @@ fun GameScreen(
             visible = isComplete,
             enter   = fadeIn(tween(400)) + scaleIn(tween(400), initialScale = 0.75f)
         ) {
-            Box(
-                modifier         = Modifier.fillMaxSize().background(Color.Black.copy(alpha = 0.55f)),
-                contentAlignment = Alignment.Center
+            CompletionOverlay(actions = completionActions)
+        }
+    }
+}
+
+@Composable
+private fun CompletionOverlay(actions: List<CompletionAction>) {
+    val tts = rememberTtsPlayer()
+    LaunchedEffect(Unit) { tts.speak("Молодец") }
+    Box(
+        modifier         = Modifier.fillMaxSize().background(Color.Black.copy(alpha = 0.55f)),
+        contentAlignment = Alignment.Center
+    ) {
+        Surface(
+            shape = RoundedCornerShape(28.dp),
+            color = Color.White,
+            modifier = Modifier.padding(24.dp)
+        ) {
+            Column(
+                modifier = Modifier.padding(horizontal = 28.dp, vertical = 28.dp),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.spacedBy(12.dp)
             ) {
-                Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                    Surface(
-                        shape = RoundedCornerShape(8.dp),
-                        color = Color.White,
-                        modifier = Modifier.padding(24.dp)
+                Text("🎉", fontSize = 96.sp)
+                Text(
+                    "Молодец!",
+                    style = MaterialTheme.typography.displaySmall,
+                    color = Color(0xFF1D3557),
+                    fontWeight = FontWeight.Bold
+                )
+                if (actions.isNotEmpty()) {
+                    Spacer(Modifier.height(6.dp))
+                    Row(
+                        horizontalArrangement = Arrangement.spacedBy(16.dp),
+                        verticalAlignment = Alignment.Top
                     ) {
-                        Column(
-                            modifier = Modifier.padding(horizontal = 28.dp, vertical = 24.dp),
-                            horizontalAlignment = Alignment.CenterHorizontally
-                        ) {
-                            Text("Готово", style = MaterialTheme.typography.displaySmall, color = Color(0xFF1D3557), fontWeight = FontWeight.Bold)
-                            Spacer(Modifier.height(8.dp))
-                            Text("Сцена завершена", style = MaterialTheme.typography.bodyLarge, color = Color(0xFF687381))
-                            if (completionActions.isNotEmpty()) {
-                                Spacer(Modifier.height(18.dp))
-                                Column(
-                                    verticalArrangement = Arrangement.spacedBy(8.dp),
-                                    modifier = Modifier.fillMaxWidth()
-                                ) {
-                                    completionActions.forEach { action ->
-                                        if (action.primary) {
-                                            Button(
-                                                onClick = action.onClick,
-                                                colors  = ButtonDefaults.buttonColors(containerColor = Color(0xFF2A9D8F)),
-                                                modifier = Modifier.fillMaxWidth()
-                                            ) {
-                                                if (action.icon.isNotBlank()) {
-                                                    Text(action.icon, fontSize = 18.sp)
-                                                    Spacer(Modifier.width(6.dp))
-                                                }
-                                                Text(action.label)
-                                            }
-                                        } else {
-                                            OutlinedButton(
-                                                onClick  = action.onClick,
-                                                modifier = Modifier.fillMaxWidth()
-                                            ) {
-                                                if (action.icon.isNotBlank()) {
-                                                    Text(action.icon, fontSize = 18.sp)
-                                                    Spacer(Modifier.width(6.dp))
-                                                }
-                                                Text(action.label)
-                                            }
-                                        }
-                                    }
-                                }
+                        actions.forEach { action ->
+                            CompletionActionTile(action) {
+                                if (action.label.isNotBlank()) tts.speak(action.label)
+                                action.onClick()
                             }
                         }
                     }
                 }
             }
         }
+    }
+}
+
+@Composable
+private fun CompletionActionTile(action: CompletionAction, onClick: () -> Unit) {
+    val accent = if (action.primary) Color(0xFF2A9D8F) else Color(0xFF457B9D)
+    val fillColor = if (action.primary) accent else accent.copy(alpha = 0.14f)
+    val iconColor = if (action.primary) Color.White else accent
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.spacedBy(6.dp),
+        modifier = Modifier.widthIn(min = 92.dp)
+    ) {
+        Surface(
+            onClick = onClick,
+            shape = CircleShape,
+            color = fillColor,
+            shadowElevation = if (action.primary) 4.dp else 1.dp,
+            modifier = Modifier.size(84.dp)
+        ) {
+            Box(contentAlignment = Alignment.Center, modifier = Modifier.fillMaxSize()) {
+                Text(
+                    action.icon.ifBlank { "▶" },
+                    fontSize = 44.sp,
+                    color = iconColor
+                )
+            }
+        }
+        Text(
+            action.label,
+            style = MaterialTheme.typography.bodyMedium,
+            color = Color(0xFF263445),
+            textAlign = TextAlign.Center,
+            maxLines = 2
+        )
     }
 }

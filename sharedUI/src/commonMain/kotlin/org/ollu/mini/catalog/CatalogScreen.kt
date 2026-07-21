@@ -4,8 +4,10 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.GridItemSpan
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -18,10 +20,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import mimi.core.world.SceneDefinition
 import org.ollu.mini.progress.ProgressRepository
+import org.ollu.mini.sound.rememberTtsPlayer
 
 private val BG = Color(0xFFF5F7FA)
 
@@ -163,15 +167,19 @@ fun CatalogScreen(
             }
 
             uiState.entries.isNotEmpty() -> {
-                LazyColumn(
-                    contentPadding      = PaddingValues(start = 16.dp, end = 16.dp, top = 16.dp, bottom = 16.dp),
+                LazyVerticalGrid(
+                    columns             = GridCells.Adaptive(minSize = 160.dp),
+                    contentPadding      = PaddingValues(start = 12.dp, end = 12.dp, top = 16.dp, bottom = 16.dp),
                     verticalArrangement = Arrangement.spacedBy(12.dp),
+                    horizontalArrangement = Arrangement.spacedBy(12.dp),
                     modifier            = Modifier.fillMaxSize()
                 ) {
-                    item { ChildNameHeader(progressRepository, onBack) }
+                    item(span = { GridItemSpan(maxLineSpan) }) {
+                        ChildNameHeader(progressRepository, onBack)
+                    }
 
                     if (uiState.offlineWarning) {
-                        item {
+                        item(span = { GridItemSpan(maxLineSpan) }) {
                             Surface(
                                 shape    = RoundedCornerShape(8.dp),
                                 color    = Color(0xFFFFF4D8),
@@ -187,12 +195,12 @@ fun CatalogScreen(
                         }
                     }
 
-                    item {
+                    item(span = { GridItemSpan(maxLineSpan) }) {
                         AgeFilterBar(selected = ageFilter, onSelect = { ageFilter = it })
                     }
 
                     if (allSkills.isNotEmpty()) {
-                        item {
+                        item(span = { GridItemSpan(maxLineSpan) }) {
                             SkillFilterBar(
                                 allSkills      = allSkills,
                                 selectedSkills = selectedSkills,
@@ -207,10 +215,10 @@ fun CatalogScreen(
                         }
                     }
 
-                    items(displayedEntries) { entry ->
+                    items(displayedEntries, key = { it.id }) { entry ->
                         var loading   by remember(entry.id) { mutableStateOf(false) }
                         var loadError by remember(entry.id) { mutableStateOf<String?>(null) }
-                        SceneCard(
+                        SceneTile(
                             entry     = entry,
                             loading   = loading,
                             completed = entry.id in completedIds,
@@ -289,7 +297,7 @@ private fun SkillFilterBar(
                     contentPadding = PaddingValues(horizontal = 8.dp, vertical = 0.dp),
                     modifier       = Modifier.height(24.dp)
                 ) {
-                    Text("Сбросить", fontSize = 12.sp, color = Color(0xFF4A90D9))
+                    Text("✕  Сбросить", fontSize = 12.sp, color = Color(0xFF4A90D9))
                 }
             }
         }
@@ -321,89 +329,82 @@ private fun SkillFilterBar(
 }
 
 @Composable
-private fun SceneCard(entry: CatalogEntry, loading: Boolean, completed: Boolean, error: String?, onClick: () -> Unit) {
+private fun SceneTile(entry: CatalogEntry, loading: Boolean, completed: Boolean, error: String?, onClick: () -> Unit) {
+    val tts = rememberTtsPlayer()
+    val accent = entry.skills.firstNotNullOfOrNull { skillColor[it] } ?: Color(0xFF457B9D)
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .background(Color.White, RoundedCornerShape(8.dp))
-            .clickable(enabled = !loading, onClick = onClick)
-            .padding(16.dp),
-        verticalArrangement = Arrangement.spacedBy(8.dp)
-    ) {
-        Row(verticalAlignment = Alignment.CenterVertically) {
-            Box(
-                modifier = Modifier
-                    .size(48.dp)
-                    .background(Color(0xFFE8F1FA), RoundedCornerShape(8.dp)),
-                contentAlignment = Alignment.Center
-            ) {
-                if (entry.icon.isNotBlank()) {
-                    Text(entry.icon, fontSize = 24.sp)
-                } else {
-                    Text(entry.title.firstOrNull()?.uppercase() ?: "M", fontSize = 20.sp, color = Color(0xFF457B9D), fontWeight = FontWeight.Bold)
-                }
-                if (completed) {
-                    Box(
-                        modifier         = Modifier.align(Alignment.TopEnd).size(18.dp)
-                            .background(Color(0xFF4CAF50), CircleShape),
-                        contentAlignment = Alignment.Center
-                    ) { Text("✓", fontSize = 10.sp, color = Color.White, fontWeight = FontWeight.Bold) }
-                }
+            .heightIn(min = 200.dp)
+            .background(Color.White, RoundedCornerShape(20.dp))
+            .clickable(enabled = !loading) {
+                if (entry.title.isNotBlank()) tts.speak(entry.title)
+                onClick()
             }
-            Spacer(Modifier.width(16.dp))
-            Column(Modifier.weight(1f)) {
-                Text(entry.title, style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.SemiBold, color = Color(0xFF263445))
-                if (entry.description.isNotBlank()) {
-                    Text(entry.description, style = MaterialTheme.typography.bodySmall, color = Color(0xFF687381))
-                }
+            .padding(12.dp),
+        verticalArrangement   = Arrangement.spacedBy(8.dp),
+        horizontalAlignment   = Alignment.CenterHorizontally
+    ) {
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(110.dp)
+                .background(accent.copy(alpha = 0.14f), RoundedCornerShape(16.dp)),
+            contentAlignment = Alignment.Center
+        ) {
+            if (entry.icon.isNotBlank()) {
+                Text(entry.icon, fontSize = 64.sp)
+            } else {
                 Text(
-                    "Возраст ${entry.ageMin}–${entry.ageMax}",
-                    style = MaterialTheme.typography.labelSmall,
-                    color = Color(0xFF8B96A3)
+                    entry.title.firstOrNull()?.uppercase() ?: "M",
+                    fontSize   = 48.sp,
+                    color      = accent,
+                    fontWeight = FontWeight.Bold
                 )
             }
-            if (loading) CircularProgressIndicator(Modifier.size(24.dp), strokeWidth = 2.dp)
-            else Text("›", fontSize = 28.sp, color = Color(0xFF457B9D))
+            if (completed) {
+                Box(
+                    modifier         = Modifier
+                        .align(Alignment.TopEnd)
+                        .padding(6.dp)
+                        .size(28.dp)
+                        .background(Color(0xFF4CAF50), CircleShape),
+                    contentAlignment = Alignment.Center
+                ) { Text("✓", fontSize = 16.sp, color = Color.White, fontWeight = FontWeight.Bold) }
+            }
+            if (loading) {
+                CircularProgressIndicator(
+                    Modifier.align(Alignment.Center).size(36.dp),
+                    strokeWidth = 3.dp,
+                    color = accent
+                )
+            }
         }
-
-        if (entry.skills.isNotEmpty()) {
-            SkillChips(entry.skills)
-        }
-
+        Text(
+            entry.title,
+            style      = MaterialTheme.typography.titleMedium,
+            fontWeight = FontWeight.SemiBold,
+            color      = Color(0xFF263445),
+            textAlign  = TextAlign.Center,
+            maxLines   = 2,
+            modifier   = Modifier.fillMaxWidth()
+        )
+        Text(
+            "${entry.ageMin}–${entry.ageMax} лет",
+            style = MaterialTheme.typography.labelSmall,
+            color = Color(0xFF8B96A3)
+        )
         if (error != null) {
             Text(
                 "⚠️ $error",
                 fontSize = 11.sp,
                 color    = Color(0xFFB00020),
+                textAlign = TextAlign.Center,
                 modifier = Modifier
                     .fillMaxWidth()
                     .background(Color(0xFFFFEBEE), RoundedCornerShape(6.dp))
                     .padding(horizontal = 8.dp, vertical = 4.dp)
             )
-        }
-    }
-}
-
-@Composable
-private fun SkillChips(skills: List<String>) {
-    Row(
-        modifier              = Modifier.horizontalScroll(rememberScrollState()),
-        horizontalArrangement = Arrangement.spacedBy(6.dp)
-    ) {
-        skills.forEach { skill ->
-            val color = skillColor[skill] ?: Color(0xFF888888)
-            Box(
-                modifier         = Modifier
-                    .background(color.copy(alpha = 0.14f), RoundedCornerShape(4.dp))
-                    .padding(horizontal = 6.dp, vertical = 2.dp)
-            ) {
-                Text(
-                    skillLabel[skill] ?: skill,
-                    fontSize = 10.sp,
-                    color    = color,
-                    maxLines = 1
-                )
-            }
         }
     }
 }
@@ -416,7 +417,7 @@ private fun ChildNameHeader(progressRepository: ProgressRepository?, onBack: (()
     Column(Modifier.padding(bottom = 8.dp)) {
         if (onBack != null) {
             TextButton(onClick = onBack, contentPadding = PaddingValues(0.dp)) {
-                Text("← Назад", color = Color(0xFF666666))
+                Text("⬅  Назад", color = Color(0xFF666666))
             }
         }
         if (editing) {
@@ -439,7 +440,7 @@ private fun ChildNameHeader(progressRepository: ProgressRepository?, onBack: (()
                         if (name.isNotBlank()) { progressRepository?.setChildName(name); editing = false }
                     },
                     colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF4CAF50))
-                ) { Text("OK") }
+                ) { Text("✓  OK") }
             }
             }
         } else {
@@ -454,7 +455,7 @@ private fun ChildNameHeader(progressRepository: ProgressRepository?, onBack: (()
                         )
                         Text("Свободный режим", style = MaterialTheme.typography.bodyMedium, color = Color(0xFF687381))
                     }
-                    TextButton(onClick = { editing = true }) { Text("Изменить", color = Color(0xFF457B9D)) }
+                    TextButton(onClick = { editing = true }) { Text("✏️  Изменить", color = Color(0xFF457B9D)) }
                 }
             }
         }

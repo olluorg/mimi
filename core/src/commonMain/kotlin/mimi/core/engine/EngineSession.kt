@@ -178,13 +178,11 @@ class EngineSession(
             val sysEvent = pendingSystemEvents.removeFirst()
             processEvent(sysEvent)
             if (sysEvent is GameEvent.LevelCompleted) {
-                // Let behaviors (sounds, animations) finish, then advance
-                scope.launch {
-                    delay(1200L)
-                    mutex.withLock { advanceLevel() }
-                    dispatch(GameEvent.SceneStarted(tick = tickCount))
-                }
-                break
+                // Hold the mutex during the pause so no input slips through on the old world.
+                // advanceLevel() clears pendingSystemEvents, so the while loop exits after this.
+                delay(1200L)
+                advanceLevel()
+                processEvent(GameEvent.SceneStarted(tick = tickCount))
             }
         }
     }
@@ -423,12 +421,16 @@ class EngineBuilder {
             }
         }
 
+        // Each session owns a child scope so close() cancels only its own coroutines
+        // without affecting the caller's (Compose) scope.
+        val sessionScope = CoroutineScope(scope.coroutineContext + Job(scope.coroutineContext[Job]))
+
         return EngineSession(
             scene            = scene,
             behaviors        = behaviors,
             feedbackRegistry = feedbackReg,
             objectiveSystem  = objSystem,
-            scope            = scope
+            scope            = sessionScope
         )
     }
 }

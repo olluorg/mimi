@@ -1,9 +1,9 @@
 package org.ollu.mini
 
 import androidx.compose.runtime.*
-import kotlinx.coroutines.launch
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.ui.Alignment
@@ -11,9 +11,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import org.ollu.mini.catalog.CatalogEntry
-import org.ollu.mini.catalog.SceneRepository
+import androidx.compose.ui.unit.sp
 import mimi.core.world.SceneDefinition
+import org.ollu.mini.catalog.CatalogEntry
 import org.ollu.mini.catalog.CatalogScreen
 import org.ollu.mini.game.CompletionAction
 import org.ollu.mini.game.GameScreen
@@ -21,12 +21,8 @@ import org.ollu.mini.learning.LearningModeScreen
 import org.ollu.mini.learning.applyLearningSceneCompletion
 import org.ollu.mini.progress.ProgressRepository
 import org.ollu.mini.progress.ProgressScreen
+import org.ollu.mini.sound.rememberTtsPlayer
 import org.ollu.mini.theme.AppTheme
-
-private fun findSimilar(current: CatalogEntry, all: List<CatalogEntry>): CatalogEntry? =
-    all.filter { it.id != current.id && it.skills.isNotEmpty() }
-        .maxByOrNull { candidate -> candidate.skills.count { it in current.skills } }
-        ?.takeIf { it.skills.any { s -> s in current.skills } }
 
 private data class SelectedScene(
     val entry: CatalogEntry,
@@ -47,11 +43,7 @@ fun App(
     onThemeChanged: @Composable (isDark: Boolean) -> Unit = {}
 ) = AppTheme(onThemeChanged) {
     val progressRepository = remember { ProgressRepository() }
-    val fetchRepo          = remember { SceneRepository() }
-    var catalogEntries     by remember { mutableStateOf(emptyList<CatalogEntry>()) }
     var screen             by remember { mutableStateOf<Screen>(Screen.Home) }
-
-    DisposableEffect(fetchRepo) { onDispose { fetchRepo.close() } }
 
     when (val s = screen) {
         is Screen.Home -> HomeScreen(
@@ -66,51 +58,30 @@ fun App(
         is Screen.FreePlay -> CatalogScreen(
             onSceneSelected    = { entry, scene -> screen = Screen.FreeGame(SelectedScene(entry, scene)) },
             progressRepository = progressRepository,
-            onBack             = { screen = Screen.Home },
-            onEntriesUpdated   = { catalogEntries = it }
+            onBack             = { screen = Screen.Home }
         )
         is Screen.Learning -> LearningModeScreen(
             progressRepository = progressRepository,
             onStartScene = { entry, scene -> screen = Screen.LearningGame(SelectedScene(entry, scene)) },
             onBack = { screen = Screen.Home }
         )
-        is Screen.FreeGame -> {
-            val scope = rememberCoroutineScope()
-            var nextSimilar by remember(s.selected.entry.id) { mutableStateOf<SelectedScene?>(null) }
-            GameScreen(
-                scene              = s.selected.scene,
-                onBack             = { screen = Screen.FreePlay },
-                progressRepository = progressRepository,
-                onCompleted        = {
-                    val similar = findSimilar(s.selected.entry, catalogEntries)
-                    if (similar != null) {
-                        scope.launch {
-                            runCatching {
-                                val def = fetchRepo.fetchScene(similar)
-                                nextSimilar = SelectedScene(similar, def)
-                            }
-                        }
-                    }
+        is Screen.FreeGame -> GameScreen(
+            scene              = s.selected.scene,
+            onBack             = { screen = Screen.FreePlay },
+            progressRepository = progressRepository,
+            completionActions  = listOf(
+                CompletionAction("Ещё раз", icon = "🔄", primary = true) {
+                    screen = Screen.FreeGame(s.selected)
                 },
-                completionActions  = buildList {
-                    add(CompletionAction("Ещё раз", primary = true) {
-                        screen = Screen.FreeGame(s.selected)
-                    })
-                    nextSimilar?.let { next ->
-                        add(CompletionAction("Следующая похожая") {
-                            screen = Screen.FreeGame(next)
-                        })
-                    }
-                    add(CompletionAction("В каталог") { screen = Screen.FreePlay })
-                }
+                CompletionAction("В каталог", icon = "🏠") { screen = Screen.FreePlay }
             )
-        }
+        )
         is Screen.LearningGame -> GameScreen(
             scene              = s.selected.scene,
             onBack             = { screen = Screen.Learning },
             progressRepository = progressRepository,
             completionActions  = listOf(
-                CompletionAction("Следующая сцена", primary = true) { screen = Screen.Learning }
+                CompletionAction("Следующая сцена", icon = "▶", primary = true) { screen = Screen.Learning }
             ),
             onCompleted = {
                 val childId = progressRepository.getChildName().ifBlank { "default_child" }
@@ -131,91 +102,81 @@ private fun HomeScreen(
     onLearning: () -> Unit,
     onProgress: () -> Unit
 ) {
+    val tts = rememberTtsPlayer()
     Box(Modifier.fillMaxSize().background(Color(0xFFF5F7FA)), contentAlignment = Alignment.Center) {
         Column(
             Modifier
                 .fillMaxWidth()
-                .padding(24.dp),
+                .padding(20.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.spacedBy(14.dp)
+            verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
-            Surface(
-                shape = RoundedCornerShape(8.dp),
-                color = Color.White,
-                tonalElevation = 1.dp,
-                shadowElevation = 1.dp,
-                modifier = Modifier.fillMaxWidth()
-            ) {
-                Column(Modifier.padding(20.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
-                    Text(
-                        "Mimi",
-                        style = MaterialTheme.typography.displaySmall,
-                        fontWeight = FontWeight.Bold,
-                        color = Color(0xFF1D3557)
-                    )
-                    Text(
-                        "Развивающие сцены и персональный маршрут занятий",
-                        style = MaterialTheme.typography.bodyLarge,
-                        color = Color(0xFF5F6B7A)
-                    )
-                }
-            }
+            Text(
+                "Mimi",
+                style = MaterialTheme.typography.displayMedium,
+                fontWeight = FontWeight.Bold,
+                color = Color(0xFF1D3557)
+            )
 
             ModeButton(
-                title = "Свободный режим",
-                subtitle = "Открывайте каталог и запускайте любую сцену вручную",
+                title = "Играть",
+                subtitle = "Выбрать игру",
+                icon = "🎮",
                 accent = Color(0xFF457B9D),
-                onClick = onFreePlay
+                onClick = { tts.speak("Играть"); onFreePlay() }
             )
             ModeButton(
-                title = "Режим обучения",
-                subtitle = "Система подбирает следующую сцену по профилю навыков",
+                title = "Учиться",
+                subtitle = "Подберём игру",
+                icon = "📚",
                 accent = Color(0xFF2A9D8F),
-                onClick = onLearning
+                onClick = { tts.speak("Учиться"); onLearning() }
             )
             ModeButton(
-                title = "Прогресс",
-                subtitle = "Статистика пройденных игр и развитых навыков",
+                title = "Награды",
+                subtitle = "Что я уже умею",
+                icon = "🏆",
                 accent = Color(0xFFE76F51),
-                onClick = onProgress
+                onClick = { tts.speak("Награды"); onProgress() }
             )
         }
     }
 }
 
 @Composable
-private fun ModeButton(title: String, subtitle: String, accent: Color, onClick: () -> Unit) {
+private fun ModeButton(title: String, subtitle: String, icon: String, accent: Color, onClick: () -> Unit) {
     Surface(
         onClick = onClick,
-        shape = RoundedCornerShape(8.dp),
+        shape = RoundedCornerShape(24.dp),
         color = Color.White,
-        tonalElevation = 1.dp,
-        shadowElevation = 1.dp,
-        modifier = Modifier.fillMaxWidth()
+        tonalElevation = 2.dp,
+        shadowElevation = 3.dp,
+        modifier = Modifier.fillMaxWidth().heightIn(min = 132.dp)
     ) {
         Row(
-            Modifier.padding(16.dp),
+            Modifier.padding(horizontal = 20.dp, vertical = 16.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
             Box(
                 Modifier
-                    .size(44.dp)
-                    .background(accent.copy(alpha = 0.14f), RoundedCornerShape(8.dp)),
+                    .size(96.dp)
+                    .background(accent.copy(alpha = 0.18f), CircleShape),
                 contentAlignment = Alignment.Center
             ) {
-                Box(
-                    Modifier
-                        .size(18.dp)
-                        .background(accent, RoundedCornerShape(4.dp))
-                )
+                Text(icon, fontSize = 60.sp)
             }
-            Spacer(Modifier.width(14.dp))
+            Spacer(Modifier.width(20.dp))
             Column(Modifier.weight(1f)) {
-                Text(title, style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.SemiBold)
-                Spacer(Modifier.height(3.dp))
+                Text(
+                    title,
+                    style = MaterialTheme.typography.headlineMedium,
+                    fontWeight = FontWeight.Bold,
+                    color = Color(0xFF1D3557)
+                )
+                Spacer(Modifier.height(4.dp))
                 Text(subtitle, style = MaterialTheme.typography.bodyMedium, color = Color(0xFF687381))
             }
-            Text("›", style = MaterialTheme.typography.headlineSmall, color = accent)
+            Text("›", fontSize = 44.sp, color = accent, fontWeight = FontWeight.Bold)
         }
     }
 }

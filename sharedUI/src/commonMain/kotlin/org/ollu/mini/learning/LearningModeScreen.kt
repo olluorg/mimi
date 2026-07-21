@@ -3,6 +3,7 @@ package org.ollu.mini.learning
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -10,8 +11,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import kotlinx.coroutines.launch
+import org.ollu.mini.sound.rememberTtsPlayer
 import mimi.core.curriculum.BalancedSkillPlanner
 import mimi.core.curriculum.ChildSkillState
 import mimi.core.curriculum.DefaultSkillMapper
@@ -65,7 +69,7 @@ fun LearningModeScreen(
         ) {
             item {
                 TextButton(onClick = onBack, contentPadding = PaddingValues(0.dp)) {
-                    Text("← Назад", color = Color(0xFF666666))
+                    Text("⬅  Назад", color = Color(0xFF666666))
                 }
                 Surface(shape = RoundedCornerShape(8.dp), color = Color.White, modifier = Modifier.fillMaxWidth()) {
                     Column(Modifier.padding(18.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
@@ -216,39 +220,74 @@ private fun NextSceneCard(
     error: String?,
     onStart: () -> Unit
 ) {
-    Surface(shape = RoundedCornerShape(8.dp), color = Color.White, modifier = Modifier.fillMaxWidth()) {
-        Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
-            Row(verticalAlignment = Alignment.CenterVertically) {
-                Box(
-                    Modifier
-                        .size(36.dp)
-                        .background(Color(0xFFE5F5F1), RoundedCornerShape(8.dp)),
-                    contentAlignment = Alignment.Center
-                ) {
-                    Box(Modifier.size(14.dp).background(Color(0xFF2A9D8F), RoundedCornerShape(4.dp)))
-                }
-                Spacer(Modifier.width(10.dp))
-                Text("Следующая сцена", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.SemiBold)
-            }
+    val tts = rememberTtsPlayer()
+    Surface(shape = RoundedCornerShape(24.dp), color = Color.White, modifier = Modifier.fillMaxWidth()) {
+        Column(
+            Modifier.padding(20.dp),
+            verticalArrangement = Arrangement.spacedBy(16.dp),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Text(
+                "Следующая игра",
+                style = MaterialTheme.typography.labelLarge,
+                color = Color(0xFF687381)
+            )
             if (entry == null) {
                 Text("Каталог пока пуст.", color = Color(0xFF687381))
             } else {
-                Text(entry.title.ifBlank { entry.id }, style = MaterialTheme.typography.titleLarge, color = Color(0xFF263445))
-                if (entry.description.isNotBlank()) {
-                    Text(entry.description, color = Color(0xFF687381))
-                }
-                Button(
-                    onClick = onStart,
-                    enabled = !loading,
-                    colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF2A9D8F)),
-                    modifier = Modifier.fillMaxWidth()
+                Box(
+                    modifier = Modifier
+                        .size(160.dp)
+                        .background(Color(0xFFE5F5F1), CircleShape),
+                    contentAlignment = Alignment.Center
                 ) {
-                    if (loading) {
-                        CircularProgressIndicator(Modifier.size(18.dp), strokeWidth = 2.dp, color = Color.White)
-                        Spacer(Modifier.width(8.dp))
+                    if (entry.icon.isNotBlank()) {
+                        Text(entry.icon, fontSize = 96.sp)
+                    } else {
+                        Text(
+                            entry.title.firstOrNull()?.uppercase() ?: "M",
+                            fontSize = 72.sp,
+                            color = Color(0xFF2A9D8F),
+                            fontWeight = FontWeight.Bold
+                        )
                     }
-                    Text("Начать")
                 }
+                Text(
+                    entry.title.ifBlank { entry.id },
+                    style = MaterialTheme.typography.headlineSmall,
+                    fontWeight = FontWeight.Bold,
+                    color = Color(0xFF263445),
+                    textAlign = TextAlign.Center
+                )
+                Surface(
+                    onClick = {
+                        if (!loading) {
+                            tts.speak(entry.title.ifBlank { "Играть" })
+                            onStart()
+                        }
+                    },
+                    shape = CircleShape,
+                    color = Color(0xFF2A9D8F),
+                    shadowElevation = 4.dp,
+                    modifier = Modifier.size(96.dp)
+                ) {
+                    Box(contentAlignment = Alignment.Center, modifier = Modifier.fillMaxSize()) {
+                        if (loading) {
+                            CircularProgressIndicator(
+                                Modifier.size(40.dp),
+                                strokeWidth = 3.dp,
+                                color = Color.White
+                            )
+                        } else {
+                            Text("▶", fontSize = 48.sp, color = Color.White)
+                        }
+                    }
+                }
+                Text(
+                    "Нажми, чтобы играть",
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = Color(0xFF687381)
+                )
             }
             if (error != null) {
                 Text(error, color = Color(0xFFB00020), style = MaterialTheme.typography.bodySmall)
