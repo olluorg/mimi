@@ -1,5 +1,7 @@
 package org.ollu.mini.progress
 
+import mimi.core.engine.SpeechTurn
+
 /**
  * How a child's attempts at one scene are going.
  *
@@ -201,17 +203,14 @@ private const val RECENT_SPEECH_SESSIONS = 10
 private fun wordsOf(sessions: List<SessionRecord>): List<WordInsight> =
     sessions
         .flatMap { it.turns }
-        .mapNotNull { entry ->
-            val parts = entry.split("|")
-            if (parts.size != 2 || parts[0].isBlank()) null else parts[0] to parts[1]
-        }
-        .groupBy({ it.first }, { it.second })
-        .map { (word, outcomes) ->
+        .mapNotNull(SpeechTurn::decode)
+        .groupBy { it.word }
+        .map { (word, turns) ->
             WordInsight(
                 word     = word,
-                asked    = outcomes.size,
-                answered = outcomes.count { it != "none" },
-                exact    = outcomes.count { it == "exact" }
+                asked    = turns.size,
+                answered = turns.count { it.answered },
+                exact    = turns.count { it.exact }
             )
         }
         .sortedWith(compareBy({ it.share }, { -it.asked }))

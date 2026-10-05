@@ -13,68 +13,7 @@ import mimi.core.objective.ObjectiveSystem
 import mimi.core.plugin.FeedbackContext
 import mimi.core.plugin.FeedbackRegistry
 import mimi.core.world.*
-import kotlin.reflect.KClass
 import kotlin.time.TimeSource
-
-/**
- * How a single play-through went. Feeds the skill mapper, which scores a scene
- * on how much help the child needed rather than on completion alone.
- */
-data class SessionMetrics(
-    val mistakes:        Int  = 0,
-    val hintsUsed:       Int  = 0,
-    val matches:         Int  = 0,
-    val durationMs:      Long = 0L,
-    val levelsCompleted: Int  = 0,
-    /**
-     * What the child answered, in a scene where answering was the point.
-     *
-     * A list, because a scene may ask several times: "do you want an apple?",
-     * then a biscuit, then a ball. A choice game produces no score — these
-     * answers are its entire result, and the reason an adult opens the progress
-     * screen after one.
-     */
-    val choices:         List<String> = emptyList(),
-    /**
-     * Times the child made a sound of their own that the microphone heard.
-     *
-     * In a speech game this is the result. Mistakes and hints say little about
-     * a child who is not yet talking; whether they try to more often than last
-     * week says almost everything.
-     */
-    val vocalAttempts:   Int  = 0,
-    /** Attempts an adult vouched for with the "сказал(а)" button. */
-    val adultConfirmed:  Int  = 0,
-    /**
-     * Turns that ended without any answer, after the word had been modelled
-     * again. Not a mistake — the game moves on regardless — but a rising share
-     * of these says the words are too hard or the child is tired.
-     */
-    val unanswered:      Int  = 0,
-    /** Turns of a speech game the child answered — by voice, picture or the adult's word. */
-    val responses:       Int  = 0,
-    /** Answers where the vowel heard was exactly the one modelled. */
-    val exactResponses:  Int  = 0,
-    /**
-     * Every turn of a speech game: which word, and how it went. A total says
-     * the child tried eleven times; this says which words they answer and
-     * which they never do, which is what changes what to practise next.
-     */
-    val turns:           List<SpeechTurn> = emptyList()
-) {
-    /** The last thing answered, for a scene that only asks once. */
-    val choice: String? get() = choices.lastOrNull()
-}
-
-/** One turn of a speech game: the word modelled and what came back. */
-data class SpeechTurn(
-    val word:    String,
-    /** exact, voice, adult, tap — or none, when the turn passed in silence. */
-    val outcome: String
-) {
-    val answered: Boolean get() = outcome != "none"
-    val exact:    Boolean get() = outcome == "exact"
-}
 
 class EngineSession(
     private val scene:            SceneDefinition,
@@ -114,14 +53,8 @@ class EngineSession(
     // Advancing a level rebuilds the world from scratch, which zeroes its counters.
     // The learning profile is scored per scene, not per level, so the totals so far
     // are carried across the boundary.
-    private var carriedMistakes: Long = 0L
-    private var carriedHints:    Long = 0L
-    private var carriedVocal:    Long = 0L
-    private var carriedAdult:    Long = 0L
-    private var carriedUnanswered: Long = 0L
-    private var carriedResponses:  Long = 0L
-    private var carriedExact:      Long = 0L
-    private val carriedTurns = mutableListOf<SpeechTurn>()
+    private val carriedCounters = mutableMapOf<String, Long>()
+    private val carriedTurns    = mutableListOf<SpeechTurn>()
     // Each round rebuilds the world, which would otherwise drop the answer given
     // in it — so a five-question scene reported only its last answer.
     private val carriedChoices = mutableListOf<String>()
@@ -174,56 +107,47 @@ class EngineSession(
         }
     }
 
+    /** Plays the scene's opening instruction again — the "повтори задание" button. */
+    suspend fun repeatInstruction() = dispatch(GameEvent.InstructionRequested(tick = tickCount))
+
     /**
      * What this play-through cost the child so far: the numbers the curriculum
      * scores a scene on. Safe to read at any time; read it when the scene
      * completes to score the attempt.
      */
-    /** Plays the scene's opening instruction again — the "повтори задание" button. */
-    suspend fun repeatInstruction() = dispatch(GameEvent.InstructionRequested(tick = tickCount))
-
     fun metrics(): SessionMetrics {
         val snapshot = world.snapshot()
+        fun total(counter: String) = ((carriedCounters[counter] ?: 0L) + snapshot.getCounter(counter)).toInt()
         return SessionMetrics(
-            mistakes        = (carriedMistakes + snapshot.mistakes()).toInt(),
-            hintsUsed       = (carriedHints + snapshot.hints()).toInt(),
+            mistakes        = total("mistakes"),
+            hintsUsed       = total("hints"),
             matches         = snapshot.matches().toInt(),
             durationMs      = startMark.elapsedNow().inWholeMilliseconds,
             levelsCompleted = currentLevelIndex,
-            choices         = carriedChoices + listOfNotNull(currentChoice()),
-            vocalAttempts   = (carriedVocal + snapshot.getCounter(COUNTER_VOCAL)).toInt(),
-            adultConfirmed  = (carriedAdult + snapshot.getCounter(COUNTER_ADULT)).toInt(),
-            unanswered      = (carriedUnanswered + snapshot.getCounter(COUNTER_UNANSWERED)).toInt(),
-            responses       = (carriedResponses + snapshot.getCounter(COUNTER_RESPONSES)).toInt(),
-            exactResponses  = (carriedExact + snapshot.getCounter(COUNTER_EXACT)).toInt(),
+            choices         = carriedChoices + listOfNotNull(currentChoice(snapshot)),
+            vocalAttempts   = total(COUNTER_VOCAL),
+            adultConfirmed  = total(COUNTER_ADULT),
+            unanswered      = total(COUNTER_UNANSWERED),
+            responses       = total(COUNTER_RESPONSES),
+            exactResponses  = total(COUNTER_EXACT),
             turns           = carriedTurns + turnsOf(snapshot)
         )
     }
 
     /** The turn log the speech behavior keeps on the scene entity. */
-    private fun turnsOf(snapshot: WorldSnapshot): List<SpeechTurn> {
-        val raw = (snapshot.getProperty(SCENE_ENTITY_ID, AwaitResponseBehavior.KEY_LOG) as? PropertyValue.Text)
-            ?.value.orEmpty()
-        if (raw.isBlank()) return emptyList()
-        return raw.split(AwaitResponseBehavior.TURN_SEPARATOR).mapNotNull { entry ->
-            val parts = entry.split(AwaitResponseBehavior.FIELD_SEPARATOR)
-            if (parts.size != 2 || parts[0].isBlank()) null else SpeechTurn(parts[0], parts[1])
-        }
-    }
+    private fun turnsOf(snapshot: WorldSnapshot): List<SpeechTurn> =
+        SpeechTurn.decodeLog(
+            (snapshot.getProperty(SCENE_ENTITY_ID, AwaitResponseBehavior.KEY_LOG) as? PropertyValue.Text)
+                ?.value.orEmpty()
+        )
 
-    private fun currentChoice(): String? =
-        (world.snapshot().getProperty(SCENE_ENTITY_ID, "lastChoice") as? PropertyValue.Text)?.value
+    private fun currentChoice(snapshot: WorldSnapshot): String? =
+        (snapshot.getProperty(SCENE_ENTITY_ID, "lastChoice") as? PropertyValue.Text)?.value
 
     fun reset() {
         scope.launch {
             mutex.withLock {
-                carriedMistakes   = 0L
-                carriedHints      = 0L
-                carriedVocal      = 0L
-                carriedAdult      = 0L
-                carriedUnanswered = 0L
-                carriedResponses  = 0L
-                carriedExact      = 0L
+                carriedCounters.clear()
                 carriedTurns.clear()
                 carriedChoices.clear()
                 startMark         = TimeSource.Monotonic.markNow()
@@ -231,29 +155,25 @@ class EngineSession(
                 // A replay deals a fresh arrangement: "again" should not mean
                 // the identical screen the child has just solved.
                 seed              = seed + 1
-                world             = DefaultWorldStateFactory.fromScene(scene, seed)
-                tickCount         = 0L
-                currentSceneState = scene.stateMachine?.initialState
-                pendingSystemEvents.clear()
-                fsmTimerJob?.cancel()
-                enterSceneState(currentSceneState, tick = 0L, runEnterActions = true)
-                _worldState.value = world.snapshot()
+                restartWorld(DefaultWorldStateFactory.fromScene(scene, seed))
             }
         }
     }
 
     private fun advanceLevel() {
-        carriedMistakes  += world.mistakes()
-        carriedHints     += world.hints()
-        carriedVocal     += world.getCounter(COUNTER_VOCAL)
-        carriedAdult     += world.getCounter(COUNTER_ADULT)
-        carriedUnanswered += world.getCounter(COUNTER_UNANSWERED)
-        carriedResponses  += world.getCounter(COUNTER_RESPONSES)
-        carriedExact      += world.getCounter(COUNTER_EXACT)
-        carriedTurns      += turnsOf(world.snapshot())
-        currentChoice()?.let { carriedChoices += it }
+        val snapshot = world.snapshot()
+        for (counter in CARRIED_COUNTERS) {
+            carriedCounters[counter] = (carriedCounters[counter] ?: 0L) + snapshot.getCounter(counter)
+        }
+        carriedTurns += turnsOf(snapshot)
+        currentChoice(snapshot)?.let { carriedChoices += it }
         currentLevelIndex++
-        world             = DefaultWorldStateFactory.forLevel(scene, currentLevelIndex, seed)
+        restartWorld(DefaultWorldStateFactory.forLevel(scene, currentLevelIndex, seed))
+    }
+
+    /** Swaps in a freshly built world and starts the scene's state machine over. */
+    private fun restartWorld(fresh: WorldState) {
+        world             = fresh
         tickCount         = 0L
         currentSceneState = scene.stateMachine?.initialState
         pendingSystemEvents.clear()
@@ -430,47 +350,12 @@ class EngineSession(
         return scene.stateMachine?.states?.firstOrNull { it.id == stateId }?.inputEnabled ?: true
     }
 
-    private fun eventName(event: GameEvent): String = when (event) {
-        is GameEvent.Tap -> "tap"
-        is GameEvent.DragStart -> "drag_start"
-        is GameEvent.DragMove -> "drag_move"
-        is GameEvent.Drop -> "drop"
-        is GameEvent.Hold -> "hold"
-        is GameEvent.TracePoint -> "trace_point"
-        is GameEvent.TraceComplete -> "trace_complete"
-        is GameEvent.VoiceLevel -> "voice_level"
-        is GameEvent.Vocalization -> "vocalization"
-        is GameEvent.ClockTick -> "clock_tick"
-        is GameEvent.MatchSuccess -> "match_success"
-        is GameEvent.MatchFail -> "match_fail"
-        is GameEvent.ObjectiveProgressed -> "objective_progressed"
-        is GameEvent.ObjectiveCompleted -> "objective_completed"
-        is GameEvent.ObjectiveReverted -> "objective_reverted"
-        is GameEvent.ObjectiveLocked -> "objective_locked"
-        is GameEvent.SceneStarted -> "scene_started"
-        is GameEvent.InstructionRequested -> "instruction_requested"
-        is GameEvent.SceneCompleted -> "scene_completed"
-        is GameEvent.SceneReset -> "scene_reset"
-        is GameEvent.SceneStateEntered -> "scene_state_entered"
-        is GameEvent.SceneStateTimeout -> "scene_state_timeout"
-        is GameEvent.HintTriggered -> "hint_triggered"
-        is GameEvent.IdleCheck -> "idle_check"
-        is GameEvent.LevelCompleted -> "level_completed"
-    }
-
     private fun applyFsmTransitions(event: GameEvent) {
         val stateMachine = scene.stateMachine ?: return
-        val current = currentSceneState ?: return
-        val name = eventName(event)
-        val transition = stateMachine.transitions.firstOrNull { transition ->
-            transition.from == current && when {
-                event is GameEvent.SceneStateTimeout -> transition.afterMs != null &&
-                    (transition.onEvent == null || transition.onEvent == name)
-                else -> transition.onEvent == name
-            }
-        } ?: return
+        val current      = currentSceneState ?: return
+        val transition   = stateMachine.transitionFor(current, event) ?: return
 
-        applyFsmActions(transition.actions, tickCount)
+        commitFsmCommands(fsmCommands(transition.actions, tickCount))
         enterSceneState(transition.to, tickCount, runEnterActions = true)
     }
 
@@ -482,30 +367,11 @@ class EngineSession(
         currentSceneState = nextId
         fsmTimerJob?.cancel()
 
-        val commands = mutableListOf<Command>(
-            Command.SetProperty(
-                target = SCENE_ENTITY_ID,
-                field = "sceneState",
-                value = PropertyValue.Text(nextId),
-                priority = 500,
-                source = "scene_fsm",
-                tick = tick
-            ),
-            Command.SetProperty(
-                target = SCENE_ENTITY_ID,
-                field = "inputEnabled",
-                value = PropertyValue.Flag(state.inputEnabled),
-                priority = 500,
-                source = "scene_fsm",
-                tick = tick
-            )
-        )
+        val commands = fsmStateCommands(nextId, state.inputEnabled, tick).toMutableList()
         if (runEnterActions) commands += fsmCommands(state.onEnter, tick)
         commitFsmCommands(commands)
-        _worldState.value = world.snapshot()
 
-        val timeout = state.durationMs
-            ?: stateMachine.transitions.firstOrNull { it.from == nextId && it.afterMs != null }?.afterMs
+        val timeout = stateMachine.timeoutOf(nextId)
         if (timeout != null && timeout > 0L) {
             fsmTimerJob = scope.launch {
                 delay(timeout)
@@ -514,14 +380,8 @@ class EngineSession(
         }
     }
 
-    private fun applyFsmActions(actions: List<SceneFsmActionDefinition>, tick: Tick) {
-        val commands = fsmCommands(actions, tick)
-        if (commands.isEmpty()) return
-        commitFsmCommands(commands)
-        _worldState.value = world.snapshot()
-    }
-
     private fun commitFsmCommands(commands: List<Command>) {
+        if (commands.isEmpty()) return
         val feedback = commands.filterIsInstance<Command.TriggerFeedback>()
         val regular = commands.filterNot { it is Command.TriggerFeedback }
         if (regular.isNotEmpty()) {
@@ -529,48 +389,8 @@ class EngineSession(
         }
         val fbCtx = FeedbackContext(world.snapshot(), tickCount)
         feedback.forEach { feedbackRegistry.dispatch(it.feedbackType, it.params, fbCtx) }
+        _worldState.value = world.snapshot()
     }
-
-    private fun fsmCommands(actions: List<SceneFsmActionDefinition>, tick: Tick): List<Command> =
-        actions.mapNotNull { action ->
-            when (action.type) {
-                "setProperty" -> {
-                    val entityId = action.entityId ?: return@mapNotNull null
-                    val field = action.field ?: return@mapNotNull null
-                    val value = action.value ?: return@mapNotNull null
-                    Command.SetProperty(
-                        target = entityId,
-                        field = field,
-                        value = value,
-                        priority = 500,
-                        source = "scene_fsm",
-                        tick = tick
-                    )
-                }
-                "setEntityState" -> {
-                    val entityId = action.entityId ?: return@mapNotNull null
-                    val state = action.state ?: return@mapNotNull null
-                    Command.SetEntityState(
-                        target = entityId,
-                        state = state,
-                        priority = 500,
-                        source = "scene_fsm",
-                        tick = tick
-                    )
-                }
-                "triggerFeedback" -> {
-                    val feedbackType = action.feedbackType ?: return@mapNotNull null
-                    Command.TriggerFeedback(
-                        feedbackType = feedbackType,
-                        params = action.params,
-                        priority = 500,
-                        source = "scene_fsm",
-                        tick = tick
-                    )
-                }
-                else -> null
-            }
-        }
 
     // ── Idle Tick Loop ────────────────────────────────────────────────────────
 
@@ -645,64 +465,8 @@ class EngineSession(
 /** How often waiting behaviors are woken. A pause is felt in whole seconds. */
 private const val CLOCK_PERIOD_MS = 250L
 
-/** Counters on the scene entity that make up the speech result of a session. */
-const val COUNTER_VOCAL      = "vocalAttempts"
-const val COUNTER_ADULT      = "adultConfirmed"
-const val COUNTER_UNANSWERED = "unanswered"
-const val COUNTER_RESPONSES  = "responses"
-const val COUNTER_EXACT      = "exactResponses"
-
-// ── Engine Builder ────────────────────────────────────────────────────────────
-
-class EngineBuilder {
-    private val plugins     = mutableListOf<BehaviorPlugin>()
-    private var feedbackReg = mimi.core.plugin.DefaultFeedbackRegistry()
-    private var objSystem   = ObjectiveSystem()
-
-    fun withPlugin(plugin: BehaviorPlugin): EngineBuilder {
-        plugins.add(plugin)
-        return this
-    }
-
-    fun withFeedbackRegistry(registry: mimi.core.plugin.FeedbackRegistry): EngineBuilder {
-        feedbackReg = registry as? mimi.core.plugin.DefaultFeedbackRegistry ?: feedbackReg
-        return this
-    }
-
-    fun build(
-        scene: SceneDefinition,
-        scope: CoroutineScope,
-        seed:  Long = 0L,
-        clock: (() -> Long)? = null
-    ): EngineSession {
-        val behaviorRegistry = DefaultBehaviorRegistry()
-        plugins.forEach { behaviorRegistry.register(it) }
-
-        val behaviors = buildList {
-            for (binding in scene.behaviors) {
-                add(behaviorRegistry.create(binding.behaviorRef, binding.entityId))
-            }
-            for (entity in scene.entities) {
-                for (ref in entity.behaviors) {
-                    if (behaviorRegistry.isRegistered(ref.type)) {
-                        add(behaviorRegistry.create(ref, entity.id))
-                    }
-                }
-            }
-        }
-
-        // Each session owns a child scope so close() cancels only its own coroutines
-        // without affecting the caller's (Compose) scope.
-        val sessionScope = CoroutineScope(scope.coroutineContext + Job(scope.coroutineContext[Job]))
-
-        return EngineSession(
-            scene            = scene,
-            behaviors        = behaviors,
-            feedbackRegistry = feedbackReg,
-            objectiveSystem  = objSystem,
-            scope            = sessionScope,
-            seed             = seed,
-            clock            = clock
-        )
-    }
-}
+/** Counters reset by a level change whose totals are still owed to the session. */
+private val CARRIED_COUNTERS = listOf(
+    "mistakes", "hints",
+    COUNTER_VOCAL, COUNTER_ADULT, COUNTER_UNANSWERED, COUNTER_RESPONSES, COUNTER_EXACT
+)

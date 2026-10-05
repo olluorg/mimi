@@ -4,6 +4,7 @@ import com.russhwolf.settings.Settings
 import com.russhwolf.settings.set
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
+import mimi.core.engine.SessionMetrics
 
 /**
  * One finished attempt at a scene.
@@ -45,6 +46,31 @@ data class SessionRecord(
 ) {
     /** Every attempt to communicate, however it was noticed. */
     val speechAttempts: Int get() = vocalAttempts + adultConfirmed
+
+    companion object {
+        /** A finished play-through, as it is kept. */
+        fun completed(
+            sceneId:    String,
+            atEpochMs:  Long,
+            metrics:    SessionMetrics,
+            speechGame: Boolean
+        ) = SessionRecord(
+            sceneId        = sceneId,
+            atEpochMs      = atEpochMs,
+            durationMs     = metrics.durationMs,
+            mistakes       = metrics.mistakes,
+            hintsUsed      = metrics.hintsUsed,
+            completed      = true,
+            choices        = metrics.choices,
+            vocalAttempts  = metrics.vocalAttempts,
+            adultConfirmed = metrics.adultConfirmed,
+            unanswered     = metrics.unanswered,
+            responses      = metrics.responses,
+            exactResponses = metrics.exactResponses,
+            turns          = metrics.turns.map { it.encode() },
+            speechGame     = speechGame
+        )
+    }
 }
 
 /**

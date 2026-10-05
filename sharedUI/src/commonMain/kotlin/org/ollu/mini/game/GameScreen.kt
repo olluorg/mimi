@@ -1,29 +1,24 @@
 package org.ollu.mini.game
 
-import org.ollu.mini.sound.SystemPhrases
 import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.scaleIn
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.ui.semantics.contentDescription
-import androidx.compose.ui.semantics.semantics
-import kotlinx.coroutines.launch
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.hapticfeedback.HapticFeedbackType
+import androidx.compose.ui.platform.LocalHapticFeedback
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
+import kotlinx.coroutines.launch
 import mimi.core.constraints.registerBuiltins
-import kotlin.time.Clock
-import kotlin.time.ExperimentalTime
 import mimi.core.engine.EngineBuilder
 import mimi.core.engine.SessionMetrics
 import mimi.core.engine.withDefaultPlugins
@@ -33,8 +28,6 @@ import mimi.core.objective.ObjectiveProgress
 import mimi.core.plugin.DefaultConstraintRegistry
 import mimi.core.plugin.DefaultFeedbackRegistry
 import mimi.core.world.SceneDefinition
-import androidx.compose.ui.hapticfeedback.HapticFeedbackType
-import androidx.compose.ui.platform.LocalHapticFeedback
 import org.ollu.mini.feedback.HapticCue
 import org.ollu.mini.feedback.HapticFeedbackChannel
 import org.ollu.mini.feedback.HintStateChannel
@@ -44,22 +37,16 @@ import org.ollu.mini.feedback.TtsFeedbackChannel
 import org.ollu.mini.progress.ProgressRepository
 import org.ollu.mini.progress.SessionRecord
 import org.ollu.mini.renderer.SceneRenderer
-import org.ollu.mini.renderer.CatalogAnimation
-import org.ollu.mini.renderer.CONFETTI_ANIMATION
-import androidx.compose.animation.core.spring
-import org.ollu.mini.sound.rememberTtsPlayer
-import androidx.compose.ui.text.style.TextAlign
 import org.ollu.mini.theme.AppIcon
 import org.ollu.mini.theme.AppIconGlyph
+import kotlin.time.Clock
+import kotlin.time.ExperimentalTime
 
 /** Mistakes in one scene before the child is offered a way past it. */
 private const val STUCK_AFTER_MISTAKES = 3L
 
 /** Or this long without touching anything, for the games that cannot be failed. */
 private const val STUCK_AFTER_IDLE_SECONDS = 25
-
-/** Above this many steps, pips stop being countable and a bar reads better. */
-private const val MAX_PIPS = 10
 
 data class CompletionAction(
     val label:   String,
@@ -110,39 +97,7 @@ fun GameScreen(
     }
 
     if (buildError != null) {
-        Box(Modifier.fillMaxSize().background(Color(0xFFF5F7FA)).safeDrawingPadding()) {
-            if (onBack != null) {
-                TextButton(
-                    onClick  = onBack,
-                    modifier = Modifier.align(Alignment.TopStart).padding(8.dp)
-                ) { AppIconGlyph(AppIcon.Back, Color(0xFF666666), size = 18.dp); Text("  Назад", color = Color(0xFF666666)) }
-            }
-            Column(
-                modifier            = Modifier.align(Alignment.Center).padding(32.dp),
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = androidx.compose.foundation.layout.Arrangement.spacedBy(12.dp)
-            ) {
-                AppIconGlyph(AppIcon.Warning, Color(0xFFB00020), size = 46.dp)
-                Text(
-                    "Сцена не запустилась",
-                    style      = MaterialTheme.typography.titleMedium,
-                    color      = Color(0xFFB00020),
-                    fontWeight = FontWeight.SemiBold
-                )
-                Surface(
-                    shape    = RoundedCornerShape(8.dp),
-                    color    = Color(0xFFFFEBEE),
-                    modifier = Modifier.fillMaxWidth()
-                ) {
-                    Text(
-                        buildError.message ?: buildError.toString(),
-                        style    = MaterialTheme.typography.bodySmall,
-                        color    = Color(0xFFB00020),
-                        modifier = Modifier.padding(12.dp)
-                    )
-                }
-            }
-        }
+        SceneErrorScreen(buildError, onBack)
         return
     }
 
@@ -184,21 +139,11 @@ fun GameScreen(
                 // mode, because the adult reviewing progress wants the whole picture.
                 repo.recordSession(
                     childId = childId,
-                    record  = SessionRecord(
+                    record  = SessionRecord.completed(
                         sceneId    = scene.sceneId,
                         atEpochMs  = Clock.System.now().toEpochMilliseconds(),
-                        durationMs = metrics.durationMs,
-                        mistakes   = metrics.mistakes,
-                        hintsUsed  = metrics.hintsUsed,
-                        completed  = true,
-                        choices    = metrics.choices,
-                        vocalAttempts  = metrics.vocalAttempts,
-                        adultConfirmed = metrics.adultConfirmed,
-                        unanswered     = metrics.unanswered,
-                        responses      = metrics.responses,
-                        exactResponses = metrics.exactResponses,
-                        turns          = metrics.turns.map { "${it.word}|${it.outcome}" },
-                        speechGame     = scene.meta.speech != null
+                        metrics    = metrics,
+                        speechGame = scene.meta.speech != null
                     )
                 )
             }
@@ -217,12 +162,7 @@ fun GameScreen(
             hintFocus      = hintFocus
         )
 
-        if (onBack != null) {
-            TextButton(
-                onClick  = onBack,
-                modifier = Modifier.align(Alignment.TopStart).padding(8.dp)
-            ) { AppIconGlyph(AppIcon.Back, Color(0xFF666666), size = 18.dp); Text("  Назад", color = Color(0xFF666666)) }
-        }
+        if (onBack != null) BackButton(onBack, Modifier.align(Alignment.TopStart))
 
         // "Say it again". A child who looked away during the instruction, or did
         // not catch it, has no other way back to it — they cannot read the
@@ -268,25 +208,13 @@ fun GameScreen(
             )
         }
 
-        val totalLevels  = snapshot.totalLevels()
-        val currentLevel = snapshot.currentLevel()
+        val totalLevels = snapshot.totalLevels()
         if (totalLevels > 1) {
-            Row(
-                modifier              = Modifier.align(Alignment.TopEnd).padding(12.dp),
-                horizontalArrangement = Arrangement.spacedBy(6.dp),
-                verticalAlignment     = Alignment.CenterVertically
-            ) {
-                repeat(totalLevels) { i ->
-                    Box(
-                        Modifier
-                            .size(if (i == currentLevel) 12.dp else 8.dp)
-                            .background(
-                                if (i <= currentLevel) Color(0xFF2A9D8F) else Color.White.copy(alpha = 0.45f),
-                                CircleShape
-                            )
-                    )
-                }
-            }
+            LevelDots(
+                total    = totalLevels,
+                current  = snapshot.currentLevel(),
+                modifier = Modifier.align(Alignment.TopEnd).padding(12.dp)
+            )
         }
 
         // A way out, shown only once the child is visibly stuck. Offering it from
@@ -323,147 +251,5 @@ fun GameScreen(
         ) {
             CompletionOverlay(actions = completionActions)
         }
-    }
-}
-
-/**
- * The goal as a row of pips that fill in, or a bar when there are too many to
- * count at a glance. Wordless: it is read by a child who cannot read.
- */
-@Composable
-private fun GoalProgress(
-    progress: mimi.core.objective.SceneProgress,
-    modifier: Modifier = Modifier
-) {
-    val accent = Color(0xFF2A9D8F)
-    if (progress.total <= MAX_PIPS) {
-        Row(
-            modifier = modifier,
-            horizontalArrangement = Arrangement.spacedBy(9.dp),
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            repeat(progress.total) { index ->
-                val filled = index < progress.done
-                // Each step done is a star collected — something to earn and
-                // to see growing, not just a dot changing colour.
-                val scale by animateFloatAsState(
-                    targetValue = if (filled) 1f else 0.7f,
-                    animationSpec = spring(dampingRatio = 0.35f, stiffness = 300f),
-                    label = "pip"
-                )
-                Box(Modifier.size(30.dp), contentAlignment = Alignment.Center) {
-                    if (filled) {
-                        AppIconGlyph(AppIcon.Star, Color(0xFFFFC107), size = (30 * scale).dp)
-                    } else {
-                        Box(
-                            Modifier
-                                .size((18 * scale).dp)
-                                .background(Color.Black.copy(alpha = 0.16f), CircleShape)
-                        )
-                    }
-                }
-            }
-        }
-    } else {
-        val fraction by animateFloatAsState(
-            targetValue = progress.fraction,
-            animationSpec = tween(260),
-            label = "bar"
-        )
-        Box(
-            modifier
-                .width(220.dp)
-                .height(12.dp)
-                .background(Color.Black.copy(alpha = 0.14f), CircleShape)
-        ) {
-            Box(
-                Modifier
-                    .fillMaxHeight()
-                    .fillMaxWidth(fraction)
-                    .background(accent, CircleShape)
-            )
-        }
-    }
-}
-
-@Composable
-private fun CompletionOverlay(actions: List<CompletionAction>) {
-    val tts = rememberTtsPlayer()
-    LaunchedEffect(Unit) { tts.speak(SystemPhrases.WELL_DONE) }
-    Box(
-        modifier         = Modifier.fillMaxSize().background(Color.Black.copy(alpha = 0.55f)),
-        contentAlignment = Alignment.Center
-    ) {
-        CatalogAnimation(
-            CONFETTI_ANIMATION, Modifier.fillMaxSize(),
-            contentScale = androidx.compose.ui.layout.ContentScale.Crop
-        )
-        Surface(
-            shape = RoundedCornerShape(28.dp),
-            color = Color.White,
-            modifier = Modifier.padding(24.dp)
-        ) {
-            Column(
-                modifier = Modifier.padding(horizontal = 28.dp, vertical = 28.dp),
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.spacedBy(12.dp)
-            ) {
-                AppIconGlyph(AppIcon.Star, Color(0xFFE9A13B), size = 92.dp)
-                Text(
-                    "Молодец!",
-                    style = MaterialTheme.typography.displaySmall,
-                    color = Color(0xFF1D3557),
-                    fontWeight = FontWeight.Bold
-                )
-                if (actions.isNotEmpty()) {
-                    Spacer(Modifier.height(6.dp))
-                    Row(
-                        horizontalArrangement = Arrangement.spacedBy(16.dp),
-                        verticalAlignment = Alignment.Top
-                    ) {
-                        actions.forEach { action ->
-                            // Not spoken: "Ещё раз" restarts the game, whose
-                            // instruction would talk over it.
-                            CompletionActionTile(action) { action.onClick() }
-                        }
-                    }
-                }
-            }
-        }
-    }
-}
-
-@Composable
-private fun CompletionActionTile(action: CompletionAction, onClick: () -> Unit) {
-    val accent = if (action.primary) Color(0xFF2A9D8F) else Color(0xFF457B9D)
-    val fillColor = if (action.primary) accent else accent.copy(alpha = 0.14f)
-    val iconColor = if (action.primary) Color.White else accent
-    Column(
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.spacedBy(6.dp),
-        modifier = Modifier.widthIn(min = 92.dp)
-    ) {
-        Surface(
-            onClick = onClick,
-            shape = CircleShape,
-            color = fillColor,
-            shadowElevation = if (action.primary) 4.dp else 1.dp,
-            modifier = Modifier.size(84.dp)
-        ) {
-            Box(contentAlignment = Alignment.Center, modifier = Modifier.fillMaxSize()) {
-                Text(
-                    action.icon.ifBlank { "▶" },
-                    fontSize = 44.sp,
-                    color = iconColor
-                )
-            }
-        }
-        Text(
-            action.label,
-            style = MaterialTheme.typography.bodyMedium,
-            color = Color(0xFF263445),
-            textAlign = TextAlign.Center,
-            maxLines = 2
-        )
     }
 }

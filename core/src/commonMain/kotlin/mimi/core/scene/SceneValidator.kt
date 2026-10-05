@@ -1,6 +1,7 @@
 package mimi.core.scene
 
 import mimi.core.behavior.BehaviorRegistry
+import mimi.core.behaviors.AwaitResponsePlugin
 import mimi.core.model.PropertyValue
 import mimi.core.model.SCENE_ENTITY_ID
 import mimi.core.model.ValidationResult
@@ -64,6 +65,11 @@ private val ALTERNATIVE_PLACEMENTS = setOf("waypoints", "center")
  */
 private val DISPLAYED_TEXT_KEYS = listOf("emoji", "label", "name", "face", "faceLabel", "speech")
 
+/** Properties the renderer turns into a picture rather than text. */
+private val PICTURE_KEYS = listOf("image", "shape", "count", "pictogram")
+
+private fun EntityDefinition.drawsPicture(): Boolean = PICTURE_KEYS.any { properties[it] != null }
+
 /**
  * A picture a tile is trying to make out of characters.
  *
@@ -75,9 +81,7 @@ private val DISPLAYED_TEXT_KEYS = listOf("emoji", "label", "name", "face", "face
  * warning to keep it that way.
  */
 private fun EntityDefinition.unrenderableText(): String? {
-    val drawsSomething = properties["image"] != null || properties["shape"] != null ||
-        properties["count"] != null || properties["pictogram"] != null
-    if (drawsSomething) return null
+    if (drawsPicture()) return null
     for (key in DISPLAYED_TEXT_KEYS) {
         val text = (properties[key] as? PropertyValue.Text)?.value?.trim().orEmpty()
         if (text.isNotEmpty() && text.any { !it.hasGlyph() }) return text
@@ -101,8 +105,7 @@ private fun EntityDefinition.unrenderableText(): String? {
  */
 private fun EntityDefinition.readableOnly(): Boolean {
     if ("dropTarget" !in components) return false
-    return properties["image"] == null && properties["shape"] == null &&
-        properties["count"] == null && properties["pictogram"] == null
+    return !drawsPicture()
 }
 
 /**
@@ -115,8 +118,7 @@ private fun EntityDefinition.readableOnly(): Boolean {
  */
 private fun EntityDefinition.wordAsPicture(): String? {
     if (components.none { it in INTERACTIVE_COMPONENTS }) return null
-    val drawsSomething = listOf("image", "faceImage", "shape", "count", "pictogram").any { properties[it] != null }
-    if (drawsSomething) return null
+    if (drawsPicture() || properties["faceImage"] != null) return null
     return listOf("emoji", "face", "label")
         .firstNotNullOfOrNull { (properties[it] as? PropertyValue.Text)?.value?.trim()?.takeIf(String::isNotEmpty) }
         ?.takeIf { it.length > 2 }
@@ -149,11 +151,19 @@ object SceneValidator {
         constraintRegistry: ConstraintRegistry? = null,
         objectiveTypes:     Set<String> = ObjectiveSystem.defaultEvaluators().keys
     ): SceneValidationReport {
-        val errors   = mutableListOf<String>()
-        val warnings = mutableListOf<String>()
+        val findings = Findings()
+        findings.check(scene, behaviorRegistry, constraintRegistry, objectiveTypes)
+        return SceneValidationReport(scene.sceneId, findings.errors, findings.warnings)
+    }
 
+    private fun Findings.check(
+        scene:              SceneDefinition,
+        behaviorRegistry:   BehaviorRegistry,
+        constraintRegistry: ConstraintRegistry?,
+        objectiveTypes:     Set<String>
+    ) {
         // Behaviors are scene-global, so they are checked once rather than per level.
-        validateBehaviors(scene, behaviorRegistry, errors)
+        validateBehaviors(scene, behaviorRegistry)
 
         // A multi-level scene swaps its entities and objectives wholesale on every
         // level, so each level is effectively its own scene and is checked as one.
@@ -162,8 +172,7 @@ object SceneValidator {
                 warnings += "Scene declares both levels[] and top-level entities/objectives; " +
                     "the top-level ones are dead weight — levels[0] shadows them"
             }
-            val levelIds = scene.levels.map { it.levelId }
-            levelIds.groupBy { it }.filter { it.value.size > 1 }.keys.forEach {
+            scene.levels.map { it.levelId }.duplicates().forEach {
                 errors += "Duplicate level ID '$it'"
             }
             scene.levels.forEachIndexed { index, level ->
@@ -173,9 +182,7 @@ object SceneValidator {
                     objectives         = level.objectives,
                     behaviorRegistry   = behaviorRegistry,
                     constraintRegistry = constraintRegistry,
-                    objectiveTypes     = objectiveTypes,
-                    errors             = errors,
-                    warnings           = warnings
+                    objectiveTypes     = objectiveTypes
                 )
             }
         } else {
@@ -185,47 +192,37 @@ object SceneValidator {
                 objectives         = scene.objectives,
                 behaviorRegistry   = behaviorRegistry,
                 constraintRegistry = constraintRegistry,
-                objectiveTypes     = objectiveTypes,
-                errors             = errors,
-                warnings           = warnings
+                objectiveTypes     = objectiveTypes
             )
         }
 
-        validateSpokenInstruction(scene, errors)
-        validateTouchIsAnswered(scene, errors, warnings)
-        validateStateMachine(scene, errors)
-        validateSpeech(scene, errors, warnings)
-
-        return SceneValidationReport(scene.sceneId, errors, warnings)
+        validateSpokenInstruction(scene)
+        validateTouchIsAnswered(scene)
+        validateStateMachine(scene)
+        validateSpeech(scene)
     }
 
     // ── One entity/objective layer (a level, or the scene itself) ─────────────
 
-    private fun validateLayer(
+    private fun Findings.validateLayer(
         label:              String,
         entities:           List<EntityDefinition>,
         objectives:         List<ObjectiveDefinition>,
         behaviorRegistry:   BehaviorRegistry,
         constraintRegistry: ConstraintRegistry?,
-        objectiveTypes:     Set<String>,
-        errors:             MutableList<String>,
-        warnings:           MutableList<String>
+        objectiveTypes:     Set<String>
     ) {
         if (entities.isEmpty()) errors += "$label has no entities"
         if (objectives.isEmpty()) errors += "$label has no objectives — it can never be completed"
 
-        entities.map { it.id }
-            .groupBy { it }
-            .filter { it.value.size > 1 }
-            .keys
-            .forEach { errors += "$label: duplicate entity ID '$it'" }
+        entities.map { it.id }.duplicates().forEach { errors += "$label: duplicate entity ID '$it'" }
 
         if (entities.any { it.id == SCENE_ENTITY_ID }) {
             errors += "$label: entity ID '$SCENE_ENTITY_ID' is reserved by the engine"
         }
 
         for (entity in entities) {
-            validatePlacement(label, entity, errors)
+            validatePlacement(label, entity)
             entity.components.filterNot { it in KNOWN_COMPONENTS }.forEach {
                 errors += "$label: entity '${entity.id}' uses unknown component '$it'"
             }
@@ -245,7 +242,7 @@ object SceneValidator {
                     "a child who cannot read sees an unlabelled basket — give it an image, " +
                     "shape, count or pictogram"
             }
-            validateConstraint(label, entity, constraintRegistry, errors)
+            validateConstraint(label, entity, constraintRegistry)
             (entity.properties["expectSound"] as? PropertyValue.Text)?.value?.let { sound ->
                 if (sound.lowercase() !in EXPECTABLE_SOUNDS) {
                     errors += "$label: entity '${entity.id}' expects sound '$sound'; only the vowels " +
@@ -260,7 +257,7 @@ object SceneValidator {
             }
         }
 
-        validateObjectives(label, entities, objectives, objectiveTypes, errors, warnings)
+        validateObjectives(label, entities, objectives, objectiveTypes)
 
         for (entity in entities) {
             for (ref in entity.behaviors) {
@@ -278,10 +275,9 @@ object SceneValidator {
      * is left with a scene that silently misses a piece. Placement can come from a
      * `position` point, a `waypoints` polyline, or a `center` + `radius` circle.
      */
-    private fun validatePlacement(
+    private fun Findings.validatePlacement(
         label:  String,
-        entity: EntityDefinition,
-        errors: MutableList<String>
+        entity: EntityDefinition
     ) {
         if (entity.components.any { it in NON_VISUAL_COMPONENTS }) return
         if (entity.properties["position"] != null) return
@@ -297,11 +293,10 @@ object SceneValidator {
         }
     }
 
-    private fun validateConstraint(
+    private fun Findings.validateConstraint(
         label:              String,
         entity:             EntityDefinition,
-        constraintRegistry: ConstraintRegistry?,
-        errors:             MutableList<String>
+        constraintRegistry: ConstraintRegistry?
     ) {
         if ("dropTarget" !in entity.components) return
         val constraintType = (entity.properties["constraintType"] as? PropertyValue.Text)?.value
@@ -324,19 +319,14 @@ object SceneValidator {
         }
     }
 
-    private fun validateObjectives(
+    private fun Findings.validateObjectives(
         label:          String,
         entities:       List<EntityDefinition>,
         objectives:     List<ObjectiveDefinition>,
-        objectiveTypes: Set<String>,
-        errors:         MutableList<String>,
-        warnings:       MutableList<String>
+        objectiveTypes: Set<String>
     ) {
         val objectiveIds = objectives.map { it.id }
-        objectiveIds.groupBy { it }
-            .filter { it.value.size > 1 }
-            .keys
-            .forEach { errors += "$label: duplicate objective ID '$it'" }
+        objectiveIds.duplicates().forEach { errors += "$label: duplicate objective ID '$it'" }
 
         val objIdSet  = objectiveIds.toSet()
         val entityIds = entities.map { it.id }.toSet()
@@ -353,7 +343,7 @@ object SceneValidator {
             if (req == obj.id) {
                 errors += "$label: objective '${obj.id}' requires itself"
             }
-            validateObjectiveReachable(label, obj, entities, entityIds, errors, warnings)
+            validateObjectiveReachable(label, obj, entities, entityIds)
         }
 
         if (hasPrereqCycle(objectives)) {
@@ -366,13 +356,11 @@ object SceneValidator {
      * keyed on a group or an entity that the level never declares can never fire,
      * leaving the child stuck on a scene with no way to finish.
      */
-    private fun validateObjectiveReachable(
+    private fun Findings.validateObjectiveReachable(
         label:     String,
         obj:       ObjectiveDefinition,
         entities:  List<EntityDefinition>,
-        entityIds: Set<String>,
-        errors:    MutableList<String>,
-        warnings:  MutableList<String>
+        entityIds: Set<String>
     ) {
         val where = "$label: objective '${obj.id}'"
 
@@ -479,7 +467,7 @@ object SceneValidator {
      * worked out by trial and error — which for a non-verbal child is
      * indistinguishable from a screen that does not respond.
      */
-    private fun validateSpokenInstruction(scene: SceneDefinition, errors: MutableList<String>) {
+    private fun Findings.validateSpokenInstruction(scene: SceneDefinition) {
         val speaks = scene.behaviors.any { binding ->
             val ref = binding.behaviorRef
             val on  = ref.config["on"] ?: "sceneStarted"
@@ -504,10 +492,8 @@ object SceneValidator {
      * sound attached, pressing it does nothing observable at all, and a
      * cause-and-effect game becomes a picture of one.
      */
-    private fun validateTouchIsAnswered(
-        scene:    SceneDefinition,
-        errors:   MutableList<String>,
-        warnings: MutableList<String>
+    private fun Findings.validateTouchIsAnswered(
+        scene:    SceneDefinition
     ) {
         val repeatable = scene.behaviors.map { it.behaviorRef }.filter {
             it.type == "freeSelection" && it.config["repeatable"]?.toBooleanStrictOrNull() == true
@@ -520,15 +506,9 @@ object SceneValidator {
         // and the scene simply never ends.
         val waitsForSelection = scene.objectivesForLevel(0).any { it.type == "anySelected" }
         if (waitsForSelection) {
-            val blocking = repeatable.any {
-                it.config["repeatable"]?.toBooleanStrictOrNull() == true ||
-                    it.config["hideOnSelect"]?.toBooleanStrictOrNull() == true
-            }
-            if (blocking) {
-                errors += "objective 'anySelected' can never complete here: freeSelection is " +
-                    "repeatable or hides what it selects, so nothing is ever left in a chosen " +
-                    "state — use 'interactionCount' instead"
-            }
+            errors += "objective 'anySelected' can never complete here: freeSelection is " +
+                "repeatable or hides what it selects, so nothing is ever left in a chosen " +
+                "state — use 'interactionCount' instead"
         }
 
         val speaks = repeatable.any { it.config["speak"]?.toBooleanStrictOrNull() == true }
@@ -559,10 +539,8 @@ object SceneValidator {
      * the child to communicate. A tag is easy to stick on a sorting game; this
      * check makes every claimed mode point at the behavior that delivers it.
      */
-    private fun validateSpeech(
-        scene:    SceneDefinition,
-        errors:   MutableList<String>,
-        warnings: MutableList<String>
+    private fun Findings.validateSpeech(
+        scene:    SceneDefinition
     ) {
         val refs = scene.behaviors.map { it.behaviorRef } +
             allEntities(scene).flatMap { it.behaviors }
@@ -571,9 +549,7 @@ object SceneValidator {
         val speakingChoice = refs.any {
             it.type == "freeSelection" && it.config["speak"]?.toBooleanStrictOrNull() == true
         }
-        fun accepts(kind: String) = awaits.any { ref ->
-            (ref.config["accept"] ?: "voice,adult").split(',').map { it.trim() }.contains(kind)
-        }
+        fun accepts(kind: String) = awaits.any { kind in AwaitResponsePlugin.acceptKinds(it.config) }
 
         val speech = scene.meta.speech
         if (speech == null) {
@@ -672,14 +648,11 @@ object SceneValidator {
 
     // ── Scene FSM ─────────────────────────────────────────────────────────────
 
-    private fun validateStateMachine(scene: SceneDefinition, errors: MutableList<String>) {
+    private fun Findings.validateStateMachine(scene: SceneDefinition) {
         val fsm = scene.stateMachine ?: return
 
         val stateIds = fsm.states.map { it.id }
-        stateIds.groupBy { it }
-            .filter { it.value.size > 1 }
-            .keys
-            .forEach { errors += "Duplicate FSM state ID '$it'" }
+        stateIds.duplicates().forEach { errors += "Duplicate FSM state ID '$it'" }
 
         val stateIdSet = stateIds.toSet()
         if (fsm.initialState !in stateIdSet) {
@@ -704,14 +677,13 @@ object SceneValidator {
             addAll(scene.entities.map { it.id })
             scene.levels.forEach { level -> addAll(level.entities.map { it.id }) }
         }
-        fsm.states.forEach { validateFsmActions(it.onEnter, addressable, errors) }
-        fsm.transitions.forEach { validateFsmActions(it.actions, addressable, errors) }
+        fsm.states.forEach { validateFsmActions(it.onEnter, addressable) }
+        fsm.transitions.forEach { validateFsmActions(it.actions, addressable) }
     }
 
-    private fun validateFsmActions(
+    private fun Findings.validateFsmActions(
         actions:     List<SceneFsmActionDefinition>,
-        addressable: Set<String>,
-        errors:      MutableList<String>
+        addressable: Set<String>
     ) {
         for (action in actions) {
             val entityId = action.entityId
@@ -738,10 +710,18 @@ object SceneValidator {
 
     // ── Shared ────────────────────────────────────────────────────────────────
 
-    private fun validateBehaviors(
+    /** Where validation collects what it finds; the checks below write into it as their receiver. */
+    private class Findings {
+        val errors   = mutableListOf<String>()
+        val warnings = mutableListOf<String>()
+    }
+
+    private fun List<String>.duplicates(): Set<String> =
+        groupingBy { it }.eachCount().filterValues { it > 1 }.keys
+
+    private fun Findings.validateBehaviors(
         scene:            SceneDefinition,
-        behaviorRegistry: BehaviorRegistry,
-        errors:           MutableList<String>
+        behaviorRegistry: BehaviorRegistry
     ) {
         for (binding in scene.behaviors) {
             val ref = binding.behaviorRef

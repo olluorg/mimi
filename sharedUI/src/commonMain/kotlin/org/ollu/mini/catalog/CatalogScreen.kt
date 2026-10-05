@@ -48,10 +48,7 @@ fun CatalogScreen(
 
     var uiState        by remember { mutableStateOf(CatalogState(isRefreshing = true)) }
     var completedIds   by remember { mutableStateOf(progressRepository?.getCompletedSceneIds(progressRepository.currentChildId()) ?: emptySet<String>()) }
-    var selectedSkills by remember { mutableStateOf(emptySet<String>()) }
-    var ageFilter      by remember { mutableStateOf(0) }  // 0=все 1=2-3 2=4-5 3=6-7
-    var speechFilter   by remember { mutableStateOf(speechOnly) }
-    var speechTarget   by remember { mutableStateOf<String?>(null) }
+    var filter         by remember { mutableStateOf(CatalogFilter(speechOnly = speechOnly)) }
 
     LaunchedEffect(catalogUrl) {
         repo.catalogFlow(catalogUrl).collect { state ->
@@ -66,33 +63,7 @@ fun CatalogScreen(
             .sortedBy { skillLabelOf(it) }
     }
 
-    val displayedEntries = remember(uiState.entries, selectedSkills, ageFilter, speechFilter, speechTarget) {
-        uiState.entries
-            .let { list ->
-                // Only games that passed the speech check: the validator will not
-                // publish a scene labelled as speech without a speech mechanic.
-                if (!speechFilter) list
-                else list.filter { entry ->
-                    val speech = entry.speech ?: return@filter false
-                    speechTarget == null || speechTarget in speech.targets
-                }.sortedBy { entry ->
-                    // First steps first: pictures, then voice, then sounds, then words.
-                    SpeechVocabulary.STAGES.keys.indexOf(entry.speech?.stage).takeIf { it >= 0 } ?: 99
-                }
-            }
-            .let { list ->
-                when (ageFilter) {
-                    1    -> list.filter { it.ageMin <= 3 && it.ageMax >= 2 }
-                    2    -> list.filter { it.ageMin <= 5 && it.ageMax >= 4 }
-                    3    -> list.filter { it.ageMin <= 7 && it.ageMax >= 6 }
-                    else -> list
-                }
-            }
-            .let { list ->
-                if (selectedSkills.isEmpty()) list
-                else list.filter { entry -> entry.skills.any { it in selectedSkills } }
-            }
-    }
+    val displayedEntries = remember(uiState.entries, filter) { filter.apply(uiState.entries) }
 
     Box(Modifier.fillMaxSize().background(BG).safeDrawingPadding()) {
 
@@ -139,29 +110,27 @@ fun CatalogScreen(
 
                     item(span = { GridItemSpan(maxLineSpan) }) {
                         SpeechFilterBar(
-                            enabled  = speechFilter,
-                            target   = speechTarget,
-                            onToggle = { speechFilter = !speechFilter; if (!speechFilter) speechTarget = null },
-                            onTarget = { speechTarget = it }
+                            enabled  = filter.speechOnly,
+                            target   = filter.speechTarget,
+                            onToggle = { filter = filter.copy(speechOnly = !filter.speechOnly, speechTarget = null) },
+                            onTarget = { filter = filter.copy(speechTarget = it) }
                         )
                     }
 
                     item(span = { GridItemSpan(maxLineSpan) }) {
-                        AgeFilterBar(selected = ageFilter, onSelect = { ageFilter = it })
+                        AgeFilterBar(selected = filter.age, onSelect = { filter = filter.copy(age = it) })
                     }
 
                     if (allSkills.isNotEmpty()) {
                         item(span = { GridItemSpan(maxLineSpan) }) {
                             SkillFilterBar(
                                 allSkills      = allSkills,
-                                selectedSkills = selectedSkills,
+                                selectedSkills = filter.skills,
                                 onToggle       = { skill ->
-                                    selectedSkills = if (skill in selectedSkills)
-                                        selectedSkills - skill
-                                    else
-                                        selectedSkills + skill
+                                    val skills = filter.skills
+                                    filter = filter.copy(skills = if (skill in skills) skills - skill else skills + skill)
                                 },
-                                onClearAll     = { selectedSkills = emptySet() }
+                                onClearAll     = { filter = filter.copy(skills = emptySet()) }
                             )
                         }
                     }
@@ -249,24 +218,22 @@ private fun SpeechFilterBar(
                 modifier              = Modifier.horizontalScroll(rememberScrollState()),
                 horizontalArrangement = Arrangement.spacedBy(8.dp)
             ) {
+                val chipColors = FilterChipDefaults.filterChipColors(
+                    selectedContainerColor = SPEECH_ACCENT,
+                    selectedLabelColor     = Color.White
+                )
                 FilterChip(
                     selected = target == null,
                     onClick  = { onTarget(null) },
                     label    = { Text("Все", fontSize = 12.sp) },
-                    colors   = FilterChipDefaults.filterChipColors(
-                        selectedContainerColor = SPEECH_ACCENT,
-                        selectedLabelColor     = Color.White
-                    )
+                    colors   = chipColors
                 )
                 SpeechVocabulary.TARGETS.forEach { (id, label) ->
                     FilterChip(
                         selected = target == id,
                         onClick  = { onTarget(if (target == id) null else id) },
                         label    = { Text(label, fontSize = 12.sp) },
-                        colors   = FilterChipDefaults.filterChipColors(
-                            selectedContainerColor = SPEECH_ACCENT,
-                            selectedLabelColor     = Color.White
-                        )
+                        colors   = chipColors
                     )
                 }
             }
@@ -275,20 +242,19 @@ private fun SpeechFilterBar(
 }
 
 @Composable
-private fun AgeFilterBar(selected: Int, onSelect: (Int) -> Unit) {
-    val labels = listOf("Все", "2–3 года", "4–5 лет", "6–7 лет")
+private fun AgeFilterBar(selected: AgeBand, onSelect: (AgeBand) -> Unit) {
     Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-        labels.forEachIndexed { index, label ->
-            val active = selected == index
+        AgeBand.entries.forEach { band ->
+            val active = selected == band
             Surface(
-                onClick = { onSelect(index) },
+                onClick = { onSelect(band) },
                 shape   = RoundedCornerShape(20.dp),
                 color   = if (active) Color(0xFF457B9D) else Color.White,
                 tonalElevation = if (active) 0.dp else 1.dp,
                 shadowElevation = if (active) 0.dp else 1.dp
             ) {
                 Text(
-                    label,
+                    band.label,
                     fontSize = 12.sp,
                     color    = if (active) Color.White else Color(0xFF687381),
                     fontWeight = if (active) FontWeight.SemiBold else FontWeight.Normal,
