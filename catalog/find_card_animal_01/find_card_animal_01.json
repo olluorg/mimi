@@ -1,0 +1,442 @@
+{
+  "sceneId": "find_card_animal_01",
+  "meta": {
+    "title": "Найди зверя",
+    "description": "Слушай и нажми нужную картинку.",
+    "ageMin": 2,
+    "ageMax": 6,
+    "version": 1,
+    "tags": [
+      "cards",
+      "listening",
+      "vocabulary"
+    ],
+    "skills": [
+      "receptive_speech",
+      "selective_attention",
+      "word_association",
+      "visual_attention"
+    ],
+    "icon": "🔍",
+    "requires": []
+  },
+  "entities": [
+    {
+      "id": "bear",
+      "components": [
+        "tap"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 220.0,
+          "y": 320.0
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/bear.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Медведь"
+        },
+        "name": {
+          "type": "text",
+          "value": "Медведь"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/bear.mp3"
+        },
+        "target": {
+          "type": "text",
+          "value": "yes"
+        }
+      },
+      "tags": {
+        "group": "choices"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "boar",
+      "components": [
+        "tap"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 500.0,
+          "y": 320.0
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/boar.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Кабан"
+        },
+        "name": {
+          "type": "text",
+          "value": "Кабан"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/boar.mp3"
+        },
+        "target": {
+          "type": "text",
+          "value": "no"
+        }
+      },
+      "tags": {
+        "group": "choices"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "bull",
+      "components": [
+        "tap"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 780.0,
+          "y": 320.0
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/bull.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Бык"
+        },
+        "name": {
+          "type": "text",
+          "value": "Бык"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/bull.mp3"
+        },
+        "target": {
+          "type": "text",
+          "value": "no"
+        }
+      },
+      "tags": {
+        "group": "choices"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "calf",
+      "components": [
+        "tap"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 220.0,
+          "y": 580.0
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/calf.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Теленок"
+        },
+        "name": {
+          "type": "text",
+          "value": "Теленок"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/calf.mp3"
+        },
+        "target": {
+          "type": "text",
+          "value": "no"
+        }
+      },
+      "tags": {
+        "group": "choices"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "cat",
+      "components": [
+        "tap"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 500.0,
+          "y": 580.0
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/cat.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Кошка"
+        },
+        "name": {
+          "type": "text",
+          "value": "Кошка"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/cat.mp3"
+        },
+        "target": {
+          "type": "text",
+          "value": "no"
+        }
+      },
+      "tags": {
+        "group": "choices"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "chick",
+      "components": [
+        "tap"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 780.0,
+          "y": 580.0
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/chick.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Цыпленок"
+        },
+        "name": {
+          "type": "text",
+          "value": "Цыпленок"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/chick.mp3"
+        },
+        "target": {
+          "type": "text",
+          "value": "no"
+        }
+      },
+      "tags": {
+        "group": "choices"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "cow",
+      "components": [
+        "tap"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 220.0,
+          "y": 840.0
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/cow.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Корова"
+        },
+        "name": {
+          "type": "text",
+          "value": "Корова"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/cow.mp3"
+        },
+        "target": {
+          "type": "text",
+          "value": "no"
+        }
+      },
+      "tags": {
+        "group": "choices"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "dog",
+      "components": [
+        "tap"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 500.0,
+          "y": 840.0
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/dog.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Собака"
+        },
+        "name": {
+          "type": "text",
+          "value": "Собака"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/dog.mp3"
+        },
+        "target": {
+          "type": "text",
+          "value": "no"
+        }
+      },
+      "tags": {
+        "group": "choices"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "duck",
+      "components": [
+        "tap"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 780.0,
+          "y": 840.0
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/duck.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Утка"
+        },
+        "name": {
+          "type": "text",
+          "value": "Утка"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/duck.mp3"
+        },
+        "target": {
+          "type": "text",
+          "value": "no"
+        }
+      },
+      "tags": {
+        "group": "choices"
+      },
+      "zOrder": 0
+    }
+  ],
+  "objectives": [
+    {
+      "id": "found",
+      "type": "entitySelected",
+      "config": {
+        "property": "target",
+        "value": "yes"
+      },
+      "requires": null
+    }
+  ],
+  "behaviors": [
+    {
+      "behaviorRef": {
+        "type": "progressTracker",
+        "config": {}
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "audioPrompt",
+        "config": {
+          "on": "sceneStarted",
+          "sound": "_cards/audio/bear.mp3"
+        }
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "propertySelectionValidator",
+        "config": {
+          "property": "target",
+          "expected": "yes"
+        }
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "adaptiveHint",
+        "config": {}
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "playSoundOnEvent",
+        "config": {
+          "on": "sceneCompleted",
+          "sound": "complete"
+        }
+      },
+      "entityId": null
+    }
+  ],
+  "fieldPolicies": {},
+  "idleTimeout": 20,
+  "onIdle": "HINT",
+  "metadata": {},
+  "variation": {
+    "pick": [
+      {
+        "group": "choices",
+        "count": 3,
+        "keep": [
+          "bear"
+        ]
+      }
+    ],
+    "shufflePositions": [
+      "choices"
+    ]
+  }
+}

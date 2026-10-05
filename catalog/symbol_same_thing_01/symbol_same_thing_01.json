@@ -1,0 +1,354 @@
+{
+  "sceneId": "symbol_same_thing_01",
+  "meta": {
+    "title": "Это одно и то же",
+    "description": "Соедини две картинки, которые значат одно и то же.",
+    "ageMin": 3,
+    "ageMax": 7,
+    "version": 1,
+    "tags": [
+      "symbols",
+      "matching",
+      "aac"
+    ],
+    "skills": [
+      "matching",
+      "word_association",
+      "categorization",
+      "receptive_speech",
+      "visual_attention"
+    ],
+    "icon": "🔗",
+    "requires": []
+  },
+  "entities": [
+    {
+      "id": "pic_dog",
+      "components": [
+        "drag"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 220.0,
+          "y": 260.0
+        },
+        "zOrder": {
+          "type": "num",
+          "value": 1.0
+        },
+        "thing": {
+          "type": "text",
+          "value": "dog"
+        },
+        "name": {
+          "type": "text",
+          "value": "собака"
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/dog.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Собака"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/dog.mp3"
+        }
+      },
+      "tags": {
+        "group": "symbols"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "pic_car",
+      "components": [
+        "drag"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 500.0,
+          "y": 260.0
+        },
+        "zOrder": {
+          "type": "num",
+          "value": 1.0
+        },
+        "thing": {
+          "type": "text",
+          "value": "car"
+        },
+        "name": {
+          "type": "text",
+          "value": "машина"
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/car.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Машина"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/car.mp3"
+        }
+      },
+      "tags": {
+        "group": "symbols"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "pic_house",
+      "components": [
+        "drag"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 780.0,
+          "y": 260.0
+        },
+        "zOrder": {
+          "type": "num",
+          "value": 1.0
+        },
+        "thing": {
+          "type": "text",
+          "value": "house"
+        },
+        "name": {
+          "type": "text",
+          "value": "дом"
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/house.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Дом"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/house.mp3"
+        }
+      },
+      "tags": {
+        "group": "symbols"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "slot_house",
+      "components": [
+        "dropTarget"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 220.0,
+          "y": 720.0
+        },
+        "zOrder": {
+          "type": "num",
+          "value": 0.0
+        },
+        "constraintType": {
+          "type": "text",
+          "value": "propertyEquals"
+        },
+        "source": {
+          "type": "text",
+          "value": "thing"
+        },
+        "target": {
+          "type": "text",
+          "value": "thing"
+        },
+        "thing": {
+          "type": "text",
+          "value": "house"
+        },
+        "label": {
+          "type": "text",
+          "value": "Дом"
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/house.jpg"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/house.mp3"
+        }
+      },
+      "tags": {},
+      "zOrder": 0
+    },
+    {
+      "id": "slot_dog",
+      "components": [
+        "dropTarget"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 500.0,
+          "y": 720.0
+        },
+        "zOrder": {
+          "type": "num",
+          "value": 0.0
+        },
+        "constraintType": {
+          "type": "text",
+          "value": "propertyEquals"
+        },
+        "source": {
+          "type": "text",
+          "value": "thing"
+        },
+        "target": {
+          "type": "text",
+          "value": "thing"
+        },
+        "thing": {
+          "type": "text",
+          "value": "dog"
+        },
+        "label": {
+          "type": "text",
+          "value": "Щенок"
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/puppy.jpg"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/puppy.mp3"
+        }
+      },
+      "tags": {},
+      "zOrder": 0
+    },
+    {
+      "id": "slot_car",
+      "components": [
+        "dropTarget"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 780.0,
+          "y": 720.0
+        },
+        "zOrder": {
+          "type": "num",
+          "value": 0.0
+        },
+        "constraintType": {
+          "type": "text",
+          "value": "propertyEquals"
+        },
+        "source": {
+          "type": "text",
+          "value": "thing"
+        },
+        "target": {
+          "type": "text",
+          "value": "thing"
+        },
+        "thing": {
+          "type": "text",
+          "value": "car"
+        },
+        "label": {
+          "type": "text",
+          "value": "Машинка"
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/toy-car.jpg"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/toy-car.mp3"
+        }
+      },
+      "tags": {},
+      "zOrder": 0
+    }
+  ],
+  "objectives": [
+    {
+      "id": "all",
+      "type": "allMatched",
+      "config": {
+        "group": "symbols"
+      },
+      "requires": null
+    }
+  ],
+  "behaviors": [
+    {
+      "behaviorRef": {
+        "type": "progressTracker",
+        "config": {}
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "audioPrompt",
+        "config": {
+          "on": "sceneStarted",
+          "text": "Найди такое же",
+          "sound": "_sounds/speech/naydi-takoe-zhe-60f4a6.wav"
+        }
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "snapToTarget",
+        "config": {}
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "adaptiveHint",
+        "config": {}
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "playSoundOnEvent",
+        "config": {
+          "on": "sceneCompleted",
+          "sound": "complete"
+        }
+      },
+      "entityId": null
+    }
+  ],
+  "fieldPolicies": {},
+  "idleTimeout": 15,
+  "onIdle": "HINT",
+  "metadata": {}
+}

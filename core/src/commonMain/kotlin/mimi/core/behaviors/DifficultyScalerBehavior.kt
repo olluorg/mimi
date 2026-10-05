@@ -93,4 +93,15 @@ class DifficultyScalerPlugin : BehaviorPlugin {
             updateIntervalMin = config["updateIntervalMin"]?.toLongOrNull() ?: secondsToTicks(20),
             updateIntervalMax = config["updateIntervalMax"]?.toLongOrNull() ?: secondsToTicks(30)
         )
+
+    override fun validateConfig(config: Map<String, String>): ValidationResult =
+        SPEC.check(config)
+
+    private companion object {
+        private val SPEC = ConfigSpec.of("difficultyScaler") {
+            number("initialDifficulty", min = 0.0, max = 1.0)
+            number("updateIntervalMin", min = 0.0)
+            number("updateIntervalMax", min = 0.0)
+        }
+    }
 }

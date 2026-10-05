@@ -11,9 +11,21 @@
           "x": 220.0,
           "y": 330.0
         },
-        "emoji": {
+        "image": {
           "type": "text",
-          "value": "🍎"
+          "value": "_cards/apple.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Яблоко"
+        },
+        "name": {
+          "type": "text",
+          "value": "Яблоко"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/apple.mp3"
         }
       },
       "tags": {
@@ -31,9 +43,21 @@
           "x": 500.0,
           "y": 330.0
         },
-        "emoji": {
+        "image": {
           "type": "text",
-          "value": "🍌"
+          "value": "_cards/banana.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Банан"
+        },
+        "name": {
+          "type": "text",
+          "value": "Банан"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/banana.mp3"
         }
       },
       "tags": {
@@ -51,9 +75,21 @@
           "x": 780.0,
           "y": 330.0
         },
-        "emoji": {
+        "image": {
           "type": "text",
-          "value": "🍒"
+          "value": "_cards/strawberry.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Клубника"
+        },
+        "name": {
+          "type": "text",
+          "value": "Клубника"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/strawberry.mp3"
         }
       },
       "tags": {
@@ -77,9 +113,21 @@
           "type": "num",
           "value": 3.0
         },
-        "emoji": {
+        "image": {
           "type": "text",
-          "value": "🍒"
+          "value": "_cards/strawberry.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Клубника"
+        },
+        "name": {
+          "type": "text",
+          "value": "Клубника"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/strawberry.mp3"
         }
       },
       "tags": {
@@ -103,9 +151,21 @@
           "type": "num",
           "value": 1.0
         },
-        "emoji": {
+        "image": {
           "type": "text",
-          "value": "🍎"
+          "value": "_cards/apple.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Яблоко"
+        },
+        "name": {
+          "type": "text",
+          "value": "Яблоко"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/apple.mp3"
         }
       },
       "tags": {
@@ -129,9 +189,21 @@
           "type": "num",
           "value": 2.0
         },
-        "emoji": {
+        "image": {
           "type": "text",
-          "value": "🍌"
+          "value": "_cards/banana.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Банан"
+        },
+        "name": {
+          "type": "text",
+          "value": "Банан"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/banana.mp3"
         }
       },
       "tags": {
@@ -153,6 +225,17 @@
   "behaviors": [
     {
       "behaviorRef": {
+        "type": "audioPrompt",
+        "config": {
+          "on": "sceneStarted",
+          "text": "Запомни порядок",
+          "sound": "_sounds/speech/zapomni-poryadok-ea6ddc.wav"
+        }
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
         "type": "sequenceValidator",
         "config": {
           "group": "sequence",
@@ -171,9 +254,7 @@
     {
       "behaviorRef": {
         "type": "adaptiveHint",
-        "config": {
-          "mode": "memory_sequence"
-        }
+        "config": {}
       },
       "entityId": null
     },

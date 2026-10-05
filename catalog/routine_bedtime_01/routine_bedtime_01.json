@@ -1,0 +1,238 @@
+{
+  "sceneId": "routine_bedtime_01",
+  "meta": {
+    "title": "Спокойной ночи",
+    "description": "Расставь по порядку, как мы готовимся ко сну.",
+    "ageMin": 3,
+    "ageMax": 7,
+    "version": 1,
+    "tags": [
+      "routine",
+      "daily_life",
+      "sequencing"
+    ],
+    "skills": [
+      "sequencing",
+      "task_completion",
+      "receptive_speech",
+      "visual_planning"
+    ],
+    "icon": "🌙",
+    "requires": []
+  },
+  "entities": [
+    {
+      "id": "bath",
+      "components": [
+        "tap"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 170.0,
+          "y": 450.0
+        },
+        "sequenceIndex": {
+          "type": "num",
+          "value": 1.0
+        },
+        "name": {
+          "type": "text",
+          "value": "искупаться"
+        },
+        "label": {
+          "type": "text",
+          "value": "искупаться"
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/bathe.jpg"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/bathe.mp3"
+        }
+      },
+      "tags": {
+        "group": "steps"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "pajamas",
+      "components": [
+        "tap"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 390.0,
+          "y": 450.0
+        },
+        "sequenceIndex": {
+          "type": "num",
+          "value": 2.0
+        },
+        "name": {
+          "type": "text",
+          "value": "надеть пижаму"
+        },
+        "label": {
+          "type": "text",
+          "value": "надеть пижаму"
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/pajamas.jpg"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/pajamas.mp3"
+        }
+      },
+      "tags": {
+        "group": "steps"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "book",
+      "components": [
+        "tap"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 610.0,
+          "y": 450.0
+        },
+        "sequenceIndex": {
+          "type": "num",
+          "value": 3.0
+        },
+        "name": {
+          "type": "text",
+          "value": "почитать"
+        },
+        "label": {
+          "type": "text",
+          "value": "почитать"
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/book.jpg"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/book.mp3"
+        }
+      },
+      "tags": {
+        "group": "steps"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "sleep",
+      "components": [
+        "tap"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 830.0,
+          "y": 450.0
+        },
+        "sequenceIndex": {
+          "type": "num",
+          "value": 4.0
+        },
+        "name": {
+          "type": "text",
+          "value": "спать"
+        },
+        "label": {
+          "type": "text",
+          "value": "спать"
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/sleep.jpg"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/sleep.mp3"
+        }
+      },
+      "tags": {
+        "group": "steps"
+      },
+      "zOrder": 0
+    }
+  ],
+  "objectives": [
+    {
+      "id": "in_order",
+      "type": "sequenceCompleted",
+      "config": {
+        "group": "steps"
+      },
+      "requires": null
+    }
+  ],
+  "behaviors": [
+    {
+      "behaviorRef": {
+        "type": "progressTracker",
+        "config": {}
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "audioPrompt",
+        "config": {
+          "on": "sceneStarted",
+          "text": "Что делаем перед сном?",
+          "sound": "_sounds/speech/chto-delaem-pered-snom-caabd4.wav"
+        }
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "sequenceValidator",
+        "config": {
+          "group": "steps",
+          "property": "sequenceIndex"
+        }
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "adaptiveHint",
+        "config": {}
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "playSoundOnEvent",
+        "config": {
+          "on": "sceneCompleted",
+          "sound": "complete"
+        }
+      },
+      "entityId": null
+    }
+  ],
+  "fieldPolicies": {},
+  "idleTimeout": 20,
+  "onIdle": "HINT",
+  "metadata": {}
+}

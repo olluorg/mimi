@@ -57,10 +57,21 @@
   "behaviors": [
     {
       "behaviorRef": {
+        "type": "audioPrompt",
+        "config": {
+          "on": "sceneStarted",
+          "text": "Проведи пальцем по линии",
+          "sound": "_sounds/speech/provedi-palcem-po-linii-5c1e06.wav"
+        }
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
         "type": "traceValidator",
         "config": {
           "group": "trace",
-          "allowBacktracking": true
+          "allowBacktracking": "true"
         }
       },
       "entityId": null
@@ -69,16 +80,6 @@
       "behaviorRef": {
         "type": "progressTracker",
         "config": {}
-      },
-      "entityId": null
-    },
-    {
-      "behaviorRef": {
-        "type": "playSoundOnEvent",
-        "config": {
-          "on": "traceCheckpointReached",
-          "sound": "checkpoint"
-        }
       },
       "entityId": null
     },

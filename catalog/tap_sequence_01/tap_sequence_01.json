@@ -17,9 +17,13 @@
           "type": "num",
           "value": 1.0
         },
-        "emoji": {
+        "count": {
+          "type": "num",
+          "value": 1.0
+        },
+        "name": {
           "type": "text",
-          "value": "1️⃣"
+          "value": "Одна точка"
         }
       },
       "tags": {
@@ -43,9 +47,13 @@
           "type": "num",
           "value": 2.0
         },
-        "emoji": {
+        "count": {
+          "type": "num",
+          "value": 2.0
+        },
+        "name": {
           "type": "text",
-          "value": "2️⃣"
+          "value": "Две точки"
         }
       },
       "tags": {
@@ -69,9 +77,13 @@
           "type": "num",
           "value": 3.0
         },
-        "emoji": {
+        "count": {
+          "type": "num",
+          "value": 3.0
+        },
+        "name": {
           "type": "text",
-          "value": "3️⃣"
+          "value": "Три точки"
         }
       },
       "tags": {
@@ -93,6 +105,17 @@
   "behaviors": [
     {
       "behaviorRef": {
+        "type": "audioPrompt",
+        "config": {
+          "on": "sceneStarted",
+          "text": "Нажимай по порядку",
+          "sound": "_sounds/speech/nazhimay-po-poryadku-abb57b.wav"
+        }
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
         "type": "sequenceValidator",
         "config": {
           "group": "sequence",
@@ -105,16 +128,6 @@
       "behaviorRef": {
         "type": "progressTracker",
         "config": {}
-      },
-      "entityId": null
-    },
-    {
-      "behaviorRef": {
-        "type": "playSoundOnEvent",
-        "config": {
-          "on": "sequenceStepCorrect",
-          "sound": "tap_ok"
-        }
       },
       "entityId": null
     },
@@ -137,7 +150,7 @@
   },
   "meta": {
     "title": "Нажми по порядку",
-    "description": "Нажимай на цифры по порядку",
+    "description": "Нажимай по порядку: одна точка, две, три",
     "ageMin": 3,
     "ageMax": 6,
     "version": 1,

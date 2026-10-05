@@ -1,0 +1,249 @@
+{
+  "sceneId": "cause_effect_bubbles_01",
+  "meta": {
+    "title": "Лопни пузыри",
+    "description": "Нажимай на пузыри — они лопаются. Ошибиться нельзя.",
+    "ageMin": 1,
+    "ageMax": 4,
+    "version": 1,
+    "tags": [
+      "cause_effect",
+      "starter"
+    ],
+    "skills": [
+      "task_completion",
+      "hand_eye_coordination",
+      "visual_attention",
+      "impulse_control"
+    ],
+    "icon": "🫧",
+    "requires": []
+  },
+  "entities": [
+    {
+      "id": "bubble_0",
+      "components": [
+        "tap"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 150.0,
+          "y": 300.0
+        },
+        "sound": {
+          "type": "text",
+          "value": "_sounds/pop.wav"
+        },
+        "shape": {
+          "type": "text",
+          "value": "circle"
+        },
+        "color": {
+          "type": "text",
+          "value": "blue"
+        },
+        "radius": {
+          "type": "num",
+          "value": 46.0
+        }
+      },
+      "tags": {
+        "group": "bubbles"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "bubble_1",
+      "components": [
+        "tap"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 325.0,
+          "y": 560.0
+        },
+        "sound": {
+          "type": "text",
+          "value": "_sounds/pop.wav"
+        },
+        "shape": {
+          "type": "text",
+          "value": "circle"
+        },
+        "color": {
+          "type": "text",
+          "value": "green"
+        },
+        "radius": {
+          "type": "num",
+          "value": 56.0
+        }
+      },
+      "tags": {
+        "group": "bubbles"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "bubble_2",
+      "components": [
+        "tap"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 500.0,
+          "y": 300.0
+        },
+        "sound": {
+          "type": "text",
+          "value": "_sounds/pop.wav"
+        },
+        "shape": {
+          "type": "text",
+          "value": "circle"
+        },
+        "color": {
+          "type": "text",
+          "value": "purple"
+        },
+        "radius": {
+          "type": "num",
+          "value": 66.0
+        }
+      },
+      "tags": {
+        "group": "bubbles"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "bubble_3",
+      "components": [
+        "tap"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 675.0,
+          "y": 560.0
+        },
+        "sound": {
+          "type": "text",
+          "value": "_sounds/pop.wav"
+        },
+        "shape": {
+          "type": "text",
+          "value": "circle"
+        },
+        "color": {
+          "type": "text",
+          "value": "orange"
+        },
+        "radius": {
+          "type": "num",
+          "value": 46.0
+        }
+      },
+      "tags": {
+        "group": "bubbles"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "bubble_4",
+      "components": [
+        "tap"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 850.0,
+          "y": 300.0
+        },
+        "sound": {
+          "type": "text",
+          "value": "_sounds/pop.wav"
+        },
+        "shape": {
+          "type": "text",
+          "value": "circle"
+        },
+        "color": {
+          "type": "text",
+          "value": "pink"
+        },
+        "radius": {
+          "type": "num",
+          "value": 56.0
+        }
+      },
+      "tags": {
+        "group": "bubbles"
+      },
+      "zOrder": 0
+    }
+  ],
+  "objectives": [
+    {
+      "id": "popped_all",
+      "type": "interactionCount",
+      "config": {
+        "count": "5"
+      },
+      "requires": null
+    }
+  ],
+  "behaviors": [
+    {
+      "behaviorRef": {
+        "type": "audioPrompt",
+        "config": {
+          "on": "sceneStarted",
+          "text": "Лопай пузыри",
+          "sound": "_sounds/speech/lopay-puzyri-bc0456.wav"
+        }
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "progressTracker",
+        "config": {}
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "freeSelection",
+        "config": {
+          "group": "bubbles",
+          "hideOnSelect": "true",
+          "speak": "true"
+        }
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "playSoundOnEvent",
+        "config": {
+          "on": "sceneCompleted",
+          "sound": "complete"
+        }
+      },
+      "entityId": null
+    }
+  ],
+  "fieldPolicies": {},
+  "idleTimeout": 20,
+  "onIdle": "HINT",
+  "metadata": {}
+}

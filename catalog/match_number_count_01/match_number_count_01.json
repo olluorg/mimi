@@ -19,7 +19,7 @@
         },
         "emoji": {
           "type": "text",
-          "value": "1️⃣"
+          "value": "1"
         }
       },
       "tags": {
@@ -45,7 +45,7 @@
         },
         "emoji": {
           "type": "text",
-          "value": "2️⃣"
+          "value": "2"
         }
       },
       "tags": {
@@ -71,7 +71,7 @@
         },
         "emoji": {
           "type": "text",
-          "value": "3️⃣"
+          "value": "3"
         }
       },
       "tags": {
@@ -107,9 +107,9 @@
           "type": "text",
           "value": "1"
         },
-        "label": {
-          "type": "text",
-          "value": "●"
+        "count": {
+          "type": "num",
+          "value": 1.0
         }
       },
       "tags": {},
@@ -143,9 +143,9 @@
           "type": "text",
           "value": "2"
         },
-        "label": {
-          "type": "text",
-          "value": "● ●"
+        "count": {
+          "type": "num",
+          "value": 2.0
         }
       },
       "tags": {},
@@ -179,9 +179,9 @@
           "type": "text",
           "value": "3"
         },
-        "label": {
-          "type": "text",
-          "value": "● ● ●"
+        "count": {
+          "type": "num",
+          "value": 3.0
         }
       },
       "tags": {},
@@ -204,7 +204,8 @@
         "type": "audioPrompt",
         "config": {
           "on": "sceneStarted",
-          "text": "Положи цифру к нужному количеству точек"
+          "text": "Положи цифру к нужному количеству точек",
+          "sound": "_sounds/speech/polozhi-cifru-k-nuzhnomu-kolichestvu-tochek-d55838.wav"
         }
       },
       "entityId": null

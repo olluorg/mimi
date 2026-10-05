@@ -1,0 +1,319 @@
+{
+  "sceneId": "daily_needs_board_01",
+  "meta": {
+    "title": "Я хочу сказать",
+    "description": "Нажми на то, что тебе нужно — планшет скажет это вслух.",
+    "ageMin": 2,
+    "ageMax": 7,
+    "version": 1,
+    "tags": [
+      "aac",
+      "communication",
+      "board",
+      "daily_life"
+    ],
+    "skills": [
+      "expressive_speech",
+      "receptive_speech",
+      "word_association",
+      "task_completion",
+      "requesting"
+    ],
+    "icon": "🗣️",
+    "requires": [],
+    "speech": {
+      "stage": "aac",
+      "targets": [
+        "alalia",
+        "apraxia"
+      ],
+      "modes": [
+        "aac"
+      ],
+      "words": [
+        "кушать",
+        "пить",
+        "туалет",
+        "спать",
+        "больно",
+        "помоги"
+      ],
+      "adultTip": "Когда ребёнок нажимает картинку, повторите слово сами и сразу дайте то, что он попросил. Картинка — это его голос, она не мешает речи, а помогает ей."
+    }
+  },
+  "entities": [
+    {
+      "id": "eat",
+      "components": [
+        "tap"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 220.0,
+          "y": 330.0
+        },
+        "name": {
+          "type": "text",
+          "value": "кушать"
+        },
+        "label": {
+          "type": "text",
+          "value": "кушать"
+        },
+        "speech": {
+          "type": "text",
+          "value": "кушать"
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/eat.jpg"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/eat.mp3"
+        }
+      },
+      "tags": {
+        "group": "needs"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "drink",
+      "components": [
+        "tap"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 500.0,
+          "y": 330.0
+        },
+        "name": {
+          "type": "text",
+          "value": "пить"
+        },
+        "label": {
+          "type": "text",
+          "value": "пить"
+        },
+        "speech": {
+          "type": "text",
+          "value": "пить"
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/drink.jpg"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/drink.mp3"
+        }
+      },
+      "tags": {
+        "group": "needs"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "toilet",
+      "components": [
+        "tap"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 780.0,
+          "y": 330.0
+        },
+        "name": {
+          "type": "text",
+          "value": "туалет"
+        },
+        "label": {
+          "type": "text",
+          "value": "туалет"
+        },
+        "speech": {
+          "type": "text",
+          "value": "туалет"
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/toilet.jpg"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/toilet.mp3"
+        }
+      },
+      "tags": {
+        "group": "needs"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "sleep",
+      "components": [
+        "tap"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 220.0,
+          "y": 640.0
+        },
+        "name": {
+          "type": "text",
+          "value": "спать"
+        },
+        "label": {
+          "type": "text",
+          "value": "спать"
+        },
+        "speech": {
+          "type": "text",
+          "value": "спать"
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/sleep.jpg"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/sleep.mp3"
+        }
+      },
+      "tags": {
+        "group": "needs"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "hurt",
+      "components": [
+        "tap"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 500.0,
+          "y": 640.0
+        },
+        "name": {
+          "type": "text",
+          "value": "больно"
+        },
+        "label": {
+          "type": "text",
+          "value": "больно"
+        },
+        "speech": {
+          "type": "text",
+          "value": "больно"
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/pain.jpg"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/pain.mp3"
+        }
+      },
+      "tags": {
+        "group": "needs"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "help",
+      "components": [
+        "tap"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 780.0,
+          "y": 640.0
+        },
+        "name": {
+          "type": "text",
+          "value": "помоги"
+        },
+        "label": {
+          "type": "text",
+          "value": "помоги"
+        },
+        "speech": {
+          "type": "text",
+          "value": "помоги"
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/help-me.jpg"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/help-me.mp3"
+        }
+      },
+      "tags": {
+        "group": "needs"
+      },
+      "zOrder": 0
+    }
+  ],
+  "objectives": [
+    {
+      "id": "said",
+      "type": "interactionCount",
+      "config": {
+        "count": "3"
+      },
+      "requires": null
+    }
+  ],
+  "behaviors": [
+    {
+      "behaviorRef": {
+        "type": "audioPrompt",
+        "config": {
+          "on": "sceneStarted",
+          "text": "Нажми на то, что тебе нужно",
+          "sound": "_sounds/speech/nazhmi-na-to-chto-tebe-nuzhno-7c9d22.wav"
+        }
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "progressTracker",
+        "config": {}
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "freeSelection",
+        "config": {
+          "group": "needs",
+          "repeatable": "true",
+          "speak": "true"
+        }
+      },
+      "entityId": null
+    }
+  ],
+  "fieldPolicies": {},
+  "idleTimeout": 60,
+  "onIdle": "HINT",
+  "metadata": {}
+}

@@ -28,7 +28,7 @@ class ConflictResolutionLayerTest {
     }
 
     @Test
-    fun `priority - tie broken by buffer order (first wins)`() {
+    fun `priority - tie broken by buffer order so the first wins`() {
         val commands = listOf(
             makeSet("entity1", "position", 10.0, priority = 50),
             makeSet("entity1", "position", 99.0, priority = 50)

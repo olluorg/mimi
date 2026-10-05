@@ -1,0 +1,197 @@
+{
+  "sceneId": "choice_play_01",
+  "meta": {
+    "title": "Во что играть?",
+    "description": "Покажи, чем хочешь заняться.",
+    "ageMin": 2,
+    "ageMax": 6,
+    "version": 1,
+    "tags": [
+      "choice",
+      "communication"
+    ],
+    "skills": [
+      "expressive_speech",
+      "receptive_speech",
+      "task_completion",
+      "visual_attention",
+      "requesting"
+    ],
+    "icon": "⚽",
+    "requires": [],
+    "speech": {
+      "stage": "aac",
+      "targets": [
+        "alalia",
+        "apraxia"
+      ],
+      "modes": [
+        "aac"
+      ],
+      "words": [
+        "мяч",
+        "кубики",
+        "книжка"
+      ],
+      "adultTip": "Когда ребёнок нажимает картинку, повторите слово сами и сразу дайте то, что он попросил. Картинка — это его голос, она не мешает речи, а помогает ей."
+    }
+  },
+  "entities": [
+    {
+      "id": "ball",
+      "components": [
+        "tap"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 220.0,
+          "y": 480.0
+        },
+        "name": {
+          "type": "text",
+          "value": "мяч"
+        },
+        "label": {
+          "type": "text",
+          "value": "мяч"
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/ball.jpg"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/ball.mp3"
+        }
+      },
+      "tags": {
+        "group": "choices"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "blocks",
+      "components": [
+        "tap"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 500.0,
+          "y": 480.0
+        },
+        "name": {
+          "type": "text",
+          "value": "кубики"
+        },
+        "label": {
+          "type": "text",
+          "value": "кубики"
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/blocks.jpg"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/blocks.mp3"
+        }
+      },
+      "tags": {
+        "group": "choices"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "book",
+      "components": [
+        "tap"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 780.0,
+          "y": 480.0
+        },
+        "name": {
+          "type": "text",
+          "value": "книжка"
+        },
+        "label": {
+          "type": "text",
+          "value": "книжка"
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/book.jpg"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/book.mp3"
+        }
+      },
+      "tags": {
+        "group": "choices"
+      },
+      "zOrder": 0
+    }
+  ],
+  "objectives": [
+    {
+      "id": "chose",
+      "type": "anySelected",
+      "config": {
+        "group": "choices"
+      },
+      "requires": null
+    }
+  ],
+  "behaviors": [
+    {
+      "behaviorRef": {
+        "type": "progressTracker",
+        "config": {}
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "audioPrompt",
+        "config": {
+          "on": "sceneStarted",
+          "text": "Во что будем играть?",
+          "sound": "_sounds/speech/vo-chto-budem-igrat-710030.wav"
+        }
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "freeSelection",
+        "config": {
+          "group": "choices",
+          "speak": "true"
+        }
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "playSoundOnEvent",
+        "config": {
+          "on": "sceneCompleted",
+          "sound": "complete"
+        }
+      },
+      "entityId": null
+    }
+  ],
+  "fieldPolicies": {},
+  "idleTimeout": 25,
+  "onIdle": "HINT",
+  "metadata": {}
+}

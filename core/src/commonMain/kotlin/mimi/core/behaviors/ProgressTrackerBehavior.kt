@@ -39,4 +39,11 @@ class ProgressTrackerPlugin : BehaviorPlugin {
 
     override fun create(config: Map<String, String>, entityId: EntityId?): Behavior =
         ProgressTrackerBehavior(behaviorId)
+
+    override fun validateConfig(config: Map<String, String>): ValidationResult =
+        SPEC.check(config)
+
+    private companion object {
+        private val SPEC = ConfigSpec.none("progressTracker")
+    }
 }

@@ -38,10 +38,6 @@
           "type": "num",
           "value": 72.0
         },
-        "emoji": {
-          "type": "text",
-          "value": "🐭"
-        },
         "width": {
           "type": "num",
           "value": 94.0
@@ -49,6 +45,22 @@
         "height": {
           "type": "num",
           "value": 94.0
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/mouse.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Мышь"
+        },
+        "name": {
+          "type": "text",
+          "value": "Мышь"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/mouse.mp3"
         }
       },
       "tags": {
@@ -72,10 +84,6 @@
           "type": "num",
           "value": 88.0
         },
-        "emoji": {
-          "type": "text",
-          "value": "🧀"
-        },
         "width": {
           "type": "num",
           "value": 106.0
@@ -83,6 +91,22 @@
         "height": {
           "type": "num",
           "value": 106.0
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/cheese.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Сыр"
+        },
+        "name": {
+          "type": "text",
+          "value": "Сыр"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/cheese.mp3"
         }
       },
       "tags": {
@@ -389,6 +413,17 @@
     }
   ],
   "behaviors": [
+    {
+      "behaviorRef": {
+        "type": "audioPrompt",
+        "config": {
+          "on": "sceneStarted",
+          "text": "Проведи мышку к сыру",
+          "sound": "_sounds/speech/provedi-myshku-k-syru-0c9e95.wav"
+        }
+      },
+      "entityId": null
+    },
     {
       "behaviorRef": {
         "type": "mazeValidator",

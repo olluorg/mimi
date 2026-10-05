@@ -87,8 +87,18 @@ class CircleTraceValidatorBehavior(
     private fun handleTraceComplete(event: GameEvent.TraceComplete, ctx: BehaviorContext): List<Command> {
         val done = ctx.snapshot.getEntitiesByTag("group", group)
             .filter { it.hasComponent("traceTarget") && it.state == EntityLifecycleState.TENTATIVE }
-        return done.map {
-            Command.TriggerFeedback(feedbackType = "traceCompleted", source = id, tick = ctx.tick)
+        return done.flatMap { entity ->
+            listOf(
+                Command.TriggerFeedback(feedbackType = "traceCompleted", source = id, tick = ctx.tick),
+                // Also a match, so a finished circle reaches the counters and the
+                // success chime the way every other mechanic's win does.
+                Command.TriggerFeedback(
+                    feedbackType = "matchSuccess",
+                    params       = mapOf("source" to entity.id),
+                    source       = id,
+                    tick         = ctx.tick
+                )
+            )
         }
     }
 }
@@ -108,4 +118,15 @@ class CircleTraceValidatorPlugin : BehaviorPlugin {
             tolerance   = config["snapTolerance"]?.toFloatOrNull() ?: 60f,
             minProgress = config["minProgress"]?.toDoubleOrNull() ?: 0.9
         )
+
+    override fun validateConfig(config: Map<String, String>): ValidationResult =
+        SPEC.check(config)
+
+    private companion object {
+        private val SPEC = ConfigSpec.of("circleTraceValidator") {
+            text("group")
+            number("minProgress", min = 0.0, max = 1.0)
+            number("snapTolerance", min = 0.0)
+        }
+    }
 }

@@ -17,9 +17,9 @@
           "type": "text",
           "value": "circle"
         },
-        "emoji": {
+        "color": {
           "type": "text",
-          "value": "🔵"
+          "value": "blue"
         }
       },
       "tags": {
@@ -43,9 +43,9 @@
           "type": "text",
           "value": "triangle"
         },
-        "emoji": {
+        "color": {
           "type": "text",
-          "value": "🔺"
+          "value": "red"
         }
       },
       "tags": {
@@ -69,9 +69,9 @@
           "type": "text",
           "value": "square"
         },
-        "emoji": {
+        "color": {
           "type": "text",
-          "value": "🟦"
+          "value": "blue"
         }
       },
       "tags": {
@@ -95,9 +95,9 @@
           "type": "text",
           "value": "star"
         },
-        "emoji": {
+        "color": {
           "type": "text",
-          "value": "⭐"
+          "value": "yellow"
         }
       },
       "tags": {
@@ -123,7 +123,8 @@
         "type": "audioPrompt",
         "config": {
           "on": "sceneStarted",
-          "text": "Нажми на круг"
+          "text": "Нажми на круг",
+          "sound": "_sounds/speech/nazhmi-na-krug-ffb6d9.wav"
         }
       },
       "entityId": null

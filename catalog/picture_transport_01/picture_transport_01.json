@@ -1,0 +1,567 @@
+{
+  "sceneId": "picture_transport_01",
+  "meta": {
+    "title": "Что едет?",
+    "description": "Нажимай на картинки — услышишь названия. Ошибиться нельзя.",
+    "ageMin": 1,
+    "ageMax": 5,
+    "version": 1,
+    "tags": [
+      "cards",
+      "vocabulary",
+      "cause_effect"
+    ],
+    "skills": [
+      "receptive_speech",
+      "word_association",
+      "visual_attention",
+      "task_completion"
+    ],
+    "icon": "🚗",
+    "requires": []
+  },
+  "entities": [
+    {
+      "id": "airplane",
+      "components": [
+        "tap"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 220.0,
+          "y": 300.0
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/airplane.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Самолет"
+        },
+        "name": {
+          "type": "text",
+          "value": "Самолет"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/airplane.mp3"
+        }
+      },
+      "tags": {
+        "group": "gallery"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "airport",
+      "components": [
+        "tap"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 500.0,
+          "y": 300.0
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/airport.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Аэропорт"
+        },
+        "name": {
+          "type": "text",
+          "value": "Аэропорт"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/airport.mp3"
+        }
+      },
+      "tags": {
+        "group": "gallery"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "ambulance",
+      "components": [
+        "tap"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 780.0,
+          "y": 300.0
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/ambulance.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Скорая помощь"
+        },
+        "name": {
+          "type": "text",
+          "value": "Скорая помощь"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/ambulance.mp3"
+        }
+      },
+      "tags": {
+        "group": "gallery"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "atv",
+      "components": [
+        "tap"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 220.0,
+          "y": 550.0
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/atv.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Квадроцикл"
+        },
+        "name": {
+          "type": "text",
+          "value": "Квадроцикл"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/atv.mp3"
+        }
+      },
+      "tags": {
+        "group": "gallery"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "bicycle",
+      "components": [
+        "tap"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 500.0,
+          "y": 550.0
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/bicycle.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Велосипед"
+        },
+        "name": {
+          "type": "text",
+          "value": "Велосипед"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/bicycle.mp3"
+        }
+      },
+      "tags": {
+        "group": "gallery"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "bulldozer",
+      "components": [
+        "tap"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 780.0,
+          "y": 550.0
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/bulldozer.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Бульдозер"
+        },
+        "name": {
+          "type": "text",
+          "value": "Бульдозер"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/bulldozer.mp3"
+        }
+      },
+      "tags": {
+        "group": "gallery"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "bus",
+      "components": [
+        "tap"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 220.0,
+          "y": 800.0
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/bus.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Автобус"
+        },
+        "name": {
+          "type": "text",
+          "value": "Автобус"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/bus.mp3"
+        }
+      },
+      "tags": {
+        "group": "gallery"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "car",
+      "components": [
+        "tap"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 500.0,
+          "y": 800.0
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/car.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Машина"
+        },
+        "name": {
+          "type": "text",
+          "value": "Машина"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/car.mp3"
+        }
+      },
+      "tags": {
+        "group": "gallery"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "car-transporter",
+      "components": [
+        "tap"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 780.0,
+          "y": 800.0
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/car-transporter.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Автовоз"
+        },
+        "name": {
+          "type": "text",
+          "value": "Автовоз"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/car-transporter.mp3"
+        }
+      },
+      "tags": {
+        "group": "gallery"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "concrete-mixer",
+      "components": [
+        "tap"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 220.0,
+          "y": 1050.0
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/concrete-mixer.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Бетономешалка"
+        },
+        "name": {
+          "type": "text",
+          "value": "Бетономешалка"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/concrete-mixer.mp3"
+        }
+      },
+      "tags": {
+        "group": "gallery"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "excavator",
+      "components": [
+        "tap"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 500.0,
+          "y": 1050.0
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/excavator.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Экскаватор"
+        },
+        "name": {
+          "type": "text",
+          "value": "Экскаватор"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/excavator.mp3"
+        }
+      },
+      "tags": {
+        "group": "gallery"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "ferry",
+      "components": [
+        "tap"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 780.0,
+          "y": 1050.0
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/ferry.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Паром"
+        },
+        "name": {
+          "type": "text",
+          "value": "Паром"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/ferry.mp3"
+        }
+      },
+      "tags": {
+        "group": "gallery"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "fire-truck",
+      "components": [
+        "tap"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 220.0,
+          "y": 1300.0
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/fire-truck.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Пожарная машина"
+        },
+        "name": {
+          "type": "text",
+          "value": "Пожарная машина"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/fire-truck.mp3"
+        }
+      },
+      "tags": {
+        "group": "gallery"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "forklift",
+      "components": [
+        "tap"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 500.0,
+          "y": 1300.0
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/forklift.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Погрузчик"
+        },
+        "name": {
+          "type": "text",
+          "value": "Погрузчик"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/forklift.mp3"
+        }
+      },
+      "tags": {
+        "group": "gallery"
+      },
+      "zOrder": 0
+    }
+  ],
+  "objectives": [
+    {
+      "id": "looked",
+      "type": "interactionCount",
+      "config": {
+        "count": "8"
+      },
+      "requires": null
+    }
+  ],
+  "behaviors": [
+    {
+      "behaviorRef": {
+        "type": "audioPrompt",
+        "config": {
+          "on": "sceneStarted",
+          "text": "Нажимай на картинки. Я назову, что это",
+          "sound": "_sounds/speech/nazhimay-na-kartinki-ya-nazovu-chto-eto-766043.wav"
+        }
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "progressTracker",
+        "config": {}
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "freeSelection",
+        "config": {
+          "group": "gallery",
+          "repeatable": "true",
+          "speak": "true"
+        }
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "playSoundOnEvent",
+        "config": {
+          "on": "sceneCompleted",
+          "sound": "complete"
+        }
+      },
+      "entityId": null
+    }
+  ],
+  "fieldPolicies": {},
+  "idleTimeout": 40,
+  "onIdle": "HINT",
+  "metadata": {},
+  "variation": {
+    "pick": [
+      {
+        "group": "gallery",
+        "count": 6
+      }
+    ],
+    "shufflePositions": [
+      "gallery"
+    ]
+  }
+}

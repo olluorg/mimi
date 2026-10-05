@@ -1,0 +1,829 @@
+{
+  "sceneId": "animal_sound_wild_01",
+  "meta": {
+    "title": "Кто рычит в лесу?",
+    "description": "Слушай голос дикого зверя и нажимай на того, кто так говорит.",
+    "ageMin": 3,
+    "ageMax": 7,
+    "version": 1,
+    "tags": [
+      "animals",
+      "sound",
+      "listening"
+    ],
+    "skills": [
+      "auditory_discrimination",
+      "receptive_speech",
+      "word_association",
+      "selective_attention"
+    ],
+    "icon": "🦁",
+    "requires": [
+      "animal_sound_match_01"
+    ]
+  },
+  "entities": [],
+  "objectives": [],
+  "behaviors": [
+    {
+      "behaviorRef": {
+        "type": "progressTracker",
+        "config": {}
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "audioPrompt",
+        "config": {
+          "on": "sceneStarted",
+          "soundFrom": "questionSound"
+        }
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "playSoundOnTap",
+        "config": {
+          "group": "listen",
+          "property": "questionSound"
+        }
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "propertySelectionValidator",
+        "config": {
+          "property": "animal",
+          "expectedFrom": "correctAnimal"
+        }
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "adaptiveHint",
+        "config": {}
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "playSoundOnEvent",
+        "config": {
+          "on": "sceneCompleted",
+          "sound": "complete"
+        }
+      },
+      "entityId": null
+    }
+  ],
+  "fieldPolicies": {},
+  "idleTimeout": 25,
+  "onIdle": "HINT",
+  "metadata": {},
+  "levels": [
+    {
+      "levelId": "1_lion",
+      "entities": [
+        {
+          "id": "listen",
+          "components": [
+            "tap"
+          ],
+          "behaviors": [],
+          "properties": {
+            "position": {
+              "type": "vec2",
+              "x": 500.0,
+              "y": 170.0
+            },
+            "pictogram": {
+              "type": "text",
+              "value": "ear"
+            },
+            "questionSound": {
+              "type": "text",
+              "value": "_sounds/animals/lion.mp3"
+            },
+            "correctAnimal": {
+              "type": "text",
+              "value": "lion"
+            }
+          },
+          "tags": {
+            "group": "listen"
+          },
+          "zOrder": 0
+        },
+        {
+          "id": "elephant",
+          "components": [
+            "tap"
+          ],
+          "behaviors": [],
+          "properties": {
+            "position": {
+              "type": "vec2",
+              "x": 250.0,
+              "y": 460.0
+            },
+            "image": {
+              "type": "text",
+              "value": "_cards/elephant.jpg"
+            },
+            "label": {
+              "type": "text",
+              "value": "Слон"
+            },
+            "name": {
+              "type": "text",
+              "value": "Слон"
+            },
+            "animal": {
+              "type": "text",
+              "value": "elephant"
+            }
+          },
+          "tags": {
+            "group": "choices"
+          },
+          "zOrder": 0
+        },
+        {
+          "id": "frog",
+          "components": [
+            "tap"
+          ],
+          "behaviors": [],
+          "properties": {
+            "position": {
+              "type": "vec2",
+              "x": 500.0,
+              "y": 460.0
+            },
+            "image": {
+              "type": "text",
+              "value": "_cards/frog.jpg"
+            },
+            "label": {
+              "type": "text",
+              "value": "Лягушка"
+            },
+            "name": {
+              "type": "text",
+              "value": "Лягушка"
+            },
+            "animal": {
+              "type": "text",
+              "value": "frog"
+            }
+          },
+          "tags": {
+            "group": "choices"
+          },
+          "zOrder": 0
+        },
+        {
+          "id": "lion",
+          "components": [
+            "tap"
+          ],
+          "behaviors": [],
+          "properties": {
+            "position": {
+              "type": "vec2",
+              "x": 750.0,
+              "y": 460.0
+            },
+            "image": {
+              "type": "text",
+              "value": "_cards/lion.jpg"
+            },
+            "label": {
+              "type": "text",
+              "value": "Лев"
+            },
+            "name": {
+              "type": "text",
+              "value": "Лев"
+            },
+            "animal": {
+              "type": "text",
+              "value": "lion"
+            }
+          },
+          "tags": {
+            "group": "choices"
+          },
+          "zOrder": 0
+        }
+      ],
+      "objectives": [
+        {
+          "id": "found",
+          "type": "entitySelected",
+          "config": {
+            "property": "animal",
+            "value": "lion"
+          },
+          "requires": null
+        }
+      ]
+    },
+    {
+      "levelId": "2_frog",
+      "entities": [
+        {
+          "id": "listen",
+          "components": [
+            "tap"
+          ],
+          "behaviors": [],
+          "properties": {
+            "position": {
+              "type": "vec2",
+              "x": 500.0,
+              "y": 170.0
+            },
+            "pictogram": {
+              "type": "text",
+              "value": "ear"
+            },
+            "questionSound": {
+              "type": "text",
+              "value": "_sounds/animals/frog.mp3"
+            },
+            "correctAnimal": {
+              "type": "text",
+              "value": "frog"
+            }
+          },
+          "tags": {
+            "group": "listen"
+          },
+          "zOrder": 0
+        },
+        {
+          "id": "bear",
+          "components": [
+            "tap"
+          ],
+          "behaviors": [],
+          "properties": {
+            "position": {
+              "type": "vec2",
+              "x": 250.0,
+              "y": 460.0
+            },
+            "image": {
+              "type": "text",
+              "value": "_cards/bear.jpg"
+            },
+            "label": {
+              "type": "text",
+              "value": "Медведь"
+            },
+            "name": {
+              "type": "text",
+              "value": "Медведь"
+            },
+            "animal": {
+              "type": "text",
+              "value": "bear"
+            }
+          },
+          "tags": {
+            "group": "choices"
+          },
+          "zOrder": 0
+        },
+        {
+          "id": "frog",
+          "components": [
+            "tap"
+          ],
+          "behaviors": [],
+          "properties": {
+            "position": {
+              "type": "vec2",
+              "x": 500.0,
+              "y": 460.0
+            },
+            "image": {
+              "type": "text",
+              "value": "_cards/frog.jpg"
+            },
+            "label": {
+              "type": "text",
+              "value": "Лягушка"
+            },
+            "name": {
+              "type": "text",
+              "value": "Лягушка"
+            },
+            "animal": {
+              "type": "text",
+              "value": "frog"
+            }
+          },
+          "tags": {
+            "group": "choices"
+          },
+          "zOrder": 0
+        },
+        {
+          "id": "wolf",
+          "components": [
+            "tap"
+          ],
+          "behaviors": [],
+          "properties": {
+            "position": {
+              "type": "vec2",
+              "x": 750.0,
+              "y": 460.0
+            },
+            "image": {
+              "type": "text",
+              "value": "_cards/wolf.jpg"
+            },
+            "label": {
+              "type": "text",
+              "value": "Волк"
+            },
+            "name": {
+              "type": "text",
+              "value": "Волк"
+            },
+            "animal": {
+              "type": "text",
+              "value": "wolf"
+            }
+          },
+          "tags": {
+            "group": "choices"
+          },
+          "zOrder": 0
+        }
+      ],
+      "objectives": [
+        {
+          "id": "found",
+          "type": "entitySelected",
+          "config": {
+            "property": "animal",
+            "value": "frog"
+          },
+          "requires": null
+        }
+      ]
+    },
+    {
+      "levelId": "3_elephant",
+      "entities": [
+        {
+          "id": "listen",
+          "components": [
+            "tap"
+          ],
+          "behaviors": [],
+          "properties": {
+            "position": {
+              "type": "vec2",
+              "x": 500.0,
+              "y": 170.0
+            },
+            "pictogram": {
+              "type": "text",
+              "value": "ear"
+            },
+            "questionSound": {
+              "type": "text",
+              "value": "_sounds/animals/elephant.mp3"
+            },
+            "correctAnimal": {
+              "type": "text",
+              "value": "elephant"
+            }
+          },
+          "tags": {
+            "group": "listen"
+          },
+          "zOrder": 0
+        },
+        {
+          "id": "elephant",
+          "components": [
+            "tap"
+          ],
+          "behaviors": [],
+          "properties": {
+            "position": {
+              "type": "vec2",
+              "x": 250.0,
+              "y": 460.0
+            },
+            "image": {
+              "type": "text",
+              "value": "_cards/elephant.jpg"
+            },
+            "label": {
+              "type": "text",
+              "value": "Слон"
+            },
+            "name": {
+              "type": "text",
+              "value": "Слон"
+            },
+            "animal": {
+              "type": "text",
+              "value": "elephant"
+            }
+          },
+          "tags": {
+            "group": "choices"
+          },
+          "zOrder": 0
+        },
+        {
+          "id": "lion",
+          "components": [
+            "tap"
+          ],
+          "behaviors": [],
+          "properties": {
+            "position": {
+              "type": "vec2",
+              "x": 500.0,
+              "y": 460.0
+            },
+            "image": {
+              "type": "text",
+              "value": "_cards/lion.jpg"
+            },
+            "label": {
+              "type": "text",
+              "value": "Лев"
+            },
+            "name": {
+              "type": "text",
+              "value": "Лев"
+            },
+            "animal": {
+              "type": "text",
+              "value": "lion"
+            }
+          },
+          "tags": {
+            "group": "choices"
+          },
+          "zOrder": 0
+        },
+        {
+          "id": "wolf",
+          "components": [
+            "tap"
+          ],
+          "behaviors": [],
+          "properties": {
+            "position": {
+              "type": "vec2",
+              "x": 750.0,
+              "y": 460.0
+            },
+            "image": {
+              "type": "text",
+              "value": "_cards/wolf.jpg"
+            },
+            "label": {
+              "type": "text",
+              "value": "Волк"
+            },
+            "name": {
+              "type": "text",
+              "value": "Волк"
+            },
+            "animal": {
+              "type": "text",
+              "value": "wolf"
+            }
+          },
+          "tags": {
+            "group": "choices"
+          },
+          "zOrder": 0
+        }
+      ],
+      "objectives": [
+        {
+          "id": "found",
+          "type": "entitySelected",
+          "config": {
+            "property": "animal",
+            "value": "elephant"
+          },
+          "requires": null
+        }
+      ]
+    },
+    {
+      "levelId": "4_wolf",
+      "entities": [
+        {
+          "id": "listen",
+          "components": [
+            "tap"
+          ],
+          "behaviors": [],
+          "properties": {
+            "position": {
+              "type": "vec2",
+              "x": 500.0,
+              "y": 170.0
+            },
+            "pictogram": {
+              "type": "text",
+              "value": "ear"
+            },
+            "questionSound": {
+              "type": "text",
+              "value": "_sounds/animals/wolf.mp3"
+            },
+            "correctAnimal": {
+              "type": "text",
+              "value": "wolf"
+            }
+          },
+          "tags": {
+            "group": "listen"
+          },
+          "zOrder": 0
+        },
+        {
+          "id": "bear",
+          "components": [
+            "tap"
+          ],
+          "behaviors": [],
+          "properties": {
+            "position": {
+              "type": "vec2",
+              "x": 250.0,
+              "y": 460.0
+            },
+            "image": {
+              "type": "text",
+              "value": "_cards/bear.jpg"
+            },
+            "label": {
+              "type": "text",
+              "value": "Медведь"
+            },
+            "name": {
+              "type": "text",
+              "value": "Медведь"
+            },
+            "animal": {
+              "type": "text",
+              "value": "bear"
+            }
+          },
+          "tags": {
+            "group": "choices"
+          },
+          "zOrder": 0
+        },
+        {
+          "id": "frog",
+          "components": [
+            "tap"
+          ],
+          "behaviors": [],
+          "properties": {
+            "position": {
+              "type": "vec2",
+              "x": 500.0,
+              "y": 460.0
+            },
+            "image": {
+              "type": "text",
+              "value": "_cards/frog.jpg"
+            },
+            "label": {
+              "type": "text",
+              "value": "Лягушка"
+            },
+            "name": {
+              "type": "text",
+              "value": "Лягушка"
+            },
+            "animal": {
+              "type": "text",
+              "value": "frog"
+            }
+          },
+          "tags": {
+            "group": "choices"
+          },
+          "zOrder": 0
+        },
+        {
+          "id": "wolf",
+          "components": [
+            "tap"
+          ],
+          "behaviors": [],
+          "properties": {
+            "position": {
+              "type": "vec2",
+              "x": 750.0,
+              "y": 460.0
+            },
+            "image": {
+              "type": "text",
+              "value": "_cards/wolf.jpg"
+            },
+            "label": {
+              "type": "text",
+              "value": "Волк"
+            },
+            "name": {
+              "type": "text",
+              "value": "Волк"
+            },
+            "animal": {
+              "type": "text",
+              "value": "wolf"
+            }
+          },
+          "tags": {
+            "group": "choices"
+          },
+          "zOrder": 0
+        }
+      ],
+      "objectives": [
+        {
+          "id": "found",
+          "type": "entitySelected",
+          "config": {
+            "property": "animal",
+            "value": "wolf"
+          },
+          "requires": null
+        }
+      ]
+    },
+    {
+      "levelId": "5_bear",
+      "entities": [
+        {
+          "id": "listen",
+          "components": [
+            "tap"
+          ],
+          "behaviors": [],
+          "properties": {
+            "position": {
+              "type": "vec2",
+              "x": 500.0,
+              "y": 170.0
+            },
+            "pictogram": {
+              "type": "text",
+              "value": "ear"
+            },
+            "questionSound": {
+              "type": "text",
+              "value": "_sounds/animals/bear.mp3"
+            },
+            "correctAnimal": {
+              "type": "text",
+              "value": "bear"
+            }
+          },
+          "tags": {
+            "group": "listen"
+          },
+          "zOrder": 0
+        },
+        {
+          "id": "bear",
+          "components": [
+            "tap"
+          ],
+          "behaviors": [],
+          "properties": {
+            "position": {
+              "type": "vec2",
+              "x": 250.0,
+              "y": 460.0
+            },
+            "image": {
+              "type": "text",
+              "value": "_cards/bear.jpg"
+            },
+            "label": {
+              "type": "text",
+              "value": "Медведь"
+            },
+            "name": {
+              "type": "text",
+              "value": "Медведь"
+            },
+            "animal": {
+              "type": "text",
+              "value": "bear"
+            }
+          },
+          "tags": {
+            "group": "choices"
+          },
+          "zOrder": 0
+        },
+        {
+          "id": "elephant",
+          "components": [
+            "tap"
+          ],
+          "behaviors": [],
+          "properties": {
+            "position": {
+              "type": "vec2",
+              "x": 500.0,
+              "y": 460.0
+            },
+            "image": {
+              "type": "text",
+              "value": "_cards/elephant.jpg"
+            },
+            "label": {
+              "type": "text",
+              "value": "Слон"
+            },
+            "name": {
+              "type": "text",
+              "value": "Слон"
+            },
+            "animal": {
+              "type": "text",
+              "value": "elephant"
+            }
+          },
+          "tags": {
+            "group": "choices"
+          },
+          "zOrder": 0
+        },
+        {
+          "id": "lion",
+          "components": [
+            "tap"
+          ],
+          "behaviors": [],
+          "properties": {
+            "position": {
+              "type": "vec2",
+              "x": 750.0,
+              "y": 460.0
+            },
+            "image": {
+              "type": "text",
+              "value": "_cards/lion.jpg"
+            },
+            "label": {
+              "type": "text",
+              "value": "Лев"
+            },
+            "name": {
+              "type": "text",
+              "value": "Лев"
+            },
+            "animal": {
+              "type": "text",
+              "value": "lion"
+            }
+          },
+          "tags": {
+            "group": "choices"
+          },
+          "zOrder": 0
+        }
+      ],
+      "objectives": [
+        {
+          "id": "found",
+          "type": "entitySelected",
+          "config": {
+            "property": "animal",
+            "value": "bear"
+          },
+          "requires": null
+        }
+      ]
+    }
+  ]
+}

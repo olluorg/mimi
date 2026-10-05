@@ -49,8 +49,9 @@ class SequenceValidatorBehavior(
             listOf(
                 Command.TriggerFeedback(
                     feedbackType = "matchFail",
-                    source = id,
-                    tick   = ctx.tick
+                    params       = mapOf("source" to tappedId, "reason" to "out_of_order"),
+                    source       = id,
+                    tick         = ctx.tick
                 )
             )
         }
@@ -68,4 +69,13 @@ class SequenceValidatorPlugin : BehaviorPlugin {
             group    = config["group"]    ?: "sequence",
             property = config["property"] ?: "sequenceIndex"
         )
+
+    override fun validateConfig(config: Map<String, String>): ValidationResult =
+        SPEC.check(config)
+
+    private companion object {
+        private val SPEC = ConfigSpec.of("sequenceValidator") {
+            text("group", "property")
+        }
+    }
 }

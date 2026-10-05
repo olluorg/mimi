@@ -1,0 +1,877 @@
+{
+  "sceneId": "sort_cards_food_toys_01",
+  "meta": {
+    "title": "Еда и игрушки",
+    "description": "Разложи картинки по корзинам.",
+    "ageMin": 3,
+    "ageMax": 6,
+    "version": 1,
+    "tags": [
+      "cards",
+      "sorting",
+      "categorization"
+    ],
+    "skills": [
+      "categorization",
+      "matching",
+      "visual_attention",
+      "task_completion",
+      "receptive_speech"
+    ],
+    "icon": "🍽️",
+    "requires": []
+  },
+  "entities": [
+    {
+      "id": "apple",
+      "components": [
+        "drag"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 170.0,
+          "y": 240.0
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/apple.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Яблоко"
+        },
+        "name": {
+          "type": "text",
+          "value": "Яблоко"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/apple.mp3"
+        },
+        "zOrder": {
+          "type": "num",
+          "value": 1.0
+        },
+        "kind": {
+          "type": "text",
+          "value": "food"
+        }
+      },
+      "tags": {
+        "group": "items",
+        "kind": "food"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "apricot",
+      "components": [
+        "drag"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 390.0,
+          "y": 240.0
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/apricot.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Абрикос"
+        },
+        "name": {
+          "type": "text",
+          "value": "Абрикос"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/apricot.mp3"
+        },
+        "zOrder": {
+          "type": "num",
+          "value": 1.0
+        },
+        "kind": {
+          "type": "text",
+          "value": "food"
+        }
+      },
+      "tags": {
+        "group": "items",
+        "kind": "food"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "avocado",
+      "components": [
+        "drag"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 610.0,
+          "y": 240.0
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/avocado.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Авокадо"
+        },
+        "name": {
+          "type": "text",
+          "value": "Авокадо"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/avocado.mp3"
+        },
+        "zOrder": {
+          "type": "num",
+          "value": 1.0
+        },
+        "kind": {
+          "type": "text",
+          "value": "food"
+        }
+      },
+      "tags": {
+        "group": "items",
+        "kind": "food"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "bagel",
+      "components": [
+        "drag"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 830.0,
+          "y": 240.0
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/bagel.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Баранка"
+        },
+        "name": {
+          "type": "text",
+          "value": "Баранка"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/bagel.mp3"
+        },
+        "zOrder": {
+          "type": "num",
+          "value": 1.0
+        },
+        "kind": {
+          "type": "text",
+          "value": "food"
+        }
+      },
+      "tags": {
+        "group": "items",
+        "kind": "food"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "banana",
+      "components": [
+        "drag"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 170.0,
+          "y": 410.0
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/banana.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Банан"
+        },
+        "name": {
+          "type": "text",
+          "value": "Банан"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/banana.mp3"
+        },
+        "zOrder": {
+          "type": "num",
+          "value": 1.0
+        },
+        "kind": {
+          "type": "text",
+          "value": "food"
+        }
+      },
+      "tags": {
+        "group": "items",
+        "kind": "food"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "banana-chips",
+      "components": [
+        "drag"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 390.0,
+          "y": 410.0
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/banana-chips.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Банановые чипсы"
+        },
+        "name": {
+          "type": "text",
+          "value": "Банановые чипсы"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/banana-chips.mp3"
+        },
+        "zOrder": {
+          "type": "num",
+          "value": 1.0
+        },
+        "kind": {
+          "type": "text",
+          "value": "food"
+        }
+      },
+      "tags": {
+        "group": "items",
+        "kind": "food"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "bar",
+      "components": [
+        "drag"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 610.0,
+          "y": 410.0
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/bar.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Батончик"
+        },
+        "name": {
+          "type": "text",
+          "value": "Батончик"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/bar.mp3"
+        },
+        "zOrder": {
+          "type": "num",
+          "value": 1.0
+        },
+        "kind": {
+          "type": "text",
+          "value": "food"
+        }
+      },
+      "tags": {
+        "group": "items",
+        "kind": "food"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "borscht",
+      "components": [
+        "drag"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 830.0,
+          "y": 410.0
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/borscht.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Борщ"
+        },
+        "name": {
+          "type": "text",
+          "value": "Борщ"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/borscht.mp3"
+        },
+        "zOrder": {
+          "type": "num",
+          "value": 1.0
+        },
+        "kind": {
+          "type": "text",
+          "value": "food"
+        }
+      },
+      "tags": {
+        "group": "items",
+        "kind": "food"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "ball",
+      "components": [
+        "drag"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 170.0,
+          "y": 580.0
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/ball.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Мяч"
+        },
+        "name": {
+          "type": "text",
+          "value": "Мяч"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/ball.mp3"
+        },
+        "zOrder": {
+          "type": "num",
+          "value": 1.0
+        },
+        "kind": {
+          "type": "text",
+          "value": "toys"
+        }
+      },
+      "tags": {
+        "group": "items",
+        "kind": "toys"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "balloon",
+      "components": [
+        "drag"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 390.0,
+          "y": 580.0
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/balloon.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Воздушный шар"
+        },
+        "name": {
+          "type": "text",
+          "value": "Воздушный шар"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/balloon.mp3"
+        },
+        "zOrder": {
+          "type": "num",
+          "value": 1.0
+        },
+        "kind": {
+          "type": "text",
+          "value": "toys"
+        }
+      },
+      "tags": {
+        "group": "items",
+        "kind": "toys"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "blocks",
+      "components": [
+        "drag"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 610.0,
+          "y": 580.0
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/blocks.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Кубики"
+        },
+        "name": {
+          "type": "text",
+          "value": "Кубики"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/blocks.mp3"
+        },
+        "zOrder": {
+          "type": "num",
+          "value": 1.0
+        },
+        "kind": {
+          "type": "text",
+          "value": "toys"
+        }
+      },
+      "tags": {
+        "group": "items",
+        "kind": "toys"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "board-game",
+      "components": [
+        "drag"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 830.0,
+          "y": 580.0
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/board-game.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Настольная игра"
+        },
+        "name": {
+          "type": "text",
+          "value": "Настольная игра"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/board-game.mp3"
+        },
+        "zOrder": {
+          "type": "num",
+          "value": 1.0
+        },
+        "kind": {
+          "type": "text",
+          "value": "toys"
+        }
+      },
+      "tags": {
+        "group": "items",
+        "kind": "toys"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "bowling-pins",
+      "components": [
+        "drag"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 170.0,
+          "y": 750.0
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/bowling-pins.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Кегли"
+        },
+        "name": {
+          "type": "text",
+          "value": "Кегли"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/bowling-pins.mp3"
+        },
+        "zOrder": {
+          "type": "num",
+          "value": 1.0
+        },
+        "kind": {
+          "type": "text",
+          "value": "toys"
+        }
+      },
+      "tags": {
+        "group": "items",
+        "kind": "toys"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "building-blocks",
+      "components": [
+        "drag"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 390.0,
+          "y": 750.0
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/building-blocks.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Конструктор"
+        },
+        "name": {
+          "type": "text",
+          "value": "Конструктор"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/building-blocks.mp3"
+        },
+        "zOrder": {
+          "type": "num",
+          "value": 1.0
+        },
+        "kind": {
+          "type": "text",
+          "value": "toys"
+        }
+      },
+      "tags": {
+        "group": "items",
+        "kind": "toys"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "cartoons",
+      "components": [
+        "drag"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 610.0,
+          "y": 750.0
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/cartoons.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Мультики"
+        },
+        "name": {
+          "type": "text",
+          "value": "Мультики"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/cartoons.mp3"
+        },
+        "zOrder": {
+          "type": "num",
+          "value": 1.0
+        },
+        "kind": {
+          "type": "text",
+          "value": "toys"
+        }
+      },
+      "tags": {
+        "group": "items",
+        "kind": "toys"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "clay",
+      "components": [
+        "drag"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 830.0,
+          "y": 750.0
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/clay.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Пластилин"
+        },
+        "name": {
+          "type": "text",
+          "value": "Пластилин"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/clay.mp3"
+        },
+        "zOrder": {
+          "type": "num",
+          "value": 1.0
+        },
+        "kind": {
+          "type": "text",
+          "value": "toys"
+        }
+      },
+      "tags": {
+        "group": "items",
+        "kind": "toys"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "basket_food",
+      "components": [
+        "dropTarget"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 300.0,
+          "y": 800.0
+        },
+        "zOrder": {
+          "type": "num",
+          "value": 0.0
+        },
+        "label": {
+          "type": "text",
+          "value": "Еда"
+        },
+        "constraintType": {
+          "type": "text",
+          "value": "propertyEquals"
+        },
+        "source": {
+          "type": "text",
+          "value": "kind"
+        },
+        "target": {
+          "type": "text",
+          "value": "kind"
+        },
+        "kind": {
+          "type": "text",
+          "value": "food"
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/apple.jpg"
+        }
+      },
+      "tags": {},
+      "zOrder": 0
+    },
+    {
+      "id": "basket_toys",
+      "components": [
+        "dropTarget"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 700.0,
+          "y": 800.0
+        },
+        "zOrder": {
+          "type": "num",
+          "value": 0.0
+        },
+        "label": {
+          "type": "text",
+          "value": "Игрушки"
+        },
+        "constraintType": {
+          "type": "text",
+          "value": "propertyEquals"
+        },
+        "source": {
+          "type": "text",
+          "value": "kind"
+        },
+        "target": {
+          "type": "text",
+          "value": "kind"
+        },
+        "kind": {
+          "type": "text",
+          "value": "toys"
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/ball.jpg"
+        }
+      },
+      "tags": {},
+      "zOrder": 0
+    }
+  ],
+  "objectives": [
+    {
+      "id": "sorted",
+      "type": "allMatched",
+      "config": {
+        "group": "items"
+      },
+      "requires": null
+    }
+  ],
+  "behaviors": [
+    {
+      "behaviorRef": {
+        "type": "progressTracker",
+        "config": {}
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "audioPrompt",
+        "config": {
+          "on": "sceneStarted",
+          "text": "Разложи по корзинам",
+          "sound": "_sounds/speech/razlozhi-po-korzinam-219e52.wav"
+        }
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "snapToTarget",
+        "config": {}
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "adaptiveHint",
+        "config": {}
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "playSoundOnEvent",
+        "config": {
+          "on": "sceneCompleted",
+          "sound": "complete"
+        }
+      },
+      "entityId": null
+    }
+  ],
+  "fieldPolicies": {},
+  "idleTimeout": 20,
+  "onIdle": "HINT",
+  "metadata": {},
+  "variation": {
+    "pick": [
+      {
+        "group": "food",
+        "count": 2,
+        "tagKey": "kind"
+      },
+      {
+        "group": "toys",
+        "count": 2,
+        "tagKey": "kind"
+      }
+    ],
+    "shufflePositions": [
+      "items"
+    ]
+  }
+}

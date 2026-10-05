@@ -1,0 +1,877 @@
+{
+  "sceneId": "sort_cards_animals_transport_01",
+  "meta": {
+    "title": "Звери и машины",
+    "description": "Разложи картинки по корзинам.",
+    "ageMin": 3,
+    "ageMax": 6,
+    "version": 1,
+    "tags": [
+      "cards",
+      "sorting",
+      "categorization"
+    ],
+    "skills": [
+      "categorization",
+      "matching",
+      "visual_attention",
+      "task_completion",
+      "receptive_speech"
+    ],
+    "icon": "🐾",
+    "requires": []
+  },
+  "entities": [
+    {
+      "id": "bear",
+      "components": [
+        "drag"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 170.0,
+          "y": 240.0
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/bear.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Медведь"
+        },
+        "name": {
+          "type": "text",
+          "value": "Медведь"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/bear.mp3"
+        },
+        "zOrder": {
+          "type": "num",
+          "value": 1.0
+        },
+        "kind": {
+          "type": "text",
+          "value": "animals"
+        }
+      },
+      "tags": {
+        "group": "items",
+        "kind": "animals"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "boar",
+      "components": [
+        "drag"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 390.0,
+          "y": 240.0
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/boar.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Кабан"
+        },
+        "name": {
+          "type": "text",
+          "value": "Кабан"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/boar.mp3"
+        },
+        "zOrder": {
+          "type": "num",
+          "value": 1.0
+        },
+        "kind": {
+          "type": "text",
+          "value": "animals"
+        }
+      },
+      "tags": {
+        "group": "items",
+        "kind": "animals"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "bull",
+      "components": [
+        "drag"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 610.0,
+          "y": 240.0
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/bull.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Бык"
+        },
+        "name": {
+          "type": "text",
+          "value": "Бык"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/bull.mp3"
+        },
+        "zOrder": {
+          "type": "num",
+          "value": 1.0
+        },
+        "kind": {
+          "type": "text",
+          "value": "animals"
+        }
+      },
+      "tags": {
+        "group": "items",
+        "kind": "animals"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "calf",
+      "components": [
+        "drag"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 830.0,
+          "y": 240.0
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/calf.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Теленок"
+        },
+        "name": {
+          "type": "text",
+          "value": "Теленок"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/calf.mp3"
+        },
+        "zOrder": {
+          "type": "num",
+          "value": 1.0
+        },
+        "kind": {
+          "type": "text",
+          "value": "animals"
+        }
+      },
+      "tags": {
+        "group": "items",
+        "kind": "animals"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "cat",
+      "components": [
+        "drag"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 170.0,
+          "y": 410.0
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/cat.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Кошка"
+        },
+        "name": {
+          "type": "text",
+          "value": "Кошка"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/cat.mp3"
+        },
+        "zOrder": {
+          "type": "num",
+          "value": 1.0
+        },
+        "kind": {
+          "type": "text",
+          "value": "animals"
+        }
+      },
+      "tags": {
+        "group": "items",
+        "kind": "animals"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "chick",
+      "components": [
+        "drag"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 390.0,
+          "y": 410.0
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/chick.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Цыпленок"
+        },
+        "name": {
+          "type": "text",
+          "value": "Цыпленок"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/chick.mp3"
+        },
+        "zOrder": {
+          "type": "num",
+          "value": 1.0
+        },
+        "kind": {
+          "type": "text",
+          "value": "animals"
+        }
+      },
+      "tags": {
+        "group": "items",
+        "kind": "animals"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "cow",
+      "components": [
+        "drag"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 610.0,
+          "y": 410.0
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/cow.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Корова"
+        },
+        "name": {
+          "type": "text",
+          "value": "Корова"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/cow.mp3"
+        },
+        "zOrder": {
+          "type": "num",
+          "value": 1.0
+        },
+        "kind": {
+          "type": "text",
+          "value": "animals"
+        }
+      },
+      "tags": {
+        "group": "items",
+        "kind": "animals"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "dog",
+      "components": [
+        "drag"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 830.0,
+          "y": 410.0
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/dog.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Собака"
+        },
+        "name": {
+          "type": "text",
+          "value": "Собака"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/dog.mp3"
+        },
+        "zOrder": {
+          "type": "num",
+          "value": 1.0
+        },
+        "kind": {
+          "type": "text",
+          "value": "animals"
+        }
+      },
+      "tags": {
+        "group": "items",
+        "kind": "animals"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "airplane",
+      "components": [
+        "drag"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 170.0,
+          "y": 580.0
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/airplane.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Самолет"
+        },
+        "name": {
+          "type": "text",
+          "value": "Самолет"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/airplane.mp3"
+        },
+        "zOrder": {
+          "type": "num",
+          "value": 1.0
+        },
+        "kind": {
+          "type": "text",
+          "value": "transport"
+        }
+      },
+      "tags": {
+        "group": "items",
+        "kind": "transport"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "airport",
+      "components": [
+        "drag"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 390.0,
+          "y": 580.0
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/airport.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Аэропорт"
+        },
+        "name": {
+          "type": "text",
+          "value": "Аэропорт"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/airport.mp3"
+        },
+        "zOrder": {
+          "type": "num",
+          "value": 1.0
+        },
+        "kind": {
+          "type": "text",
+          "value": "transport"
+        }
+      },
+      "tags": {
+        "group": "items",
+        "kind": "transport"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "ambulance",
+      "components": [
+        "drag"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 610.0,
+          "y": 580.0
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/ambulance.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Скорая помощь"
+        },
+        "name": {
+          "type": "text",
+          "value": "Скорая помощь"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/ambulance.mp3"
+        },
+        "zOrder": {
+          "type": "num",
+          "value": 1.0
+        },
+        "kind": {
+          "type": "text",
+          "value": "transport"
+        }
+      },
+      "tags": {
+        "group": "items",
+        "kind": "transport"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "atv",
+      "components": [
+        "drag"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 830.0,
+          "y": 580.0
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/atv.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Квадроцикл"
+        },
+        "name": {
+          "type": "text",
+          "value": "Квадроцикл"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/atv.mp3"
+        },
+        "zOrder": {
+          "type": "num",
+          "value": 1.0
+        },
+        "kind": {
+          "type": "text",
+          "value": "transport"
+        }
+      },
+      "tags": {
+        "group": "items",
+        "kind": "transport"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "bicycle",
+      "components": [
+        "drag"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 170.0,
+          "y": 750.0
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/bicycle.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Велосипед"
+        },
+        "name": {
+          "type": "text",
+          "value": "Велосипед"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/bicycle.mp3"
+        },
+        "zOrder": {
+          "type": "num",
+          "value": 1.0
+        },
+        "kind": {
+          "type": "text",
+          "value": "transport"
+        }
+      },
+      "tags": {
+        "group": "items",
+        "kind": "transport"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "bulldozer",
+      "components": [
+        "drag"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 390.0,
+          "y": 750.0
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/bulldozer.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Бульдозер"
+        },
+        "name": {
+          "type": "text",
+          "value": "Бульдозер"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/bulldozer.mp3"
+        },
+        "zOrder": {
+          "type": "num",
+          "value": 1.0
+        },
+        "kind": {
+          "type": "text",
+          "value": "transport"
+        }
+      },
+      "tags": {
+        "group": "items",
+        "kind": "transport"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "bus",
+      "components": [
+        "drag"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 610.0,
+          "y": 750.0
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/bus.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Автобус"
+        },
+        "name": {
+          "type": "text",
+          "value": "Автобус"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/bus.mp3"
+        },
+        "zOrder": {
+          "type": "num",
+          "value": 1.0
+        },
+        "kind": {
+          "type": "text",
+          "value": "transport"
+        }
+      },
+      "tags": {
+        "group": "items",
+        "kind": "transport"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "car",
+      "components": [
+        "drag"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 830.0,
+          "y": 750.0
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/car.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Машина"
+        },
+        "name": {
+          "type": "text",
+          "value": "Машина"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/car.mp3"
+        },
+        "zOrder": {
+          "type": "num",
+          "value": 1.0
+        },
+        "kind": {
+          "type": "text",
+          "value": "transport"
+        }
+      },
+      "tags": {
+        "group": "items",
+        "kind": "transport"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "basket_animals",
+      "components": [
+        "dropTarget"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 300.0,
+          "y": 800.0
+        },
+        "zOrder": {
+          "type": "num",
+          "value": 0.0
+        },
+        "label": {
+          "type": "text",
+          "value": "Звери"
+        },
+        "constraintType": {
+          "type": "text",
+          "value": "propertyEquals"
+        },
+        "source": {
+          "type": "text",
+          "value": "kind"
+        },
+        "target": {
+          "type": "text",
+          "value": "kind"
+        },
+        "kind": {
+          "type": "text",
+          "value": "animals"
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/cat.jpg"
+        }
+      },
+      "tags": {},
+      "zOrder": 0
+    },
+    {
+      "id": "basket_transport",
+      "components": [
+        "dropTarget"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 700.0,
+          "y": 800.0
+        },
+        "zOrder": {
+          "type": "num",
+          "value": 0.0
+        },
+        "label": {
+          "type": "text",
+          "value": "Машины"
+        },
+        "constraintType": {
+          "type": "text",
+          "value": "propertyEquals"
+        },
+        "source": {
+          "type": "text",
+          "value": "kind"
+        },
+        "target": {
+          "type": "text",
+          "value": "kind"
+        },
+        "kind": {
+          "type": "text",
+          "value": "transport"
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/car.jpg"
+        }
+      },
+      "tags": {},
+      "zOrder": 0
+    }
+  ],
+  "objectives": [
+    {
+      "id": "sorted",
+      "type": "allMatched",
+      "config": {
+        "group": "items"
+      },
+      "requires": null
+    }
+  ],
+  "behaviors": [
+    {
+      "behaviorRef": {
+        "type": "progressTracker",
+        "config": {}
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "audioPrompt",
+        "config": {
+          "on": "sceneStarted",
+          "text": "Разложи по корзинам",
+          "sound": "_sounds/speech/razlozhi-po-korzinam-219e52.wav"
+        }
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "snapToTarget",
+        "config": {}
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "adaptiveHint",
+        "config": {}
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "playSoundOnEvent",
+        "config": {
+          "on": "sceneCompleted",
+          "sound": "complete"
+        }
+      },
+      "entityId": null
+    }
+  ],
+  "fieldPolicies": {},
+  "idleTimeout": 20,
+  "onIdle": "HINT",
+  "metadata": {},
+  "variation": {
+    "pick": [
+      {
+        "group": "animals",
+        "count": 2,
+        "tagKey": "kind"
+      },
+      {
+        "group": "transport",
+        "count": 2,
+        "tagKey": "kind"
+      }
+    ],
+    "shufflePositions": [
+      "items"
+    ]
+  }
+}

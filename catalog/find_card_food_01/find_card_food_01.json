@@ -1,0 +1,442 @@
+{
+  "sceneId": "find_card_food_01",
+  "meta": {
+    "title": "Найди еду",
+    "description": "Слушай и нажми нужную картинку.",
+    "ageMin": 2,
+    "ageMax": 6,
+    "version": 1,
+    "tags": [
+      "cards",
+      "listening",
+      "vocabulary"
+    ],
+    "skills": [
+      "receptive_speech",
+      "selective_attention",
+      "word_association",
+      "visual_attention"
+    ],
+    "icon": "🔍",
+    "requires": []
+  },
+  "entities": [
+    {
+      "id": "apple",
+      "components": [
+        "tap"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 220.0,
+          "y": 320.0
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/apple.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Яблоко"
+        },
+        "name": {
+          "type": "text",
+          "value": "Яблоко"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/apple.mp3"
+        },
+        "target": {
+          "type": "text",
+          "value": "yes"
+        }
+      },
+      "tags": {
+        "group": "choices"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "apricot",
+      "components": [
+        "tap"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 500.0,
+          "y": 320.0
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/apricot.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Абрикос"
+        },
+        "name": {
+          "type": "text",
+          "value": "Абрикос"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/apricot.mp3"
+        },
+        "target": {
+          "type": "text",
+          "value": "no"
+        }
+      },
+      "tags": {
+        "group": "choices"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "avocado",
+      "components": [
+        "tap"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 780.0,
+          "y": 320.0
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/avocado.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Авокадо"
+        },
+        "name": {
+          "type": "text",
+          "value": "Авокадо"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/avocado.mp3"
+        },
+        "target": {
+          "type": "text",
+          "value": "no"
+        }
+      },
+      "tags": {
+        "group": "choices"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "bagel",
+      "components": [
+        "tap"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 220.0,
+          "y": 580.0
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/bagel.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Баранка"
+        },
+        "name": {
+          "type": "text",
+          "value": "Баранка"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/bagel.mp3"
+        },
+        "target": {
+          "type": "text",
+          "value": "no"
+        }
+      },
+      "tags": {
+        "group": "choices"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "banana",
+      "components": [
+        "tap"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 500.0,
+          "y": 580.0
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/banana.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Банан"
+        },
+        "name": {
+          "type": "text",
+          "value": "Банан"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/banana.mp3"
+        },
+        "target": {
+          "type": "text",
+          "value": "no"
+        }
+      },
+      "tags": {
+        "group": "choices"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "banana-chips",
+      "components": [
+        "tap"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 780.0,
+          "y": 580.0
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/banana-chips.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Банановые чипсы"
+        },
+        "name": {
+          "type": "text",
+          "value": "Банановые чипсы"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/banana-chips.mp3"
+        },
+        "target": {
+          "type": "text",
+          "value": "no"
+        }
+      },
+      "tags": {
+        "group": "choices"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "bar",
+      "components": [
+        "tap"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 220.0,
+          "y": 840.0
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/bar.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Батончик"
+        },
+        "name": {
+          "type": "text",
+          "value": "Батончик"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/bar.mp3"
+        },
+        "target": {
+          "type": "text",
+          "value": "no"
+        }
+      },
+      "tags": {
+        "group": "choices"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "borscht",
+      "components": [
+        "tap"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 500.0,
+          "y": 840.0
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/borscht.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Борщ"
+        },
+        "name": {
+          "type": "text",
+          "value": "Борщ"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/borscht.mp3"
+        },
+        "target": {
+          "type": "text",
+          "value": "no"
+        }
+      },
+      "tags": {
+        "group": "choices"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "bread",
+      "components": [
+        "tap"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 780.0,
+          "y": 840.0
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/bread.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Хлеб"
+        },
+        "name": {
+          "type": "text",
+          "value": "Хлеб"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/bread.mp3"
+        },
+        "target": {
+          "type": "text",
+          "value": "no"
+        }
+      },
+      "tags": {
+        "group": "choices"
+      },
+      "zOrder": 0
+    }
+  ],
+  "objectives": [
+    {
+      "id": "found",
+      "type": "entitySelected",
+      "config": {
+        "property": "target",
+        "value": "yes"
+      },
+      "requires": null
+    }
+  ],
+  "behaviors": [
+    {
+      "behaviorRef": {
+        "type": "progressTracker",
+        "config": {}
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "audioPrompt",
+        "config": {
+          "on": "sceneStarted",
+          "sound": "_cards/audio/apple.mp3"
+        }
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "propertySelectionValidator",
+        "config": {
+          "property": "target",
+          "expected": "yes"
+        }
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "adaptiveHint",
+        "config": {}
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "playSoundOnEvent",
+        "config": {
+          "on": "sceneCompleted",
+          "sound": "complete"
+        }
+      },
+      "entityId": null
+    }
+  ],
+  "fieldPolicies": {},
+  "idleTimeout": 20,
+  "onIdle": "HINT",
+  "metadata": {},
+  "variation": {
+    "pick": [
+      {
+        "group": "choices",
+        "count": 3,
+        "keep": [
+          "apple"
+        ]
+      }
+    ],
+    "shufflePositions": [
+      "choices"
+    ]
+  }
+}

@@ -31,11 +31,13 @@ class TraceValidatorBehavior(
 
         for (entity in entities) {
             val waypoints = entity.waypoints("waypoints") ?: continue
-            val nextIndex = waypoints.indexOfFirst { wp ->
-                val prop = entity.property("wp_${waypoints.indexOf(wp)}_done")
-                prop == null  // not yet done
-            }
-            if (nextIndex < 0) continue
+            // Scan by index, not by value. Waypoint is a data class, so looking an
+            // element up with indexOf finds the first waypoint with the same
+            // coordinates — on any path that revisits a point, such as the crossbar
+            // of an "A" or a closed shape, that is the wrong waypoint.
+            val nextIndex = waypoints.indices.firstOrNull { index ->
+                entity.property("wp_${index}_done") == null
+            } ?: continue
 
             val wp   = waypoints[nextIndex]
             val dist = dist(event.position.x, event.position.y, wp.x, wp.y)
@@ -79,8 +81,13 @@ class TraceValidatorBehavior(
         val entities = ctx.snapshot.getEntitiesByTag("group", group)
             .filter { it.hasComponent("traceTarget") }
 
-        return entities.filter { it.state == EntityLifecycleState.TENTATIVE }.map {
-            Command.TriggerFeedback(feedbackType = "matchSuccess", source = id, tick = ctx.tick)
+        return entities.filter { it.state == EntityLifecycleState.TENTATIVE }.map { entity ->
+            Command.TriggerFeedback(
+                feedbackType = "matchSuccess",
+                params       = mapOf("source" to entity.id),
+                source       = id,
+                tick         = ctx.tick
+            )
         }
     }
 
@@ -104,4 +111,14 @@ class TraceValidatorPlugin : BehaviorPlugin {
             group            = config["group"] ?: "trace",
             allowBacktracking = config["allowBacktracking"]?.toBooleanStrictOrNull() ?: true
         )
+
+    override fun validateConfig(config: Map<String, String>): ValidationResult =
+        SPEC.check(config)
+
+    private companion object {
+        private val SPEC = ConfigSpec.of("traceValidator") {
+            text("group")
+            flag("allowBacktracking")
+        }
+    }
 }

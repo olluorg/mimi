@@ -1,0 +1,197 @@
+{
+  "sceneId": "choice_drink_01",
+  "meta": {
+    "title": "Что будешь пить?",
+    "description": "Покажи, что ты хочешь. Любой ответ правильный.",
+    "ageMin": 2,
+    "ageMax": 6,
+    "version": 1,
+    "tags": [
+      "choice",
+      "communication"
+    ],
+    "skills": [
+      "expressive_speech",
+      "receptive_speech",
+      "task_completion",
+      "visual_attention",
+      "requesting"
+    ],
+    "icon": "🧃",
+    "requires": [],
+    "speech": {
+      "stage": "aac",
+      "targets": [
+        "alalia",
+        "apraxia"
+      ],
+      "modes": [
+        "aac"
+      ],
+      "words": [
+        "сок",
+        "вода",
+        "молоко"
+      ],
+      "adultTip": "Когда ребёнок нажимает картинку, повторите слово сами и сразу дайте то, что он попросил. Картинка — это его голос, она не мешает речи, а помогает ей."
+    }
+  },
+  "entities": [
+    {
+      "id": "juice",
+      "components": [
+        "tap"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 220.0,
+          "y": 480.0
+        },
+        "name": {
+          "type": "text",
+          "value": "сок"
+        },
+        "label": {
+          "type": "text",
+          "value": "сок"
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/juice.jpg"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/juice.mp3"
+        }
+      },
+      "tags": {
+        "group": "choices"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "water",
+      "components": [
+        "tap"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 500.0,
+          "y": 480.0
+        },
+        "name": {
+          "type": "text",
+          "value": "вода"
+        },
+        "label": {
+          "type": "text",
+          "value": "вода"
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/water.jpg"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/water.mp3"
+        }
+      },
+      "tags": {
+        "group": "choices"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "milk",
+      "components": [
+        "tap"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 780.0,
+          "y": 480.0
+        },
+        "name": {
+          "type": "text",
+          "value": "молоко"
+        },
+        "label": {
+          "type": "text",
+          "value": "молоко"
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/milk.jpg"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/milk.mp3"
+        }
+      },
+      "tags": {
+        "group": "choices"
+      },
+      "zOrder": 0
+    }
+  ],
+  "objectives": [
+    {
+      "id": "chose",
+      "type": "anySelected",
+      "config": {
+        "group": "choices"
+      },
+      "requires": null
+    }
+  ],
+  "behaviors": [
+    {
+      "behaviorRef": {
+        "type": "progressTracker",
+        "config": {}
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "audioPrompt",
+        "config": {
+          "on": "sceneStarted",
+          "text": "Что будешь пить?",
+          "sound": "_sounds/speech/chto-budesh-pit-56ebd3.wav"
+        }
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "freeSelection",
+        "config": {
+          "group": "choices",
+          "speak": "true"
+        }
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "playSoundOnEvent",
+        "config": {
+          "on": "sceneCompleted",
+          "sound": "complete"
+        }
+      },
+      "entityId": null
+    }
+  ],
+  "fieldPolicies": {},
+  "idleTimeout": 25,
+  "onIdle": "HINT",
+  "metadata": {}
+}

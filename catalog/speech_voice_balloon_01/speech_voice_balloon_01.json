@@ -1,0 +1,150 @@
+{
+  "sceneId": "speech_voice_balloon_01",
+  "meta": {
+    "title": "Шарик от голоса",
+    "description": "Пока ребёнок тянет «а-а-а», шарик поднимается к звезде. Замолчал — опускается.",
+    "ageMin": 2,
+    "ageMax": 7,
+    "version": 1,
+    "tags": [
+      "speech",
+      "voice",
+      "cause_effect"
+    ],
+    "skills": [
+      "voice_loudness",
+      "vocal_initiation",
+      "cause_effect",
+      "sustained_attention"
+    ],
+    "icon": "🎈",
+    "requires": [],
+    "speech": {
+      "stage": "vocal",
+      "targets": [
+        "dysarthria",
+        "alalia"
+      ],
+      "modes": [
+        "voice"
+      ],
+      "words": [
+        "а-а-а",
+        "у-у-у",
+        "о-о-о"
+      ],
+      "adultTip": "Покажите сами: долгое громкое «а-а-а» на одном выдохе. Нужен голос, а не дутьё — дуть на экран бесполезно."
+    }
+  },
+  "entities": [
+    {
+      "id": "star",
+      "components": [],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 500.0,
+          "y": 250.0
+        },
+        "width": {
+          "type": "num",
+          "value": 150.0
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/star.jpg"
+        }
+      },
+      "tags": {
+        "group": "decor"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "balloon",
+      "components": [],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 500.0,
+          "y": 560.0
+        },
+        "width": {
+          "type": "num",
+          "value": 230.0
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/balloon.jpg"
+        },
+        "glide": {
+          "type": "flag",
+          "value": true
+        }
+      },
+      "tags": {
+        "group": "player"
+      },
+      "zOrder": 1
+    }
+  ],
+  "objectives": [
+    {
+      "id": "turns",
+      "type": "interactionCount",
+      "config": {
+        "count": "3"
+      },
+      "requires": null
+    }
+  ],
+  "behaviors": [
+    {
+      "behaviorRef": {
+        "type": "progressTracker",
+        "config": {}
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "audioPrompt",
+        "config": {
+          "on": "sceneStarted",
+          "text": "Скажи: а-а-а!",
+          "sound": "_sounds/speech/skazhi-a-a-a-3647c4.wav"
+        }
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "voiceDrive",
+        "config": {
+          "entity": "balloon",
+          "fromY": "560",
+          "toY": "260",
+          "rise": "330",
+          "fall": "90"
+        }
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "playSoundOnEvent",
+        "config": {
+          "on": "sceneCompleted",
+          "sound": "complete"
+        }
+      },
+      "entityId": null
+    }
+  ],
+  "fieldPolicies": {},
+  "idleTimeout": 40,
+  "onIdle": "HINT",
+  "metadata": {}
+}

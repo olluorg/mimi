@@ -64,12 +64,23 @@ class AdaptiveHintBehavior(
             tick   = ctx.tick
         ))
 
+        // Point at something. A hint bound to no entity — which is every scene in
+        // the catalog — used to name nothing, so the child heard a chime and saw
+        // no change at all. The next move is worked out from the world instead.
+        val move = HintTargets.nextMove(snap)
+        val pointAt = entityId ?: move?.source
+        val params = buildMap {
+            put("level", newLevel.value.toString())
+            put("entityId", pointAt ?: "")
+            // Only once the child has been stuck a while is the answer shown as
+            // well as the question: where the piece belongs, not just which piece.
+            if (newLevel == HintLevel.ASSIST && entityId == null) {
+                move?.destination?.let { put("destinationId", it) }
+            }
+        }
         commands.add(Command.TriggerFeedback(
             feedbackType = "hint",
-            params       = mapOf(
-                "level"    to newLevel.value.toString(),
-                "entityId" to (entityId ?: "")
-            ),
+            params       = params,
             source = id,
             tick   = ctx.tick
         ))
@@ -114,4 +125,14 @@ class AdaptiveHintPlugin : BehaviorPlugin {
             cooldownMax = config["cooldownMax"]?.toLongOrNull() ?: secondsToTicks(15),
             thresholds  = HintThresholds()
         )
+
+    override fun validateConfig(config: Map<String, String>): ValidationResult =
+        SPEC.check(config)
+
+    private companion object {
+        private val SPEC = ConfigSpec.of("adaptiveHint") {
+            number("cooldownMin", min = 0.0)
+            number("cooldownMax", min = 0.0)
+        }
+    }
 }

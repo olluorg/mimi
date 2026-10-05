@@ -135,4 +135,14 @@ class MazeValidatorPlugin : BehaviorPlugin {
             wallGroup = config["wallGroup"] ?: "maze_wall",
             wallPadding = config["wallPadding"]?.toFloatOrNull() ?: 8f
         )
+
+    override fun validateConfig(config: Map<String, String>): ValidationResult =
+        SPEC.check(config)
+
+    private companion object {
+        private val SPEC = ConfigSpec.of("mazeValidator") {
+            text("pathId", "startEntity", "exitEntity", "wallGroup")
+            number("wallPadding", min = 0.0)
+        }
+    }
 }

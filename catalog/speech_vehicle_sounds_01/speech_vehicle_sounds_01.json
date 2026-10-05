@@ -1,0 +1,279 @@
+{
+  "sceneId": "speech_vehicle_sounds_01",
+  "meta": {
+    "title": "Би-би! Ту-ту!",
+    "description": "Машина, поезд, самолёт: ребёнок повторяет их простые звуки.",
+    "ageMin": 2,
+    "ageMax": 6,
+    "version": 1,
+    "tags": [
+      "speech",
+      "imitation",
+      "transport"
+    ],
+    "skills": [
+      "sound_imitation",
+      "vocal_initiation",
+      "expressive_speech",
+      "turn_taking"
+    ],
+    "icon": "🚗",
+    "requires": [],
+    "speech": {
+      "stage": "imitation",
+      "targets": [
+        "alalia",
+        "apraxia"
+      ],
+      "modes": [
+        "imitation",
+        "voice"
+      ],
+      "words": [
+        "би-би",
+        "ту-ту",
+        "у",
+        "динь"
+      ],
+      "adultTip": "Скажите звук вместе с игрой и изобразите его руками — руль, гудок. Потом замолчите и ждите. Засчитывайте любую попытку — даже один звук вместо слова."
+    }
+  },
+  "entities": [
+    {
+      "id": "car",
+      "components": [
+        "tap"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 500.0,
+          "y": 440.0
+        },
+        "width": {
+          "type": "num",
+          "value": 320.0
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/car.jpg"
+        },
+        "name": {
+          "type": "text",
+          "value": "машина"
+        },
+        "speech": {
+          "type": "text",
+          "value": "Би-би!"
+        },
+        "rewardMotion": {
+          "type": "text",
+          "value": "drive"
+        },
+        "reward": {
+          "type": "text",
+          "value": "_sounds/car.wav"
+        },
+        "mouth": {
+          "type": "text",
+          "value": "_anim/mouth_ma.json"
+        }
+      },
+      "tags": {
+        "group": "targets"
+      },
+      "zOrder": 0,
+      "initialState": "INACTIVE"
+    },
+    {
+      "id": "train",
+      "components": [
+        "tap"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 500.0,
+          "y": 440.0
+        },
+        "width": {
+          "type": "num",
+          "value": 320.0
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/train.jpg"
+        },
+        "name": {
+          "type": "text",
+          "value": "поезд"
+        },
+        "speech": {
+          "type": "text",
+          "value": "Ту-ту!"
+        },
+        "rewardMotion": {
+          "type": "text",
+          "value": "drive"
+        },
+        "reward": {
+          "type": "text",
+          "value": "_sounds/train.wav"
+        }
+      },
+      "tags": {
+        "group": "targets"
+      },
+      "zOrder": 0,
+      "initialState": "INACTIVE"
+    },
+    {
+      "id": "airplane",
+      "components": [
+        "tap"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 500.0,
+          "y": 440.0
+        },
+        "width": {
+          "type": "num",
+          "value": 320.0
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/airplane.jpg"
+        },
+        "name": {
+          "type": "text",
+          "value": "самолёт"
+        },
+        "speech": {
+          "type": "text",
+          "value": "У-у!"
+        },
+        "rewardMotion": {
+          "type": "text",
+          "value": "fly"
+        },
+        "reward": {
+          "type": "text",
+          "value": "_sounds/airplane.wav"
+        },
+        "mouth": {
+          "type": "text",
+          "value": "_anim/mouth_u.json"
+        }
+      },
+      "tags": {
+        "group": "targets"
+      },
+      "zOrder": 0,
+      "initialState": "INACTIVE"
+    },
+    {
+      "id": "bell",
+      "components": [
+        "tap"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 500.0,
+          "y": 440.0
+        },
+        "width": {
+          "type": "num",
+          "value": 320.0
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/bell.jpg"
+        },
+        "name": {
+          "type": "text",
+          "value": "колокольчик"
+        },
+        "speech": {
+          "type": "text",
+          "value": "Динь!"
+        },
+        "rewardMotion": {
+          "type": "text",
+          "value": "wiggle"
+        },
+        "reward": {
+          "type": "text",
+          "value": "_sounds/bell.wav"
+        }
+      },
+      "tags": {
+        "group": "targets"
+      },
+      "zOrder": 0,
+      "initialState": "INACTIVE"
+    }
+  ],
+  "objectives": [
+    {
+      "id": "turns",
+      "type": "interactionCount",
+      "config": {
+        "count": "4"
+      },
+      "requires": null
+    }
+  ],
+  "behaviors": [
+    {
+      "behaviorRef": {
+        "type": "progressTracker",
+        "config": {}
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "audioPrompt",
+        "config": {
+          "on": "sceneStarted",
+          "text": "Скажи!",
+          "sound": "_sounds/speech/skazhi-3628b3.wav"
+        }
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "awaitResponse",
+        "config": {
+          "group": "targets",
+          "accept": "voice,adult",
+          "waitMs": "6000",
+          "maxPrompts": "2"
+        }
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "playSoundOnEvent",
+        "config": {
+          "on": "sceneCompleted",
+          "sound": "complete"
+        }
+      },
+      "entityId": null
+    }
+  ],
+  "fieldPolicies": {},
+  "idleTimeout": 40,
+  "onIdle": "HINT",
+  "metadata": {}
+}

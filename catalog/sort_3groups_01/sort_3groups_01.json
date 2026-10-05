@@ -17,9 +17,21 @@
           "type": "text",
           "value": "animal"
         },
-        "emoji": {
+        "image": {
           "type": "text",
-          "value": "🐶"
+          "value": "_cards/dog.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Собака"
+        },
+        "name": {
+          "type": "text",
+          "value": "Собака"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/dog.mp3"
         }
       },
       "tags": {
@@ -37,15 +49,27 @@
         "position": {
           "type": "vec2",
           "x": 500.0,
-          "y": 150.0
+          "y": 340.0
         },
         "category": {
           "type": "text",
           "value": "vehicle"
         },
-        "emoji": {
+        "image": {
           "type": "text",
-          "value": "🚗"
+          "value": "_cards/car.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Машина"
+        },
+        "name": {
+          "type": "text",
+          "value": "Машина"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/car.mp3"
         }
       },
       "tags": {
@@ -63,15 +87,27 @@
         "position": {
           "type": "vec2",
           "x": 830.0,
-          "y": 150.0
+          "y": 530.0
         },
         "category": {
           "type": "text",
           "value": "food"
         },
-        "emoji": {
+        "image": {
           "type": "text",
-          "value": "🍎"
+          "value": "_cards/apple.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Яблоко"
+        },
+        "name": {
+          "type": "text",
+          "value": "Яблоко"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/apple.mp3"
         }
       },
       "tags": {
@@ -95,9 +131,21 @@
           "type": "text",
           "value": "animal"
         },
-        "emoji": {
+        "image": {
           "type": "text",
-          "value": "🐱"
+          "value": "_cards/cat.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Кошка"
+        },
+        "name": {
+          "type": "text",
+          "value": "Кошка"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/cat.mp3"
         }
       },
       "tags": {
@@ -115,15 +163,27 @@
         "position": {
           "type": "vec2",
           "x": 500.0,
-          "y": 340.0
+          "y": 530.0
         },
         "category": {
           "type": "text",
           "value": "vehicle"
         },
-        "emoji": {
+        "image": {
           "type": "text",
-          "value": "🚂"
+          "value": "_cards/train.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Поезд"
+        },
+        "name": {
+          "type": "text",
+          "value": "Поезд"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/train.mp3"
         }
       },
       "tags": {
@@ -141,15 +201,27 @@
         "position": {
           "type": "vec2",
           "x": 830.0,
-          "y": 340.0
+          "y": 150.0
         },
         "category": {
           "type": "text",
           "value": "food"
         },
-        "emoji": {
+        "image": {
           "type": "text",
-          "value": "🍕"
+          "value": "_cards/pizza.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Пицца"
+        },
+        "name": {
+          "type": "text",
+          "value": "Пицца"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/pizza.mp3"
         }
       },
       "tags": {
@@ -173,9 +245,21 @@
           "type": "text",
           "value": "animal"
         },
-        "emoji": {
+        "image": {
           "type": "text",
-          "value": "🐰"
+          "value": "_cards/rabbit.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Кролик"
+        },
+        "name": {
+          "type": "text",
+          "value": "Кролик"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/rabbit.mp3"
         }
       },
       "tags": {
@@ -193,15 +277,27 @@
         "position": {
           "type": "vec2",
           "x": 500.0,
-          "y": 530.0
+          "y": 150.0
         },
         "category": {
           "type": "text",
           "value": "vehicle"
         },
-        "emoji": {
+        "image": {
           "type": "text",
-          "value": "✈️"
+          "value": "_cards/airplane.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Самолет"
+        },
+        "name": {
+          "type": "text",
+          "value": "Самолет"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/airplane.mp3"
         }
       },
       "tags": {
@@ -219,15 +315,27 @@
         "position": {
           "type": "vec2",
           "x": 830.0,
-          "y": 530.0
+          "y": 340.0
         },
         "category": {
           "type": "text",
           "value": "food"
         },
-        "emoji": {
+        "image": {
           "type": "text",
-          "value": "🍦"
+          "value": "_cards/ice-cream.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Мороженое"
+        },
+        "name": {
+          "type": "text",
+          "value": "Мороженое"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/ice-cream.mp3"
         }
       },
       "tags": {
@@ -263,13 +371,13 @@
           "type": "text",
           "value": "animal"
         },
-        "emoji": {
-          "type": "text",
-          "value": "🐾"
-        },
         "label": {
           "type": "text",
           "value": "Животные"
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/cat.jpg"
         }
       },
       "tags": {},
@@ -303,13 +411,13 @@
           "type": "text",
           "value": "vehicle"
         },
-        "emoji": {
-          "type": "text",
-          "value": "🚗"
-        },
         "label": {
           "type": "text",
           "value": "Транспорт"
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/car.jpg"
         }
       },
       "tags": {},
@@ -343,13 +451,13 @@
           "type": "text",
           "value": "food"
         },
-        "emoji": {
-          "type": "text",
-          "value": "🍽️"
-        },
         "label": {
           "type": "text",
           "value": "Еда"
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/apple.jpg"
         }
       },
       "tags": {},
@@ -372,7 +480,8 @@
         "type": "audioPrompt",
         "config": {
           "on": "sceneStarted",
-          "text": "Разложи по группам: животные, транспорт и еда"
+          "text": "Разложи по группам: животные, транспорт и еда",
+          "sound": "_sounds/speech/razlozhi-po-gruppam-zhivotnye-transport-i-eda-6340ac.wav"
         }
       },
       "entityId": null
@@ -432,5 +541,10 @@
       "task_completion"
     ],
     "icon": "🗂️"
+  },
+  "variation": {
+    "shufflePositions": [
+      "items"
+    ]
   }
 }

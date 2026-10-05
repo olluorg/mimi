@@ -16,9 +16,11 @@ fun hitDraggable(screenPos: Offset, entities: List<EntitySnapshot>, mapper: Coor
         .filter { it.hasComponent("drag") }
         .filter { entity ->
             val pos = entity.vec2("position") ?: return@filter false
-            val dx = logical.x - pos.x
-            val dy = logical.y - pos.y
-            (dx * dx + dy * dy) <= DRAG_HIT_RADIUS * DRAG_HIT_RADIUS
+            // A square test, matching the square tile: a radius left the corners
+            // of a card outside the area that responded to a press.
+            val reach = TileMetrics.reachOf(entity)
+            kotlin.math.abs(logical.x - pos.x) <= reach &&
+                kotlin.math.abs(logical.y - pos.y) <= reach
         }
         .maxByOrNull { it.num("zOrder") ?: 0.0 }
 }
@@ -70,4 +72,49 @@ fun hitMazeStart(screenPos: Offset, entities: List<EntitySnapshot>, mapper: Coor
             val dy = logical.y - pos.y
             (dx * dx + dy * dy) <= radius * radius
         }
+}
+
+private fun isConnectEnd(entity: EntitySnapshot) =
+    entity.hasComponent("connectSource") || entity.hasComponent("connectTarget")
+
+private fun within(entity: EntitySnapshot, logical: mimi.core.model.PropertyValue.Vec2, radius: Float): Boolean {
+    val pos = entity.vec2("position") ?: return false
+    val dx = logical.x - pos.x
+    val dy = logical.y - pos.y
+    return dx * dx + dy * dy <= radius * radius
+}
+
+/**
+ * Where a line may start: either card of a pair.
+ *
+ * Lines could only be drawn from the left-hand card, so a child who reached for
+ * the fish first got nothing at all — no line, no response — and learned that
+ * the game does not work. Which end a line starts from carries no meaning.
+ */
+fun hitConnectEnd(screenPos: Offset, entities: List<EntitySnapshot>, mapper: CoordinateMapper): EntitySnapshot? {
+    val logical = mapper.screenToLogical(screenPos)
+    return entities
+        .filter { it.state == EntityLifecycleState.ACTIVE && isConnectEnd(it) }
+        .filter { within(it, logical, CONNECT_HIT_RADIUS) }
+        .maxByOrNull { it.num("zOrder") ?: 0.0 }
+}
+
+/**
+ * The connection a finished line makes, as (source, target) — the order the
+ * engine checks — whichever end the child started from. Null when the line
+ * ends on nothing, or on a card of the same kind it started from.
+ */
+fun connectionFrom(
+    startId: String,
+    endLogical: mimi.core.model.PropertyValue.Vec2,
+    entities: List<EntitySnapshot>
+): Pair<String, String>? {
+    val start = entities.firstOrNull { it.id == startId } ?: return null
+    val startedAtSource = start.hasComponent("connectSource")
+    val wanted = if (startedAtSource) "connectTarget" else "connectSource"
+    val end = entities
+        .filter { it.id != startId && it.state == EntityLifecycleState.ACTIVE && it.hasComponent(wanted) }
+        .firstOrNull { within(it, endLogical, CONNECT_HIT_RADIUS) }
+        ?: return null
+    return if (startedAtSource) start.id to end.id else end.id to start.id
 }

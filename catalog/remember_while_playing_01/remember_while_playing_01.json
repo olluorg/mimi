@@ -25,9 +25,9 @@
           "type": "text",
           "value": "first"
         },
-        "emoji": {
+        "shape": {
           "type": "text",
-          "value": "🔴"
+          "value": "circle"
         }
       },
       "tags": {
@@ -59,9 +59,9 @@
           "type": "text",
           "value": "second"
         },
-        "emoji": {
+        "shape": {
           "type": "text",
-          "value": "🔵"
+          "value": "circle"
         }
       },
       "tags": {
@@ -93,9 +93,9 @@
           "type": "text",
           "value": "third"
         },
-        "emoji": {
+        "shape": {
           "type": "text",
-          "value": "🟡"
+          "value": "circle"
         }
       },
       "tags": {
@@ -131,9 +131,13 @@
           "type": "text",
           "value": "red"
         },
-        "emoji": {
+        "shape": {
           "type": "text",
-          "value": "🧺"
+          "value": "circle"
+        },
+        "name": {
+          "type": "text",
+          "value": "Красная корзина"
         }
       },
       "tags": {},
@@ -167,9 +171,13 @@
           "type": "text",
           "value": "blue"
         },
-        "emoji": {
+        "shape": {
           "type": "text",
-          "value": "🧺"
+          "value": "circle"
+        },
+        "name": {
+          "type": "text",
+          "value": "Синяя корзина"
         }
       },
       "tags": {},
@@ -203,9 +211,13 @@
           "type": "text",
           "value": "yellow"
         },
-        "emoji": {
+        "shape": {
           "type": "text",
-          "value": "🧺"
+          "value": "circle"
+        },
+        "name": {
+          "type": "text",
+          "value": "Жёлтая корзина"
         }
       },
       "tags": {},
@@ -225,6 +237,17 @@
   "behaviors": [
     {
       "behaviorRef": {
+        "type": "audioPrompt",
+        "config": {
+          "on": "sceneStarted",
+          "text": "Разложи по цвету. И запомни",
+          "sound": "_sounds/speech/razlozhi-po-cvetu-i-zapomni-b7ab44.wav"
+        }
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
         "type": "snapToTarget",
         "config": {}
       },
@@ -240,9 +263,7 @@
     {
       "behaviorRef": {
         "type": "adaptiveHint",
-        "config": {
-          "mode": "attention_memory"
-        }
+        "config": {}
       },
       "entityId": null
     },

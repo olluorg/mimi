@@ -117,27 +117,40 @@ class DefaultWorldState(
 
 object DefaultWorldStateFactory {
 
-    fun fromScene(scene: SceneDefinition): DefaultWorldState =
+    fun fromScene(scene: SceneDefinition, seed: Long = 0L): DefaultWorldState =
         build(
-            entities   = scene.entitiesForLevel(0),
+            entities   = varied(scene, scene.entitiesForLevel(0), seed, level = 0),
             objectives = scene.objectivesForLevel(0),
             level      = 0,
-            totalLevels = if (scene.isMultiLevel) scene.levels.size else 1
+            totalLevels = if (scene.isMultiLevel) scene.levels.size else 1,
+            seed       = seed
         )
 
-    fun forLevel(scene: SceneDefinition, levelIndex: Int): DefaultWorldState =
+    fun forLevel(scene: SceneDefinition, levelIndex: Int, seed: Long = 0L): DefaultWorldState =
         build(
-            entities    = scene.entitiesForLevel(levelIndex),
+            entities    = varied(scene, scene.entitiesForLevel(levelIndex), seed, levelIndex),
             objectives  = scene.objectivesForLevel(levelIndex),
             level       = levelIndex,
-            totalLevels = scene.levels.size
+            totalLevels = scene.levels.size,
+            seed        = seed + levelIndex * 31L
         )
+
+    // Offsetting by the level keeps successive levels of one scene from drawing
+    // the identical arrangement out of a single session seed.
+    private fun varied(
+        scene:    SceneDefinition,
+        entities: List<EntityDefinition>,
+        seed:     Long,
+        level:    Int
+    ): List<EntityDefinition> =
+        SceneVariations.apply(entities, scene.variation, seed + level * 31L)
 
     private fun build(
         entities:    List<EntityDefinition>,
         objectives:  List<ObjectiveDefinition>,
         level:       Int,
-        totalLevels: Int
+        totalLevels: Int,
+        seed:        Long
     ): DefaultWorldState {
         val sceneEntity = EntitySnapshot(
             id         = SCENE_ENTITY_ID,
@@ -151,7 +164,10 @@ object DefaultWorldStateFactory {
                 "matches"           to PropertyValue.Num(0.0),
                 "hints"             to PropertyValue.Num(0.0),
                 "level"             to PropertyValue.Num(level.toDouble()),
-                "totalLevels"       to PropertyValue.Num(totalLevels.toDouble())
+                "totalLevels"       to PropertyValue.Num(totalLevels.toDouble()),
+                // For behaviors that choose — the order of practice words — so a
+                // replay asks in a new order while one play stays reproducible.
+                "seed"              to PropertyValue.Num(seed.toDouble())
             ),
             state = EntityLifecycleState.ACTIVE,
             tags  = emptyMap()
@@ -164,7 +180,7 @@ object DefaultWorldStateFactory {
                     id         = def.id,
                     components = def.components,
                     properties = def.properties,
-                    state      = EntityLifecycleState.ACTIVE,
+                    state      = def.initialState,
                     tags       = def.tags
                 ))
             }

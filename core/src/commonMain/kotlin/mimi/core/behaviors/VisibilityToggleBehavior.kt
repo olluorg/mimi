@@ -52,4 +52,14 @@ class VisibilityTogglePlugin : BehaviorPlugin {
             onEventClass = onEvent
         )
     }
+
+    override fun validateConfig(config: Map<String, String>): ValidationResult =
+        SPEC.check(config)
+
+    private companion object {
+        private val SPEC = ConfigSpec.of("visibilityToggle") {
+            text("targets")
+            oneOf("on", "tap", "matchSuccess")
+        }
+    }
 }

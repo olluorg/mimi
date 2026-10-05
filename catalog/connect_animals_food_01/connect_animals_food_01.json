@@ -17,9 +17,21 @@
           "type": "text",
           "value": "carrot"
         },
-        "emoji": {
+        "image": {
           "type": "text",
-          "value": "🐰"
+          "value": "_cards/rabbit.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Кролик"
+        },
+        "name": {
+          "type": "text",
+          "value": "Кролик"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/rabbit.mp3"
         }
       },
       "tags": {
@@ -43,9 +55,21 @@
           "type": "text",
           "value": "fish"
         },
-        "emoji": {
+        "image": {
           "type": "text",
-          "value": "🐱"
+          "value": "_cards/cat.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Кошка"
+        },
+        "name": {
+          "type": "text",
+          "value": "Кошка"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/cat.mp3"
         }
       },
       "tags": {
@@ -69,9 +93,21 @@
           "type": "text",
           "value": "bone"
         },
-        "emoji": {
+        "image": {
           "type": "text",
-          "value": "🐶"
+          "value": "_cards/dog.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Собака"
+        },
+        "name": {
+          "type": "text",
+          "value": "Собака"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/dog.mp3"
         }
       },
       "tags": {
@@ -107,9 +143,21 @@
           "type": "text",
           "value": "fish"
         },
-        "emoji": {
+        "image": {
           "type": "text",
-          "value": "🐟"
+          "value": "_cards/fish.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Рыба"
+        },
+        "name": {
+          "type": "text",
+          "value": "Рыба"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/fish.mp3"
         }
       },
       "tags": {
@@ -145,9 +193,21 @@
           "type": "text",
           "value": "bone"
         },
-        "emoji": {
+        "image": {
           "type": "text",
-          "value": "🦴"
+          "value": "_cards/sausage.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Колбаса"
+        },
+        "name": {
+          "type": "text",
+          "value": "Колбаса"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/sausage.mp3"
         }
       },
       "tags": {
@@ -183,9 +243,21 @@
           "type": "text",
           "value": "carrot"
         },
-        "emoji": {
+        "image": {
           "type": "text",
-          "value": "🥕"
+          "value": "_cards/carrot.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Морковь"
+        },
+        "name": {
+          "type": "text",
+          "value": "Морковь"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/carrot.mp3"
         }
       },
       "tags": {
@@ -207,6 +279,17 @@
   "behaviors": [
     {
       "behaviorRef": {
+        "type": "audioPrompt",
+        "config": {
+          "on": "sceneStarted",
+          "text": "Проведи линию. Кто что ест?",
+          "sound": "_sounds/speech/provedi-liniyu-kto-chto-est-c36612.wav"
+        }
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
         "type": "lineConnectValidator",
         "config": {}
       },
@@ -222,9 +305,7 @@
     {
       "behaviorRef": {
         "type": "adaptiveHint",
-        "config": {
-          "mode": "connect"
-        }
+        "config": {}
       },
       "entityId": null
     },

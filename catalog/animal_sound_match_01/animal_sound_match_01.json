@@ -1,117 +1,30 @@
 {
   "sceneId": "animal_sound_match_01",
-  "entities": [
-    {
-      "id": "cat",
-      "components": [
-        "tap"
-      ],
-      "behaviors": [],
-      "properties": {
-        "position": {
-          "type": "vec2",
-          "x": 260.0,
-          "y": 430.0
-        },
-        "animal": {
-          "type": "text",
-          "value": "cat"
-        },
-        "emoji": {
-          "type": "text",
-          "value": "🐱"
-        }
-      },
-      "tags": {
-        "group": "choices"
-      },
-      "zOrder": 0
-    },
-    {
-      "id": "dog",
-      "components": [
-        "tap"
-      ],
-      "behaviors": [],
-      "properties": {
-        "position": {
-          "type": "vec2",
-          "x": 500.0,
-          "y": 430.0
-        },
-        "animal": {
-          "type": "text",
-          "value": "dog"
-        },
-        "emoji": {
-          "type": "text",
-          "value": "🐶"
-        }
-      },
-      "tags": {
-        "group": "choices"
-      },
-      "zOrder": 0
-    },
-    {
-      "id": "cow",
-      "components": [
-        "tap"
-      ],
-      "behaviors": [],
-      "properties": {
-        "position": {
-          "type": "vec2",
-          "x": 740.0,
-          "y": 430.0
-        },
-        "animal": {
-          "type": "text",
-          "value": "cow"
-        },
-        "emoji": {
-          "type": "text",
-          "value": "🐮"
-        }
-      },
-      "tags": {
-        "group": "choices"
-      },
-      "zOrder": 0
-    }
-  ],
-  "objectives": [
-    {
-      "id": "obj1",
-      "type": "entitySelected",
-      "config": {
-        "property": "animal",
-        "value": "cat"
-      },
-      "requires": null
-    }
-  ],
+  "meta": {
+    "title": "Кто так говорит?",
+    "description": "Слушай голос и нажимай на того, кто так говорит.",
+    "ageMin": 2,
+    "ageMax": 6,
+    "version": 1,
+    "tags": [
+      "animals",
+      "sound",
+      "listening"
+    ],
+    "skills": [
+      "auditory_discrimination",
+      "receptive_speech",
+      "word_association",
+      "selective_attention"
+    ],
+    "icon": "🐕",
+    "requires": [
+      "animal_zoo_free_01"
+    ]
+  },
+  "entities": [],
+  "objectives": [],
   "behaviors": [
-    {
-      "behaviorRef": {
-        "type": "audioPrompt",
-        "config": {
-          "on": "sceneStarted",
-          "text": "Find the cat"
-        }
-      },
-      "entityId": null
-    },
-    {
-      "behaviorRef": {
-        "type": "propertySelectionValidator",
-        "config": {
-          "property": "animal",
-          "expected": "cat"
-        }
-      },
-      "entityId": null
-    },
     {
       "behaviorRef": {
         "type": "progressTracker",
@@ -121,10 +34,38 @@
     },
     {
       "behaviorRef": {
-        "type": "adaptiveHint",
+        "type": "audioPrompt",
         "config": {
-          "mode": "sound_match"
+          "on": "sceneStarted",
+          "soundFrom": "questionSound"
         }
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "playSoundOnTap",
+        "config": {
+          "group": "listen",
+          "property": "questionSound"
+        }
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "propertySelectionValidator",
+        "config": {
+          "property": "animal",
+          "expectedFrom": "correctAnimal"
+        }
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "adaptiveHint",
+        "config": {}
       },
       "entityId": null
     },
@@ -140,29 +81,749 @@
     }
   ],
   "fieldPolicies": {},
-  "idleTimeout": 15,
+  "idleTimeout": 25,
   "onIdle": "HINT",
-  "metadata": {
-    "difficulty": "easy"
-  },
-  "meta": {
-    "title": "Голос животного",
-    "description": "Слушай и выбери нужное животное",
-    "ageMin": 2,
-    "ageMax": 6,
-    "version": 1,
-    "tags": [
-      "memory",
-      "sound",
-      "animals"
-    ],
-    "skills": [
-      "associative_memory",
-      "receptive_speech",
-      "word_association",
-      "selective_attention",
-      "task_completion"
-    ],
-    "icon": "🔊"
-  }
+  "metadata": {},
+  "levels": [
+    {
+      "levelId": "1_cat",
+      "entities": [
+        {
+          "id": "listen",
+          "components": [
+            "tap"
+          ],
+          "behaviors": [],
+          "properties": {
+            "position": {
+              "type": "vec2",
+              "x": 500.0,
+              "y": 170.0
+            },
+            "pictogram": {
+              "type": "text",
+              "value": "ear"
+            },
+            "questionSound": {
+              "type": "text",
+              "value": "_sounds/animals/cat.mp3"
+            },
+            "correctAnimal": {
+              "type": "text",
+              "value": "cat"
+            }
+          },
+          "tags": {
+            "group": "listen"
+          },
+          "zOrder": 0
+        },
+        {
+          "id": "cat",
+          "components": [
+            "tap"
+          ],
+          "behaviors": [],
+          "properties": {
+            "position": {
+              "type": "vec2",
+              "x": 250.0,
+              "y": 460.0
+            },
+            "image": {
+              "type": "text",
+              "value": "_cards/cat.jpg"
+            },
+            "label": {
+              "type": "text",
+              "value": "Кошка"
+            },
+            "name": {
+              "type": "text",
+              "value": "Кошка"
+            },
+            "animal": {
+              "type": "text",
+              "value": "cat"
+            }
+          },
+          "tags": {
+            "group": "choices"
+          },
+          "zOrder": 0
+        },
+        {
+          "id": "cow",
+          "components": [
+            "tap"
+          ],
+          "behaviors": [],
+          "properties": {
+            "position": {
+              "type": "vec2",
+              "x": 500.0,
+              "y": 460.0
+            },
+            "image": {
+              "type": "text",
+              "value": "_cards/cow.jpg"
+            },
+            "label": {
+              "type": "text",
+              "value": "Корова"
+            },
+            "name": {
+              "type": "text",
+              "value": "Корова"
+            },
+            "animal": {
+              "type": "text",
+              "value": "cow"
+            }
+          },
+          "tags": {
+            "group": "choices"
+          },
+          "zOrder": 0
+        },
+        {
+          "id": "dog",
+          "components": [
+            "tap"
+          ],
+          "behaviors": [],
+          "properties": {
+            "position": {
+              "type": "vec2",
+              "x": 750.0,
+              "y": 460.0
+            },
+            "image": {
+              "type": "text",
+              "value": "_cards/dog.jpg"
+            },
+            "label": {
+              "type": "text",
+              "value": "Собака"
+            },
+            "name": {
+              "type": "text",
+              "value": "Собака"
+            },
+            "animal": {
+              "type": "text",
+              "value": "dog"
+            }
+          },
+          "tags": {
+            "group": "choices"
+          },
+          "zOrder": 0
+        }
+      ],
+      "objectives": [
+        {
+          "id": "found",
+          "type": "entitySelected",
+          "config": {
+            "property": "animal",
+            "value": "cat"
+          },
+          "requires": null
+        }
+      ]
+    },
+    {
+      "levelId": "2_dog",
+      "entities": [
+        {
+          "id": "listen",
+          "components": [
+            "tap"
+          ],
+          "behaviors": [],
+          "properties": {
+            "position": {
+              "type": "vec2",
+              "x": 500.0,
+              "y": 170.0
+            },
+            "pictogram": {
+              "type": "text",
+              "value": "ear"
+            },
+            "questionSound": {
+              "type": "text",
+              "value": "_sounds/animals/dog.mp3"
+            },
+            "correctAnimal": {
+              "type": "text",
+              "value": "dog"
+            }
+          },
+          "tags": {
+            "group": "listen"
+          },
+          "zOrder": 0
+        },
+        {
+          "id": "cat",
+          "components": [
+            "tap"
+          ],
+          "behaviors": [],
+          "properties": {
+            "position": {
+              "type": "vec2",
+              "x": 250.0,
+              "y": 460.0
+            },
+            "image": {
+              "type": "text",
+              "value": "_cards/cat.jpg"
+            },
+            "label": {
+              "type": "text",
+              "value": "Кошка"
+            },
+            "name": {
+              "type": "text",
+              "value": "Кошка"
+            },
+            "animal": {
+              "type": "text",
+              "value": "cat"
+            }
+          },
+          "tags": {
+            "group": "choices"
+          },
+          "zOrder": 0
+        },
+        {
+          "id": "dog",
+          "components": [
+            "tap"
+          ],
+          "behaviors": [],
+          "properties": {
+            "position": {
+              "type": "vec2",
+              "x": 500.0,
+              "y": 460.0
+            },
+            "image": {
+              "type": "text",
+              "value": "_cards/dog.jpg"
+            },
+            "label": {
+              "type": "text",
+              "value": "Собака"
+            },
+            "name": {
+              "type": "text",
+              "value": "Собака"
+            },
+            "animal": {
+              "type": "text",
+              "value": "dog"
+            }
+          },
+          "tags": {
+            "group": "choices"
+          },
+          "zOrder": 0
+        },
+        {
+          "id": "duck",
+          "components": [
+            "tap"
+          ],
+          "behaviors": [],
+          "properties": {
+            "position": {
+              "type": "vec2",
+              "x": 750.0,
+              "y": 460.0
+            },
+            "image": {
+              "type": "text",
+              "value": "_cards/duck.jpg"
+            },
+            "label": {
+              "type": "text",
+              "value": "Утка"
+            },
+            "name": {
+              "type": "text",
+              "value": "Утка"
+            },
+            "animal": {
+              "type": "text",
+              "value": "duck"
+            }
+          },
+          "tags": {
+            "group": "choices"
+          },
+          "zOrder": 0
+        }
+      ],
+      "objectives": [
+        {
+          "id": "found",
+          "type": "entitySelected",
+          "config": {
+            "property": "animal",
+            "value": "dog"
+          },
+          "requires": null
+        }
+      ]
+    },
+    {
+      "levelId": "3_cow",
+      "entities": [
+        {
+          "id": "listen",
+          "components": [
+            "tap"
+          ],
+          "behaviors": [],
+          "properties": {
+            "position": {
+              "type": "vec2",
+              "x": 500.0,
+              "y": 170.0
+            },
+            "pictogram": {
+              "type": "text",
+              "value": "ear"
+            },
+            "questionSound": {
+              "type": "text",
+              "value": "_sounds/animals/cow.mp3"
+            },
+            "correctAnimal": {
+              "type": "text",
+              "value": "cow"
+            }
+          },
+          "tags": {
+            "group": "listen"
+          },
+          "zOrder": 0
+        },
+        {
+          "id": "cat",
+          "components": [
+            "tap"
+          ],
+          "behaviors": [],
+          "properties": {
+            "position": {
+              "type": "vec2",
+              "x": 250.0,
+              "y": 460.0
+            },
+            "image": {
+              "type": "text",
+              "value": "_cards/cat.jpg"
+            },
+            "label": {
+              "type": "text",
+              "value": "Кошка"
+            },
+            "name": {
+              "type": "text",
+              "value": "Кошка"
+            },
+            "animal": {
+              "type": "text",
+              "value": "cat"
+            }
+          },
+          "tags": {
+            "group": "choices"
+          },
+          "zOrder": 0
+        },
+        {
+          "id": "cow",
+          "components": [
+            "tap"
+          ],
+          "behaviors": [],
+          "properties": {
+            "position": {
+              "type": "vec2",
+              "x": 500.0,
+              "y": 460.0
+            },
+            "image": {
+              "type": "text",
+              "value": "_cards/cow.jpg"
+            },
+            "label": {
+              "type": "text",
+              "value": "Корова"
+            },
+            "name": {
+              "type": "text",
+              "value": "Корова"
+            },
+            "animal": {
+              "type": "text",
+              "value": "cow"
+            }
+          },
+          "tags": {
+            "group": "choices"
+          },
+          "zOrder": 0
+        },
+        {
+          "id": "sheep",
+          "components": [
+            "tap"
+          ],
+          "behaviors": [],
+          "properties": {
+            "position": {
+              "type": "vec2",
+              "x": 750.0,
+              "y": 460.0
+            },
+            "image": {
+              "type": "text",
+              "value": "_cards/sheep.jpg"
+            },
+            "label": {
+              "type": "text",
+              "value": "Овца"
+            },
+            "name": {
+              "type": "text",
+              "value": "Овца"
+            },
+            "animal": {
+              "type": "text",
+              "value": "sheep"
+            }
+          },
+          "tags": {
+            "group": "choices"
+          },
+          "zOrder": 0
+        }
+      ],
+      "objectives": [
+        {
+          "id": "found",
+          "type": "entitySelected",
+          "config": {
+            "property": "animal",
+            "value": "cow"
+          },
+          "requires": null
+        }
+      ]
+    },
+    {
+      "levelId": "4_rooster",
+      "entities": [
+        {
+          "id": "listen",
+          "components": [
+            "tap"
+          ],
+          "behaviors": [],
+          "properties": {
+            "position": {
+              "type": "vec2",
+              "x": 500.0,
+              "y": 170.0
+            },
+            "pictogram": {
+              "type": "text",
+              "value": "ear"
+            },
+            "questionSound": {
+              "type": "text",
+              "value": "_sounds/animals/rooster.mp3"
+            },
+            "correctAnimal": {
+              "type": "text",
+              "value": "rooster"
+            }
+          },
+          "tags": {
+            "group": "listen"
+          },
+          "zOrder": 0
+        },
+        {
+          "id": "horse",
+          "components": [
+            "tap"
+          ],
+          "behaviors": [],
+          "properties": {
+            "position": {
+              "type": "vec2",
+              "x": 250.0,
+              "y": 460.0
+            },
+            "image": {
+              "type": "text",
+              "value": "_cards/horse.jpg"
+            },
+            "label": {
+              "type": "text",
+              "value": "Лошадь"
+            },
+            "name": {
+              "type": "text",
+              "value": "Лошадь"
+            },
+            "animal": {
+              "type": "text",
+              "value": "horse"
+            }
+          },
+          "tags": {
+            "group": "choices"
+          },
+          "zOrder": 0
+        },
+        {
+          "id": "pig",
+          "components": [
+            "tap"
+          ],
+          "behaviors": [],
+          "properties": {
+            "position": {
+              "type": "vec2",
+              "x": 500.0,
+              "y": 460.0
+            },
+            "image": {
+              "type": "text",
+              "value": "_cards/pig.jpg"
+            },
+            "label": {
+              "type": "text",
+              "value": "Свинья"
+            },
+            "name": {
+              "type": "text",
+              "value": "Свинья"
+            },
+            "animal": {
+              "type": "text",
+              "value": "pig"
+            }
+          },
+          "tags": {
+            "group": "choices"
+          },
+          "zOrder": 0
+        },
+        {
+          "id": "rooster",
+          "components": [
+            "tap"
+          ],
+          "behaviors": [],
+          "properties": {
+            "position": {
+              "type": "vec2",
+              "x": 750.0,
+              "y": 460.0
+            },
+            "image": {
+              "type": "text",
+              "value": "_cards/rooster.jpg"
+            },
+            "label": {
+              "type": "text",
+              "value": "Петух"
+            },
+            "name": {
+              "type": "text",
+              "value": "Петух"
+            },
+            "animal": {
+              "type": "text",
+              "value": "rooster"
+            }
+          },
+          "tags": {
+            "group": "choices"
+          },
+          "zOrder": 0
+        }
+      ],
+      "objectives": [
+        {
+          "id": "found",
+          "type": "entitySelected",
+          "config": {
+            "property": "animal",
+            "value": "rooster"
+          },
+          "requires": null
+        }
+      ]
+    },
+    {
+      "levelId": "5_horse",
+      "entities": [
+        {
+          "id": "listen",
+          "components": [
+            "tap"
+          ],
+          "behaviors": [],
+          "properties": {
+            "position": {
+              "type": "vec2",
+              "x": 500.0,
+              "y": 170.0
+            },
+            "pictogram": {
+              "type": "text",
+              "value": "ear"
+            },
+            "questionSound": {
+              "type": "text",
+              "value": "_sounds/animals/horse.mp3"
+            },
+            "correctAnimal": {
+              "type": "text",
+              "value": "horse"
+            }
+          },
+          "tags": {
+            "group": "listen"
+          },
+          "zOrder": 0
+        },
+        {
+          "id": "cow",
+          "components": [
+            "tap"
+          ],
+          "behaviors": [],
+          "properties": {
+            "position": {
+              "type": "vec2",
+              "x": 250.0,
+              "y": 460.0
+            },
+            "image": {
+              "type": "text",
+              "value": "_cards/cow.jpg"
+            },
+            "label": {
+              "type": "text",
+              "value": "Корова"
+            },
+            "name": {
+              "type": "text",
+              "value": "Корова"
+            },
+            "animal": {
+              "type": "text",
+              "value": "cow"
+            }
+          },
+          "tags": {
+            "group": "choices"
+          },
+          "zOrder": 0
+        },
+        {
+          "id": "dog",
+          "components": [
+            "tap"
+          ],
+          "behaviors": [],
+          "properties": {
+            "position": {
+              "type": "vec2",
+              "x": 500.0,
+              "y": 460.0
+            },
+            "image": {
+              "type": "text",
+              "value": "_cards/dog.jpg"
+            },
+            "label": {
+              "type": "text",
+              "value": "Собака"
+            },
+            "name": {
+              "type": "text",
+              "value": "Собака"
+            },
+            "animal": {
+              "type": "text",
+              "value": "dog"
+            }
+          },
+          "tags": {
+            "group": "choices"
+          },
+          "zOrder": 0
+        },
+        {
+          "id": "horse",
+          "components": [
+            "tap"
+          ],
+          "behaviors": [],
+          "properties": {
+            "position": {
+              "type": "vec2",
+              "x": 750.0,
+              "y": 460.0
+            },
+            "image": {
+              "type": "text",
+              "value": "_cards/horse.jpg"
+            },
+            "label": {
+              "type": "text",
+              "value": "Лошадь"
+            },
+            "name": {
+              "type": "text",
+              "value": "Лошадь"
+            },
+            "animal": {
+              "type": "text",
+              "value": "horse"
+            }
+          },
+          "tags": {
+            "group": "choices"
+          },
+          "zOrder": 0
+        }
+      ],
+      "objectives": [
+        {
+          "id": "found",
+          "type": "entitySelected",
+          "config": {
+            "property": "animal",
+            "value": "horse"
+          },
+          "requires": null
+        }
+      ]
+    }
+  ]
 }

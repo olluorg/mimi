@@ -20,6 +20,18 @@
         "label": {
           "type": "text",
           "value": "А"
+        },
+        "name": {
+          "type": "text",
+          "value": "Буква А"
+        },
+        "askText": {
+          "type": "text",
+          "value": "Нажми на букву А"
+        },
+        "askSound": {
+          "type": "text",
+          "value": "_sounds/speech/nazhmi-na-bukvu-a-0d7f77.wav"
         }
       },
       "tags": {
@@ -28,7 +40,7 @@
       "zOrder": 0
     },
     {
-      "id": "letter_B",
+      "id": "letter_O",
       "components": [
         "tap"
       ],
@@ -41,11 +53,23 @@
         },
         "letter": {
           "type": "text",
-          "value": "Б"
+          "value": "О"
         },
         "label": {
           "type": "text",
-          "value": "Б"
+          "value": "О"
+        },
+        "name": {
+          "type": "text",
+          "value": "Буква О"
+        },
+        "askText": {
+          "type": "text",
+          "value": "Нажми на букву О"
+        },
+        "askSound": {
+          "type": "text",
+          "value": "_sounds/speech/nazhmi-na-bukvu-o-81e115.wav"
         }
       },
       "tags": {
@@ -54,7 +78,7 @@
       "zOrder": 0
     },
     {
-      "id": "letter_V",
+      "id": "letter_U",
       "components": [
         "tap"
       ],
@@ -67,11 +91,23 @@
         },
         "letter": {
           "type": "text",
-          "value": "В"
+          "value": "У"
         },
         "label": {
           "type": "text",
-          "value": "В"
+          "value": "У"
+        },
+        "name": {
+          "type": "text",
+          "value": "Буква У"
+        },
+        "askText": {
+          "type": "text",
+          "value": "Нажми на букву У"
+        },
+        "askSound": {
+          "type": "text",
+          "value": "_sounds/speech/nazhmi-na-bukvu-u-da2c79.wav"
         }
       },
       "tags": {
@@ -80,7 +116,7 @@
       "zOrder": 0
     },
     {
-      "id": "letter_G",
+      "id": "letter_I",
       "components": [
         "tap"
       ],
@@ -93,11 +129,251 @@
         },
         "letter": {
           "type": "text",
-          "value": "Г"
+          "value": "И"
         },
         "label": {
           "type": "text",
-          "value": "Г"
+          "value": "И"
+        },
+        "name": {
+          "type": "text",
+          "value": "Буква И"
+        },
+        "askText": {
+          "type": "text",
+          "value": "Нажми на букву И"
+        },
+        "askSound": {
+          "type": "text",
+          "value": "_sounds/speech/nazhmi-na-bukvu-i-d02bea.wav"
+        }
+      },
+      "tags": {
+        "group": "choices"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "letter_E",
+      "components": [
+        "tap"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 260.0,
+          "y": 280.0
+        },
+        "letter": {
+          "type": "text",
+          "value": "Э"
+        },
+        "label": {
+          "type": "text",
+          "value": "Э"
+        },
+        "name": {
+          "type": "text",
+          "value": "Буква Э"
+        },
+        "askText": {
+          "type": "text",
+          "value": "Нажми на букву Э"
+        },
+        "askSound": {
+          "type": "text",
+          "value": "_sounds/speech/nazhmi-na-bukvu-e-c76aa3.wav"
+        }
+      },
+      "tags": {
+        "group": "choices"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "letter_M",
+      "components": [
+        "tap"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 740.0,
+          "y": 280.0
+        },
+        "letter": {
+          "type": "text",
+          "value": "М"
+        },
+        "label": {
+          "type": "text",
+          "value": "М"
+        },
+        "name": {
+          "type": "text",
+          "value": "Буква М"
+        },
+        "askText": {
+          "type": "text",
+          "value": "Нажми на букву эм"
+        },
+        "askSound": {
+          "type": "text",
+          "value": "_sounds/speech/nazhmi-na-bukvu-em-b858ad.wav"
+        }
+      },
+      "tags": {
+        "group": "choices"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "letter_P",
+      "components": [
+        "tap"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 260.0,
+          "y": 560.0
+        },
+        "letter": {
+          "type": "text",
+          "value": "П"
+        },
+        "label": {
+          "type": "text",
+          "value": "П"
+        },
+        "name": {
+          "type": "text",
+          "value": "Буква П"
+        },
+        "askText": {
+          "type": "text",
+          "value": "Нажми на букву пэ"
+        },
+        "askSound": {
+          "type": "text",
+          "value": "_sounds/speech/nazhmi-na-bukvu-pe-416afa.wav"
+        }
+      },
+      "tags": {
+        "group": "choices"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "letter_T",
+      "components": [
+        "tap"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 740.0,
+          "y": 560.0
+        },
+        "letter": {
+          "type": "text",
+          "value": "Т"
+        },
+        "label": {
+          "type": "text",
+          "value": "Т"
+        },
+        "name": {
+          "type": "text",
+          "value": "Буква Т"
+        },
+        "askText": {
+          "type": "text",
+          "value": "Нажми на букву тэ"
+        },
+        "askSound": {
+          "type": "text",
+          "value": "_sounds/speech/nazhmi-na-bukvu-te-6de38d.wav"
+        }
+      },
+      "tags": {
+        "group": "choices"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "letter_K",
+      "components": [
+        "tap"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 260.0,
+          "y": 280.0
+        },
+        "letter": {
+          "type": "text",
+          "value": "К"
+        },
+        "label": {
+          "type": "text",
+          "value": "К"
+        },
+        "name": {
+          "type": "text",
+          "value": "Буква К"
+        },
+        "askText": {
+          "type": "text",
+          "value": "Нажми на букву ка"
+        },
+        "askSound": {
+          "type": "text",
+          "value": "_sounds/speech/nazhmi-na-bukvu-ka-4f65d6.wav"
+        }
+      },
+      "tags": {
+        "group": "choices"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "letter_S",
+      "components": [
+        "tap"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 740.0,
+          "y": 280.0
+        },
+        "letter": {
+          "type": "text",
+          "value": "С"
+        },
+        "label": {
+          "type": "text",
+          "value": "С"
+        },
+        "name": {
+          "type": "text",
+          "value": "Буква С"
+        },
+        "askText": {
+          "type": "text",
+          "value": "Нажми на букву эс"
+        },
+        "askSound": {
+          "type": "text",
+          "value": "_sounds/speech/nazhmi-na-bukvu-es-f9a220.wav"
         }
       },
       "tags": {
@@ -112,7 +388,7 @@
       "type": "entitySelected",
       "config": {
         "property": "letter",
-        "value": "А"
+        "valueFrom": "targetLetter"
       },
       "requires": null
     }
@@ -123,7 +399,7 @@
         "type": "audioPrompt",
         "config": {
           "on": "sceneStarted",
-          "text": "Нажми на букву А"
+          "soundFrom": "questionSound"
         }
       },
       "entityId": null
@@ -133,7 +409,7 @@
         "type": "propertySelectionValidator",
         "config": {
           "property": "letter",
-          "expected": "А"
+          "expectedFrom": "targetLetter"
         }
       },
       "entityId": null
@@ -156,16 +432,6 @@
       "behaviorRef": {
         "type": "playSoundOnEvent",
         "config": {
-          "on": "matchSuccess",
-          "sound": "correct"
-        }
-      },
-      "entityId": null
-    },
-    {
-      "behaviorRef": {
-        "type": "playSoundOnEvent",
-        "config": {
           "on": "sceneCompleted",
           "sound": "complete"
         }
@@ -180,8 +446,8 @@
     "difficulty": "easy"
   },
   "meta": {
-    "title": "Найди букву А",
-    "description": "Слушай и нажми на правильную букву",
+    "title": "Найди букву",
+    "description": "Слушай, какую букву назвали, и нажми на неё",
     "ageMin": 4,
     "ageMax": 7,
     "version": 1,
@@ -198,5 +464,25 @@
       "task_completion"
     ],
     "icon": "🔤"
+  },
+  "variation": {
+    "pick": [
+      {
+        "group": "choices",
+        "count": 4
+      }
+    ],
+    "choose": [
+      {
+        "group": "choices",
+        "copy": {
+          "letter": "targetLetter",
+          "askSound": "questionSound"
+        }
+      }
+    ],
+    "shufflePositions": [
+      "choices"
+    ]
   }
 }

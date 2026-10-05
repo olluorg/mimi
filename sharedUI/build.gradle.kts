@@ -8,8 +8,6 @@ plugins {
     alias(libs.plugins.compose.multiplatform)
     alias(libs.plugins.android.kmp.library)
     alias(libs.plugins.kotlinx.serialization)
-    alias(libs.plugins.room)
-    alias(libs.plugins.ksp)
 }
 
 kotlin {
@@ -44,21 +42,24 @@ kotlin {
             implementation(libs.ktor.serialization.json)
             implementation(libs.ktor.client.logging)
             implementation(libs.kotlinx.serialization.json)
-            implementation(libs.coil)
-            implementation(libs.coil.network.ktor)
             implementation(libs.multiplatformSettings)
             implementation(libs.kotlinx.datetime)
-            implementation(libs.room.runtime)
+            // Lottie animations: rewards, celebrations, the mouth that shows a word.
+            implementation(libs.compottie)
         }
 
         commonTest.dependencies {
             implementation(kotlin("test"))
+            // An in-memory Settings, so the profile rules can be tested without a device.
+            implementation(libs.multiplatformSettings.test)
             implementation(libs.compose.ui.test)
             implementation(libs.kotlinx.coroutines.test)
         }
 
         androidMain.dependencies {
             implementation(libs.kotlinx.coroutines.android)
+            // The system back button, which Compose Multiplatform does not route on its own.
+            implementation(libs.androidx.activityCompose)
             implementation(libs.ktor.client.okhttp)
         }
 
@@ -90,20 +91,34 @@ kotlin {
 dependencies {
     debugImplementation(libs.compose.ui.tooling)
 }
+
+// Session tests plan against the real catalog rather than a synthetic one, so
+// they need to know where it lives.
+tasks.withType<Test>().configureEach {
+    val catalogDir = rootProject.file("catalog")
+    systemProperty("mimi.catalogDir", catalogDir.absolutePath)
+    // Opt-in scene previews: -Pmimi.previewDir=/path [-Pmimi.previewScenes=a,b]
+    providers.gradleProperty("mimi.previewDir").orNull?.let { systemProperty("mimi.previewDir", it) }
+    providers.gradleProperty("mimi.previewScenes").orNull?.let { systemProperty("mimi.previewScenes", it) }
+    dependsOn(rootProject.tasks.named("generateCatalogIndex"))
+    inputs.dir(catalogDir).withPropertyName("catalog").withPathSensitivity(PathSensitivity.RELATIVE)
+}
 android {
     namespace = "org.ollu.mini"
     compileSdk = 36
     defaultConfig {
         minSdk = 23
     }
+    // Keep "_cards", "_sounds" and the rest: the default asset filter drops any
+    // directory starting with "_", and this module's merge is where it happened.
+    // See androidApp/build.gradle.kts for the full story.
+    androidResources {
+        ignoreAssetsPattern = "!.svn:!.git:!.ds_store:!*.scc:.*:!CVS:!thumbs.db:!picasa.ini:!*~"
+    }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
     }
-}
-
-room {
-    schemaDirectory("$projectDir/schemas")
 }
 
 // ── Bundled catalog sync ──────────────────────────────────────────────────────
@@ -112,12 +127,19 @@ room {
 // Rich scenes:  catalog/<id>/*.json + media/**  → files/catalog/<id>/...
 val syncBundledCatalog by tasks.registering(Sync::class) {
     val src = rootProject.file("catalog")
+    // catalog.json is generated into the folder this copies, so the two tasks
+    // have to be ordered; left implicit they can run at once and bundle a
+    // half-written index.
+    dependsOn(rootProject.tasks.named("generateCatalogIndex"))
     onlyIf { src.exists() }
     from(src)
     into("${projectDir}/src/commonMain/composeResources/files/catalog")
-    include("*.json")       // flat scene JSONs and catalog.json
-    include("*/*.json")     // nested scene JSONs (e.g. find_animal_01/find_animal_01.json)
-    include("*/media/**")   // media assets (mp3, ogg, …)
+    include("*.json")        // catalog.json
+    include("*/*.json")      // scene JSONs (e.g. find_animal_01/find_animal_01.json)
+    include("*/media/**")    // per-scene media (mp3, ogg, …)
+    include("_cards/**")     // shared PECS card library: pictures and their audio
+    include("_sounds/**")    // generated instrument sounds
+    include("_anim/**")      // generated Lottie animations
     exclude("README.md")
     // preserve .gitkeep so the directory stays tracked when catalog/ is empty
     preserve { include(".gitkeep") }
@@ -128,11 +150,12 @@ afterEvaluate {
         .configureEach { dependsOn(syncBundledCatalog) }
 }
 
-dependencies {
-    with(libs.room.compiler) {
-        add("kspAndroid", this)
-        add("kspJvm", this)
-        add("kspIosArm64", this)
-        add("kspIosSimulatorArm64", this)
+// The Compose plugin copies resources into the Android assets with a plain
+// copy, so a file deleted from the catalog stays in every later APK — removed
+// recordings kept shipping until a clean build. Emptying the output first makes
+// the copy behave like a sync.
+tasks.matching { it.name.startsWith("copy") && it.name.endsWith("ComposeResourcesToAndroidAssets") }
+    .configureEach {
+        val stale = outputs.files
+        doFirst { stale.forEach { it.deleteRecursively() } }
     }
-}

@@ -1,0 +1,737 @@
+{
+ "voice": "dostoevsky",
+ "rate": 16000,
+ "lines": {
+  "А-а!": {
+   "file": "_sounds/speech/a-a-50a6f8.wav",
+   "seconds": 1.28,
+   "scenes": [
+    "speech_ladder_01",
+    "speech_vowels_01"
+   ]
+  },
+  "Ав!": {
+   "file": "_sounds/speech/av-7d1f36.wav",
+   "seconds": 0.64,
+   "scenes": [
+    "speech_animal_voices_01"
+   ]
+  },
+  "Ба!": {
+   "file": "_sounds/speech/ba-5b59a1.wav",
+   "seconds": 0.96,
+   "scenes": [
+    "speech_lip_sounds_01"
+   ]
+  },
+  "Ба-ба": {
+   "file": "_sounds/speech/ba-ba-39c795.wav",
+   "seconds": 1.2,
+   "scenes": [
+    "speech_ladder_01",
+    "speech_syllable_drill_01"
+   ]
+  },
+  "Бе!": {
+   "file": "_sounds/speech/be-b9b579.wav",
+   "seconds": 1.2,
+   "scenes": [
+    "speech_animal_voices_01"
+   ]
+  },
+  "Би-би": {
+   "file": "_sounds/speech/bi-bi-cf680c.wav",
+   "seconds": 0.8,
+   "scenes": [
+    "speech_syllable_drill_01"
+   ]
+  },
+  "Би-би!": {
+   "file": "_sounds/speech/bi-bi-192b50.wav",
+   "seconds": 0.8,
+   "scenes": [
+    "speech_vehicle_sounds_01"
+   ]
+  },
+  "Во что будем играть?": {
+   "file": "_sounds/speech/vo-chto-budem-igrat-710030.wav",
+   "seconds": 1.44,
+   "scenes": [
+    "choice_play_01"
+   ]
+  },
+  "Выполни все задания": {
+   "file": "_sounds/speech/vypolni-vse-zadaniya-b7634c.wav",
+   "seconds": 1.6,
+   "scenes": [
+    "ultimate_stress_test_01"
+   ]
+  },
+  "Где носик?": {
+   "file": "_sounds/speech/gde-nosik-9137c0.wav",
+   "seconds": 1.04,
+   "scenes": [
+    "body_parts_01"
+   ]
+  },
+  "Да": {
+   "file": "_sounds/speech/da-8d2fab.wav",
+   "seconds": 0.8,
+   "scenes": [
+    "speech_core_words_01",
+    "speech_ladder_01"
+   ]
+  },
+  "Динь!": {
+   "file": "_sounds/speech/din-68b556.wav",
+   "seconds": 0.88,
+   "scenes": [
+    "speech_vehicle_sounds_01"
+   ]
+  },
+  "Ещё": {
+   "file": "_sounds/speech/esche-19f25d.wav",
+   "seconds": 0.72,
+   "scenes": [
+    "speech_core_words_01",
+    "speech_ladder_01"
+   ]
+  },
+  "Жди зелёный. Потом нажми": {
+   "file": "_sounds/speech/zhdi-zelenyy-potom-nazhmi-bf2ae6.wav",
+   "seconds": 2.4,
+   "scenes": [
+    "reaction_tap_01"
+   ]
+  },
+  "Запомни картинку": {
+   "file": "_sounds/speech/zapomni-kartinku-110892.wav",
+   "seconds": 1.44,
+   "scenes": [
+    "show_hide_01"
+   ]
+  },
+  "Запомни порядок": {
+   "file": "_sounds/speech/zapomni-poryadok-ea6ddc.wav",
+   "seconds": 1.36,
+   "scenes": [
+    "remember_sequence_01"
+   ]
+  },
+  "Запомни цвета": {
+   "file": "_sounds/speech/zapomni-cveta-f46514.wav",
+   "seconds": 1.28,
+   "scenes": [
+    "color_recall_01"
+   ]
+  },
+  "И-и!": {
+   "file": "_sounds/speech/i-i-b0ad14.wav",
+   "seconds": 1.28,
+   "scenes": [
+    "speech_vowels_01"
+   ]
+  },
+  "Иди": {
+   "file": "_sounds/speech/idi-a7398c.wav",
+   "seconds": 0.64,
+   "scenes": [
+    "reaction_tap_01"
+   ]
+  },
+  "Лопай пузыри": {
+   "file": "_sounds/speech/lopay-puzyri-bc0456.wav",
+   "seconds": 1.44,
+   "scenes": [
+    "cause_effect_bubbles_01"
+   ]
+  },
+  "Ма!": {
+   "file": "_sounds/speech/ma-87b150.wav",
+   "seconds": 0.72,
+   "scenes": [
+    "speech_lip_sounds_01"
+   ]
+  },
+  "Ма-ма": {
+   "file": "_sounds/speech/ma-ma-a96e0c.wav",
+   "seconds": 1.04,
+   "scenes": [
+    "speech_ladder_01",
+    "speech_syllable_drill_01"
+   ]
+  },
+  "Мама": {
+   "file": "_sounds/speech/mama-5560f4.wav",
+   "seconds": 0.72,
+   "scenes": [
+    "speech_core_words_01"
+   ]
+  },
+  "Молодец!": {
+   "file": "_sounds/speech/molodec-e73b88.wav",
+   "seconds": 1.04,
+   "scenes": [
+    "app"
+   ]
+  },
+  "Молодец! Ты закончил.": {
+   "file": "_sounds/speech/molodec-ty-zakonchil-30f67b.wav",
+   "seconds": 2.0,
+   "scenes": [
+    "app"
+   ]
+  },
+  "Му!": {
+   "file": "_sounds/speech/mu-e4fcf8.wav",
+   "seconds": 0.72,
+   "scenes": [
+    "speech_animal_voices_01"
+   ]
+  },
+  "Мяу!": {
+   "file": "_sounds/speech/myau-243f9e.wav",
+   "seconds": 0.96,
+   "scenes": [
+    "speech_animal_voices_01"
+   ]
+  },
+  "Награды": {
+   "file": "_sounds/speech/nagrady-071197.wav",
+   "seconds": 0.96,
+   "scenes": [
+    "app"
+   ]
+  },
+  "Нажимай в том же порядке": {
+   "file": "_sounds/speech/nazhimay-v-tom-zhe-poryadke-7793e1.wav",
+   "seconds": 1.52,
+   "scenes": [
+    "order_reconstruction_01"
+   ]
+  },
+  "Нажимай звёзды по порядку": {
+   "file": "_sounds/speech/nazhimay-zvezdy-po-poryadku-a41b99.wav",
+   "seconds": 2.4,
+   "scenes": [
+    "count_to_5_01"
+   ]
+  },
+  "Нажимай и жди. Цветок растёт": {
+   "file": "_sounds/speech/nazhimay-i-zhdi-cvetok-rastet-49a20c.wav",
+   "seconds": 2.96,
+   "scenes": [
+    "patience_grow_01"
+   ]
+  },
+  "Нажимай на животных и слушай.": {
+   "file": "_sounds/speech/nazhimay-na-zhivotnyh-i-slushay-8ee3b9.wav",
+   "seconds": 2.08,
+   "scenes": [
+    "animal_zoo_free_01"
+   ]
+  },
+  "Нажимай на картинки. Я назову одежду": {
+   "file": "_sounds/speech/nazhimay-na-kartinki-ya-nazovu-odezhdu-7e4a6b.wav",
+   "seconds": 3.12,
+   "scenes": [
+    "picture_clothes_01"
+   ]
+  },
+  "Нажимай на картинки. Я назову, кто это": {
+   "file": "_sounds/speech/nazhimay-na-kartinki-ya-nazovu-kto-eto-4fc985.wav",
+   "seconds": 3.04,
+   "scenes": [
+    "picture_animals_01"
+   ]
+  },
+  "Нажимай на картинки. Я назову, что это": {
+   "file": "_sounds/speech/nazhimay-na-kartinki-ya-nazovu-chto-eto-766043.wav",
+   "seconds": 2.96,
+   "scenes": [
+    "picture_food_01",
+    "picture_transport_01"
+   ]
+  },
+  "Нажимай по порядку": {
+   "file": "_sounds/speech/nazhimay-po-poryadku-abb57b.wav",
+   "seconds": 1.44,
+   "scenes": [
+    "tap_sequence_01"
+   ]
+  },
+  "Нажимай — услышишь, как звучит": {
+   "file": "_sounds/speech/nazhimay-uslyshish-kak-zvuchit-6365c9.wav",
+   "seconds": 2.16,
+   "scenes": [
+    "cause_effect_music_01"
+   ]
+  },
+  "Нажми «ещё»": {
+   "file": "_sounds/speech/nazhmi-esche-11c727.wav",
+   "seconds": 1.2,
+   "scenes": [
+    "request_more_01"
+   ]
+  },
+  "Нажми на большой": {
+   "file": "_sounds/speech/nazhmi-na-bolshoy-ff2a19.wav",
+   "seconds": 1.2,
+   "scenes": [
+    "big_small_01"
+   ]
+  },
+  "Нажми на букву А": {
+   "file": "_sounds/speech/nazhmi-na-bukvu-a-0d7f77.wav",
+   "seconds": 1.28,
+   "scenes": [
+    "find_letter_A_01"
+   ]
+  },
+  "Нажми на букву И": {
+   "file": "_sounds/speech/nazhmi-na-bukvu-i-d02bea.wav",
+   "seconds": 1.44,
+   "scenes": [
+    "find_letter_A_01"
+   ]
+  },
+  "Нажми на букву О": {
+   "file": "_sounds/speech/nazhmi-na-bukvu-o-81e115.wav",
+   "seconds": 1.44,
+   "scenes": [
+    "find_letter_A_01"
+   ]
+  },
+  "Нажми на букву У": {
+   "file": "_sounds/speech/nazhmi-na-bukvu-u-da2c79.wav",
+   "seconds": 1.52,
+   "scenes": [
+    "find_letter_A_01"
+   ]
+  },
+  "Нажми на букву Э": {
+   "file": "_sounds/speech/nazhmi-na-bukvu-e-c76aa3.wav",
+   "seconds": 1.36,
+   "scenes": [
+    "find_letter_A_01"
+   ]
+  },
+  "Нажми на букву ка": {
+   "file": "_sounds/speech/nazhmi-na-bukvu-ka-4f65d6.wav",
+   "seconds": 1.44,
+   "scenes": [
+    "find_letter_A_01"
+   ]
+  },
+  "Нажми на букву пэ": {
+   "file": "_sounds/speech/nazhmi-na-bukvu-pe-416afa.wav",
+   "seconds": 1.44,
+   "scenes": [
+    "find_letter_A_01"
+   ]
+  },
+  "Нажми на букву тэ": {
+   "file": "_sounds/speech/nazhmi-na-bukvu-te-6de38d.wav",
+   "seconds": 1.6,
+   "scenes": [
+    "find_letter_A_01"
+   ]
+  },
+  "Нажми на букву эм": {
+   "file": "_sounds/speech/nazhmi-na-bukvu-em-b858ad.wav",
+   "seconds": 2.08,
+   "scenes": [
+    "find_letter_A_01"
+   ]
+  },
+  "Нажми на букву эс": {
+   "file": "_sounds/speech/nazhmi-na-bukvu-es-f9a220.wav",
+   "seconds": 1.44,
+   "scenes": [
+    "find_letter_A_01"
+   ]
+  },
+  "Нажми на круг": {
+   "file": "_sounds/speech/nazhmi-na-krug-ffb6d9.wav",
+   "seconds": 1.2,
+   "scenes": [
+    "find_circle_01"
+   ]
+  },
+  "Нажми на то, что тебе нужно": {
+   "file": "_sounds/speech/nazhmi-na-to-chto-tebe-nuzhno-7c9d22.wav",
+   "seconds": 2.08,
+   "scenes": [
+    "daily_needs_board_01"
+   ]
+  },
+  "Найди весёлое лицо": {
+   "file": "_sounds/speech/naydi-veseloe-lico-55bccb.wav",
+   "seconds": 1.92,
+   "scenes": [
+    "emotion_find_happy_01"
+   ]
+  },
+  "Найди такое же": {
+   "file": "_sounds/speech/naydi-takoe-zhe-60f4a6.wav",
+   "seconds": 1.36,
+   "scenes": [
+    "symbol_same_thing_01"
+   ]
+  },
+  "Нет": {
+   "file": "_sounds/speech/net-f82a82.wav",
+   "seconds": 0.48,
+   "scenes": [
+    "speech_core_words_01",
+    "speech_ladder_01"
+   ]
+  },
+  "О-о!": {
+   "file": "_sounds/speech/o-o-5c40fc.wav",
+   "seconds": 1.52,
+   "scenes": [
+    "speech_ladder_01",
+    "speech_vowels_01"
+   ]
+  },
+  "Обведи круг пальцем": {
+   "file": "_sounds/speech/obvedi-krug-palcem-46e655.wav",
+   "seconds": 1.2,
+   "scenes": [
+    "trace_circle_01"
+   ]
+  },
+  "Они одинаковые?": {
+   "file": "_sounds/speech/oni-odinakovye-276d22.wav",
+   "seconds": 1.68,
+   "scenes": [
+    "yes_no_same_01"
+   ]
+  },
+  "Открывай карточки и ищи пары": {
+   "file": "_sounds/speech/otkryvay-kartochki-i-ischi-pary-659d0e.wav",
+   "seconds": 2.56,
+   "scenes": [
+    "memory_cards_01",
+    "memory_cards_02"
+   ]
+  },
+  "Открывай карточки и найди одинаковые пары": {
+   "file": "_sounds/speech/otkryvay-kartochki-i-naydi-odinakovye-pary-17c303.wav",
+   "seconds": 2.96,
+   "scenes": [
+    "memory_cards_levels"
+   ]
+  },
+  "Па!": {
+   "file": "_sounds/speech/pa-e53a9f.wav",
+   "seconds": 0.64,
+   "scenes": [
+    "speech_lip_sounds_01"
+   ]
+  },
+  "Па-па": {
+   "file": "_sounds/speech/pa-pa-c2cf05.wav",
+   "seconds": 0.96,
+   "scenes": [
+    "speech_ladder_01",
+    "speech_syllable_drill_01"
+   ]
+  },
+  "Папа": {
+   "file": "_sounds/speech/papa-240343.wav",
+   "seconds": 1.28,
+   "scenes": [
+    "speech_core_words_01"
+   ]
+  },
+  "Подбери одинаковые лица": {
+   "file": "_sounds/speech/podberi-odinakovye-lica-6f9bf2.wav",
+   "seconds": 1.92,
+   "scenes": [
+    "emotion_match_01"
+   ]
+  },
+  "Покажи: да или нет": {
+   "file": "_sounds/speech/pokazhi-da-ili-net-e5f7d1.wav",
+   "seconds": 1.52,
+   "scenes": [
+    "yes_no_01"
+   ]
+  },
+  "Положи большое к большому, маленькое к маленькому": {
+   "file": "_sounds/speech/polozhi-bolshoe-k-bolshomu-malenkoe-k-malenkomu-2e0aff.wav",
+   "seconds": 3.04,
+   "scenes": [
+    "sort_big_small_01"
+   ]
+  },
+  "Положи кружок к своему цвету": {
+   "file": "_sounds/speech/polozhi-kruzhok-k-svoemu-cvetu-b619c8.wav",
+   "seconds": 2.24,
+   "scenes": [
+    "match_colors_01"
+   ]
+  },
+  "Положи фигуру к такой же": {
+   "file": "_sounds/speech/polozhi-figuru-k-takoy-zhe-063130.wav",
+   "seconds": 1.84,
+   "scenes": [
+    "match_shapes_01"
+   ]
+  },
+  "Положи фрукты в корзину": {
+   "file": "_sounds/speech/polozhi-frukty-v-korzinu-4c32e6.wav",
+   "seconds": 1.68,
+   "scenes": [
+    "sort_fruits_01"
+   ]
+  },
+  "Положи цифру к нужному количеству точек": {
+   "file": "_sounds/speech/polozhi-cifru-k-nuzhnomu-kolichestvu-tochek-d55838.wav",
+   "seconds": 2.72,
+   "scenes": [
+    "match_number_count_01",
+    "match_number_count_02"
+   ]
+  },
+  "Положи цифру к точкам": {
+   "file": "_sounds/speech/polozhi-cifru-k-tochkam-8732b0.wav",
+   "seconds": 1.6,
+   "scenes": [
+    "match_numbers_01"
+   ]
+  },
+  "Помоги каждому найти дом": {
+   "file": "_sounds/speech/pomogi-kazhdomu-nayti-dom-343620.wav",
+   "seconds": 2.24,
+   "scenes": [
+    "sort_animals_01"
+   ]
+  },
+  "Проведи линию. Кто что ест?": {
+   "file": "_sounds/speech/provedi-liniyu-kto-chto-est-c36612.wav",
+   "seconds": 3.2,
+   "scenes": [
+    "connect_animals_food_01"
+   ]
+  },
+  "Проведи мышку к сыру": {
+   "file": "_sounds/speech/provedi-myshku-k-syru-0c9e95.wav",
+   "seconds": 2.08,
+   "scenes": [
+    "maze_mouse_cheese_01"
+   ]
+  },
+  "Проведи пальцем по линии": {
+   "file": "_sounds/speech/provedi-palcem-po-linii-5c1e06.wav",
+   "seconds": 2.0,
+   "scenes": [
+    "trace_line_01"
+   ]
+  },
+  "Разложи по группам: животные, транспорт и еда": {
+   "file": "_sounds/speech/razlozhi-po-gruppam-zhivotnye-transport-i-eda-6340ac.wav",
+   "seconds": 4.56,
+   "scenes": [
+    "sort_3groups_01"
+   ]
+  },
+  "Разложи по корзинам": {
+   "file": "_sounds/speech/razlozhi-po-korzinam-219e52.wav",
+   "seconds": 1.36,
+   "scenes": [
+    "object_category_recall_01",
+    "sort_cards_animals_transport_01",
+    "sort_cards_clothes_food_01",
+    "sort_cards_food_toys_01",
+    "sort_food_01"
+   ]
+  },
+  "Разложи по размеру: большой, средний, маленький": {
+   "file": "_sounds/speech/razlozhi-po-razmeru-bolshoy-sredniy-malenkiy-c49e2f.wav",
+   "seconds": 3.04,
+   "scenes": [
+    "sort_big_small_02"
+   ]
+  },
+  "Разложи по цвету. И запомни": {
+   "file": "_sounds/speech/razlozhi-po-cvetu-i-zapomni-b7ab44.wav",
+   "seconds": 2.64,
+   "scenes": [
+    "remember_while_playing_01"
+   ]
+  },
+  "Разложи предметы по цвету": {
+   "file": "_sounds/speech/razlozhi-predmety-po-cvetu-3b38e6.wav",
+   "seconds": 1.92,
+   "scenes": [
+    "sort_colors_01"
+   ]
+  },
+  "Скажи!": {
+   "file": "_sounds/speech/skazhi-3628b3.wav",
+   "seconds": 0.56,
+   "scenes": [
+    "speech_animal_voices_01",
+    "speech_core_words_01",
+    "speech_ladder_01",
+    "speech_lip_sounds_01",
+    "speech_syllable_drill_01",
+    "speech_vehicle_sounds_01",
+    "speech_vowels_01"
+   ]
+  },
+  "Скажи: а-а-а!": {
+   "file": "_sounds/speech/skazhi-a-a-a-3647c4.wav",
+   "seconds": 3.44,
+   "scenes": [
+    "speech_voice_balloon_01"
+   ]
+  },
+  "Смотри и повтори": {
+   "file": "_sounds/speech/smotri-i-povtori-9a36d1.wav",
+   "seconds": 1.36,
+   "scenes": [
+    "tap_repeat_01",
+    "tap_repeat_02"
+   ]
+  },
+  "Ту-ту": {
+   "file": "_sounds/speech/tu-tu-08935f.wav",
+   "seconds": 1.28,
+   "scenes": [
+    "speech_syllable_drill_01"
+   ]
+  },
+  "Ту-ту!": {
+   "file": "_sounds/speech/tu-tu-05b327.wav",
+   "seconds": 1.04,
+   "scenes": [
+    "speech_vehicle_sounds_01"
+   ]
+  },
+  "У-у!": {
+   "file": "_sounds/speech/u-u-dc29d5.wav",
+   "seconds": 0.96,
+   "scenes": [
+    "speech_ladder_01",
+    "speech_vehicle_sounds_01",
+    "speech_vowels_01"
+   ]
+  },
+  "Фу!": {
+   "file": "_sounds/speech/fu-147f1d.wav",
+   "seconds": 0.56,
+   "scenes": [
+    "speech_lip_sounds_01"
+   ]
+  },
+  "Хочешь это?": {
+   "file": "_sounds/speech/hochesh-eto-df7103.wav",
+   "seconds": 1.12,
+   "scenes": [
+    "yes_no_want_01"
+   ]
+  },
+  "Что будет дальше?": {
+   "file": "_sounds/speech/chto-budet-dalshe-b0e3d7.wav",
+   "seconds": 1.2,
+   "scenes": [
+    "continue_pattern_01"
+   ]
+  },
+  "Что будешь пить?": {
+   "file": "_sounds/speech/chto-budesh-pit-56ebd3.wav",
+   "seconds": 1.2,
+   "scenes": [
+    "choice_drink_01"
+   ]
+  },
+  "Что делаем перед сном?": {
+   "file": "_sounds/speech/chto-delaem-pered-snom-caabd4.wav",
+   "seconds": 1.28,
+   "scenes": [
+    "routine_bedtime_01"
+   ]
+  },
+  "Что делаем утром сначала?": {
+   "file": "_sounds/speech/chto-delaem-utrom-snachala-f32e72.wav",
+   "seconds": 1.68,
+   "scenes": [
+    "routine_morning_01"
+   ]
+  },
+  "Что здесь лишнее?": {
+   "file": "_sounds/speech/chto-zdes-lishnee-a7ebe4.wav",
+   "seconds": 1.28,
+   "scenes": [
+    "odd_one_out_01"
+   ]
+  },
+  "Что изменилось?": {
+   "file": "_sounds/speech/chto-izmenilos-b2d340.wav",
+   "seconds": 1.12,
+   "scenes": [
+    "what_changed_01"
+   ]
+  },
+  "Что пропало?": {
+   "file": "_sounds/speech/chto-propalo-23af6d.wav",
+   "seconds": 1.68,
+   "scenes": [
+    "missing_object_01"
+   ]
+  },
+  "Что сначала, а что потом?": {
+   "file": "_sounds/speech/chto-snachala-a-chto-potom-e080b0.wav",
+   "seconds": 2.72,
+   "scenes": [
+    "first_then_01"
+   ]
+  },
+  "Что сначала?": {
+   "file": "_sounds/speech/chto-snachala-b9b33a.wav",
+   "seconds": 1.04,
+   "scenes": [
+    "routine_handwash_01"
+   ]
+  },
+  "Что хочешь съесть?": {
+   "file": "_sounds/speech/chto-hochesh-sest-b41573.wav",
+   "seconds": 1.36,
+   "scenes": [
+    "choice_snack_01"
+   ]
+  },
+  "Э-э!": {
+   "file": "_sounds/speech/e-e-cbe39e.wav",
+   "seconds": 1.04,
+   "scenes": [
+    "speech_vowels_01"
+   ]
+  },
+  "Это большой?": {
+   "file": "_sounds/speech/eto-bolshoy-2b7023.wav",
+   "seconds": 1.6,
+   "scenes": [
+    "yes_no_is_it_big_01"
+   ]
+  },
+  "Это едят?": {
+   "file": "_sounds/speech/eto-edyat-ab2bf0.wav",
+   "seconds": 0.8,
+   "scenes": [
+    "yes_no_is_it_food_01"
+   ]
+  },
+  "Это кошка?": {
+   "file": "_sounds/speech/eto-koshka-ec65a0.wav",
+   "seconds": 1.44,
+   "scenes": [
+    "yes_no_is_it_01"
+   ]
+  }
+ }
+}

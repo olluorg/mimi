@@ -1,0 +1,310 @@
+{
+  "sceneId": "speech_core_words_01",
+  "meta": {
+    "title": "Первые слова",
+    "description": "Да, нет, ещё, мама, папа. Можно сказать слово или показать картинку — оба ответа засчитываются.",
+    "ageMin": 2,
+    "ageMax": 7,
+    "version": 1,
+    "tags": [
+      "speech",
+      "aac",
+      "communication",
+      "requesting"
+    ],
+    "skills": [
+      "requesting",
+      "expressive_speech",
+      "vocal_initiation",
+      "turn_taking"
+    ],
+    "icon": "🗨️",
+    "requires": [],
+    "speech": {
+      "stage": "aac",
+      "targets": [
+        "alalia",
+        "apraxia",
+        "dysarthria"
+      ],
+      "modes": [
+        "aac",
+        "imitation",
+        "voice"
+      ],
+      "words": [
+        "да",
+        "нет",
+        "ещё",
+        "мама",
+        "папа"
+      ],
+      "adultTip": "Говоря слово, показывайте на картинку. Повторяйте эти слова и вне игры — в течение дня. Засчитывайте любую попытку — даже один звук вместо слова."
+    }
+  },
+  "entities": [
+    {
+      "id": "yes",
+      "components": [
+        "tap"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 500.0,
+          "y": 440.0
+        },
+        "width": {
+          "type": "num",
+          "value": 320.0
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/yes.jpg"
+        },
+        "name": {
+          "type": "text",
+          "value": "да"
+        },
+        "speech": {
+          "type": "text",
+          "value": "Да"
+        },
+        "rewardMotion": {
+          "type": "text",
+          "value": "jump"
+        }
+      },
+      "tags": {
+        "group": "targets"
+      },
+      "zOrder": 0,
+      "initialState": "INACTIVE"
+    },
+    {
+      "id": "no",
+      "components": [
+        "tap"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 500.0,
+          "y": 440.0
+        },
+        "width": {
+          "type": "num",
+          "value": 320.0
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/no.jpg"
+        },
+        "name": {
+          "type": "text",
+          "value": "нет"
+        },
+        "speech": {
+          "type": "text",
+          "value": "Нет"
+        },
+        "rewardMotion": {
+          "type": "text",
+          "value": "wiggle"
+        }
+      },
+      "tags": {
+        "group": "targets"
+      },
+      "zOrder": 0,
+      "initialState": "INACTIVE"
+    },
+    {
+      "id": "more",
+      "components": [
+        "tap"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 500.0,
+          "y": 440.0
+        },
+        "width": {
+          "type": "num",
+          "value": 320.0
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/more.jpg"
+        },
+        "name": {
+          "type": "text",
+          "value": "ещё"
+        },
+        "speech": {
+          "type": "text",
+          "value": "Ещё"
+        },
+        "rewardMotion": {
+          "type": "text",
+          "value": "spin"
+        },
+        "reward": {
+          "type": "text",
+          "value": "_sounds/pop.wav"
+        }
+      },
+      "tags": {
+        "group": "targets"
+      },
+      "zOrder": 0,
+      "initialState": "INACTIVE"
+    },
+    {
+      "id": "mom",
+      "components": [
+        "tap"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 500.0,
+          "y": 440.0
+        },
+        "width": {
+          "type": "num",
+          "value": 320.0
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/mom.jpg"
+        },
+        "name": {
+          "type": "text",
+          "value": "мама"
+        },
+        "speech": {
+          "type": "text",
+          "value": "Мама"
+        },
+        "rewardMotion": {
+          "type": "text",
+          "value": "jump"
+        },
+        "mouth": {
+          "type": "text",
+          "value": "_anim/mouth_ma.json"
+        }
+      },
+      "tags": {
+        "group": "targets"
+      },
+      "zOrder": 0,
+      "initialState": "INACTIVE"
+    },
+    {
+      "id": "dad",
+      "components": [
+        "tap"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 500.0,
+          "y": 440.0
+        },
+        "width": {
+          "type": "num",
+          "value": 320.0
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/dad.jpg"
+        },
+        "name": {
+          "type": "text",
+          "value": "папа"
+        },
+        "speech": {
+          "type": "text",
+          "value": "Папа"
+        },
+        "rewardMotion": {
+          "type": "text",
+          "value": "jump"
+        },
+        "mouth": {
+          "type": "text",
+          "value": "_anim/mouth_ma.json"
+        }
+      },
+      "tags": {
+        "group": "targets"
+      },
+      "zOrder": 0,
+      "initialState": "INACTIVE"
+    }
+  ],
+  "objectives": [
+    {
+      "id": "turns",
+      "type": "interactionCount",
+      "config": {
+        "count": "5"
+      },
+      "requires": null
+    }
+  ],
+  "behaviors": [
+    {
+      "behaviorRef": {
+        "type": "progressTracker",
+        "config": {}
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "audioPrompt",
+        "config": {
+          "on": "sceneStarted",
+          "text": "Скажи!",
+          "sound": "_sounds/speech/skazhi-3628b3.wav"
+        }
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "awaitResponse",
+        "config": {
+          "group": "targets",
+          "accept": "tap,voice,adult",
+          "waitMs": "7000",
+          "maxPrompts": "2"
+        }
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "playSoundOnEvent",
+        "config": {
+          "on": "sceneCompleted",
+          "sound": "complete"
+        }
+      },
+      "entityId": null
+    }
+  ],
+  "fieldPolicies": {},
+  "idleTimeout": 40,
+  "onIdle": "HINT",
+  "metadata": {}
+}

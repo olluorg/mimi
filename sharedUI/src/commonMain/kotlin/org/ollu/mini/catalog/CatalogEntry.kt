@@ -1,6 +1,7 @@
 package org.ollu.mini.catalog
 
 import kotlinx.serialization.Serializable
+import mimi.core.world.SpeechProfile
 
 // ── catalog.json ─────────────────────────────────────────────────────────────
 // Minimal generated index: just ids and URLs. Never edit by hand.
@@ -30,7 +31,9 @@ data class SceneMeta(
     val tags:        List<String> = emptyList(),
     val skills:      List<String> = emptyList(),
     val icon:        String       = "",
-    val requires:    List<String> = emptyList()
+    val requires:    List<String> = emptyList(),
+    /** Present on speech games only; what puts a scene under «Запуск речи». */
+    val speech:      SpeechProfile? = null
 )
 
 @Serializable
@@ -51,7 +54,13 @@ data class CatalogEntry(
     val ageMax:      Int,
     val skills:      List<String> = emptyList(),
     val icon:        String       = "",
-    val requires:    List<String> = emptyList()
-)
+    val requires:    List<String> = emptyList(),
+    /** Scene tags, e.g. "sorting", "cards", "choice" — used to vary what a sitting feels like. */
+    val tags:        List<String> = emptyList(),
+    /** Set only for speech games, which the validator has checked really are. */
+    val speech:      SpeechProfile? = null
+) {
+    val isSpeechGame: Boolean get() = speech != null
+}
 
 const val DEFAULT_CATALOG_URL = "https://olluorg.github.io/mimi/catalog.json"

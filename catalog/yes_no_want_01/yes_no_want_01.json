@@ -1,0 +1,688 @@
+{
+  "sceneId": "yes_no_want_01",
+  "meta": {
+    "title": "Хочешь это?",
+    "description": "Смотри на картинку и отвечай: хочу или не хочу. Любой ответ правильный.",
+    "ageMin": 2,
+    "ageMax": 6,
+    "version": 1,
+    "tags": [
+      "yes_no",
+      "communication",
+      "choice"
+    ],
+    "skills": [
+      "expressive_speech",
+      "receptive_speech",
+      "task_completion",
+      "visual_attention"
+    ],
+    "icon": "🖐",
+    "requires": [
+      "yes_no_01"
+    ]
+  },
+  "entities": [],
+  "objectives": [],
+  "behaviors": [
+    {
+      "behaviorRef": {
+        "type": "progressTracker",
+        "config": {}
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "audioPrompt",
+        "config": {
+          "on": "sceneStarted",
+          "text": "Хочешь это?",
+          "sound": "_sounds/speech/hochesh-eto-df7103.wav"
+        }
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "freeSelection",
+        "config": {
+          "group": "answers",
+          "speak": "true"
+        }
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "playSoundOnEvent",
+        "config": {
+          "on": "sceneCompleted",
+          "sound": "complete"
+        }
+      },
+      "entityId": null
+    }
+  ],
+  "fieldPolicies": {},
+  "idleTimeout": 25,
+  "onIdle": "HINT",
+  "metadata": {},
+  "levels": [
+    {
+      "levelId": "apple",
+      "entities": [
+        {
+          "id": "apple",
+          "components": [],
+          "behaviors": [],
+          "properties": {
+            "position": {
+              "type": "vec2",
+              "x": 500.0,
+              "y": 300.0
+            },
+            "image": {
+              "type": "text",
+              "value": "_cards/apple.jpg"
+            },
+            "label": {
+              "type": "text",
+              "value": "Яблоко"
+            },
+            "name": {
+              "type": "text",
+              "value": "Яблоко"
+            },
+            "sound": {
+              "type": "text",
+              "value": "_cards/audio/apple.mp3"
+            }
+          },
+          "tags": {
+            "group": "question"
+          },
+          "zOrder": 0
+        },
+        {
+          "id": "i-want",
+          "components": [
+            "tap"
+          ],
+          "behaviors": [],
+          "properties": {
+            "position": {
+              "type": "vec2",
+              "x": 320.0,
+              "y": 720.0
+            },
+            "image": {
+              "type": "text",
+              "value": "_cards/i-want.jpg"
+            },
+            "label": {
+              "type": "text",
+              "value": "Хочу"
+            },
+            "name": {
+              "type": "text",
+              "value": "Хочу"
+            },
+            "sound": {
+              "type": "text",
+              "value": "_cards/audio/i-want.mp3"
+            },
+            "answer": {
+              "type": "text",
+              "value": "yes"
+            }
+          },
+          "tags": {
+            "group": "answers"
+          },
+          "zOrder": 0
+        },
+        {
+          "id": "i-do-not-want",
+          "components": [
+            "tap"
+          ],
+          "behaviors": [],
+          "properties": {
+            "position": {
+              "type": "vec2",
+              "x": 680.0,
+              "y": 720.0
+            },
+            "image": {
+              "type": "text",
+              "value": "_cards/i-do-not-want.jpg"
+            },
+            "label": {
+              "type": "text",
+              "value": "Не хочу"
+            },
+            "name": {
+              "type": "text",
+              "value": "Не хочу"
+            },
+            "sound": {
+              "type": "text",
+              "value": "_cards/audio/i-do-not-want.mp3"
+            },
+            "answer": {
+              "type": "text",
+              "value": "no"
+            }
+          },
+          "tags": {
+            "group": "answers"
+          },
+          "zOrder": 0
+        }
+      ],
+      "objectives": [
+        {
+          "id": "answered",
+          "type": "anySelected",
+          "config": {
+            "group": "answers"
+          },
+          "requires": null
+        }
+      ]
+    },
+    {
+      "levelId": "cookie",
+      "entities": [
+        {
+          "id": "cookie",
+          "components": [],
+          "behaviors": [],
+          "properties": {
+            "position": {
+              "type": "vec2",
+              "x": 500.0,
+              "y": 300.0
+            },
+            "image": {
+              "type": "text",
+              "value": "_cards/cookie.jpg"
+            },
+            "label": {
+              "type": "text",
+              "value": "Печенье"
+            },
+            "name": {
+              "type": "text",
+              "value": "Печенье"
+            },
+            "sound": {
+              "type": "text",
+              "value": "_cards/audio/cookie.mp3"
+            }
+          },
+          "tags": {
+            "group": "question"
+          },
+          "zOrder": 0
+        },
+        {
+          "id": "i-want",
+          "components": [
+            "tap"
+          ],
+          "behaviors": [],
+          "properties": {
+            "position": {
+              "type": "vec2",
+              "x": 320.0,
+              "y": 720.0
+            },
+            "image": {
+              "type": "text",
+              "value": "_cards/i-want.jpg"
+            },
+            "label": {
+              "type": "text",
+              "value": "Хочу"
+            },
+            "name": {
+              "type": "text",
+              "value": "Хочу"
+            },
+            "sound": {
+              "type": "text",
+              "value": "_cards/audio/i-want.mp3"
+            },
+            "answer": {
+              "type": "text",
+              "value": "yes"
+            }
+          },
+          "tags": {
+            "group": "answers"
+          },
+          "zOrder": 0
+        },
+        {
+          "id": "i-do-not-want",
+          "components": [
+            "tap"
+          ],
+          "behaviors": [],
+          "properties": {
+            "position": {
+              "type": "vec2",
+              "x": 680.0,
+              "y": 720.0
+            },
+            "image": {
+              "type": "text",
+              "value": "_cards/i-do-not-want.jpg"
+            },
+            "label": {
+              "type": "text",
+              "value": "Не хочу"
+            },
+            "name": {
+              "type": "text",
+              "value": "Не хочу"
+            },
+            "sound": {
+              "type": "text",
+              "value": "_cards/audio/i-do-not-want.mp3"
+            },
+            "answer": {
+              "type": "text",
+              "value": "no"
+            }
+          },
+          "tags": {
+            "group": "answers"
+          },
+          "zOrder": 0
+        }
+      ],
+      "objectives": [
+        {
+          "id": "answered",
+          "type": "anySelected",
+          "config": {
+            "group": "answers"
+          },
+          "requires": null
+        }
+      ]
+    },
+    {
+      "levelId": "juice",
+      "entities": [
+        {
+          "id": "juice",
+          "components": [],
+          "behaviors": [],
+          "properties": {
+            "position": {
+              "type": "vec2",
+              "x": 500.0,
+              "y": 300.0
+            },
+            "image": {
+              "type": "text",
+              "value": "_cards/juice.jpg"
+            },
+            "label": {
+              "type": "text",
+              "value": "Сок"
+            },
+            "name": {
+              "type": "text",
+              "value": "Сок"
+            },
+            "sound": {
+              "type": "text",
+              "value": "_cards/audio/juice.mp3"
+            }
+          },
+          "tags": {
+            "group": "question"
+          },
+          "zOrder": 0
+        },
+        {
+          "id": "i-want",
+          "components": [
+            "tap"
+          ],
+          "behaviors": [],
+          "properties": {
+            "position": {
+              "type": "vec2",
+              "x": 320.0,
+              "y": 720.0
+            },
+            "image": {
+              "type": "text",
+              "value": "_cards/i-want.jpg"
+            },
+            "label": {
+              "type": "text",
+              "value": "Хочу"
+            },
+            "name": {
+              "type": "text",
+              "value": "Хочу"
+            },
+            "sound": {
+              "type": "text",
+              "value": "_cards/audio/i-want.mp3"
+            },
+            "answer": {
+              "type": "text",
+              "value": "yes"
+            }
+          },
+          "tags": {
+            "group": "answers"
+          },
+          "zOrder": 0
+        },
+        {
+          "id": "i-do-not-want",
+          "components": [
+            "tap"
+          ],
+          "behaviors": [],
+          "properties": {
+            "position": {
+              "type": "vec2",
+              "x": 680.0,
+              "y": 720.0
+            },
+            "image": {
+              "type": "text",
+              "value": "_cards/i-do-not-want.jpg"
+            },
+            "label": {
+              "type": "text",
+              "value": "Не хочу"
+            },
+            "name": {
+              "type": "text",
+              "value": "Не хочу"
+            },
+            "sound": {
+              "type": "text",
+              "value": "_cards/audio/i-do-not-want.mp3"
+            },
+            "answer": {
+              "type": "text",
+              "value": "no"
+            }
+          },
+          "tags": {
+            "group": "answers"
+          },
+          "zOrder": 0
+        }
+      ],
+      "objectives": [
+        {
+          "id": "answered",
+          "type": "anySelected",
+          "config": {
+            "group": "answers"
+          },
+          "requires": null
+        }
+      ]
+    },
+    {
+      "levelId": "ball",
+      "entities": [
+        {
+          "id": "ball",
+          "components": [],
+          "behaviors": [],
+          "properties": {
+            "position": {
+              "type": "vec2",
+              "x": 500.0,
+              "y": 300.0
+            },
+            "image": {
+              "type": "text",
+              "value": "_cards/ball.jpg"
+            },
+            "label": {
+              "type": "text",
+              "value": "Мяч"
+            },
+            "name": {
+              "type": "text",
+              "value": "Мяч"
+            },
+            "sound": {
+              "type": "text",
+              "value": "_cards/audio/ball.mp3"
+            }
+          },
+          "tags": {
+            "group": "question"
+          },
+          "zOrder": 0
+        },
+        {
+          "id": "i-want",
+          "components": [
+            "tap"
+          ],
+          "behaviors": [],
+          "properties": {
+            "position": {
+              "type": "vec2",
+              "x": 320.0,
+              "y": 720.0
+            },
+            "image": {
+              "type": "text",
+              "value": "_cards/i-want.jpg"
+            },
+            "label": {
+              "type": "text",
+              "value": "Хочу"
+            },
+            "name": {
+              "type": "text",
+              "value": "Хочу"
+            },
+            "sound": {
+              "type": "text",
+              "value": "_cards/audio/i-want.mp3"
+            },
+            "answer": {
+              "type": "text",
+              "value": "yes"
+            }
+          },
+          "tags": {
+            "group": "answers"
+          },
+          "zOrder": 0
+        },
+        {
+          "id": "i-do-not-want",
+          "components": [
+            "tap"
+          ],
+          "behaviors": [],
+          "properties": {
+            "position": {
+              "type": "vec2",
+              "x": 680.0,
+              "y": 720.0
+            },
+            "image": {
+              "type": "text",
+              "value": "_cards/i-do-not-want.jpg"
+            },
+            "label": {
+              "type": "text",
+              "value": "Не хочу"
+            },
+            "name": {
+              "type": "text",
+              "value": "Не хочу"
+            },
+            "sound": {
+              "type": "text",
+              "value": "_cards/audio/i-do-not-want.mp3"
+            },
+            "answer": {
+              "type": "text",
+              "value": "no"
+            }
+          },
+          "tags": {
+            "group": "answers"
+          },
+          "zOrder": 0
+        }
+      ],
+      "objectives": [
+        {
+          "id": "answered",
+          "type": "anySelected",
+          "config": {
+            "group": "answers"
+          },
+          "requires": null
+        }
+      ]
+    },
+    {
+      "levelId": "book",
+      "entities": [
+        {
+          "id": "book",
+          "components": [],
+          "behaviors": [],
+          "properties": {
+            "position": {
+              "type": "vec2",
+              "x": 500.0,
+              "y": 300.0
+            },
+            "image": {
+              "type": "text",
+              "value": "_cards/book.jpg"
+            },
+            "label": {
+              "type": "text",
+              "value": "Книга"
+            },
+            "name": {
+              "type": "text",
+              "value": "Книга"
+            },
+            "sound": {
+              "type": "text",
+              "value": "_cards/audio/book.mp3"
+            }
+          },
+          "tags": {
+            "group": "question"
+          },
+          "zOrder": 0
+        },
+        {
+          "id": "i-want",
+          "components": [
+            "tap"
+          ],
+          "behaviors": [],
+          "properties": {
+            "position": {
+              "type": "vec2",
+              "x": 320.0,
+              "y": 720.0
+            },
+            "image": {
+              "type": "text",
+              "value": "_cards/i-want.jpg"
+            },
+            "label": {
+              "type": "text",
+              "value": "Хочу"
+            },
+            "name": {
+              "type": "text",
+              "value": "Хочу"
+            },
+            "sound": {
+              "type": "text",
+              "value": "_cards/audio/i-want.mp3"
+            },
+            "answer": {
+              "type": "text",
+              "value": "yes"
+            }
+          },
+          "tags": {
+            "group": "answers"
+          },
+          "zOrder": 0
+        },
+        {
+          "id": "i-do-not-want",
+          "components": [
+            "tap"
+          ],
+          "behaviors": [],
+          "properties": {
+            "position": {
+              "type": "vec2",
+              "x": 680.0,
+              "y": 720.0
+            },
+            "image": {
+              "type": "text",
+              "value": "_cards/i-do-not-want.jpg"
+            },
+            "label": {
+              "type": "text",
+              "value": "Не хочу"
+            },
+            "name": {
+              "type": "text",
+              "value": "Не хочу"
+            },
+            "sound": {
+              "type": "text",
+              "value": "_cards/audio/i-do-not-want.mp3"
+            },
+            "answer": {
+              "type": "text",
+              "value": "no"
+            }
+          },
+          "tags": {
+            "group": "answers"
+          },
+          "zOrder": 0
+        }
+      ],
+      "objectives": [
+        {
+          "id": "answered",
+          "type": "anySelected",
+          "config": {
+            "group": "answers"
+          },
+          "requires": null
+        }
+      ]
+    }
+  ]
+}

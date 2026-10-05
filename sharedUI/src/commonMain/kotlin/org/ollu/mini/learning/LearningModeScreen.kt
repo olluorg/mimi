@@ -15,11 +15,11 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import kotlinx.coroutines.launch
-import org.ollu.mini.sound.rememberTtsPlayer
 import mimi.core.curriculum.BalancedSkillPlanner
 import mimi.core.curriculum.ChildSkillState
 import mimi.core.curriculum.DefaultSkillMapper
 import mimi.core.curriculum.SceneMetrics
+import mimi.core.engine.SessionMetrics
 import mimi.core.curriculum.SceneResult
 import mimi.core.curriculum.SceneSkillMapping
 import mimi.core.world.SceneDefinition
@@ -52,7 +52,7 @@ fun LearningModeScreen(
         repo.catalogFlow(catalogUrl).collect { uiState = it }
     }
 
-    val childId = progressRepository.getChildName().ifBlank { "default_child" }
+    val childId = progressRepository.currentChildId()
     val skillState = remember(uiState.entries, childId) {
         ChildSkillState(childId = childId, skills = progressRepository.getSkillState(childId))
     }
@@ -61,7 +61,7 @@ fun LearningModeScreen(
         selectNextEntry(uiState.entries, progressRepository, skillState)
     }
 
-    Box(Modifier.fillMaxSize().background(BG)) {
+    Box(Modifier.fillMaxSize().background(BG).safeDrawingPadding()) {
         LazyColumn(
             modifier = Modifier.fillMaxSize(),
             contentPadding = PaddingValues(16.dp),
@@ -125,22 +125,37 @@ fun LearningModeScreen(
     }
 }
 
+/**
+ * Folds a finished attempt into the child's skill profile.
+ *
+ * The attempt is scored on what it actually cost — mistakes made and hints
+ * taken — so a scene solved unaided moves the profile further than one the
+ * child was walked through.
+ */
 fun applyLearningSceneCompletion(
     progressRepository: ProgressRepository,
     childId: String,
     entry: CatalogEntry,
-    scene: SceneDefinition
+    scene: SceneDefinition,
+    metrics: SessionMetrics
 ) {
     val current = ChildSkillState(childId = childId, skills = progressRepository.getSkillState(childId))
     val weights = sceneSkillWeights(entry.skills)
     if (weights.isEmpty()) return
+
+    val attempts = progressRepository.getSessions(childId).count { it.sceneId == scene.sceneId }
 
     val result = DefaultSkillMapper().updateSkills(
         state = current,
         result = SceneResult(
             sceneId = scene.sceneId,
             completed = true,
-            metrics = SceneMetrics()
+            metrics = SceneMetrics(
+                attempts   = attempts.coerceAtLeast(1),
+                mistakes   = metrics.mistakes,
+                hintsUsed  = metrics.hintsUsed,
+                durationMs = metrics.durationMs
+            )
         ),
         mapping = SceneSkillMapping(sceneId = scene.sceneId, skillWeights = weights)
     )
@@ -152,7 +167,7 @@ private fun selectNextEntry(
     progressRepository: ProgressRepository,
     skillState: ChildSkillState
 ): CatalogEntry? {
-    val completedIds = progressRepository.getCompletedSceneIds()
+    val completedIds = progressRepository.getCompletedSceneIds(progressRepository.currentChildId())
     val plannerEntries = entries
         .filter { it.skills.isNotEmpty() }
         .map { PlannerSceneEntry(it.id, sceneSkillWeights(it.skills), it.requires) }
@@ -220,7 +235,6 @@ private fun NextSceneCard(
     error: String?,
     onStart: () -> Unit
 ) {
-    val tts = rememberTtsPlayer()
     Surface(shape = RoundedCornerShape(24.dp), color = Color.White, modifier = Modifier.fillMaxWidth()) {
         Column(
             Modifier.padding(20.dp),
@@ -261,10 +275,8 @@ private fun NextSceneCard(
                 )
                 Surface(
                     onClick = {
-                        if (!loading) {
-                            tts.speak(entry.title.ifBlank { "Играть" })
-                            onStart()
-                        }
+                        // Silent on purpose — the game speaks its own instruction.
+                        if (!loading) onStart()
                     },
                     shape = CircleShape,
                     color = Color(0xFF2A9D8F),

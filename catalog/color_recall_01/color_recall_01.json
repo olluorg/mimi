@@ -11,9 +11,13 @@
           "x": 220.0,
           "y": 680.0
         },
-        "emoji": {
+        "shape": {
           "type": "text",
-          "value": "🔴"
+          "value": "circle"
+        },
+        "color": {
+          "type": "text",
+          "value": "red"
         }
       },
       "tags": {
@@ -31,9 +35,13 @@
           "x": 500.0,
           "y": 680.0
         },
-        "emoji": {
+        "shape": {
           "type": "text",
-          "value": "🔵"
+          "value": "circle"
+        },
+        "color": {
+          "type": "text",
+          "value": "blue"
         }
       },
       "tags": {
@@ -51,9 +59,13 @@
           "x": 780.0,
           "y": 680.0
         },
-        "emoji": {
+        "shape": {
           "type": "text",
-          "value": "🟢"
+          "value": "circle"
+        },
+        "color": {
+          "type": "text",
+          "value": "green"
         }
       },
       "tags": {
@@ -81,9 +93,9 @@
           "type": "text",
           "value": "red"
         },
-        "emoji": {
+        "shape": {
           "type": "text",
-          "value": "🔴"
+          "value": "circle"
         }
       },
       "tags": {
@@ -111,9 +123,9 @@
           "type": "text",
           "value": "blue"
         },
-        "emoji": {
+        "shape": {
           "type": "text",
-          "value": "🔵"
+          "value": "circle"
         }
       },
       "tags": {
@@ -141,9 +153,9 @@
           "type": "text",
           "value": "green"
         },
-        "emoji": {
+        "shape": {
           "type": "text",
-          "value": "🟢"
+          "value": "circle"
         }
       },
       "tags": {
@@ -179,9 +191,9 @@
           "type": "text",
           "value": "red"
         },
-        "emoji": {
+        "shape": {
           "type": "text",
-          "value": "⬜"
+          "value": "square"
         }
       },
       "tags": {},
@@ -215,9 +227,9 @@
           "type": "text",
           "value": "blue"
         },
-        "emoji": {
+        "shape": {
           "type": "text",
-          "value": "⬜"
+          "value": "square"
         }
       },
       "tags": {},
@@ -251,9 +263,9 @@
           "type": "text",
           "value": "green"
         },
-        "emoji": {
+        "shape": {
           "type": "text",
-          "value": "⬜"
+          "value": "square"
         }
       },
       "tags": {},
@@ -273,6 +285,17 @@
   "behaviors": [
     {
       "behaviorRef": {
+        "type": "audioPrompt",
+        "config": {
+          "on": "sceneStarted",
+          "text": "Запомни цвета",
+          "sound": "_sounds/speech/zapomni-cveta-f46514.wav"
+        }
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
         "type": "snapToTarget",
         "config": {}
       },
@@ -288,9 +311,7 @@
     {
       "behaviorRef": {
         "type": "adaptiveHint",
-        "config": {
-          "mode": "color_recall"
-        }
+        "config": {}
       },
       "entityId": null
     },

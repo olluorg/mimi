@@ -1,0 +1,542 @@
+{
+  "sceneId": "speech_ladder_01",
+  "meta": {
+    "title": "Лесенка: звук, слог, слово",
+    "description": "Три короткие ступеньки: звук, потом слог, потом первое слово — да, нет, ещё.",
+    "ageMin": 3,
+    "ageMax": 7,
+    "version": 1,
+    "tags": [
+      "speech",
+      "imitation",
+      "levels"
+    ],
+    "skills": [
+      "speech_motor",
+      "sound_imitation",
+      "expressive_speech",
+      "vocal_initiation"
+    ],
+    "icon": "🪜",
+    "requires": [
+      "speech_animal_voices_01"
+    ],
+    "speech": {
+      "stage": "words",
+      "targets": [
+        "apraxia",
+        "alalia"
+      ],
+      "modes": [
+        "imitation",
+        "voice"
+      ],
+      "words": [
+        "а",
+        "у",
+        "о",
+        "ма-ма",
+        "па-па",
+        "ба-ба",
+        "да",
+        "нет",
+        "ещё"
+      ],
+      "adultTip": "Говорите вместе с игрой медленно, ребёнок смотрит на ваши губы. «Е» вместо «ещё» — уже успех."
+    }
+  },
+  "entities": [],
+  "objectives": [],
+  "levels": [
+    {
+      "levelId": "sounds",
+      "entities": [
+        {
+          "id": "doctor",
+          "components": [
+            "tap"
+          ],
+          "behaviors": [],
+          "properties": {
+            "position": {
+              "type": "vec2",
+              "x": 500.0,
+              "y": 440.0
+            },
+            "width": {
+              "type": "num",
+              "value": 320.0
+            },
+            "image": {
+              "type": "text",
+              "value": "_cards/doctor.jpg"
+            },
+            "name": {
+              "type": "text",
+              "value": "доктор"
+            },
+            "speech": {
+              "type": "text",
+              "value": "А-а!"
+            },
+            "rewardMotion": {
+              "type": "text",
+              "value": "jump"
+            },
+            "expectSound": {
+              "type": "text",
+              "value": "а"
+            },
+            "mouth": {
+              "type": "text",
+              "value": "_anim/mouth_a.json"
+            }
+          },
+          "tags": {
+            "group": "targets"
+          },
+          "zOrder": 0,
+          "initialState": "INACTIVE"
+        },
+        {
+          "id": "airplane",
+          "components": [
+            "tap"
+          ],
+          "behaviors": [],
+          "properties": {
+            "position": {
+              "type": "vec2",
+              "x": 500.0,
+              "y": 440.0
+            },
+            "width": {
+              "type": "num",
+              "value": 320.0
+            },
+            "image": {
+              "type": "text",
+              "value": "_cards/airplane.jpg"
+            },
+            "name": {
+              "type": "text",
+              "value": "самолёт"
+            },
+            "speech": {
+              "type": "text",
+              "value": "У-у!"
+            },
+            "rewardMotion": {
+              "type": "text",
+              "value": "fly"
+            },
+            "reward": {
+              "type": "text",
+              "value": "_sounds/airplane.wav"
+            },
+            "expectSound": {
+              "type": "text",
+              "value": "у"
+            },
+            "mouth": {
+              "type": "text",
+              "value": "_anim/mouth_u.json"
+            }
+          },
+          "tags": {
+            "group": "targets"
+          },
+          "zOrder": 0,
+          "initialState": "INACTIVE"
+        },
+        {
+          "id": "surprise",
+          "components": [
+            "tap"
+          ],
+          "behaviors": [],
+          "properties": {
+            "position": {
+              "type": "vec2",
+              "x": 500.0,
+              "y": 440.0
+            },
+            "width": {
+              "type": "num",
+              "value": 320.0
+            },
+            "image": {
+              "type": "text",
+              "value": "_cards/surprise.jpg"
+            },
+            "name": {
+              "type": "text",
+              "value": "ой"
+            },
+            "speech": {
+              "type": "text",
+              "value": "О-о!"
+            },
+            "rewardMotion": {
+              "type": "text",
+              "value": "spin"
+            },
+            "expectSound": {
+              "type": "text",
+              "value": "о"
+            },
+            "mouth": {
+              "type": "text",
+              "value": "_anim/mouth_o.json"
+            }
+          },
+          "tags": {
+            "group": "targets"
+          },
+          "zOrder": 0,
+          "initialState": "INACTIVE"
+        }
+      ],
+      "objectives": [
+        {
+          "id": "turns",
+          "type": "interactionCount",
+          "config": {
+            "count": "4"
+          },
+          "requires": null
+        }
+      ]
+    },
+    {
+      "levelId": "syllables",
+      "entities": [
+        {
+          "id": "mom",
+          "components": [
+            "tap"
+          ],
+          "behaviors": [],
+          "properties": {
+            "position": {
+              "type": "vec2",
+              "x": 500.0,
+              "y": 440.0
+            },
+            "width": {
+              "type": "num",
+              "value": 320.0
+            },
+            "image": {
+              "type": "text",
+              "value": "_cards/mom.jpg"
+            },
+            "name": {
+              "type": "text",
+              "value": "мама"
+            },
+            "speech": {
+              "type": "text",
+              "value": "Ма-ма"
+            },
+            "rewardMotion": {
+              "type": "text",
+              "value": "jump"
+            },
+            "mouth": {
+              "type": "text",
+              "value": "_anim/mouth_ma.json"
+            }
+          },
+          "tags": {
+            "group": "targets"
+          },
+          "zOrder": 0,
+          "initialState": "INACTIVE"
+        },
+        {
+          "id": "dad",
+          "components": [
+            "tap"
+          ],
+          "behaviors": [],
+          "properties": {
+            "position": {
+              "type": "vec2",
+              "x": 500.0,
+              "y": 440.0
+            },
+            "width": {
+              "type": "num",
+              "value": 320.0
+            },
+            "image": {
+              "type": "text",
+              "value": "_cards/dad.jpg"
+            },
+            "name": {
+              "type": "text",
+              "value": "папа"
+            },
+            "speech": {
+              "type": "text",
+              "value": "Па-па"
+            },
+            "rewardMotion": {
+              "type": "text",
+              "value": "jump"
+            },
+            "mouth": {
+              "type": "text",
+              "value": "_anim/mouth_ma.json"
+            }
+          },
+          "tags": {
+            "group": "targets"
+          },
+          "zOrder": 0,
+          "initialState": "INACTIVE"
+        },
+        {
+          "id": "grandmother",
+          "components": [
+            "tap"
+          ],
+          "behaviors": [],
+          "properties": {
+            "position": {
+              "type": "vec2",
+              "x": 500.0,
+              "y": 440.0
+            },
+            "width": {
+              "type": "num",
+              "value": 320.0
+            },
+            "image": {
+              "type": "text",
+              "value": "_cards/grandmother.jpg"
+            },
+            "name": {
+              "type": "text",
+              "value": "баба"
+            },
+            "speech": {
+              "type": "text",
+              "value": "Ба-ба"
+            },
+            "rewardMotion": {
+              "type": "text",
+              "value": "jump"
+            },
+            "mouth": {
+              "type": "text",
+              "value": "_anim/mouth_ma.json"
+            }
+          },
+          "tags": {
+            "group": "targets"
+          },
+          "zOrder": 0,
+          "initialState": "INACTIVE"
+        }
+      ],
+      "objectives": [
+        {
+          "id": "turns",
+          "type": "interactionCount",
+          "config": {
+            "count": "4"
+          },
+          "requires": null
+        }
+      ]
+    },
+    {
+      "levelId": "words",
+      "entities": [
+        {
+          "id": "yes",
+          "components": [
+            "tap"
+          ],
+          "behaviors": [],
+          "properties": {
+            "position": {
+              "type": "vec2",
+              "x": 500.0,
+              "y": 440.0
+            },
+            "width": {
+              "type": "num",
+              "value": 320.0
+            },
+            "image": {
+              "type": "text",
+              "value": "_cards/yes.jpg"
+            },
+            "name": {
+              "type": "text",
+              "value": "да"
+            },
+            "speech": {
+              "type": "text",
+              "value": "Да"
+            },
+            "rewardMotion": {
+              "type": "text",
+              "value": "jump"
+            }
+          },
+          "tags": {
+            "group": "targets"
+          },
+          "zOrder": 0,
+          "initialState": "INACTIVE"
+        },
+        {
+          "id": "no",
+          "components": [
+            "tap"
+          ],
+          "behaviors": [],
+          "properties": {
+            "position": {
+              "type": "vec2",
+              "x": 500.0,
+              "y": 440.0
+            },
+            "width": {
+              "type": "num",
+              "value": 320.0
+            },
+            "image": {
+              "type": "text",
+              "value": "_cards/no.jpg"
+            },
+            "name": {
+              "type": "text",
+              "value": "нет"
+            },
+            "speech": {
+              "type": "text",
+              "value": "Нет"
+            },
+            "rewardMotion": {
+              "type": "text",
+              "value": "wiggle"
+            }
+          },
+          "tags": {
+            "group": "targets"
+          },
+          "zOrder": 0,
+          "initialState": "INACTIVE"
+        },
+        {
+          "id": "more",
+          "components": [
+            "tap"
+          ],
+          "behaviors": [],
+          "properties": {
+            "position": {
+              "type": "vec2",
+              "x": 500.0,
+              "y": 440.0
+            },
+            "width": {
+              "type": "num",
+              "value": 320.0
+            },
+            "image": {
+              "type": "text",
+              "value": "_cards/more.jpg"
+            },
+            "name": {
+              "type": "text",
+              "value": "ещё"
+            },
+            "speech": {
+              "type": "text",
+              "value": "Ещё"
+            },
+            "rewardMotion": {
+              "type": "text",
+              "value": "spin"
+            },
+            "reward": {
+              "type": "text",
+              "value": "_sounds/pop.wav"
+            }
+          },
+          "tags": {
+            "group": "targets"
+          },
+          "zOrder": 0,
+          "initialState": "INACTIVE"
+        }
+      ],
+      "objectives": [
+        {
+          "id": "turns",
+          "type": "interactionCount",
+          "config": {
+            "count": "4"
+          },
+          "requires": null
+        }
+      ]
+    }
+  ],
+  "behaviors": [
+    {
+      "behaviorRef": {
+        "type": "progressTracker",
+        "config": {}
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "audioPrompt",
+        "config": {
+          "on": "sceneStarted",
+          "text": "Скажи!",
+          "sound": "_sounds/speech/skazhi-3628b3.wav"
+        }
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "awaitResponse",
+        "config": {
+          "group": "targets",
+          "accept": "voice,adult",
+          "order": "random",
+          "trials": "4",
+          "waitMs": "6000",
+          "leadMs": "700",
+          "rewardMs": "1300",
+          "maxPrompts": "2"
+        }
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "playSoundOnEvent",
+        "config": {
+          "on": "sceneCompleted",
+          "sound": "complete"
+        }
+      },
+      "entityId": null
+    }
+  ],
+  "fieldPolicies": {},
+  "idleTimeout": 40,
+  "onIdle": "HINT",
+  "metadata": {}
+}

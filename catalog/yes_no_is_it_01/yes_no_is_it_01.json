@@ -1,0 +1,604 @@
+{
+  "sceneId": "yes_no_is_it_01",
+  "meta": {
+    "title": "Это кошка?",
+    "description": "Слушай вопрос, смотри на картинку и отвечай да или нет.",
+    "ageMin": 2,
+    "ageMax": 6,
+    "version": 1,
+    "tags": [
+      "yes_no",
+      "communication",
+      "vocabulary"
+    ],
+    "skills": [
+      "receptive_speech",
+      "word_association",
+      "selective_attention",
+      "problem_solving"
+    ],
+    "icon": "🐱",
+    "requires": [
+      "yes_no_01"
+    ]
+  },
+  "entities": [],
+  "objectives": [],
+  "behaviors": [
+    {
+      "behaviorRef": {
+        "type": "progressTracker",
+        "config": {}
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "audioPrompt",
+        "config": {
+          "on": "sceneStarted",
+          "text": "Это кошка?",
+          "sound": "_sounds/speech/eto-koshka-ec65a0.wav"
+        }
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "propertySelectionValidator",
+        "config": {
+          "property": "answer",
+          "expectedFrom": "correctAnswer"
+        }
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "adaptiveHint",
+        "config": {}
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "playSoundOnEvent",
+        "config": {
+          "on": "sceneCompleted",
+          "sound": "complete"
+        }
+      },
+      "entityId": null
+    }
+  ],
+  "fieldPolicies": {},
+  "idleTimeout": 25,
+  "onIdle": "HINT",
+  "metadata": {},
+  "levels": [
+    {
+      "levelId": "1_cat_yes",
+      "entities": [
+        {
+          "id": "cat",
+          "components": [],
+          "behaviors": [],
+          "properties": {
+            "position": {
+              "type": "vec2",
+              "x": 500.0,
+              "y": 300.0
+            },
+            "image": {
+              "type": "text",
+              "value": "_cards/cat.jpg"
+            },
+            "label": {
+              "type": "text",
+              "value": "Кошка"
+            },
+            "name": {
+              "type": "text",
+              "value": "Кошка"
+            },
+            "sound": {
+              "type": "text",
+              "value": "_cards/audio/cat.mp3"
+            },
+            "correctAnswer": {
+              "type": "text",
+              "value": "yes"
+            },
+            "question": {
+              "type": "text",
+              "value": "Это кошка?"
+            }
+          },
+          "tags": {
+            "group": "question"
+          },
+          "zOrder": 0
+        },
+        {
+          "id": "yes",
+          "components": [
+            "tap"
+          ],
+          "behaviors": [],
+          "properties": {
+            "position": {
+              "type": "vec2",
+              "x": 320.0,
+              "y": 720.0
+            },
+            "image": {
+              "type": "text",
+              "value": "_cards/yes.jpg"
+            },
+            "label": {
+              "type": "text",
+              "value": "Да"
+            },
+            "name": {
+              "type": "text",
+              "value": "Да"
+            },
+            "sound": {
+              "type": "text",
+              "value": "_cards/audio/yes.mp3"
+            },
+            "answer": {
+              "type": "text",
+              "value": "yes"
+            }
+          },
+          "tags": {
+            "group": "answers"
+          },
+          "zOrder": 0
+        },
+        {
+          "id": "no",
+          "components": [
+            "tap"
+          ],
+          "behaviors": [],
+          "properties": {
+            "position": {
+              "type": "vec2",
+              "x": 680.0,
+              "y": 720.0
+            },
+            "image": {
+              "type": "text",
+              "value": "_cards/no.jpg"
+            },
+            "label": {
+              "type": "text",
+              "value": "Нет"
+            },
+            "name": {
+              "type": "text",
+              "value": "Нет"
+            },
+            "sound": {
+              "type": "text",
+              "value": "_cards/audio/no.mp3"
+            },
+            "answer": {
+              "type": "text",
+              "value": "no"
+            }
+          },
+          "tags": {
+            "group": "answers"
+          },
+          "zOrder": 0
+        }
+      ],
+      "objectives": [
+        {
+          "id": "answered",
+          "type": "anySelected",
+          "config": {
+            "group": "answers"
+          },
+          "requires": null
+        }
+      ]
+    },
+    {
+      "levelId": "2_dog_no",
+      "entities": [
+        {
+          "id": "dog",
+          "components": [],
+          "behaviors": [],
+          "properties": {
+            "position": {
+              "type": "vec2",
+              "x": 500.0,
+              "y": 300.0
+            },
+            "image": {
+              "type": "text",
+              "value": "_cards/dog.jpg"
+            },
+            "label": {
+              "type": "text",
+              "value": "Собака"
+            },
+            "name": {
+              "type": "text",
+              "value": "Собака"
+            },
+            "sound": {
+              "type": "text",
+              "value": "_cards/audio/dog.mp3"
+            },
+            "correctAnswer": {
+              "type": "text",
+              "value": "no"
+            },
+            "question": {
+              "type": "text",
+              "value": "Это кошка?"
+            }
+          },
+          "tags": {
+            "group": "question"
+          },
+          "zOrder": 0
+        },
+        {
+          "id": "yes",
+          "components": [
+            "tap"
+          ],
+          "behaviors": [],
+          "properties": {
+            "position": {
+              "type": "vec2",
+              "x": 320.0,
+              "y": 720.0
+            },
+            "image": {
+              "type": "text",
+              "value": "_cards/yes.jpg"
+            },
+            "label": {
+              "type": "text",
+              "value": "Да"
+            },
+            "name": {
+              "type": "text",
+              "value": "Да"
+            },
+            "sound": {
+              "type": "text",
+              "value": "_cards/audio/yes.mp3"
+            },
+            "answer": {
+              "type": "text",
+              "value": "yes"
+            }
+          },
+          "tags": {
+            "group": "answers"
+          },
+          "zOrder": 0
+        },
+        {
+          "id": "no",
+          "components": [
+            "tap"
+          ],
+          "behaviors": [],
+          "properties": {
+            "position": {
+              "type": "vec2",
+              "x": 680.0,
+              "y": 720.0
+            },
+            "image": {
+              "type": "text",
+              "value": "_cards/no.jpg"
+            },
+            "label": {
+              "type": "text",
+              "value": "Нет"
+            },
+            "name": {
+              "type": "text",
+              "value": "Нет"
+            },
+            "sound": {
+              "type": "text",
+              "value": "_cards/audio/no.mp3"
+            },
+            "answer": {
+              "type": "text",
+              "value": "no"
+            }
+          },
+          "tags": {
+            "group": "answers"
+          },
+          "zOrder": 0
+        }
+      ],
+      "objectives": [
+        {
+          "id": "answered",
+          "type": "anySelected",
+          "config": {
+            "group": "answers"
+          },
+          "requires": null
+        }
+      ]
+    },
+    {
+      "levelId": "3_cat_yes",
+      "entities": [
+        {
+          "id": "cat",
+          "components": [],
+          "behaviors": [],
+          "properties": {
+            "position": {
+              "type": "vec2",
+              "x": 500.0,
+              "y": 300.0
+            },
+            "image": {
+              "type": "text",
+              "value": "_cards/cat.jpg"
+            },
+            "label": {
+              "type": "text",
+              "value": "Кошка"
+            },
+            "name": {
+              "type": "text",
+              "value": "Кошка"
+            },
+            "sound": {
+              "type": "text",
+              "value": "_cards/audio/cat.mp3"
+            },
+            "correctAnswer": {
+              "type": "text",
+              "value": "yes"
+            },
+            "question": {
+              "type": "text",
+              "value": "Это кошка?"
+            }
+          },
+          "tags": {
+            "group": "question"
+          },
+          "zOrder": 0
+        },
+        {
+          "id": "yes",
+          "components": [
+            "tap"
+          ],
+          "behaviors": [],
+          "properties": {
+            "position": {
+              "type": "vec2",
+              "x": 320.0,
+              "y": 720.0
+            },
+            "image": {
+              "type": "text",
+              "value": "_cards/yes.jpg"
+            },
+            "label": {
+              "type": "text",
+              "value": "Да"
+            },
+            "name": {
+              "type": "text",
+              "value": "Да"
+            },
+            "sound": {
+              "type": "text",
+              "value": "_cards/audio/yes.mp3"
+            },
+            "answer": {
+              "type": "text",
+              "value": "yes"
+            }
+          },
+          "tags": {
+            "group": "answers"
+          },
+          "zOrder": 0
+        },
+        {
+          "id": "no",
+          "components": [
+            "tap"
+          ],
+          "behaviors": [],
+          "properties": {
+            "position": {
+              "type": "vec2",
+              "x": 680.0,
+              "y": 720.0
+            },
+            "image": {
+              "type": "text",
+              "value": "_cards/no.jpg"
+            },
+            "label": {
+              "type": "text",
+              "value": "Нет"
+            },
+            "name": {
+              "type": "text",
+              "value": "Нет"
+            },
+            "sound": {
+              "type": "text",
+              "value": "_cards/audio/no.mp3"
+            },
+            "answer": {
+              "type": "text",
+              "value": "no"
+            }
+          },
+          "tags": {
+            "group": "answers"
+          },
+          "zOrder": 0
+        }
+      ],
+      "objectives": [
+        {
+          "id": "answered",
+          "type": "anySelected",
+          "config": {
+            "group": "answers"
+          },
+          "requires": null
+        }
+      ]
+    },
+    {
+      "levelId": "4_car_no",
+      "entities": [
+        {
+          "id": "car",
+          "components": [],
+          "behaviors": [],
+          "properties": {
+            "position": {
+              "type": "vec2",
+              "x": 500.0,
+              "y": 300.0
+            },
+            "image": {
+              "type": "text",
+              "value": "_cards/car.jpg"
+            },
+            "label": {
+              "type": "text",
+              "value": "Машина"
+            },
+            "name": {
+              "type": "text",
+              "value": "Машина"
+            },
+            "sound": {
+              "type": "text",
+              "value": "_cards/audio/car.mp3"
+            },
+            "correctAnswer": {
+              "type": "text",
+              "value": "no"
+            },
+            "question": {
+              "type": "text",
+              "value": "Это кошка?"
+            }
+          },
+          "tags": {
+            "group": "question"
+          },
+          "zOrder": 0
+        },
+        {
+          "id": "yes",
+          "components": [
+            "tap"
+          ],
+          "behaviors": [],
+          "properties": {
+            "position": {
+              "type": "vec2",
+              "x": 320.0,
+              "y": 720.0
+            },
+            "image": {
+              "type": "text",
+              "value": "_cards/yes.jpg"
+            },
+            "label": {
+              "type": "text",
+              "value": "Да"
+            },
+            "name": {
+              "type": "text",
+              "value": "Да"
+            },
+            "sound": {
+              "type": "text",
+              "value": "_cards/audio/yes.mp3"
+            },
+            "answer": {
+              "type": "text",
+              "value": "yes"
+            }
+          },
+          "tags": {
+            "group": "answers"
+          },
+          "zOrder": 0
+        },
+        {
+          "id": "no",
+          "components": [
+            "tap"
+          ],
+          "behaviors": [],
+          "properties": {
+            "position": {
+              "type": "vec2",
+              "x": 680.0,
+              "y": 720.0
+            },
+            "image": {
+              "type": "text",
+              "value": "_cards/no.jpg"
+            },
+            "label": {
+              "type": "text",
+              "value": "Нет"
+            },
+            "name": {
+              "type": "text",
+              "value": "Нет"
+            },
+            "sound": {
+              "type": "text",
+              "value": "_cards/audio/no.mp3"
+            },
+            "answer": {
+              "type": "text",
+              "value": "no"
+            }
+          },
+          "tags": {
+            "group": "answers"
+          },
+          "zOrder": 0
+        }
+      ],
+      "objectives": [
+        {
+          "id": "answered",
+          "type": "anySelected",
+          "config": {
+            "group": "answers"
+          },
+          "requires": null
+        }
+      ]
+    }
+  ]
+}

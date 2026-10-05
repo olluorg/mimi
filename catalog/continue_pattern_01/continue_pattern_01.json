@@ -11,9 +11,13 @@
           "x": 180.0,
           "y": 260.0
         },
-        "emoji": {
+        "shape": {
           "type": "text",
-          "value": "🔴"
+          "value": "circle"
+        },
+        "color": {
+          "type": "text",
+          "value": "red"
         }
       },
       "tags": {
@@ -31,9 +35,13 @@
           "x": 340.0,
           "y": 260.0
         },
-        "emoji": {
+        "shape": {
           "type": "text",
-          "value": "🔵"
+          "value": "circle"
+        },
+        "color": {
+          "type": "text",
+          "value": "blue"
         }
       },
       "tags": {
@@ -51,9 +59,13 @@
           "x": 500.0,
           "y": 260.0
         },
-        "emoji": {
+        "shape": {
           "type": "text",
-          "value": "🔴"
+          "value": "circle"
+        },
+        "color": {
+          "type": "text",
+          "value": "red"
         }
       },
       "tags": {
@@ -71,9 +83,13 @@
           "x": 660.0,
           "y": 260.0
         },
-        "emoji": {
+        "shape": {
           "type": "text",
-          "value": "🔵"
+          "value": "circle"
+        },
+        "color": {
+          "type": "text",
+          "value": "blue"
         }
       },
       "tags": {
@@ -117,9 +133,13 @@
           "type": "text",
           "value": "red"
         },
-        "emoji": {
+        "shape": {
           "type": "text",
-          "value": "🔴"
+          "value": "circle"
+        },
+        "color": {
+          "type": "text",
+          "value": "red"
         }
       },
       "tags": {
@@ -143,9 +163,13 @@
           "type": "text",
           "value": "blue"
         },
-        "emoji": {
+        "shape": {
           "type": "text",
-          "value": "🔵"
+          "value": "circle"
+        },
+        "color": {
+          "type": "text",
+          "value": "blue"
         }
       },
       "tags": {
@@ -168,6 +192,17 @@
   "behaviors": [
     {
       "behaviorRef": {
+        "type": "audioPrompt",
+        "config": {
+          "on": "sceneStarted",
+          "text": "Что будет дальше?",
+          "sound": "_sounds/speech/chto-budet-dalshe-b0e3d7.wav"
+        }
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
         "type": "propertySelectionValidator",
         "config": {
           "property": "patternValue",
@@ -186,19 +221,7 @@
     {
       "behaviorRef": {
         "type": "adaptiveHint",
-        "config": {
-          "mode": "pattern"
-        }
-      },
-      "entityId": null
-    },
-    {
-      "behaviorRef": {
-        "type": "playSoundOnEvent",
-        "config": {
-          "on": "matchSuccess",
-          "sound": "correct"
-        }
+        "config": {}
       },
       "entityId": null
     },

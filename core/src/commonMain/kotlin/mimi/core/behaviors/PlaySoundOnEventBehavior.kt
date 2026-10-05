@@ -43,4 +43,16 @@ class PlaySoundOnEventPlugin : BehaviorPlugin {
         }
         return PlaySoundOnEventBehavior(id = behaviorId, sound = sound, onEvent = onEvent)
     }
+
+    override fun validateConfig(config: Map<String, String>): ValidationResult =
+        SPEC.check(config)
+
+    private companion object {
+        private val SPEC = ConfigSpec.of("playSoundOnEvent") {
+            oneOf("on", "matchSuccess", "matchFail", "sceneCompleted")
+            // A bare name the sound channel does not know plays silence, so the
+            // built-in names are a closed set; anything containing "/" is a file.
+            sound("sound")
+        }
+    }
 }

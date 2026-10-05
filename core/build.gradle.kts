@@ -23,7 +23,6 @@ kotlin {
         commonMain.dependencies {
             implementation(libs.kotlinx.coroutines.core)
             implementation(libs.kotlinx.serialization.json)
-            implementation(libs.kotlinx.datetime)
         }
         commonTest.dependencies {
             implementation(kotlin("test"))
@@ -42,6 +41,21 @@ kotlin {
                 }
             }
         }
+}
+
+// The catalog integrity tests read the real scene files, so they need to know
+// where the catalog lives. Declared as a task input so a scene edit re-runs them.
+tasks.withType<Test>().configureEach {
+    val catalogDir = rootProject.file("catalog")
+    systemProperty("mimi.catalogDir", catalogDir.absolutePath)
+    // The index is derived from the scene folders and the tests check the two
+    // agree. Without this the two tasks can run at once and the test reads a
+    // half-written index — a failure that disappears when rerun, which is worse
+    // than one that does not.
+    dependsOn(rootProject.tasks.named("generateCatalogIndex"))
+    // The naming guard reads the test sources of every module.
+    systemProperty("mimi.repoDir", rootProject.projectDir.absolutePath)
+    inputs.dir(catalogDir).withPropertyName("catalog").withPathSensitivity(PathSensitivity.RELATIVE)
 }
 
 android {

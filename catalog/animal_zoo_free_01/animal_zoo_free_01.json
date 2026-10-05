@@ -1,0 +1,384 @@
+{
+  "sceneId": "animal_zoo_free_01",
+  "meta": {
+    "title": "Зоопарк",
+    "description": "Нажимай на животных и слушай, как они говорят.",
+    "ageMin": 2,
+    "ageMax": 6,
+    "version": 1,
+    "tags": [
+      "animals",
+      "sound",
+      "free_play"
+    ],
+    "skills": [
+      "auditory_discrimination",
+      "cause_effect",
+      "visual_attention",
+      "vocabulary"
+    ],
+    "icon": "🐄",
+    "requires": []
+  },
+  "entities": [
+    {
+      "id": "cat",
+      "components": [
+        "tap"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 180.0,
+          "y": 320.0
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/cat.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Кошка"
+        },
+        "name": {
+          "type": "text",
+          "value": "Кошка"
+        },
+        "animal": {
+          "type": "text",
+          "value": "cat"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_sounds/animals/cat.mp3"
+        }
+      },
+      "tags": {
+        "group": "zoo"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "dog",
+      "components": [
+        "tap"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 420.0,
+          "y": 320.0
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/dog.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Собака"
+        },
+        "name": {
+          "type": "text",
+          "value": "Собака"
+        },
+        "animal": {
+          "type": "text",
+          "value": "dog"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_sounds/animals/dog.mp3"
+        }
+      },
+      "tags": {
+        "group": "zoo"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "cow",
+      "components": [
+        "tap"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 660.0,
+          "y": 320.0
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/cow.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Корова"
+        },
+        "name": {
+          "type": "text",
+          "value": "Корова"
+        },
+        "animal": {
+          "type": "text",
+          "value": "cow"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_sounds/animals/cow.mp3"
+        }
+      },
+      "tags": {
+        "group": "zoo"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "horse",
+      "components": [
+        "tap"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 900.0,
+          "y": 320.0
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/horse.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Лошадь"
+        },
+        "name": {
+          "type": "text",
+          "value": "Лошадь"
+        },
+        "animal": {
+          "type": "text",
+          "value": "horse"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_sounds/animals/horse.mp3"
+        }
+      },
+      "tags": {
+        "group": "zoo"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "sheep",
+      "components": [
+        "tap"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 180.0,
+          "y": 560.0
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/sheep.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Овца"
+        },
+        "name": {
+          "type": "text",
+          "value": "Овца"
+        },
+        "animal": {
+          "type": "text",
+          "value": "sheep"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_sounds/animals/sheep.mp3"
+        }
+      },
+      "tags": {
+        "group": "zoo"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "rooster",
+      "components": [
+        "tap"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 420.0,
+          "y": 560.0
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/rooster.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Петух"
+        },
+        "name": {
+          "type": "text",
+          "value": "Петух"
+        },
+        "animal": {
+          "type": "text",
+          "value": "rooster"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_sounds/animals/rooster.mp3"
+        }
+      },
+      "tags": {
+        "group": "zoo"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "pig",
+      "components": [
+        "tap"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 660.0,
+          "y": 560.0
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/pig.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Свинья"
+        },
+        "name": {
+          "type": "text",
+          "value": "Свинья"
+        },
+        "animal": {
+          "type": "text",
+          "value": "pig"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_sounds/animals/pig.mp3"
+        }
+      },
+      "tags": {
+        "group": "zoo"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "duck",
+      "components": [
+        "tap"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 900.0,
+          "y": 560.0
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/duck.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Утка"
+        },
+        "name": {
+          "type": "text",
+          "value": "Утка"
+        },
+        "animal": {
+          "type": "text",
+          "value": "duck"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_sounds/animals/duck.mp3"
+        }
+      },
+      "tags": {
+        "group": "zoo"
+      },
+      "zOrder": 0
+    }
+  ],
+  "objectives": [
+    {
+      "id": "listened",
+      "type": "interactionCount",
+      "config": {
+        "count": "8"
+      },
+      "requires": null
+    }
+  ],
+  "behaviors": [
+    {
+      "behaviorRef": {
+        "type": "progressTracker",
+        "config": {}
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "audioPrompt",
+        "config": {
+          "on": "sceneStarted",
+          "text": "Нажимай на животных и слушай.",
+          "sound": "_sounds/speech/nazhimay-na-zhivotnyh-i-slushay-8ee3b9.wav"
+        }
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "freeSelection",
+        "config": {
+          "group": "zoo",
+          "repeatable": "true",
+          "speak": "true"
+        }
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "playSoundOnEvent",
+        "config": {
+          "on": "sceneCompleted",
+          "sound": "complete"
+        }
+      },
+      "entityId": null
+    }
+  ],
+  "fieldPolicies": {},
+  "idleTimeout": 40,
+  "onIdle": "HINT",
+  "metadata": {}
+}

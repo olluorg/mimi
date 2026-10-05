@@ -72,4 +72,13 @@ class LineConnectValidatorPlugin(private val constraintRegistry: ConstraintRegis
 
     override fun create(config: Map<String, String>, entityId: EntityId?): Behavior =
         LineConnectValidatorBehavior(behaviorId, constraintRegistry)
+
+    override fun validateConfig(config: Map<String, String>): ValidationResult =
+        SPEC.check(config)
+
+    private companion object {
+        private val SPEC = ConfigSpec.of("lineConnectValidator") {
+            text("group")
+        }
+    }
 }

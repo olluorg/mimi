@@ -97,4 +97,14 @@ class SnapToTargetPlugin(private val constraintRegistry: ConstraintRegistry) : B
             priority    = config["priority"]?.toIntOrNull() ?: 100,
             constraints = constraintRegistry
         )
+
+    override fun validateConfig(config: Map<String, String>): ValidationResult =
+        SPEC.check(config)
+
+    private companion object {
+        private val SPEC = ConfigSpec.of("snapToTarget") {
+            number("snapRadius", min = 0.0)
+            number("priority")
+        }
+    }
 }

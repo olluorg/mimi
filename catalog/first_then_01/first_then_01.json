@@ -1,0 +1,638 @@
+{
+  "sceneId": "first_then_01",
+  "meta": {
+    "title": "Сначала — потом",
+    "description": "Поставь по порядку: что сначала, а что потом.",
+    "ageMin": 3,
+    "ageMax": 7,
+    "version": 1,
+    "tags": [
+      "routine",
+      "daily_life",
+      "first_then",
+      "visual_schedule"
+    ],
+    "skills": [
+      "sequencing",
+      "visual_planning",
+      "task_completion",
+      "patience",
+      "receptive_speech"
+    ],
+    "icon": "1️⃣",
+    "requires": []
+  },
+  "entities": [],
+  "objectives": [],
+  "behaviors": [
+    {
+      "behaviorRef": {
+        "type": "progressTracker",
+        "config": {}
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "audioPrompt",
+        "config": {
+          "on": "sceneStarted",
+          "text": "Что сначала, а что потом?",
+          "sound": "_sounds/speech/chto-snachala-a-chto-potom-e080b0.wav"
+        }
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "snapToTarget",
+        "config": {}
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "adaptiveHint",
+        "config": {}
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "playSoundOnEvent",
+        "config": {
+          "on": "sceneCompleted",
+          "sound": "complete"
+        }
+      },
+      "entityId": null
+    }
+  ],
+  "fieldPolicies": {},
+  "idleTimeout": 25,
+  "onIdle": "HINT",
+  "metadata": {},
+  "levels": [
+    {
+      "levelId": "meal",
+      "entities": [
+        {
+          "id": "eat",
+          "components": [
+            "drag"
+          ],
+          "behaviors": [],
+          "properties": {
+            "position": {
+              "type": "vec2",
+              "x": 320.0,
+              "y": 250.0
+            },
+            "zOrder": {
+              "type": "num",
+              "value": 1.0
+            },
+            "order": {
+              "type": "text",
+              "value": "1"
+            },
+            "name": {
+              "type": "text",
+              "value": "покушать"
+            },
+            "label": {
+              "type": "text",
+              "value": "покушать"
+            },
+            "image": {
+              "type": "text",
+              "value": "_cards/eat.jpg"
+            },
+            "sound": {
+              "type": "text",
+              "value": "_cards/audio/eat.mp3"
+            }
+          },
+          "tags": {
+            "group": "activities"
+          },
+          "zOrder": 0
+        },
+        {
+          "id": "toy",
+          "components": [
+            "drag"
+          ],
+          "behaviors": [],
+          "properties": {
+            "position": {
+              "type": "vec2",
+              "x": 680.0,
+              "y": 250.0
+            },
+            "zOrder": {
+              "type": "num",
+              "value": 1.0
+            },
+            "order": {
+              "type": "text",
+              "value": "2"
+            },
+            "name": {
+              "type": "text",
+              "value": "поиграть"
+            },
+            "label": {
+              "type": "text",
+              "value": "поиграть"
+            },
+            "image": {
+              "type": "text",
+              "value": "_cards/teddy-bear.jpg"
+            },
+            "sound": {
+              "type": "text",
+              "value": "_cards/audio/teddy-bear.mp3"
+            }
+          },
+          "tags": {
+            "group": "activities"
+          },
+          "zOrder": 0
+        },
+        {
+          "id": "slot_first",
+          "components": [
+            "dropTarget"
+          ],
+          "behaviors": [],
+          "properties": {
+            "position": {
+              "type": "vec2",
+              "x": 320.0,
+              "y": 720.0
+            },
+            "zOrder": {
+              "type": "num",
+              "value": 0.0
+            },
+            "constraintType": {
+              "type": "text",
+              "value": "propertyEquals"
+            },
+            "source": {
+              "type": "text",
+              "value": "order"
+            },
+            "target": {
+              "type": "text",
+              "value": "order"
+            },
+            "order": {
+              "type": "text",
+              "value": "1"
+            },
+            "label": {
+              "type": "text",
+              "value": "сначала"
+            },
+            "count": {
+              "type": "num",
+              "value": 1.0
+            }
+          },
+          "tags": {},
+          "zOrder": 0
+        },
+        {
+          "id": "slot_then",
+          "components": [
+            "dropTarget"
+          ],
+          "behaviors": [],
+          "properties": {
+            "position": {
+              "type": "vec2",
+              "x": 680.0,
+              "y": 720.0
+            },
+            "zOrder": {
+              "type": "num",
+              "value": 0.0
+            },
+            "constraintType": {
+              "type": "text",
+              "value": "propertyEquals"
+            },
+            "source": {
+              "type": "text",
+              "value": "order"
+            },
+            "target": {
+              "type": "text",
+              "value": "order"
+            },
+            "order": {
+              "type": "text",
+              "value": "2"
+            },
+            "label": {
+              "type": "text",
+              "value": "потом"
+            },
+            "count": {
+              "type": "num",
+              "value": 2.0
+            }
+          },
+          "tags": {},
+          "zOrder": 0
+        }
+      ],
+      "objectives": [
+        {
+          "id": "ordered",
+          "type": "allMatched",
+          "config": {
+            "group": "activities"
+          },
+          "requires": null
+        }
+      ]
+    },
+    {
+      "levelId": "tidy",
+      "entities": [
+        {
+          "id": "tidy",
+          "components": [
+            "drag"
+          ],
+          "behaviors": [],
+          "properties": {
+            "position": {
+              "type": "vec2",
+              "x": 320.0,
+              "y": 250.0
+            },
+            "zOrder": {
+              "type": "num",
+              "value": 1.0
+            },
+            "order": {
+              "type": "text",
+              "value": "1"
+            },
+            "name": {
+              "type": "text",
+              "value": "убрать"
+            },
+            "label": {
+              "type": "text",
+              "value": "убрать"
+            },
+            "image": {
+              "type": "text",
+              "value": "_cards/clean-up.jpg"
+            },
+            "sound": {
+              "type": "text",
+              "value": "_cards/audio/clean-up.mp3"
+            }
+          },
+          "tags": {
+            "group": "activities"
+          },
+          "zOrder": 0
+        },
+        {
+          "id": "cartoon",
+          "components": [
+            "drag"
+          ],
+          "behaviors": [],
+          "properties": {
+            "position": {
+              "type": "vec2",
+              "x": 680.0,
+              "y": 250.0
+            },
+            "zOrder": {
+              "type": "num",
+              "value": 1.0
+            },
+            "order": {
+              "type": "text",
+              "value": "2"
+            },
+            "name": {
+              "type": "text",
+              "value": "мультик"
+            },
+            "label": {
+              "type": "text",
+              "value": "мультик"
+            },
+            "image": {
+              "type": "text",
+              "value": "_cards/cartoons.jpg"
+            },
+            "sound": {
+              "type": "text",
+              "value": "_cards/audio/cartoons.mp3"
+            }
+          },
+          "tags": {
+            "group": "activities"
+          },
+          "zOrder": 0
+        },
+        {
+          "id": "slot_first",
+          "components": [
+            "dropTarget"
+          ],
+          "behaviors": [],
+          "properties": {
+            "position": {
+              "type": "vec2",
+              "x": 320.0,
+              "y": 720.0
+            },
+            "zOrder": {
+              "type": "num",
+              "value": 0.0
+            },
+            "constraintType": {
+              "type": "text",
+              "value": "propertyEquals"
+            },
+            "source": {
+              "type": "text",
+              "value": "order"
+            },
+            "target": {
+              "type": "text",
+              "value": "order"
+            },
+            "order": {
+              "type": "text",
+              "value": "1"
+            },
+            "label": {
+              "type": "text",
+              "value": "сначала"
+            },
+            "count": {
+              "type": "num",
+              "value": 1.0
+            }
+          },
+          "tags": {},
+          "zOrder": 0
+        },
+        {
+          "id": "slot_then",
+          "components": [
+            "dropTarget"
+          ],
+          "behaviors": [],
+          "properties": {
+            "position": {
+              "type": "vec2",
+              "x": 680.0,
+              "y": 720.0
+            },
+            "zOrder": {
+              "type": "num",
+              "value": 0.0
+            },
+            "constraintType": {
+              "type": "text",
+              "value": "propertyEquals"
+            },
+            "source": {
+              "type": "text",
+              "value": "order"
+            },
+            "target": {
+              "type": "text",
+              "value": "order"
+            },
+            "order": {
+              "type": "text",
+              "value": "2"
+            },
+            "label": {
+              "type": "text",
+              "value": "потом"
+            },
+            "count": {
+              "type": "num",
+              "value": 2.0
+            }
+          },
+          "tags": {},
+          "zOrder": 0
+        }
+      ],
+      "objectives": [
+        {
+          "id": "ordered",
+          "type": "allMatched",
+          "config": {
+            "group": "activities"
+          },
+          "requires": null
+        }
+      ]
+    },
+    {
+      "levelId": "teeth",
+      "entities": [
+        {
+          "id": "teeth",
+          "components": [
+            "drag"
+          ],
+          "behaviors": [],
+          "properties": {
+            "position": {
+              "type": "vec2",
+              "x": 320.0,
+              "y": 250.0
+            },
+            "zOrder": {
+              "type": "num",
+              "value": 1.0
+            },
+            "order": {
+              "type": "text",
+              "value": "1"
+            },
+            "name": {
+              "type": "text",
+              "value": "почистить зубы"
+            },
+            "label": {
+              "type": "text",
+              "value": "почистить зубы"
+            },
+            "image": {
+              "type": "text",
+              "value": "_cards/toothbrush.jpg"
+            },
+            "sound": {
+              "type": "text",
+              "value": "_cards/audio/toothbrush.mp3"
+            }
+          },
+          "tags": {
+            "group": "activities"
+          },
+          "zOrder": 0
+        },
+        {
+          "id": "book",
+          "components": [
+            "drag"
+          ],
+          "behaviors": [],
+          "properties": {
+            "position": {
+              "type": "vec2",
+              "x": 680.0,
+              "y": 250.0
+            },
+            "zOrder": {
+              "type": "num",
+              "value": 1.0
+            },
+            "order": {
+              "type": "text",
+              "value": "2"
+            },
+            "name": {
+              "type": "text",
+              "value": "книжка"
+            },
+            "label": {
+              "type": "text",
+              "value": "книжка"
+            },
+            "image": {
+              "type": "text",
+              "value": "_cards/book.jpg"
+            },
+            "sound": {
+              "type": "text",
+              "value": "_cards/audio/book.mp3"
+            }
+          },
+          "tags": {
+            "group": "activities"
+          },
+          "zOrder": 0
+        },
+        {
+          "id": "slot_first",
+          "components": [
+            "dropTarget"
+          ],
+          "behaviors": [],
+          "properties": {
+            "position": {
+              "type": "vec2",
+              "x": 320.0,
+              "y": 720.0
+            },
+            "zOrder": {
+              "type": "num",
+              "value": 0.0
+            },
+            "constraintType": {
+              "type": "text",
+              "value": "propertyEquals"
+            },
+            "source": {
+              "type": "text",
+              "value": "order"
+            },
+            "target": {
+              "type": "text",
+              "value": "order"
+            },
+            "order": {
+              "type": "text",
+              "value": "1"
+            },
+            "label": {
+              "type": "text",
+              "value": "сначала"
+            },
+            "count": {
+              "type": "num",
+              "value": 1.0
+            }
+          },
+          "tags": {},
+          "zOrder": 0
+        },
+        {
+          "id": "slot_then",
+          "components": [
+            "dropTarget"
+          ],
+          "behaviors": [],
+          "properties": {
+            "position": {
+              "type": "vec2",
+              "x": 680.0,
+              "y": 720.0
+            },
+            "zOrder": {
+              "type": "num",
+              "value": 0.0
+            },
+            "constraintType": {
+              "type": "text",
+              "value": "propertyEquals"
+            },
+            "source": {
+              "type": "text",
+              "value": "order"
+            },
+            "target": {
+              "type": "text",
+              "value": "order"
+            },
+            "order": {
+              "type": "text",
+              "value": "2"
+            },
+            "label": {
+              "type": "text",
+              "value": "потом"
+            },
+            "count": {
+              "type": "num",
+              "value": 2.0
+            }
+          },
+          "tags": {},
+          "zOrder": 0
+        }
+      ],
+      "objectives": [
+        {
+          "id": "ordered",
+          "type": "allMatched",
+          "config": {
+            "group": "activities"
+          },
+          "requires": null
+        }
+      ]
+    }
+  ]
+}

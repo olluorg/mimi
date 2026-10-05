@@ -19,7 +19,7 @@
         },
         "emoji": {
           "type": "text",
-          "value": "4️⃣"
+          "value": "4"
         }
       },
       "tags": {
@@ -45,7 +45,7 @@
         },
         "emoji": {
           "type": "text",
-          "value": "5️⃣"
+          "value": "5"
         }
       },
       "tags": {
@@ -71,7 +71,7 @@
         },
         "emoji": {
           "type": "text",
-          "value": "6️⃣"
+          "value": "6"
         }
       },
       "tags": {
@@ -107,9 +107,9 @@
           "type": "text",
           "value": "4"
         },
-        "label": {
-          "type": "text",
-          "value": "● ● ● ●"
+        "count": {
+          "type": "num",
+          "value": 4.0
         }
       },
       "tags": {},
@@ -143,9 +143,9 @@
           "type": "text",
           "value": "5"
         },
-        "label": {
-          "type": "text",
-          "value": "● ● ● ● ●"
+        "count": {
+          "type": "num",
+          "value": 5.0
         }
       },
       "tags": {},
@@ -179,9 +179,9 @@
           "type": "text",
           "value": "6"
         },
-        "label": {
-          "type": "text",
-          "value": "● ● ● ● ● ●"
+        "count": {
+          "type": "num",
+          "value": 6.0
         }
       },
       "tags": {},
@@ -204,7 +204,8 @@
         "type": "audioPrompt",
         "config": {
           "on": "sceneStarted",
-          "text": "Положи цифру к нужному количеству точек"
+          "text": "Положи цифру к нужному количеству точек",
+          "sound": "_sounds/speech/polozhi-cifru-k-nuzhnomu-kolichestvu-tochek-d55838.wav"
         }
       },
       "entityId": null

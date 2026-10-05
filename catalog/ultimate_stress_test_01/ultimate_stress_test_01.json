@@ -28,7 +28,15 @@
         },
         "emoji": {
           "type": "text",
-          "value": "1️⃣"
+          "value": "1"
+        },
+        "faceImage": {
+          "type": "text",
+          "value": "_cards/pear.jpg"
+        },
+        "faceLabel": {
+          "type": "text",
+          "value": "Груша"
         }
       },
       "tags": {
@@ -63,7 +71,15 @@
         },
         "emoji": {
           "type": "text",
-          "value": "2️⃣"
+          "value": "2"
+        },
+        "faceImage": {
+          "type": "text",
+          "value": "_cards/peach.jpg"
+        },
+        "faceLabel": {
+          "type": "text",
+          "value": "Персик"
         }
       },
       "tags": {
@@ -98,7 +114,15 @@
         },
         "emoji": {
           "type": "text",
-          "value": "3️⃣"
+          "value": "3"
+        },
+        "faceImage": {
+          "type": "text",
+          "value": "_cards/pear.jpg"
+        },
+        "faceLabel": {
+          "type": "text",
+          "value": "Груша"
         }
       },
       "tags": {
@@ -174,6 +198,17 @@
   "behaviors": [
     {
       "behaviorRef": {
+        "type": "audioPrompt",
+        "config": {
+          "on": "sceneStarted",
+          "text": "Выполни все задания",
+          "sound": "_sounds/speech/vypolni-vse-zadaniya-b7634c.wav"
+        }
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
         "type": "sequenceValidator",
         "config": {
           "group": "mixed",
@@ -186,7 +221,7 @@
         "type": "pairMatchValidator",
         "config": {
           "group": "mixed",
-          "property": "pairId"
+          "matchProperty": "pairId"
         }
       }
     },
@@ -195,8 +230,7 @@
         "type": "memoryFlipController",
         "config": {
           "group": "mixed",
-          "maxOpenCards": "2",
-          "flipBackDelayMs": "700"
+          "maxOpenCards": "2"
         }
       },
       "entityId": null
@@ -220,9 +254,7 @@
     {
       "behaviorRef": {
         "type": "adaptiveHint",
-        "config": {
-          "mode": "mixed"
-        }
+        "config": {}
       }
     }
   ],

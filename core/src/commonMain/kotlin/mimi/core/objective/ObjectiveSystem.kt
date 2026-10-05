@@ -120,12 +120,62 @@ object EntitySelectedEvaluator : ObjectiveEvaluator {
 
     override fun evaluate(objectiveId: ObjectiveId, definition: mimi.core.world.ObjectiveDefinition, world: WorldSnapshot): ObjectiveState {
         val property = definition.config["property"] ?: return ObjectiveState.INACTIVE
-        val value    = definition.config["value"]    ?: return ObjectiveState.INACTIVE
+        // `valueFrom` names a property carrying the answer, for a scene whose
+        // answer is drawn at random on each play rather than written into it.
+        val value    = definition.config["value"]
+            ?: definition.config["valueFrom"]?.let { key ->
+                world.getAllEntities().firstNotNullOfOrNull { it.text(key) }
+            }
+            ?: return ObjectiveState.INACTIVE
         val match    = world.getAllEntities().any { entity ->
             entity.text(property) == value &&
             (entity.state == EntityLifecycleState.TENTATIVE || entity.state == EntityLifecycleState.LOCKED)
         }
         return if (match) ObjectiveState.TENTATIVE_COMPLETE else ObjectiveState.INACTIVE
+    }
+}
+
+
+/**
+ * Completes as soon as the child picks any one of the offered options.
+ *
+ * Pairs with the freeSelection behavior for choice-making: "which do you want?"
+ * has no wrong answer, so the objective is satisfied by the act of choosing
+ * rather than by which option was touched.
+ */
+object AnySelectedEvaluator : ObjectiveEvaluator {
+    override val type = "anySelected"
+
+    override fun evaluate(objectiveId: ObjectiveId, definition: mimi.core.world.ObjectiveDefinition, world: WorldSnapshot): ObjectiveState {
+        val group = definition.config["group"] ?: return ObjectiveState.INACTIVE
+        val entities = world.getEntitiesByTag("group", group)
+        if (entities.isEmpty()) return ObjectiveState.INACTIVE
+        val chosen = entities.any {
+            it.state == EntityLifecycleState.TENTATIVE || it.state == EntityLifecycleState.LOCKED
+        }
+        return if (chosen) ObjectiveState.TENTATIVE_COMPLETE else ObjectiveState.INACTIVE
+    }
+}
+
+/**
+ * Completes after the child has interacted a set number of times.
+ *
+ * For cause-and-effect play, where the point is the repetition itself: touch,
+ * something happens, touch again. Nothing can be got wrong, and the scene ends
+ * once the child has had enough turns to see the pattern.
+ */
+object InteractionCountEvaluator : ObjectiveEvaluator {
+    override val type = "interactionCount"
+
+    override fun evaluate(objectiveId: ObjectiveId, definition: mimi.core.world.ObjectiveDefinition, world: WorldSnapshot): ObjectiveState {
+        val required = definition.config["count"]?.toLongOrNull() ?: return ObjectiveState.INACTIVE
+        if (required <= 0L) return ObjectiveState.INACTIVE
+        val done = world.getCounter("selections")
+        return when {
+            done <= 0L     -> ObjectiveState.INACTIVE
+            done >= required -> ObjectiveState.TENTATIVE_COMPLETE
+            else           -> ObjectiveState.PROGRESSING
+        }
     }
 }
 
@@ -276,7 +326,9 @@ class ObjectiveSystem(
             TraceCompleteEvaluator.type      to TraceCompleteEvaluator,
             TraceCompletedEvaluator.type     to TraceCompletedEvaluator,
             EntitySelectedEvaluator.type     to EntitySelectedEvaluator,
-            GeometrySelectionEvaluator.type  to GeometrySelectionEvaluator
+            GeometrySelectionEvaluator.type  to GeometrySelectionEvaluator,
+            AnySelectedEvaluator.type        to AnySelectedEvaluator,
+            InteractionCountEvaluator.type   to InteractionCountEvaluator
         )
     }
 }

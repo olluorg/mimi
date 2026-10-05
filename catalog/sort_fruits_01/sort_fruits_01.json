@@ -21,9 +21,21 @@
           "type": "text",
           "value": "fruit"
         },
-        "emoji": {
+        "image": {
           "type": "text",
-          "value": "🍎"
+          "value": "_cards/apple.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Яблоко"
+        },
+        "name": {
+          "type": "text",
+          "value": "Яблоко"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/apple.mp3"
         }
       },
       "tags": {
@@ -51,9 +63,21 @@
           "type": "text",
           "value": "fruit"
         },
-        "emoji": {
+        "image": {
           "type": "text",
-          "value": "🍌"
+          "value": "_cards/banana.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Банан"
+        },
+        "name": {
+          "type": "text",
+          "value": "Банан"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/banana.mp3"
         }
       },
       "tags": {
@@ -81,9 +105,21 @@
           "type": "text",
           "value": "fruit"
         },
-        "emoji": {
+        "image": {
           "type": "text",
-          "value": "🍒"
+          "value": "_cards/strawberry.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Клубника"
+        },
+        "name": {
+          "type": "text",
+          "value": "Клубника"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/strawberry.mp3"
         }
       },
       "tags": {
@@ -123,9 +159,9 @@
           "type": "text",
           "value": "fruit"
         },
-        "emoji": {
+        "image": {
           "type": "text",
-          "value": "🧺"
+          "value": "_cards/apple.jpg"
         }
       },
       "tags": {},
@@ -143,6 +179,17 @@
     }
   ],
   "behaviors": [
+    {
+      "behaviorRef": {
+        "type": "audioPrompt",
+        "config": {
+          "on": "sceneStarted",
+          "text": "Положи фрукты в корзину",
+          "sound": "_sounds/speech/polozhi-frukty-v-korzinu-4c32e6.wav"
+        }
+      },
+      "entityId": null
+    },
     {
       "behaviorRef": {
         "type": "progressTracker",

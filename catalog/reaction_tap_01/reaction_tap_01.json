@@ -19,9 +19,13 @@
           "type": "num",
           "value": 120.0
         },
-        "emoji": {
+        "shape": {
           "type": "text",
-          "value": "🔴"
+          "value": "circle"
+        },
+        "color": {
+          "type": "text",
+          "value": "red"
         }
       },
       "tags": {
@@ -47,9 +51,13 @@
           "type": "num",
           "value": 120.0
         },
-        "emoji": {
+        "shape": {
           "type": "text",
-          "value": "⚫"
+          "value": "circle"
+        },
+        "color": {
+          "type": "text",
+          "value": "black"
         }
       },
       "tags": {
@@ -75,9 +83,13 @@
           "type": "num",
           "value": 120.0
         },
-        "emoji": {
+        "shape": {
           "type": "text",
-          "value": "⚫"
+          "value": "circle"
+        },
+        "color": {
+          "type": "text",
+          "value": "black"
         }
       },
       "tags": {
@@ -109,9 +121,21 @@
           "type": "text",
           "value": "true"
         },
-        "emoji": {
+        "image": {
           "type": "text",
-          "value": "🚶"
+          "value": "_cards/walk.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Гулять"
+        },
+        "name": {
+          "type": "text",
+          "value": "Гулять"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/walk.mp3"
         }
       },
       "tags": {
@@ -134,6 +158,17 @@
   "behaviors": [
     {
       "behaviorRef": {
+        "type": "audioPrompt",
+        "config": {
+          "on": "sceneStarted",
+          "text": "Жди зелёный. Потом нажми",
+          "sound": "_sounds/speech/zhdi-zelenyy-potom-nazhmi-bf2ae6.wav"
+        }
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
         "type": "propertySelectionValidator",
         "config": {
           "property": "ready",
@@ -152,9 +187,7 @@
     {
       "behaviorRef": {
         "type": "adaptiveHint",
-        "config": {
-          "mode": "reaction"
-        }
+        "config": {}
       },
       "entityId": null
     },
@@ -163,7 +196,8 @@
         "type": "audioPrompt",
         "config": {
           "on": "sceneCompleted",
-          "text": "Иди"
+          "text": "Иди",
+          "sound": "_sounds/speech/idi-a7398c.wav"
         }
       },
       "entityId": null
@@ -196,28 +230,28 @@
           {
             "type": "setProperty",
             "entityId": "red_light",
-            "field": "emoji",
+            "field": "color",
             "value": {
               "type": "text",
-              "value": "🔴"
+              "value": "red"
             }
           },
           {
             "type": "setProperty",
             "entityId": "yellow_light",
-            "field": "emoji",
+            "field": "color",
             "value": {
               "type": "text",
-              "value": "⚫"
+              "value": "black"
             }
           },
           {
             "type": "setProperty",
             "entityId": "green_light",
-            "field": "emoji",
+            "field": "color",
             "value": {
               "type": "text",
-              "value": "⚫"
+              "value": "black"
             }
           },
           {
@@ -242,28 +276,28 @@
           {
             "type": "setProperty",
             "entityId": "red_light",
-            "field": "emoji",
+            "field": "color",
             "value": {
               "type": "text",
-              "value": "⚫"
+              "value": "black"
             }
           },
           {
             "type": "setProperty",
             "entityId": "yellow_light",
-            "field": "emoji",
+            "field": "color",
             "value": {
               "type": "text",
-              "value": "🟡"
+              "value": "yellow"
             }
           },
           {
             "type": "setProperty",
             "entityId": "green_light",
-            "field": "emoji",
+            "field": "color",
             "value": {
               "type": "text",
-              "value": "⚫"
+              "value": "black"
             }
           },
           {
@@ -282,28 +316,28 @@
           {
             "type": "setProperty",
             "entityId": "red_light",
-            "field": "emoji",
+            "field": "color",
             "value": {
               "type": "text",
-              "value": "⚫"
+              "value": "black"
             }
           },
           {
             "type": "setProperty",
             "entityId": "yellow_light",
-            "field": "emoji",
+            "field": "color",
             "value": {
               "type": "text",
-              "value": "⚫"
+              "value": "black"
             }
           },
           {
             "type": "setProperty",
             "entityId": "green_light",
-            "field": "emoji",
+            "field": "color",
             "value": {
               "type": "text",
-              "value": "🟢"
+              "value": "green"
             }
           },
           {

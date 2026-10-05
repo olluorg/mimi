@@ -1,0 +1,238 @@
+{
+  "sceneId": "routine_morning_01",
+  "meta": {
+    "title": "Утро по порядку",
+    "description": "Покажи, что мы делаем утром — по порядку.",
+    "ageMin": 3,
+    "ageMax": 7,
+    "version": 1,
+    "tags": [
+      "routine",
+      "daily_life",
+      "sequencing"
+    ],
+    "skills": [
+      "sequencing",
+      "task_completion",
+      "receptive_speech",
+      "visual_planning"
+    ],
+    "icon": "🌅",
+    "requires": []
+  },
+  "entities": [
+    {
+      "id": "wake",
+      "components": [
+        "tap"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 170.0,
+          "y": 450.0
+        },
+        "sequenceIndex": {
+          "type": "num",
+          "value": 1.0
+        },
+        "name": {
+          "type": "text",
+          "value": "проснуться"
+        },
+        "label": {
+          "type": "text",
+          "value": "проснуться"
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/bed.jpg"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/bed.mp3"
+        }
+      },
+      "tags": {
+        "group": "steps"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "brush",
+      "components": [
+        "tap"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 390.0,
+          "y": 450.0
+        },
+        "sequenceIndex": {
+          "type": "num",
+          "value": 2.0
+        },
+        "name": {
+          "type": "text",
+          "value": "почистить зубы"
+        },
+        "label": {
+          "type": "text",
+          "value": "почистить зубы"
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/toothbrush.jpg"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/toothbrush.mp3"
+        }
+      },
+      "tags": {
+        "group": "steps"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "dress",
+      "components": [
+        "tap"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 610.0,
+          "y": 450.0
+        },
+        "sequenceIndex": {
+          "type": "num",
+          "value": 3.0
+        },
+        "name": {
+          "type": "text",
+          "value": "одеться"
+        },
+        "label": {
+          "type": "text",
+          "value": "одеться"
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/shirt.jpg"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/shirt.mp3"
+        }
+      },
+      "tags": {
+        "group": "steps"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "eat",
+      "components": [
+        "tap"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 830.0,
+          "y": 450.0
+        },
+        "sequenceIndex": {
+          "type": "num",
+          "value": 4.0
+        },
+        "name": {
+          "type": "text",
+          "value": "позавтракать"
+        },
+        "label": {
+          "type": "text",
+          "value": "позавтракать"
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/eat.jpg"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/eat.mp3"
+        }
+      },
+      "tags": {
+        "group": "steps"
+      },
+      "zOrder": 0
+    }
+  ],
+  "objectives": [
+    {
+      "id": "in_order",
+      "type": "sequenceCompleted",
+      "config": {
+        "group": "steps"
+      },
+      "requires": null
+    }
+  ],
+  "behaviors": [
+    {
+      "behaviorRef": {
+        "type": "progressTracker",
+        "config": {}
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "audioPrompt",
+        "config": {
+          "on": "sceneStarted",
+          "text": "Что делаем утром сначала?",
+          "sound": "_sounds/speech/chto-delaem-utrom-snachala-f32e72.wav"
+        }
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "sequenceValidator",
+        "config": {
+          "group": "steps",
+          "property": "sequenceIndex"
+        }
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "adaptiveHint",
+        "config": {}
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "playSoundOnEvent",
+        "config": {
+          "on": "sceneCompleted",
+          "sound": "complete"
+        }
+      },
+      "entityId": null
+    }
+  ],
+  "fieldPolicies": {},
+  "idleTimeout": 20,
+  "onIdle": "HINT",
+  "metadata": {}
+}

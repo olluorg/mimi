@@ -19,11 +19,21 @@ enum class Phase {
 interface BehaviorContext {
     val snapshot: WorldSnapshot
     val tick:     Tick
+
+    /**
+     * Milliseconds since the session started.
+     *
+     * Ticks are not a clock: they advance per event and per idle second, so a
+     * stream of voice events would make "five seconds" arrive in half a
+     * second. Behaviors that wait a real amount of time read this instead.
+     */
+    val nowMs: Long get() = 0L
 }
 
 data class DefaultBehaviorContext(
     override val snapshot: WorldSnapshot,
-    override val tick:     Tick
+    override val tick:     Tick,
+    override val nowMs:    Long = 0L
 ) : BehaviorContext
 
 // ── Behavior ──────────────────────────────────────────────────────────────────

@@ -13,7 +13,9 @@ private const val CARD_MATCHED = "matched"
 class MemoryFlipControllerBehavior(
     override val id: BehaviorId,
     private val group: String,
-    private val maxOpenCards: Int
+    private val maxOpenCards: Int,
+    /** Cards form a pair when this property matches. */
+    private val matchProperty: String
 ) : Behavior {
     override val phase = Phase.COMMAND_GENERATION
     override val eventTypes = setOf<KClass<out GameEvent>>(GameEvent.Tap::class)
@@ -61,7 +63,8 @@ class MemoryFlipControllerBehavior(
 
         val first = openCards.first()
         val second = openCards.last()
-        val matched = first.text("pairId") != null && first.text("pairId") == second.text("pairId")
+        val matched = first.text(matchProperty) != null &&
+            first.text(matchProperty) == second.text(matchProperty)
 
         return if (matched) {
             listOf(
@@ -69,7 +72,6 @@ class MemoryFlipControllerBehavior(
                 match(second.id, ctx.tick),
                 Command.SetEntityState(first.id, EntityLifecycleState.TENTATIVE, priority = 100, source = id, tick = ctx.tick),
                 Command.SetEntityState(second.id, EntityLifecycleState.TENTATIVE, priority = 100, source = id, tick = ctx.tick),
-                Command.IncrementCounter(SCENE_ENTITY_ID, "matches", delta = 1L, source = id, tick = ctx.tick),
                 Command.TriggerFeedback(
                     feedbackType = "matchSuccess",
                     params = mapOf("source" to first.id, "target" to second.id),
@@ -80,7 +82,6 @@ class MemoryFlipControllerBehavior(
         } else {
             listOf(
                 reveal(tapped.id, ctx.tick),
-                Command.IncrementCounter(SCENE_ENTITY_ID, "mistakes", delta = 1L, source = id, tick = ctx.tick),
                 Command.TriggerFeedback(
                     feedbackType = "matchFail",
                     params = mapOf("source" to first.id, "target" to second.id),
@@ -121,8 +122,19 @@ class MemoryFlipControllerPlugin : BehaviorPlugin {
         MemoryFlipControllerBehavior(
             id = behaviorId,
             group = config["group"] ?: "cards",
-            maxOpenCards = config["maxOpenCards"]?.toIntOrNull()?.coerceAtLeast(2) ?: 2
+            maxOpenCards = config["maxOpenCards"]?.toIntOrNull()?.coerceAtLeast(2) ?: 2,
+            matchProperty = config["matchProperty"] ?: "pairId"
         )
+
+    override fun validateConfig(config: Map<String, String>): ValidationResult =
+        SPEC.check(config)
+
+    private companion object {
+        private val SPEC = ConfigSpec.of("memoryFlipController") {
+            text("group", "matchProperty")
+            number("maxOpenCards", min = 2.0)
+        }
+    }
 }
 
 class PairMatchValidatorBehavior(override val id: BehaviorId) : Behavior {
@@ -139,4 +151,13 @@ class PairMatchValidatorPlugin : BehaviorPlugin {
 
     override fun create(config: Map<String, String>, entityId: EntityId?): Behavior =
         PairMatchValidatorBehavior(behaviorId)
+
+    override fun validateConfig(config: Map<String, String>): ValidationResult =
+        SPEC.check(config)
+
+    private companion object {
+        private val SPEC = ConfigSpec.of("pairMatchValidator") {
+            text("group", "matchProperty")
+        }
+    }
 }

@@ -1,0 +1,216 @@
+{
+  "sceneId": "cause_effect_music_01",
+  "meta": {
+    "title": "Играй музыку",
+    "description": "Нажимай на инструменты — они звучат. Играй сколько хочешь.",
+    "ageMin": 1,
+    "ageMax": 4,
+    "version": 1,
+    "tags": [
+      "cause_effect",
+      "sound",
+      "starter"
+    ],
+    "skills": [
+      "task_completion",
+      "hand_eye_coordination",
+      "phonemic_awareness",
+      "visual_attention"
+    ],
+    "icon": "🥁",
+    "requires": []
+  },
+  "entities": [
+    {
+      "id": "drum",
+      "components": [
+        "tap"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 170.0,
+          "y": 450.0
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/drum.jpg"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_sounds/drum.wav"
+        },
+        "label": {
+          "type": "text",
+          "value": "Барабан"
+        },
+        "name": {
+          "type": "text",
+          "value": "Барабан"
+        }
+      },
+      "tags": {
+        "group": "instruments"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "bell",
+      "components": [
+        "tap"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 390.0,
+          "y": 450.0
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/bell.jpg"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_sounds/bell.wav"
+        },
+        "label": {
+          "type": "text",
+          "value": "Звонок"
+        },
+        "name": {
+          "type": "text",
+          "value": "Звонок"
+        }
+      },
+      "tags": {
+        "group": "instruments"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "xylophone",
+      "components": [
+        "tap"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 610.0,
+          "y": 450.0
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/xylophone.jpg"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_sounds/xylophone.wav"
+        },
+        "label": {
+          "type": "text",
+          "value": "Ксилофон"
+        },
+        "name": {
+          "type": "text",
+          "value": "Ксилофон"
+        }
+      },
+      "tags": {
+        "group": "instruments"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "rattle",
+      "components": [
+        "tap"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 830.0,
+          "y": 450.0
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/rattle.jpg"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_sounds/rattle.wav"
+        },
+        "label": {
+          "type": "text",
+          "value": "Погремушка"
+        },
+        "name": {
+          "type": "text",
+          "value": "Погремушка"
+        }
+      },
+      "tags": {
+        "group": "instruments"
+      },
+      "zOrder": 0
+    }
+  ],
+  "objectives": [
+    {
+      "id": "played",
+      "type": "interactionCount",
+      "config": {
+        "count": "8"
+      },
+      "requires": null
+    }
+  ],
+  "behaviors": [
+    {
+      "behaviorRef": {
+        "type": "audioPrompt",
+        "config": {
+          "on": "sceneStarted",
+          "text": "Нажимай — услышишь, как звучит",
+          "sound": "_sounds/speech/nazhimay-uslyshish-kak-zvuchit-6365c9.wav"
+        }
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "progressTracker",
+        "config": {}
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "freeSelection",
+        "config": {
+          "group": "instruments",
+          "repeatable": "true",
+          "speak": "true"
+        }
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "playSoundOnEvent",
+        "config": {
+          "on": "sceneCompleted",
+          "sound": "complete"
+        }
+      },
+      "entityId": null
+    }
+  ],
+  "fieldPolicies": {},
+  "idleTimeout": 25,
+  "onIdle": "HINT",
+  "metadata": {}
+}

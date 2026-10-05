@@ -1,0 +1,567 @@
+{
+  "sceneId": "picture_clothes_01",
+  "meta": {
+    "title": "Что надеваем?",
+    "description": "Нажимай на картинки — услышишь названия. Ошибиться нельзя.",
+    "ageMin": 1,
+    "ageMax": 5,
+    "version": 1,
+    "tags": [
+      "cards",
+      "vocabulary",
+      "cause_effect"
+    ],
+    "skills": [
+      "receptive_speech",
+      "word_association",
+      "visual_attention",
+      "task_completion"
+    ],
+    "icon": "👕",
+    "requires": []
+  },
+  "entities": [
+    {
+      "id": "backpack",
+      "components": [
+        "tap"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 220.0,
+          "y": 300.0
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/shirt.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Рубашка"
+        },
+        "name": {
+          "type": "text",
+          "value": "Рубашка"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/shirt.mp3"
+        }
+      },
+      "tags": {
+        "group": "gallery"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "blouse",
+      "components": [
+        "tap"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 500.0,
+          "y": 300.0
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/trousers.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Брюки"
+        },
+        "name": {
+          "type": "text",
+          "value": "Брюки"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/trousers.mp3"
+        }
+      },
+      "tags": {
+        "group": "gallery"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "boots",
+      "components": [
+        "tap"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 780.0,
+          "y": 300.0
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/dress.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Платье"
+        },
+        "name": {
+          "type": "text",
+          "value": "Платье"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/dress.mp3"
+        }
+      },
+      "tags": {
+        "group": "gallery"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "cap",
+      "components": [
+        "tap"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 220.0,
+          "y": 550.0
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/socks.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Носки"
+        },
+        "name": {
+          "type": "text",
+          "value": "Носки"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/socks.mp3"
+        }
+      },
+      "tags": {
+        "group": "gallery"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "collar",
+      "components": [
+        "tap"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 500.0,
+          "y": 550.0
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/boots.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Ботинки"
+        },
+        "name": {
+          "type": "text",
+          "value": "Ботинки"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/boots.mp3"
+        }
+      },
+      "tags": {
+        "group": "gallery"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "dress",
+      "components": [
+        "tap"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 780.0,
+          "y": 550.0
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/hat.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Шапка"
+        },
+        "name": {
+          "type": "text",
+          "value": "Шапка"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/hat.mp3"
+        }
+      },
+      "tags": {
+        "group": "gallery"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "hat",
+      "components": [
+        "tap"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 220.0,
+          "y": 800.0
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/cap.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Кепка"
+        },
+        "name": {
+          "type": "text",
+          "value": "Кепка"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/cap.mp3"
+        }
+      },
+      "tags": {
+        "group": "gallery"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "hood",
+      "components": [
+        "tap"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 500.0,
+          "y": 800.0
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/jacket.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Куртка"
+        },
+        "name": {
+          "type": "text",
+          "value": "Куртка"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/jacket.mp3"
+        }
+      },
+      "tags": {
+        "group": "gallery"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "jacket",
+      "components": [
+        "tap"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 780.0,
+          "y": 800.0
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/mittens.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Варежки"
+        },
+        "name": {
+          "type": "text",
+          "value": "Варежки"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/mittens.mp3"
+        }
+      },
+      "tags": {
+        "group": "gallery"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "jeans",
+      "components": [
+        "tap"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 220.0,
+          "y": 1050.0
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/scarf.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Шарф"
+        },
+        "name": {
+          "type": "text",
+          "value": "Шарф"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/scarf.mp3"
+        }
+      },
+      "tags": {
+        "group": "gallery"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "mask",
+      "components": [
+        "tap"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 500.0,
+          "y": 1050.0
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/blouse.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Блузка"
+        },
+        "name": {
+          "type": "text",
+          "value": "Блузка"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/blouse.mp3"
+        }
+      },
+      "tags": {
+        "group": "gallery"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "mittens",
+      "components": [
+        "tap"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 780.0,
+          "y": 1050.0
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/shoes.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Туфли"
+        },
+        "name": {
+          "type": "text",
+          "value": "Туфли"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/shoes.mp3"
+        }
+      },
+      "tags": {
+        "group": "gallery"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "pocket",
+      "components": [
+        "tap"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 220.0,
+          "y": 1300.0
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/sweater.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Свитер"
+        },
+        "name": {
+          "type": "text",
+          "value": "Свитер"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/sweater.mp3"
+        }
+      },
+      "tags": {
+        "group": "gallery"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "put-on",
+      "components": [
+        "tap"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 500.0,
+          "y": 1300.0
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/t-shirt.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Футболка"
+        },
+        "name": {
+          "type": "text",
+          "value": "Футболка"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/t-shirt.mp3"
+        }
+      },
+      "tags": {
+        "group": "gallery"
+      },
+      "zOrder": 0
+    }
+  ],
+  "objectives": [
+    {
+      "id": "looked",
+      "type": "interactionCount",
+      "config": {
+        "count": "8"
+      },
+      "requires": null
+    }
+  ],
+  "behaviors": [
+    {
+      "behaviorRef": {
+        "type": "audioPrompt",
+        "config": {
+          "on": "sceneStarted",
+          "text": "Нажимай на картинки. Я назову одежду",
+          "sound": "_sounds/speech/nazhimay-na-kartinki-ya-nazovu-odezhdu-7e4a6b.wav"
+        }
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "progressTracker",
+        "config": {}
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "freeSelection",
+        "config": {
+          "group": "gallery",
+          "repeatable": "true",
+          "speak": "true"
+        }
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "playSoundOnEvent",
+        "config": {
+          "on": "sceneCompleted",
+          "sound": "complete"
+        }
+      },
+      "entityId": null
+    }
+  ],
+  "fieldPolicies": {},
+  "idleTimeout": 40,
+  "onIdle": "HINT",
+  "metadata": {},
+  "variation": {
+    "pick": [
+      {
+        "group": "gallery",
+        "count": 6
+      }
+    ],
+    "shufflePositions": [
+      "gallery"
+    ]
+  }
+}

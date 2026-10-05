@@ -1,0 +1,276 @@
+{
+  "sceneId": "speech_animal_voices_01",
+  "meta": {
+    "title": "Скажи, как зверь",
+    "description": "Зверь подаёт голос — ребёнок повторяет один звук, и зверь отвечает.",
+    "ageMin": 2,
+    "ageMax": 6,
+    "version": 1,
+    "tags": [
+      "speech",
+      "imitation",
+      "animals",
+      "sound"
+    ],
+    "skills": [
+      "sound_imitation",
+      "vocal_initiation",
+      "expressive_speech",
+      "turn_taking"
+    ],
+    "icon": "🐮",
+    "requires": [],
+    "speech": {
+      "stage": "imitation",
+      "targets": [
+        "alalia",
+        "apraxia"
+      ],
+      "modes": [
+        "imitation",
+        "voice"
+      ],
+      "words": [
+        "му",
+        "бе",
+        "ав",
+        "мяу"
+      ],
+      "adultTip": "Скажите звук вместе с игрой, медленно и чуть громче, и подождите. Засчитывайте любую попытку — даже один звук вместо слова."
+    }
+  },
+  "entities": [
+    {
+      "id": "cow",
+      "components": [
+        "tap"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 500.0,
+          "y": 440.0
+        },
+        "width": {
+          "type": "num",
+          "value": 320.0
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/cow.jpg"
+        },
+        "name": {
+          "type": "text",
+          "value": "корова"
+        },
+        "speech": {
+          "type": "text",
+          "value": "Му!"
+        },
+        "reward": {
+          "type": "text",
+          "value": "_sounds/animals/cow.mp3"
+        },
+        "rewardMotion": {
+          "type": "text",
+          "value": "jump"
+        },
+        "mouth": {
+          "type": "text",
+          "value": "_anim/mouth_m.json"
+        }
+      },
+      "tags": {
+        "group": "targets"
+      },
+      "zOrder": 0,
+      "initialState": "INACTIVE"
+    },
+    {
+      "id": "sheep",
+      "components": [
+        "tap"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 500.0,
+          "y": 440.0
+        },
+        "width": {
+          "type": "num",
+          "value": 320.0
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/sheep.jpg"
+        },
+        "name": {
+          "type": "text",
+          "value": "овечка"
+        },
+        "speech": {
+          "type": "text",
+          "value": "Бе!"
+        },
+        "reward": {
+          "type": "text",
+          "value": "_sounds/animals/sheep.mp3"
+        },
+        "rewardMotion": {
+          "type": "text",
+          "value": "jump"
+        }
+      },
+      "tags": {
+        "group": "targets"
+      },
+      "zOrder": 0,
+      "initialState": "INACTIVE"
+    },
+    {
+      "id": "dog",
+      "components": [
+        "tap"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 500.0,
+          "y": 440.0
+        },
+        "width": {
+          "type": "num",
+          "value": 320.0
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/dog.jpg"
+        },
+        "name": {
+          "type": "text",
+          "value": "собака"
+        },
+        "speech": {
+          "type": "text",
+          "value": "Ав!"
+        },
+        "reward": {
+          "type": "text",
+          "value": "_sounds/animals/dog.mp3"
+        },
+        "rewardMotion": {
+          "type": "text",
+          "value": "jump"
+        }
+      },
+      "tags": {
+        "group": "targets"
+      },
+      "zOrder": 0,
+      "initialState": "INACTIVE"
+    },
+    {
+      "id": "cat",
+      "components": [
+        "tap"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 500.0,
+          "y": 440.0
+        },
+        "width": {
+          "type": "num",
+          "value": 320.0
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/cat.jpg"
+        },
+        "name": {
+          "type": "text",
+          "value": "кошка"
+        },
+        "speech": {
+          "type": "text",
+          "value": "Мяу!"
+        },
+        "reward": {
+          "type": "text",
+          "value": "_sounds/animals/cat.mp3"
+        },
+        "rewardMotion": {
+          "type": "text",
+          "value": "spin"
+        }
+      },
+      "tags": {
+        "group": "targets"
+      },
+      "zOrder": 0,
+      "initialState": "INACTIVE"
+    }
+  ],
+  "objectives": [
+    {
+      "id": "turns",
+      "type": "interactionCount",
+      "config": {
+        "count": "4"
+      },
+      "requires": null
+    }
+  ],
+  "behaviors": [
+    {
+      "behaviorRef": {
+        "type": "progressTracker",
+        "config": {}
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "audioPrompt",
+        "config": {
+          "on": "sceneStarted",
+          "text": "Скажи!",
+          "sound": "_sounds/speech/skazhi-3628b3.wav"
+        }
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "awaitResponse",
+        "config": {
+          "group": "targets",
+          "accept": "voice,adult",
+          "waitMs": "6000",
+          "maxPrompts": "2"
+        }
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "playSoundOnEvent",
+        "config": {
+          "on": "sceneCompleted",
+          "sound": "complete"
+        }
+      },
+      "entityId": null
+    }
+  ],
+  "fieldPolicies": {},
+  "idleTimeout": 40,
+  "onIdle": "HINT",
+  "metadata": {}
+}

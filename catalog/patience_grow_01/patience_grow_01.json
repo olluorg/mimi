@@ -25,9 +25,17 @@
           "type": "text",
           "value": "true"
         },
-        "emoji": {
+        "shape": {
           "type": "text",
-          "value": "🌱"
+          "value": "circle"
+        },
+        "color": {
+          "type": "text",
+          "value": "brown"
+        },
+        "radius": {
+          "type": "num",
+          "value": 34.0
         }
       },
       "tags": {
@@ -48,6 +56,17 @@
     }
   ],
   "behaviors": [
+    {
+      "behaviorRef": {
+        "type": "audioPrompt",
+        "config": {
+          "on": "sceneStarted",
+          "text": "Нажимай и жди. Цветок растёт",
+          "sound": "_sounds/speech/nazhimay-i-zhdi-cvetok-rastet-49a20c.wav"
+        }
+      },
+      "entityId": null
+    },
     {
       "behaviorRef": {
         "type": "propertySelectionValidator",
@@ -91,19 +110,28 @@
             "state": "INACTIVE"
           },
           {
-            "type": "setProperty",
-            "entityId": "plant",
-            "field": "emoji",
-            "value": {
-              "type": "text",
-              "value": "🌱"
-            }
-          },
-          {
             "type": "triggerFeedback",
             "feedbackType": "tts",
             "params": {
               "text": "Подожди, растение растёт..."
+            }
+          },
+          {
+            "type": "setProperty",
+            "entityId": "plant",
+            "field": "radius",
+            "value": {
+              "type": "num",
+              "value": 34.0
+            }
+          },
+          {
+            "type": "setProperty",
+            "entityId": "plant",
+            "field": "color",
+            "value": {
+              "type": "text",
+              "value": "brown"
             }
           }
         ]
@@ -121,10 +149,19 @@
           {
             "type": "setProperty",
             "entityId": "plant",
-            "field": "emoji",
+            "field": "radius",
+            "value": {
+              "type": "num",
+              "value": 64.0
+            }
+          },
+          {
+            "type": "setProperty",
+            "entityId": "plant",
+            "field": "color",
             "value": {
               "type": "text",
-              "value": "🌿"
+              "value": "green"
             }
           }
         ]
@@ -133,15 +170,6 @@
         "id": "bloom",
         "inputEnabled": true,
         "onEnter": [
-          {
-            "type": "setProperty",
-            "entityId": "plant",
-            "field": "emoji",
-            "value": {
-              "type": "text",
-              "value": "🌸"
-            }
-          },
           {
             "type": "setEntityState",
             "entityId": "plant",
@@ -152,6 +180,24 @@
             "feedbackType": "tts",
             "params": {
               "text": "Расцвело! Нажми на цветок!"
+            }
+          },
+          {
+            "type": "setProperty",
+            "entityId": "plant",
+            "field": "radius",
+            "value": {
+              "type": "num",
+              "value": 104.0
+            }
+          },
+          {
+            "type": "setProperty",
+            "entityId": "plant",
+            "field": "color",
+            "value": {
+              "type": "text",
+              "value": "pink"
             }
           }
         ]

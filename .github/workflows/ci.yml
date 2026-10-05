@@ -1,0 +1,53 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    name: Build and test
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - uses: gradle/actions/setup-gradle@v4
+
+      # The engine and the catalog gate. Runs first and on its own: a broken
+      # scene is the failure most likely to reach children, so it reports
+      # before the slower Compose/Android compilation muddies the log.
+      - name: Core tests (engine + catalog integrity)
+        run: ./gradlew :core:jvmTest --stacktrace
+
+      - name: Shared UI tests
+        run: ./gradlew :sharedUI:jvmTest --stacktrace
+
+      - name: Compile all targets
+        run: ./gradlew assemble --stacktrace
+
+      - name: Upload test reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-reports
+          path: |
+            **/build/reports/tests/
+            **/build/test-results/
+          retention-days: 7
+          if-no-files-found: ignore

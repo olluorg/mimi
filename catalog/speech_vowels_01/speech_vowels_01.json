@@ -1,0 +1,345 @@
+{
+  "sceneId": "speech_vowels_01",
+  "meta": {
+    "title": "Гласные: А, О, У, И, Э",
+    "description": "Протяжные гласные. Любой звук засчитывается, а точно сказанная гласная — большая звезда.",
+    "ageMin": 2,
+    "ageMax": 7,
+    "version": 1,
+    "tags": [
+      "speech",
+      "imitation",
+      "vowels"
+    ],
+    "skills": [
+      "sound_imitation",
+      "speech_motor",
+      "vocal_initiation",
+      "expressive_speech"
+    ],
+    "icon": "🅰",
+    "requires": [],
+    "speech": {
+      "stage": "imitation",
+      "targets": [
+        "apraxia",
+        "alalia",
+        "dysarthria"
+      ],
+      "modes": [
+        "imitation",
+        "voice"
+      ],
+      "words": [
+        "а",
+        "о",
+        "у",
+        "и",
+        "э"
+      ],
+      "adultTip": "Тяните гласную вместе с игрой и широко показывайте рот: «а» — открыт, «у» — трубочкой, «и» — улыбка. Любая попытка засчитывается, точная — с большой звездой."
+    }
+  },
+  "entities": [
+    {
+      "id": "doctor",
+      "components": [
+        "tap"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 500.0,
+          "y": 440.0
+        },
+        "width": {
+          "type": "num",
+          "value": 320.0
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/doctor.jpg"
+        },
+        "name": {
+          "type": "text",
+          "value": "доктор"
+        },
+        "speech": {
+          "type": "text",
+          "value": "А-а!"
+        },
+        "expectSound": {
+          "type": "text",
+          "value": "а"
+        },
+        "rewardMotion": {
+          "type": "text",
+          "value": "jump"
+        },
+        "mouth": {
+          "type": "text",
+          "value": "_anim/mouth_a.json"
+        }
+      },
+      "tags": {
+        "group": "targets"
+      },
+      "zOrder": 0,
+      "initialState": "INACTIVE"
+    },
+    {
+      "id": "surprise",
+      "components": [
+        "tap"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 500.0,
+          "y": 440.0
+        },
+        "width": {
+          "type": "num",
+          "value": 320.0
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/surprise.jpg"
+        },
+        "name": {
+          "type": "text",
+          "value": "ой"
+        },
+        "speech": {
+          "type": "text",
+          "value": "О-о!"
+        },
+        "expectSound": {
+          "type": "text",
+          "value": "о"
+        },
+        "rewardMotion": {
+          "type": "text",
+          "value": "spin"
+        },
+        "mouth": {
+          "type": "text",
+          "value": "_anim/mouth_o.json"
+        }
+      },
+      "tags": {
+        "group": "targets"
+      },
+      "zOrder": 0,
+      "initialState": "INACTIVE"
+    },
+    {
+      "id": "airplane",
+      "components": [
+        "tap"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 500.0,
+          "y": 440.0
+        },
+        "width": {
+          "type": "num",
+          "value": 320.0
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/airplane.jpg"
+        },
+        "name": {
+          "type": "text",
+          "value": "самолёт"
+        },
+        "speech": {
+          "type": "text",
+          "value": "У-у!"
+        },
+        "expectSound": {
+          "type": "text",
+          "value": "у"
+        },
+        "rewardMotion": {
+          "type": "text",
+          "value": "fly"
+        },
+        "reward": {
+          "type": "text",
+          "value": "_sounds/airplane.wav"
+        },
+        "mouth": {
+          "type": "text",
+          "value": "_anim/mouth_u.json"
+        }
+      },
+      "tags": {
+        "group": "targets"
+      },
+      "zOrder": 0,
+      "initialState": "INACTIVE"
+    },
+    {
+      "id": "horse",
+      "components": [
+        "tap"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 500.0,
+          "y": 440.0
+        },
+        "width": {
+          "type": "num",
+          "value": 320.0
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/horse.jpg"
+        },
+        "name": {
+          "type": "text",
+          "value": "лошадка"
+        },
+        "speech": {
+          "type": "text",
+          "value": "И-и!"
+        },
+        "expectSound": {
+          "type": "text",
+          "value": "и"
+        },
+        "rewardMotion": {
+          "type": "text",
+          "value": "jump"
+        },
+        "reward": {
+          "type": "text",
+          "value": "_sounds/animals/horse.mp3"
+        },
+        "mouth": {
+          "type": "text",
+          "value": "_anim/mouth_i.json"
+        }
+      },
+      "tags": {
+        "group": "targets"
+      },
+      "zOrder": 0,
+      "initialState": "INACTIVE"
+    },
+    {
+      "id": "hmm",
+      "components": [
+        "tap"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 500.0,
+          "y": 440.0
+        },
+        "width": {
+          "type": "num",
+          "value": 320.0
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/confusion.jpg"
+        },
+        "name": {
+          "type": "text",
+          "value": "э"
+        },
+        "speech": {
+          "type": "text",
+          "value": "Э-э!"
+        },
+        "expectSound": {
+          "type": "text",
+          "value": "э"
+        },
+        "rewardMotion": {
+          "type": "text",
+          "value": "wiggle"
+        },
+        "mouth": {
+          "type": "text",
+          "value": "_anim/mouth_e.json"
+        }
+      },
+      "tags": {
+        "group": "targets"
+      },
+      "zOrder": 0,
+      "initialState": "INACTIVE"
+    }
+  ],
+  "objectives": [
+    {
+      "id": "turns",
+      "type": "interactionCount",
+      "config": {
+        "count": "5"
+      },
+      "requires": null
+    }
+  ],
+  "behaviors": [
+    {
+      "behaviorRef": {
+        "type": "progressTracker",
+        "config": {}
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "audioPrompt",
+        "config": {
+          "on": "sceneStarted",
+          "text": "Скажи!",
+          "sound": "_sounds/speech/skazhi-3628b3.wav"
+        }
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "awaitResponse",
+        "config": {
+          "group": "targets",
+          "accept": "voice,adult",
+          "waitMs": "6000",
+          "maxPrompts": "2",
+          "rewardMs": "1900"
+        }
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "playSoundOnEvent",
+        "config": {
+          "on": "sceneCompleted",
+          "sound": "complete"
+        }
+      },
+      "entityId": null
+    }
+  ],
+  "fieldPolicies": {},
+  "idleTimeout": 40,
+  "onIdle": "HINT",
+  "metadata": {}
+}

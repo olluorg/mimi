@@ -1,0 +1,206 @@
+{
+  "sceneId": "body_parts_01",
+  "meta": {
+    "title": "Где носик?",
+    "description": "Слушай и нажимай на нужную часть лица.",
+    "ageMin": 2,
+    "ageMax": 6,
+    "version": 1,
+    "tags": [
+      "body",
+      "vocabulary"
+    ],
+    "skills": [
+      "receptive_speech",
+      "word_association",
+      "visual_attention",
+      "selective_attention"
+    ],
+    "icon": "👃",
+    "requires": []
+  },
+  "entities": [
+    {
+      "id": "nose",
+      "components": [
+        "tap"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 170.0,
+          "y": 450.0
+        },
+        "part": {
+          "type": "text",
+          "value": "nose"
+        },
+        "name": {
+          "type": "text",
+          "value": "нос"
+        },
+        "pictogram": {
+          "type": "text",
+          "value": "nose"
+        }
+      },
+      "tags": {
+        "group": "parts"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "eye",
+      "components": [
+        "tap"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 390.0,
+          "y": 450.0
+        },
+        "part": {
+          "type": "text",
+          "value": "eye"
+        },
+        "name": {
+          "type": "text",
+          "value": "глаз"
+        },
+        "pictogram": {
+          "type": "text",
+          "value": "eye"
+        }
+      },
+      "tags": {
+        "group": "parts"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "mouth",
+      "components": [
+        "tap"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 610.0,
+          "y": 450.0
+        },
+        "part": {
+          "type": "text",
+          "value": "mouth"
+        },
+        "name": {
+          "type": "text",
+          "value": "рот"
+        },
+        "pictogram": {
+          "type": "text",
+          "value": "mouth"
+        }
+      },
+      "tags": {
+        "group": "parts"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "ear",
+      "components": [
+        "tap"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 830.0,
+          "y": 450.0
+        },
+        "part": {
+          "type": "text",
+          "value": "ear"
+        },
+        "name": {
+          "type": "text",
+          "value": "ухо"
+        },
+        "pictogram": {
+          "type": "text",
+          "value": "ear"
+        }
+      },
+      "tags": {
+        "group": "parts"
+      },
+      "zOrder": 0
+    }
+  ],
+  "objectives": [
+    {
+      "id": "found_nose",
+      "type": "entitySelected",
+      "config": {
+        "property": "part",
+        "value": "nose"
+      },
+      "requires": null
+    }
+  ],
+  "behaviors": [
+    {
+      "behaviorRef": {
+        "type": "progressTracker",
+        "config": {}
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "audioPrompt",
+        "config": {
+          "on": "sceneStarted",
+          "text": "Где носик?",
+          "sound": "_sounds/speech/gde-nosik-9137c0.wav"
+        }
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "propertySelectionValidator",
+        "config": {
+          "property": "part",
+          "expected": "nose"
+        }
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "adaptiveHint",
+        "config": {}
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "playSoundOnEvent",
+        "config": {
+          "on": "sceneCompleted",
+          "sound": "complete"
+        }
+      },
+      "entityId": null
+    }
+  ],
+  "fieldPolicies": {},
+  "idleTimeout": 15,
+  "onIdle": "HINT",
+  "metadata": {}
+}

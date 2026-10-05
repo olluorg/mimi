@@ -1,0 +1,2062 @@
+{
+ "cards": [
+  {
+   "id": "bathe",
+   "label": "Купаться",
+   "category": "actions",
+   "audio": true
+  },
+  {
+   "id": "clean-up",
+   "label": "Убирать",
+   "category": "actions",
+   "audio": true
+  },
+  {
+   "id": "drink",
+   "label": "Пить",
+   "category": "actions",
+   "audio": true
+  },
+  {
+   "id": "eat",
+   "label": "Есть",
+   "category": "actions",
+   "audio": true
+  },
+  {
+   "id": "first",
+   "label": "Сначала",
+   "category": "actions",
+   "audio": true
+  },
+  {
+   "id": "help-me",
+   "label": "Помоги",
+   "category": "actions",
+   "audio": true
+  },
+  {
+   "id": "i-want",
+   "label": "Хочу",
+   "category": "actions",
+   "audio": true
+  },
+  {
+   "id": "sleep",
+   "label": "Спать",
+   "category": "actions",
+   "audio": true
+  },
+  {
+   "id": "walk",
+   "label": "Гулять",
+   "category": "actions",
+   "audio": true
+  },
+  {
+   "id": "wash",
+   "label": "Мыть",
+   "category": "actions",
+   "audio": true
+  },
+  {
+   "id": "bear",
+   "label": "Медведь",
+   "category": "animals",
+   "audio": true
+  },
+  {
+   "id": "bee",
+   "label": "Пчела",
+   "category": "animals",
+   "audio": true
+  },
+  {
+   "id": "boar",
+   "label": "Кабан",
+   "category": "animals",
+   "audio": true
+  },
+  {
+   "id": "bull",
+   "label": "Бык",
+   "category": "animals",
+   "audio": true
+  },
+  {
+   "id": "calf",
+   "label": "Теленок",
+   "category": "animals",
+   "audio": true
+  },
+  {
+   "id": "cat",
+   "label": "Кошка",
+   "category": "animals",
+   "audio": true
+  },
+  {
+   "id": "chick",
+   "label": "Цыпленок",
+   "category": "animals",
+   "audio": true
+  },
+  {
+   "id": "cow",
+   "label": "Корова",
+   "category": "animals",
+   "audio": true
+  },
+  {
+   "id": "dog",
+   "label": "Собака",
+   "category": "animals",
+   "audio": true
+  },
+  {
+   "id": "duck",
+   "label": "Утка",
+   "category": "animals",
+   "audio": true
+  },
+  {
+   "id": "duckling",
+   "label": "Утенок",
+   "category": "animals",
+   "audio": true
+  },
+  {
+   "id": "elephant",
+   "label": "Слон",
+   "category": "animals",
+   "audio": true
+  },
+  {
+   "id": "fish",
+   "label": "Рыба",
+   "category": "animals",
+   "audio": true
+  },
+  {
+   "id": "foal",
+   "label": "Жеребенок",
+   "category": "animals",
+   "audio": true
+  },
+  {
+   "id": "fox",
+   "label": "Лиса",
+   "category": "animals",
+   "audio": true
+  },
+  {
+   "id": "frog",
+   "label": "Лягушка",
+   "category": "animals",
+   "audio": true
+  },
+  {
+   "id": "giraffe",
+   "label": "Жираф",
+   "category": "animals",
+   "audio": true
+  },
+  {
+   "id": "goat",
+   "label": "Коза",
+   "category": "animals",
+   "audio": true
+  },
+  {
+   "id": "goose",
+   "label": "Гусь",
+   "category": "animals",
+   "audio": true
+  },
+  {
+   "id": "hare",
+   "label": "Заяц",
+   "category": "animals",
+   "audio": true
+  },
+  {
+   "id": "hedgehog",
+   "label": "Еж",
+   "category": "animals",
+   "audio": true
+  },
+  {
+   "id": "hen",
+   "label": "Курица-птица",
+   "category": "animals",
+   "audio": true
+  },
+  {
+   "id": "horse",
+   "label": "Лошадь",
+   "category": "animals",
+   "audio": true
+  },
+  {
+   "id": "kid-goat",
+   "label": "Козленок",
+   "category": "animals",
+   "audio": true
+  },
+  {
+   "id": "kitten",
+   "label": "Котенок",
+   "category": "animals",
+   "audio": true
+  },
+  {
+   "id": "lamb",
+   "label": "Ягненок",
+   "category": "animals",
+   "audio": true
+  },
+  {
+   "id": "lion",
+   "label": "Лев",
+   "category": "animals",
+   "audio": true
+  },
+  {
+   "id": "monkey",
+   "label": "Обезьяна",
+   "category": "animals",
+   "audio": true
+  },
+  {
+   "id": "mouse",
+   "label": "Мышь",
+   "category": "animals",
+   "audio": true
+  },
+  {
+   "id": "panda",
+   "label": "Панда",
+   "category": "animals",
+   "audio": true
+  },
+  {
+   "id": "pig",
+   "label": "Свинья",
+   "category": "animals",
+   "audio": true
+  },
+  {
+   "id": "piglet",
+   "label": "Поросенок",
+   "category": "animals",
+   "audio": true
+  },
+  {
+   "id": "puppy",
+   "label": "Щенок",
+   "category": "animals",
+   "audio": true
+  },
+  {
+   "id": "rabbit",
+   "label": "Кролик",
+   "category": "animals",
+   "audio": true
+  },
+  {
+   "id": "ram",
+   "label": "Баран",
+   "category": "animals",
+   "audio": true
+  },
+  {
+   "id": "rooster",
+   "label": "Петух",
+   "category": "animals",
+   "audio": true
+  },
+  {
+   "id": "sheep",
+   "label": "Овца",
+   "category": "animals",
+   "audio": true
+  },
+  {
+   "id": "snake",
+   "label": "Змея",
+   "category": "animals",
+   "audio": true
+  },
+  {
+   "id": "squirrel",
+   "label": "Белка",
+   "category": "animals",
+   "audio": true
+  },
+  {
+   "id": "tiger",
+   "label": "Тигр",
+   "category": "animals",
+   "audio": true
+  },
+  {
+   "id": "turtle",
+   "label": "Черепаха",
+   "category": "animals",
+   "audio": true
+  },
+  {
+   "id": "whale",
+   "label": "Кит",
+   "category": "animals",
+   "audio": true
+  },
+  {
+   "id": "wolf",
+   "label": "Волк",
+   "category": "animals",
+   "audio": true
+  },
+  {
+   "id": "zebra",
+   "label": "Зебра",
+   "category": "animals",
+   "audio": true
+  },
+  {
+   "id": "backpack",
+   "label": "Рюкзак",
+   "category": "clothes",
+   "audio": true
+  },
+  {
+   "id": "blouse",
+   "label": "Блузка",
+   "category": "clothes",
+   "audio": true
+  },
+  {
+   "id": "boots",
+   "label": "Ботинки",
+   "category": "clothes",
+   "audio": true
+  },
+  {
+   "id": "cap",
+   "label": "Кепка",
+   "category": "clothes",
+   "audio": true
+  },
+  {
+   "id": "collar",
+   "label": "Воротник",
+   "category": "clothes",
+   "audio": true
+  },
+  {
+   "id": "dress",
+   "label": "Платье",
+   "category": "clothes",
+   "audio": true
+  },
+  {
+   "id": "hat",
+   "label": "Шапка",
+   "category": "clothes",
+   "audio": true
+  },
+  {
+   "id": "hood",
+   "label": "Капюшон",
+   "category": "clothes",
+   "audio": true
+  },
+  {
+   "id": "jacket",
+   "label": "Куртка",
+   "category": "clothes",
+   "audio": true
+  },
+  {
+   "id": "jeans",
+   "label": "Джинсы",
+   "category": "clothes",
+   "audio": true
+  },
+  {
+   "id": "mask",
+   "label": "Маска",
+   "category": "clothes",
+   "audio": true
+  },
+  {
+   "id": "mittens",
+   "label": "Варежки",
+   "category": "clothes",
+   "audio": true
+  },
+  {
+   "id": "pajamas",
+   "label": "Пижама",
+   "category": "clothes",
+   "audio": true
+  },
+  {
+   "id": "pocket",
+   "label": "Карман",
+   "category": "clothes",
+   "audio": true
+  },
+  {
+   "id": "put-on",
+   "label": "Надеть",
+   "category": "clothes",
+   "audio": true
+  },
+  {
+   "id": "put-on-hood",
+   "label": "Капюшон надеть",
+   "category": "clothes",
+   "audio": true
+  },
+  {
+   "id": "scarf",
+   "label": "Шарф",
+   "category": "clothes",
+   "audio": true
+  },
+  {
+   "id": "school-backpack",
+   "label": "Рюкзак школьный",
+   "category": "clothes",
+   "audio": true
+  },
+  {
+   "id": "shirt",
+   "label": "Рубашка",
+   "category": "clothes",
+   "audio": true
+  },
+  {
+   "id": "shoe-covers",
+   "label": "Бахилы",
+   "category": "clothes",
+   "audio": true
+  },
+  {
+   "id": "shoes",
+   "label": "Туфли",
+   "category": "clothes",
+   "audio": true
+  },
+  {
+   "id": "socks",
+   "label": "Носки",
+   "category": "clothes",
+   "audio": true
+  },
+  {
+   "id": "sweater",
+   "label": "Свитер",
+   "category": "clothes",
+   "audio": true
+  },
+  {
+   "id": "t-shirt",
+   "label": "Футболка",
+   "category": "clothes",
+   "audio": true
+  },
+  {
+   "id": "take-off",
+   "label": "Снять",
+   "category": "clothes",
+   "audio": true
+  },
+  {
+   "id": "tights",
+   "label": "Колготки",
+   "category": "clothes",
+   "audio": true
+  },
+  {
+   "id": "trousers",
+   "label": "Брюки",
+   "category": "clothes",
+   "audio": true
+  },
+  {
+   "id": "vest",
+   "label": "Жилет",
+   "category": "clothes",
+   "audio": true
+  },
+  {
+   "id": "beige",
+   "label": "Бежевый",
+   "category": "colors",
+   "audio": true
+  },
+  {
+   "id": "black",
+   "label": "Черный",
+   "category": "colors",
+   "audio": true
+  },
+  {
+   "id": "blue",
+   "label": "Синий",
+   "category": "colors",
+   "audio": true
+  },
+  {
+   "id": "brown",
+   "label": "Коричневый",
+   "category": "colors",
+   "audio": true
+  },
+  {
+   "id": "gold",
+   "label": "Золотой",
+   "category": "colors",
+   "audio": true
+  },
+  {
+   "id": "gray",
+   "label": "Серый",
+   "category": "colors",
+   "audio": true
+  },
+  {
+   "id": "green",
+   "label": "Зеленый",
+   "category": "colors",
+   "audio": true
+  },
+  {
+   "id": "light-blue",
+   "label": "Голубой",
+   "category": "colors",
+   "audio": true
+  },
+  {
+   "id": "orange-color",
+   "label": "Оранжевый",
+   "category": "colors",
+   "audio": true
+  },
+  {
+   "id": "pink",
+   "label": "Розовый",
+   "category": "colors",
+   "audio": true
+  },
+  {
+   "id": "purple",
+   "label": "Фиолетовый",
+   "category": "colors",
+   "audio": true
+  },
+  {
+   "id": "red",
+   "label": "Красный",
+   "category": "colors",
+   "audio": true
+  },
+  {
+   "id": "silver",
+   "label": "Серебряный",
+   "category": "colors",
+   "audio": true
+  },
+  {
+   "id": "turquoise",
+   "label": "Бирюзовый",
+   "category": "colors",
+   "audio": true
+  },
+  {
+   "id": "white",
+   "label": "Белый",
+   "category": "colors",
+   "audio": true
+  },
+  {
+   "id": "yellow",
+   "label": "Желтый",
+   "category": "colors",
+   "audio": true
+  },
+  {
+   "id": "cocktail",
+   "label": "Коктейль",
+   "category": "drink",
+   "audio": true
+  },
+  {
+   "id": "cocoa",
+   "label": "Какао",
+   "category": "drink",
+   "audio": true
+  },
+  {
+   "id": "compote",
+   "label": "Компот",
+   "category": "drink",
+   "audio": true
+  },
+  {
+   "id": "cranberry-drink",
+   "label": "Клюквенный морс",
+   "category": "drink",
+   "audio": true
+  },
+  {
+   "id": "drinkable-yogurt",
+   "label": "Йогурт питьевой",
+   "category": "drink",
+   "audio": true
+  },
+  {
+   "id": "grape-juice",
+   "label": "Виноградный сок",
+   "category": "drink",
+   "audio": true
+  },
+  {
+   "id": "green-tea",
+   "label": "Зеленый чай",
+   "category": "drink",
+   "audio": true
+  },
+  {
+   "id": "hot-chocolate",
+   "label": "Горячий шоколад",
+   "category": "drink",
+   "audio": true
+  },
+  {
+   "id": "juice",
+   "label": "Сок",
+   "category": "drink",
+   "audio": true
+  },
+  {
+   "id": "kefir",
+   "label": "Кефир",
+   "category": "drink",
+   "audio": true
+  },
+  {
+   "id": "kissel",
+   "label": "Кисель",
+   "category": "drink",
+   "audio": true
+  },
+  {
+   "id": "lemon-water",
+   "label": "Вода с лимоном",
+   "category": "drink",
+   "audio": true
+  },
+  {
+   "id": "milk",
+   "label": "Молоко",
+   "category": "drink",
+   "audio": true
+  },
+  {
+   "id": "orange-juice",
+   "label": "Апельсиновый сок",
+   "category": "drink",
+   "audio": true
+  },
+  {
+   "id": "soda",
+   "label": "Газировка",
+   "category": "drink",
+   "audio": true
+  },
+  {
+   "id": "tea",
+   "label": "Чай",
+   "category": "drink",
+   "audio": true
+  },
+  {
+   "id": "water",
+   "label": "Вода",
+   "category": "drink",
+   "audio": true
+  },
+  {
+   "id": "yogurt",
+   "label": "Йогурт",
+   "category": "drink",
+   "audio": true
+  },
+  {
+   "id": "anger",
+   "label": "Злость",
+   "category": "emotions",
+   "audio": true
+  },
+  {
+   "id": "awkwardness",
+   "label": "Неловкость",
+   "category": "emotions",
+   "audio": true
+  },
+  {
+   "id": "boredom",
+   "label": "Скука",
+   "category": "emotions",
+   "audio": true
+  },
+  {
+   "id": "calm",
+   "label": "Спокойствие",
+   "category": "emotions",
+   "audio": true
+  },
+  {
+   "id": "confusion",
+   "label": "Растерянность",
+   "category": "emotions",
+   "audio": true
+  },
+  {
+   "id": "disappointment",
+   "label": "Разочарование",
+   "category": "emotions",
+   "audio": true
+  },
+  {
+   "id": "disgust",
+   "label": "Отвращение",
+   "category": "emotions",
+   "audio": true
+  },
+  {
+   "id": "embarrassment",
+   "label": "Смущение",
+   "category": "emotions",
+   "audio": true
+  },
+  {
+   "id": "envy",
+   "label": "Зависть",
+   "category": "emotions",
+   "audio": true
+  },
+  {
+   "id": "fear",
+   "label": "Страх",
+   "category": "emotions",
+   "audio": true
+  },
+  {
+   "id": "gratitude",
+   "label": "Благодарность",
+   "category": "emotions",
+   "audio": true
+  },
+  {
+   "id": "guilt",
+   "label": "Вина",
+   "category": "emotions",
+   "audio": true
+  },
+  {
+   "id": "hurt-feelings",
+   "label": "Обида",
+   "category": "emotions",
+   "audio": true
+  },
+  {
+   "id": "jealousy",
+   "label": "Ревность",
+   "category": "emotions",
+   "audio": true
+  },
+  {
+   "id": "joy",
+   "label": "Радость",
+   "category": "emotions",
+   "audio": true
+  },
+  {
+   "id": "pity",
+   "label": "Жалость",
+   "category": "emotions",
+   "audio": true
+  },
+  {
+   "id": "pride",
+   "label": "Гордость",
+   "category": "emotions",
+   "audio": true
+  },
+  {
+   "id": "sadness",
+   "label": "Грусть",
+   "category": "emotions",
+   "audio": true
+  },
+  {
+   "id": "surprise",
+   "label": "Удивление",
+   "category": "emotions",
+   "audio": true
+  },
+  {
+   "id": "worry",
+   "label": "Беспокойство",
+   "category": "emotions",
+   "audio": true
+  },
+  {
+   "id": "apple",
+   "label": "Яблоко",
+   "category": "food",
+   "audio": true
+  },
+  {
+   "id": "apricot",
+   "label": "Абрикос",
+   "category": "food",
+   "audio": true
+  },
+  {
+   "id": "avocado",
+   "label": "Авокадо",
+   "category": "food",
+   "audio": true
+  },
+  {
+   "id": "bagel",
+   "label": "Баранка",
+   "category": "food",
+   "audio": true
+  },
+  {
+   "id": "banana",
+   "label": "Банан",
+   "category": "food",
+   "audio": true
+  },
+  {
+   "id": "banana-chips",
+   "label": "Банановые чипсы",
+   "category": "food",
+   "audio": true
+  },
+  {
+   "id": "bar",
+   "label": "Батончик",
+   "category": "food",
+   "audio": true
+  },
+  {
+   "id": "blueberries",
+   "label": "Черника",
+   "category": "food",
+   "audio": true
+  },
+  {
+   "id": "borscht",
+   "label": "Борщ",
+   "category": "food",
+   "audio": true
+  },
+  {
+   "id": "bread",
+   "label": "Хлеб",
+   "category": "food",
+   "audio": true
+  },
+  {
+   "id": "broccoli",
+   "label": "Брокколи",
+   "category": "food",
+   "audio": true
+  },
+  {
+   "id": "bun",
+   "label": "Булка",
+   "category": "food",
+   "audio": true
+  },
+  {
+   "id": "burger",
+   "label": "Бургер",
+   "category": "food",
+   "audio": true
+  },
+  {
+   "id": "cake",
+   "label": "Пирожное",
+   "category": "food",
+   "audio": true
+  },
+  {
+   "id": "candy",
+   "label": "Конфета",
+   "category": "food",
+   "audio": true
+  },
+  {
+   "id": "carrot",
+   "label": "Морковь",
+   "category": "food",
+   "audio": true
+  },
+  {
+   "id": "cheese",
+   "label": "Сыр",
+   "category": "food",
+   "audio": true
+  },
+  {
+   "id": "chicken",
+   "label": "Курица",
+   "category": "food",
+   "audio": true
+  },
+  {
+   "id": "chips",
+   "label": "Чипсы",
+   "category": "food",
+   "audio": true
+  },
+  {
+   "id": "chocolate",
+   "label": "Шоколад",
+   "category": "food",
+   "audio": true
+  },
+  {
+   "id": "cookie",
+   "label": "Печенье",
+   "category": "food",
+   "audio": true
+  },
+  {
+   "id": "curd-yogurt",
+   "label": "Творожок",
+   "category": "food",
+   "audio": true
+  },
+  {
+   "id": "dumplings",
+   "label": "Вареники",
+   "category": "food",
+   "audio": true
+  },
+  {
+   "id": "eggplant",
+   "label": "Баклажан",
+   "category": "food",
+   "audio": true
+  },
+  {
+   "id": "grapes",
+   "label": "Виноград",
+   "category": "food",
+   "audio": true
+  },
+  {
+   "id": "ice-cream",
+   "label": "Мороженое",
+   "category": "food",
+   "audio": true
+  },
+  {
+   "id": "jam",
+   "label": "Варенье",
+   "category": "food",
+   "audio": true
+  },
+  {
+   "id": "lemon",
+   "label": "Лимон",
+   "category": "food",
+   "audio": true
+  },
+  {
+   "id": "loaf",
+   "label": "Батон",
+   "category": "food",
+   "audio": true
+  },
+  {
+   "id": "orange",
+   "label": "Апельсин",
+   "category": "food",
+   "audio": true
+  },
+  {
+   "id": "pancakes",
+   "label": "Блины",
+   "category": "food",
+   "audio": true
+  },
+  {
+   "id": "pasta",
+   "label": "Макароны",
+   "category": "food",
+   "audio": true
+  },
+  {
+   "id": "peach",
+   "label": "Персик",
+   "category": "food",
+   "audio": true
+  },
+  {
+   "id": "pear",
+   "label": "Груша",
+   "category": "food",
+   "audio": true
+  },
+  {
+   "id": "pineapple",
+   "label": "Ананас",
+   "category": "food",
+   "audio": true
+  },
+  {
+   "id": "pizza",
+   "label": "Пицца",
+   "category": "food",
+   "audio": true
+  },
+  {
+   "id": "plum",
+   "label": "Слива",
+   "category": "food",
+   "audio": true
+  },
+  {
+   "id": "porridge",
+   "label": "Каша",
+   "category": "food",
+   "audio": true
+  },
+  {
+   "id": "potato",
+   "label": "Картофель",
+   "category": "food",
+   "audio": true
+  },
+  {
+   "id": "rice",
+   "label": "Рис",
+   "category": "food",
+   "audio": true
+  },
+  {
+   "id": "sausage",
+   "label": "Колбаса",
+   "category": "food",
+   "audio": true
+  },
+  {
+   "id": "soup",
+   "label": "Суп",
+   "category": "food",
+   "audio": true
+  },
+  {
+   "id": "strawberry",
+   "label": "Клубника",
+   "category": "food",
+   "audio": true
+  },
+  {
+   "id": "sweet-bun",
+   "label": "Булочка сладкая",
+   "category": "food",
+   "audio": true
+  },
+  {
+   "id": "vinaigrette",
+   "label": "Винегрет",
+   "category": "food",
+   "audio": true
+  },
+  {
+   "id": "waffle",
+   "label": "Вафля",
+   "category": "food",
+   "audio": true
+  },
+  {
+   "id": "watermelon",
+   "label": "Арбуз",
+   "category": "food",
+   "audio": true
+  },
+  {
+   "id": "bed",
+   "label": "Кровать",
+   "category": "household",
+   "audio": true
+  },
+  {
+   "id": "blanket",
+   "label": "Одеяло",
+   "category": "household",
+   "audio": true
+  },
+  {
+   "id": "bottle",
+   "label": "Бутылка",
+   "category": "household",
+   "audio": true
+  },
+  {
+   "id": "box",
+   "label": "Коробка",
+   "category": "household",
+   "audio": true
+  },
+  {
+   "id": "bucket",
+   "label": "Ведерко",
+   "category": "household",
+   "audio": true
+  },
+  {
+   "id": "carpet",
+   "label": "Ковер",
+   "category": "household",
+   "audio": true
+  },
+  {
+   "id": "chair",
+   "label": "Стул",
+   "category": "household",
+   "audio": true
+  },
+  {
+   "id": "cup",
+   "label": "Чашка",
+   "category": "household",
+   "audio": true
+  },
+  {
+   "id": "door",
+   "label": "Дверь",
+   "category": "household",
+   "audio": true
+  },
+  {
+   "id": "faucet",
+   "label": "Кран",
+   "category": "household",
+   "audio": true
+  },
+  {
+   "id": "fork",
+   "label": "Вилка",
+   "category": "household",
+   "audio": true
+  },
+  {
+   "id": "key",
+   "label": "Ключ",
+   "category": "household",
+   "audio": true
+  },
+  {
+   "id": "mirror",
+   "label": "Зеркало",
+   "category": "household",
+   "audio": true
+  },
+  {
+   "id": "phone",
+   "label": "Телефон",
+   "category": "household",
+   "audio": true
+  },
+  {
+   "id": "pillow",
+   "label": "Подушка",
+   "category": "household",
+   "audio": true
+  },
+  {
+   "id": "plate",
+   "label": "Тарелка",
+   "category": "household",
+   "audio": true
+  },
+  {
+   "id": "pot",
+   "label": "Кастрюля",
+   "category": "household",
+   "audio": true
+  },
+  {
+   "id": "soap",
+   "label": "Мыло",
+   "category": "household",
+   "audio": true
+  },
+  {
+   "id": "sofa",
+   "label": "Диван",
+   "category": "household",
+   "audio": true
+  },
+  {
+   "id": "spoon",
+   "label": "Ложка",
+   "category": "household",
+   "audio": true
+  },
+  {
+   "id": "table",
+   "label": "Стол",
+   "category": "household",
+   "audio": true
+  },
+  {
+   "id": "towel",
+   "label": "Полотенце",
+   "category": "household",
+   "audio": true
+  },
+  {
+   "id": "tv",
+   "label": "Телевизор",
+   "category": "household",
+   "audio": true
+  },
+  {
+   "id": "umbrella",
+   "label": "Зонт",
+   "category": "household",
+   "audio": true
+  },
+  {
+   "id": "window",
+   "label": "Окно",
+   "category": "household",
+   "audio": true
+  },
+  {
+   "id": "pain",
+   "label": "Больно",
+   "category": "medicine",
+   "audio": true
+  },
+  {
+   "id": "bye",
+   "label": "Пока",
+   "category": "needs",
+   "audio": true
+  },
+  {
+   "id": "clean",
+   "label": "Чисто",
+   "category": "needs",
+   "audio": true
+  },
+  {
+   "id": "cold",
+   "label": "Холодно",
+   "category": "needs",
+   "audio": true
+  },
+  {
+   "id": "dirty",
+   "label": "Грязно",
+   "category": "needs",
+   "audio": true
+  },
+  {
+   "id": "hello",
+   "label": "Привет",
+   "category": "needs",
+   "audio": true
+  },
+  {
+   "id": "hot",
+   "label": "Жарко",
+   "category": "needs",
+   "audio": true
+  },
+  {
+   "id": "how",
+   "label": "Как",
+   "category": "needs",
+   "audio": true
+  },
+  {
+   "id": "i-do-not-want",
+   "label": "Не хочу",
+   "category": "needs",
+   "audio": true
+  },
+  {
+   "id": "may-i",
+   "label": "Можно",
+   "category": "needs",
+   "audio": true
+  },
+  {
+   "id": "more",
+   "label": "Еще",
+   "category": "needs",
+   "audio": true
+  },
+  {
+   "id": "my-turn",
+   "label": "Моя очередь",
+   "category": "needs",
+   "audio": true
+  },
+  {
+   "id": "no",
+   "label": "Нет",
+   "category": "needs",
+   "audio": true
+  },
+  {
+   "id": "not-allowed",
+   "label": "Нельзя",
+   "category": "needs",
+   "audio": true
+  },
+  {
+   "id": "not-ready",
+   "label": "Не готово",
+   "category": "needs",
+   "audio": true
+  },
+  {
+   "id": "please",
+   "label": "Пожалуйста",
+   "category": "needs",
+   "audio": true
+  },
+  {
+   "id": "ready",
+   "label": "Готово",
+   "category": "needs",
+   "audio": true
+  },
+  {
+   "id": "thank-you",
+   "label": "Спасибо",
+   "category": "needs",
+   "audio": true
+  },
+  {
+   "id": "tiredness",
+   "label": "Усталость",
+   "category": "needs",
+   "audio": true
+  },
+  {
+   "id": "toilet",
+   "label": "Туалет",
+   "category": "needs",
+   "audio": true
+  },
+  {
+   "id": "wet",
+   "label": "Мокро",
+   "category": "needs",
+   "audio": true
+  },
+  {
+   "id": "when",
+   "label": "Когда",
+   "category": "needs",
+   "audio": true
+  },
+  {
+   "id": "where",
+   "label": "Где",
+   "category": "needs",
+   "audio": true
+  },
+  {
+   "id": "who",
+   "label": "Кто",
+   "category": "needs",
+   "audio": true
+  },
+  {
+   "id": "yes",
+   "label": "Да",
+   "category": "needs",
+   "audio": true
+  },
+  {
+   "id": "bell",
+   "label": "Звонок",
+   "category": "objects",
+   "audio": true
+  },
+  {
+   "id": "button",
+   "label": "Пуговица",
+   "category": "objects",
+   "audio": true
+  },
+  {
+   "id": "computer",
+   "label": "Компьютер",
+   "category": "objects",
+   "audio": true
+  },
+  {
+   "id": "folder",
+   "label": "Папка",
+   "category": "objects",
+   "audio": true
+  },
+  {
+   "id": "lock",
+   "label": "Замок",
+   "category": "objects",
+   "audio": true
+  },
+  {
+   "id": "music",
+   "label": "Музыка",
+   "category": "objects",
+   "audio": true
+  },
+  {
+   "id": "name",
+   "label": "Имя",
+   "category": "objects",
+   "audio": true
+  },
+  {
+   "id": "pair",
+   "label": "Пара",
+   "category": "objects",
+   "audio": true
+  },
+  {
+   "id": "scissors",
+   "label": "Ножницы",
+   "category": "objects",
+   "audio": true
+  },
+  {
+   "id": "star",
+   "label": "Звезда",
+   "category": "objects",
+   "audio": true
+  },
+  {
+   "id": "team",
+   "label": "Команда",
+   "category": "objects",
+   "audio": true
+  },
+  {
+   "id": "ticket",
+   "label": "Билет",
+   "category": "objects",
+   "audio": true
+  },
+  {
+   "id": "toothbrush",
+   "label": "Зубная щетка",
+   "category": "objects",
+   "audio": true
+  },
+  {
+   "id": "wheel",
+   "label": "Колесо",
+   "category": "objects",
+   "audio": true
+  },
+  {
+   "id": "your-turn",
+   "label": "Твоя очередь",
+   "category": "objects",
+   "audio": true
+  },
+  {
+   "id": "zipper",
+   "label": "Молния",
+   "category": "objects",
+   "audio": true
+  },
+  {
+   "id": "baby",
+   "label": "Малыш",
+   "category": "people",
+   "audio": true
+  },
+  {
+   "id": "boy",
+   "label": "Мальчик",
+   "category": "people",
+   "audio": true
+  },
+  {
+   "id": "brother",
+   "label": "Брат",
+   "category": "people",
+   "audio": true
+  },
+  {
+   "id": "child",
+   "label": "Ребенок",
+   "category": "people",
+   "audio": true
+  },
+  {
+   "id": "children",
+   "label": "Дети",
+   "category": "people",
+   "audio": true
+  },
+  {
+   "id": "dad",
+   "label": "Папа",
+   "category": "people",
+   "audio": true
+  },
+  {
+   "id": "doctor",
+   "label": "Врач",
+   "category": "people",
+   "audio": true
+  },
+  {
+   "id": "friend",
+   "label": "Друг",
+   "category": "people",
+   "audio": true
+  },
+  {
+   "id": "girl",
+   "label": "Девочка",
+   "category": "people",
+   "audio": true
+  },
+  {
+   "id": "grandfather",
+   "label": "Дедушка",
+   "category": "people",
+   "audio": true
+  },
+  {
+   "id": "grandmother",
+   "label": "Бабушка",
+   "category": "people",
+   "audio": true
+  },
+  {
+   "id": "mom",
+   "label": "Мама",
+   "category": "people",
+   "audio": true
+  },
+  {
+   "id": "sister",
+   "label": "Сестра",
+   "category": "people",
+   "audio": true
+  },
+  {
+   "id": "turkey",
+   "label": "Индюк",
+   "category": "people",
+   "audio": true
+  },
+  {
+   "id": "cafeteria",
+   "label": "Столовая",
+   "category": "places",
+   "audio": true
+  },
+  {
+   "id": "forest",
+   "label": "Лес",
+   "category": "places",
+   "audio": true
+  },
+  {
+   "id": "garage",
+   "label": "Гараж",
+   "category": "places",
+   "audio": true
+  },
+  {
+   "id": "gym",
+   "label": "Спортзал",
+   "category": "places",
+   "audio": true
+  },
+  {
+   "id": "hallway",
+   "label": "Коридор",
+   "category": "places",
+   "audio": true
+  },
+  {
+   "id": "house",
+   "label": "Дом",
+   "category": "places",
+   "audio": true
+  },
+  {
+   "id": "room",
+   "label": "Комната",
+   "category": "places",
+   "audio": true
+  },
+  {
+   "id": "school-toilet",
+   "label": "Туалет в школе",
+   "category": "places",
+   "audio": true
+  },
+  {
+   "id": "wardrobe-room",
+   "label": "Гардероб",
+   "category": "places",
+   "audio": true
+  },
+  {
+   "id": "book",
+   "label": "Книга",
+   "category": "school",
+   "audio": true
+  },
+  {
+   "id": "brush",
+   "label": "Кисточка",
+   "category": "school",
+   "audio": true
+  },
+  {
+   "id": "arrow",
+   "label": "Стрелка",
+   "category": "shapes",
+   "audio": true
+  },
+  {
+   "id": "circle",
+   "label": "Круг",
+   "category": "shapes",
+   "audio": true
+  },
+  {
+   "id": "cone",
+   "label": "Конус",
+   "category": "shapes",
+   "audio": true
+  },
+  {
+   "id": "cross",
+   "label": "Крест",
+   "category": "shapes",
+   "audio": true
+  },
+  {
+   "id": "cube",
+   "label": "Куб",
+   "category": "shapes",
+   "audio": true
+  },
+  {
+   "id": "cylinder",
+   "label": "Цилиндр",
+   "category": "shapes",
+   "audio": true
+  },
+  {
+   "id": "diamond-shape",
+   "label": "Ромб",
+   "category": "shapes",
+   "audio": true
+  },
+  {
+   "id": "line",
+   "label": "Линия",
+   "category": "shapes",
+   "audio": true
+  },
+  {
+   "id": "oval",
+   "label": "Овал",
+   "category": "shapes",
+   "audio": true
+  },
+  {
+   "id": "point",
+   "label": "Точка",
+   "category": "shapes",
+   "audio": true
+  },
+  {
+   "id": "pyramid",
+   "label": "Пирамида",
+   "category": "shapes",
+   "audio": true
+  },
+  {
+   "id": "rectangle",
+   "label": "Прямоугольник",
+   "category": "shapes",
+   "audio": true
+  },
+  {
+   "id": "semicircle",
+   "label": "Полукруг",
+   "category": "shapes",
+   "audio": true
+  },
+  {
+   "id": "sphere",
+   "label": "Шар",
+   "category": "shapes",
+   "audio": true
+  },
+  {
+   "id": "square",
+   "label": "Квадрат",
+   "category": "shapes",
+   "audio": true
+  },
+  {
+   "id": "triangle",
+   "label": "Треугольник",
+   "category": "shapes",
+   "audio": true
+  },
+  {
+   "id": "ball",
+   "label": "Мяч",
+   "category": "toys",
+   "audio": true
+  },
+  {
+   "id": "balloon",
+   "label": "Воздушный шар",
+   "category": "toys",
+   "audio": true
+  },
+  {
+   "id": "blocks",
+   "label": "Кубики",
+   "category": "toys",
+   "audio": true
+  },
+  {
+   "id": "board-game",
+   "label": "Настольная игра",
+   "category": "toys",
+   "audio": true
+  },
+  {
+   "id": "bowling-pins",
+   "label": "Кегли",
+   "category": "toys",
+   "audio": true
+  },
+  {
+   "id": "building-blocks",
+   "label": "Конструктор",
+   "category": "toys",
+   "audio": true
+  },
+  {
+   "id": "cartoons",
+   "label": "Мультики",
+   "category": "toys",
+   "audio": true
+  },
+  {
+   "id": "clay",
+   "label": "Пластилин",
+   "category": "toys",
+   "audio": true
+  },
+  {
+   "id": "doll",
+   "label": "Кукла",
+   "category": "toys",
+   "audio": true
+  },
+  {
+   "id": "dominoes",
+   "label": "Домино",
+   "category": "toys",
+   "audio": true
+  },
+  {
+   "id": "drum",
+   "label": "Барабан",
+   "category": "toys",
+   "audio": true
+  },
+  {
+   "id": "kaleidoscope",
+   "label": "Калейдоскоп",
+   "category": "toys",
+   "audio": true
+  },
+  {
+   "id": "kitchen-set",
+   "label": "Набор кухни",
+   "category": "toys",
+   "audio": true
+  },
+  {
+   "id": "kite",
+   "label": "Воздушный змей",
+   "category": "toys",
+   "audio": true
+  },
+  {
+   "id": "lotto-game",
+   "label": "Лото",
+   "category": "toys",
+   "audio": true
+  },
+  {
+   "id": "mosaic",
+   "label": "Мозаика",
+   "category": "toys",
+   "audio": true
+  },
+  {
+   "id": "puzzle",
+   "label": "Пазл",
+   "category": "toys",
+   "audio": true
+  },
+  {
+   "id": "rattle",
+   "label": "Погремушка",
+   "category": "toys",
+   "audio": true
+  },
+  {
+   "id": "soap-bubbles",
+   "label": "Мыльные пузыри",
+   "category": "toys",
+   "audio": true
+  },
+  {
+   "id": "spinning-top",
+   "label": "Волчок",
+   "category": "toys",
+   "audio": true
+  },
+  {
+   "id": "stacking-pyramid",
+   "label": "Пирамидка",
+   "category": "toys",
+   "audio": true
+  },
+  {
+   "id": "stuffed-toy",
+   "label": "Мягкая игрушка",
+   "category": "toys",
+   "audio": true
+  },
+  {
+   "id": "tablet",
+   "label": "Планшет",
+   "category": "toys",
+   "audio": true
+  },
+  {
+   "id": "teddy-bear",
+   "label": "Мишка",
+   "category": "toys",
+   "audio": true
+  },
+  {
+   "id": "toy-bunny",
+   "label": "Зайчик игрушечный",
+   "category": "toys",
+   "audio": true
+  },
+  {
+   "id": "toy-car",
+   "label": "Машинка",
+   "category": "toys",
+   "audio": true
+  },
+  {
+   "id": "toy-dishes",
+   "label": "Игрушечная посуда",
+   "category": "toys",
+   "audio": true
+  },
+  {
+   "id": "toy-phone",
+   "label": "Игрушечный телефон",
+   "category": "toys",
+   "audio": true
+  },
+  {
+   "id": "xylophone",
+   "label": "Ксилофон",
+   "category": "toys",
+   "audio": true
+  },
+  {
+   "id": "airplane",
+   "label": "Самолет",
+   "category": "transport",
+   "audio": true
+  },
+  {
+   "id": "airport",
+   "label": "Аэропорт",
+   "category": "transport",
+   "audio": true
+  },
+  {
+   "id": "ambulance",
+   "label": "Скорая помощь",
+   "category": "transport",
+   "audio": true
+  },
+  {
+   "id": "atv",
+   "label": "Квадроцикл",
+   "category": "transport",
+   "audio": true
+  },
+  {
+   "id": "bicycle",
+   "label": "Велосипед",
+   "category": "transport",
+   "audio": true
+  },
+  {
+   "id": "bulldozer",
+   "label": "Бульдозер",
+   "category": "transport",
+   "audio": true
+  },
+  {
+   "id": "bus",
+   "label": "Автобус",
+   "category": "transport",
+   "audio": true
+  },
+  {
+   "id": "car",
+   "label": "Машина",
+   "category": "transport",
+   "audio": true
+  },
+  {
+   "id": "car-transporter",
+   "label": "Автовоз",
+   "category": "transport",
+   "audio": true
+  },
+  {
+   "id": "concrete-mixer",
+   "label": "Бетономешалка",
+   "category": "transport",
+   "audio": true
+  },
+  {
+   "id": "excavator",
+   "label": "Экскаватор",
+   "category": "transport",
+   "audio": true
+  },
+  {
+   "id": "ferry",
+   "label": "Паром",
+   "category": "transport",
+   "audio": true
+  },
+  {
+   "id": "fire-truck",
+   "label": "Пожарная машина",
+   "category": "transport",
+   "audio": true
+  },
+  {
+   "id": "forklift",
+   "label": "Погрузчик",
+   "category": "transport",
+   "audio": true
+  },
+  {
+   "id": "metro",
+   "label": "Метро",
+   "category": "transport",
+   "audio": true
+  },
+  {
+   "id": "police-car",
+   "label": "Полицейская машина",
+   "category": "transport",
+   "audio": true
+  },
+  {
+   "id": "semi-truck",
+   "label": "Фура",
+   "category": "transport",
+   "audio": true
+  },
+  {
+   "id": "taxi",
+   "label": "Такси",
+   "category": "transport",
+   "audio": true
+  },
+  {
+   "id": "tow-truck",
+   "label": "Эвакуатор",
+   "category": "transport",
+   "audio": true
+  },
+  {
+   "id": "train",
+   "label": "Поезд",
+   "category": "transport",
+   "audio": true
+  },
+  {
+   "id": "tram",
+   "label": "Трамвай",
+   "category": "transport",
+   "audio": true
+  },
+  {
+   "id": "trolleybus",
+   "label": "Троллейбус",
+   "category": "transport",
+   "audio": true
+  },
+  {
+   "id": "truck",
+   "label": "Грузовик",
+   "category": "transport",
+   "audio": true
+  },
+  {
+   "id": "trunk",
+   "label": "Багажник",
+   "category": "transport",
+   "audio": true
+  }
+ ]
+}

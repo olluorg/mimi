@@ -48,7 +48,9 @@ class CatalogCache {
             ageMax      = meta.ageMax,
             skills      = meta.skills,
             icon        = meta.icon,
-            requires    = meta.requires
+            requires    = meta.requires,
+            tags        = meta.tags,
+            speech      = meta.speech
         )
     }
 

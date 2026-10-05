@@ -1,0 +1,875 @@
+{
+  "sceneId": "yes_no_same_01",
+  "meta": {
+    "title": "Они одинаковые?",
+    "description": "Смотри на две картинки: они одинаковые или разные?",
+    "ageMin": 3,
+    "ageMax": 7,
+    "version": 1,
+    "tags": [
+      "yes_no",
+      "communication",
+      "comparison"
+    ],
+    "skills": [
+      "visual_discrimination",
+      "receptive_speech",
+      "problem_solving",
+      "selective_attention"
+    ],
+    "icon": "👯",
+    "requires": [
+      "yes_no_is_it_01"
+    ]
+  },
+  "entities": [],
+  "objectives": [],
+  "behaviors": [
+    {
+      "behaviorRef": {
+        "type": "progressTracker",
+        "config": {}
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "audioPrompt",
+        "config": {
+          "on": "sceneStarted",
+          "text": "Они одинаковые?",
+          "sound": "_sounds/speech/oni-odinakovye-276d22.wav"
+        }
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "propertySelectionValidator",
+        "config": {
+          "property": "answer",
+          "expectedFrom": "correctAnswer"
+        }
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "adaptiveHint",
+        "config": {}
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "playSoundOnEvent",
+        "config": {
+          "on": "sceneCompleted",
+          "sound": "complete"
+        }
+      },
+      "entityId": null
+    }
+  ],
+  "fieldPolicies": {},
+  "idleTimeout": 25,
+  "onIdle": "HINT",
+  "metadata": {},
+  "levels": [
+    {
+      "levelId": "1_cat_cat",
+      "entities": [
+        {
+          "id": "left_1",
+          "components": [],
+          "behaviors": [],
+          "properties": {
+            "position": {
+              "type": "vec2",
+              "x": 340.0,
+              "y": 300.0
+            },
+            "image": {
+              "type": "text",
+              "value": "_cards/cat.jpg"
+            },
+            "label": {
+              "type": "text",
+              "value": "Кошка"
+            },
+            "name": {
+              "type": "text",
+              "value": "Кошка"
+            },
+            "sound": {
+              "type": "text",
+              "value": "_cards/audio/cat.mp3"
+            },
+            "correctAnswer": {
+              "type": "text",
+              "value": "yes"
+            }
+          },
+          "tags": {
+            "group": "question"
+          },
+          "zOrder": 0
+        },
+        {
+          "id": "right_1",
+          "components": [],
+          "behaviors": [],
+          "properties": {
+            "position": {
+              "type": "vec2",
+              "x": 660.0,
+              "y": 300.0
+            },
+            "image": {
+              "type": "text",
+              "value": "_cards/cat.jpg"
+            },
+            "label": {
+              "type": "text",
+              "value": "Кошка"
+            },
+            "name": {
+              "type": "text",
+              "value": "Кошка"
+            },
+            "sound": {
+              "type": "text",
+              "value": "_cards/audio/cat.mp3"
+            }
+          },
+          "tags": {
+            "group": "question"
+          },
+          "zOrder": 0
+        },
+        {
+          "id": "yes",
+          "components": [
+            "tap"
+          ],
+          "behaviors": [],
+          "properties": {
+            "position": {
+              "type": "vec2",
+              "x": 320.0,
+              "y": 720.0
+            },
+            "image": {
+              "type": "text",
+              "value": "_cards/yes.jpg"
+            },
+            "label": {
+              "type": "text",
+              "value": "Да"
+            },
+            "name": {
+              "type": "text",
+              "value": "Да"
+            },
+            "sound": {
+              "type": "text",
+              "value": "_cards/audio/yes.mp3"
+            },
+            "answer": {
+              "type": "text",
+              "value": "yes"
+            }
+          },
+          "tags": {
+            "group": "answers"
+          },
+          "zOrder": 0
+        },
+        {
+          "id": "no",
+          "components": [
+            "tap"
+          ],
+          "behaviors": [],
+          "properties": {
+            "position": {
+              "type": "vec2",
+              "x": 680.0,
+              "y": 720.0
+            },
+            "image": {
+              "type": "text",
+              "value": "_cards/no.jpg"
+            },
+            "label": {
+              "type": "text",
+              "value": "Нет"
+            },
+            "name": {
+              "type": "text",
+              "value": "Нет"
+            },
+            "sound": {
+              "type": "text",
+              "value": "_cards/audio/no.mp3"
+            },
+            "answer": {
+              "type": "text",
+              "value": "no"
+            }
+          },
+          "tags": {
+            "group": "answers"
+          },
+          "zOrder": 0
+        }
+      ],
+      "objectives": [
+        {
+          "id": "answered",
+          "type": "anySelected",
+          "config": {
+            "group": "answers"
+          },
+          "requires": null
+        }
+      ]
+    },
+    {
+      "levelId": "2_cat_dog",
+      "entities": [
+        {
+          "id": "left_2",
+          "components": [],
+          "behaviors": [],
+          "properties": {
+            "position": {
+              "type": "vec2",
+              "x": 340.0,
+              "y": 300.0
+            },
+            "image": {
+              "type": "text",
+              "value": "_cards/cat.jpg"
+            },
+            "label": {
+              "type": "text",
+              "value": "Кошка"
+            },
+            "name": {
+              "type": "text",
+              "value": "Кошка"
+            },
+            "sound": {
+              "type": "text",
+              "value": "_cards/audio/cat.mp3"
+            },
+            "correctAnswer": {
+              "type": "text",
+              "value": "no"
+            }
+          },
+          "tags": {
+            "group": "question"
+          },
+          "zOrder": 0
+        },
+        {
+          "id": "right_2",
+          "components": [],
+          "behaviors": [],
+          "properties": {
+            "position": {
+              "type": "vec2",
+              "x": 660.0,
+              "y": 300.0
+            },
+            "image": {
+              "type": "text",
+              "value": "_cards/dog.jpg"
+            },
+            "label": {
+              "type": "text",
+              "value": "Собака"
+            },
+            "name": {
+              "type": "text",
+              "value": "Собака"
+            },
+            "sound": {
+              "type": "text",
+              "value": "_cards/audio/dog.mp3"
+            }
+          },
+          "tags": {
+            "group": "question"
+          },
+          "zOrder": 0
+        },
+        {
+          "id": "yes",
+          "components": [
+            "tap"
+          ],
+          "behaviors": [],
+          "properties": {
+            "position": {
+              "type": "vec2",
+              "x": 320.0,
+              "y": 720.0
+            },
+            "image": {
+              "type": "text",
+              "value": "_cards/yes.jpg"
+            },
+            "label": {
+              "type": "text",
+              "value": "Да"
+            },
+            "name": {
+              "type": "text",
+              "value": "Да"
+            },
+            "sound": {
+              "type": "text",
+              "value": "_cards/audio/yes.mp3"
+            },
+            "answer": {
+              "type": "text",
+              "value": "yes"
+            }
+          },
+          "tags": {
+            "group": "answers"
+          },
+          "zOrder": 0
+        },
+        {
+          "id": "no",
+          "components": [
+            "tap"
+          ],
+          "behaviors": [],
+          "properties": {
+            "position": {
+              "type": "vec2",
+              "x": 680.0,
+              "y": 720.0
+            },
+            "image": {
+              "type": "text",
+              "value": "_cards/no.jpg"
+            },
+            "label": {
+              "type": "text",
+              "value": "Нет"
+            },
+            "name": {
+              "type": "text",
+              "value": "Нет"
+            },
+            "sound": {
+              "type": "text",
+              "value": "_cards/audio/no.mp3"
+            },
+            "answer": {
+              "type": "text",
+              "value": "no"
+            }
+          },
+          "tags": {
+            "group": "answers"
+          },
+          "zOrder": 0
+        }
+      ],
+      "objectives": [
+        {
+          "id": "answered",
+          "type": "anySelected",
+          "config": {
+            "group": "answers"
+          },
+          "requires": null
+        }
+      ]
+    },
+    {
+      "levelId": "3_apple_apple",
+      "entities": [
+        {
+          "id": "left_3",
+          "components": [],
+          "behaviors": [],
+          "properties": {
+            "position": {
+              "type": "vec2",
+              "x": 340.0,
+              "y": 300.0
+            },
+            "image": {
+              "type": "text",
+              "value": "_cards/apple.jpg"
+            },
+            "label": {
+              "type": "text",
+              "value": "Яблоко"
+            },
+            "name": {
+              "type": "text",
+              "value": "Яблоко"
+            },
+            "sound": {
+              "type": "text",
+              "value": "_cards/audio/apple.mp3"
+            },
+            "correctAnswer": {
+              "type": "text",
+              "value": "yes"
+            }
+          },
+          "tags": {
+            "group": "question"
+          },
+          "zOrder": 0
+        },
+        {
+          "id": "right_3",
+          "components": [],
+          "behaviors": [],
+          "properties": {
+            "position": {
+              "type": "vec2",
+              "x": 660.0,
+              "y": 300.0
+            },
+            "image": {
+              "type": "text",
+              "value": "_cards/apple.jpg"
+            },
+            "label": {
+              "type": "text",
+              "value": "Яблоко"
+            },
+            "name": {
+              "type": "text",
+              "value": "Яблоко"
+            },
+            "sound": {
+              "type": "text",
+              "value": "_cards/audio/apple.mp3"
+            }
+          },
+          "tags": {
+            "group": "question"
+          },
+          "zOrder": 0
+        },
+        {
+          "id": "yes",
+          "components": [
+            "tap"
+          ],
+          "behaviors": [],
+          "properties": {
+            "position": {
+              "type": "vec2",
+              "x": 320.0,
+              "y": 720.0
+            },
+            "image": {
+              "type": "text",
+              "value": "_cards/yes.jpg"
+            },
+            "label": {
+              "type": "text",
+              "value": "Да"
+            },
+            "name": {
+              "type": "text",
+              "value": "Да"
+            },
+            "sound": {
+              "type": "text",
+              "value": "_cards/audio/yes.mp3"
+            },
+            "answer": {
+              "type": "text",
+              "value": "yes"
+            }
+          },
+          "tags": {
+            "group": "answers"
+          },
+          "zOrder": 0
+        },
+        {
+          "id": "no",
+          "components": [
+            "tap"
+          ],
+          "behaviors": [],
+          "properties": {
+            "position": {
+              "type": "vec2",
+              "x": 680.0,
+              "y": 720.0
+            },
+            "image": {
+              "type": "text",
+              "value": "_cards/no.jpg"
+            },
+            "label": {
+              "type": "text",
+              "value": "Нет"
+            },
+            "name": {
+              "type": "text",
+              "value": "Нет"
+            },
+            "sound": {
+              "type": "text",
+              "value": "_cards/audio/no.mp3"
+            },
+            "answer": {
+              "type": "text",
+              "value": "no"
+            }
+          },
+          "tags": {
+            "group": "answers"
+          },
+          "zOrder": 0
+        }
+      ],
+      "objectives": [
+        {
+          "id": "answered",
+          "type": "anySelected",
+          "config": {
+            "group": "answers"
+          },
+          "requires": null
+        }
+      ]
+    },
+    {
+      "levelId": "4_ball_car",
+      "entities": [
+        {
+          "id": "left_4",
+          "components": [],
+          "behaviors": [],
+          "properties": {
+            "position": {
+              "type": "vec2",
+              "x": 340.0,
+              "y": 300.0
+            },
+            "image": {
+              "type": "text",
+              "value": "_cards/ball.jpg"
+            },
+            "label": {
+              "type": "text",
+              "value": "Мяч"
+            },
+            "name": {
+              "type": "text",
+              "value": "Мяч"
+            },
+            "sound": {
+              "type": "text",
+              "value": "_cards/audio/ball.mp3"
+            },
+            "correctAnswer": {
+              "type": "text",
+              "value": "no"
+            }
+          },
+          "tags": {
+            "group": "question"
+          },
+          "zOrder": 0
+        },
+        {
+          "id": "right_4",
+          "components": [],
+          "behaviors": [],
+          "properties": {
+            "position": {
+              "type": "vec2",
+              "x": 660.0,
+              "y": 300.0
+            },
+            "image": {
+              "type": "text",
+              "value": "_cards/car.jpg"
+            },
+            "label": {
+              "type": "text",
+              "value": "Машина"
+            },
+            "name": {
+              "type": "text",
+              "value": "Машина"
+            },
+            "sound": {
+              "type": "text",
+              "value": "_cards/audio/car.mp3"
+            }
+          },
+          "tags": {
+            "group": "question"
+          },
+          "zOrder": 0
+        },
+        {
+          "id": "yes",
+          "components": [
+            "tap"
+          ],
+          "behaviors": [],
+          "properties": {
+            "position": {
+              "type": "vec2",
+              "x": 320.0,
+              "y": 720.0
+            },
+            "image": {
+              "type": "text",
+              "value": "_cards/yes.jpg"
+            },
+            "label": {
+              "type": "text",
+              "value": "Да"
+            },
+            "name": {
+              "type": "text",
+              "value": "Да"
+            },
+            "sound": {
+              "type": "text",
+              "value": "_cards/audio/yes.mp3"
+            },
+            "answer": {
+              "type": "text",
+              "value": "yes"
+            }
+          },
+          "tags": {
+            "group": "answers"
+          },
+          "zOrder": 0
+        },
+        {
+          "id": "no",
+          "components": [
+            "tap"
+          ],
+          "behaviors": [],
+          "properties": {
+            "position": {
+              "type": "vec2",
+              "x": 680.0,
+              "y": 720.0
+            },
+            "image": {
+              "type": "text",
+              "value": "_cards/no.jpg"
+            },
+            "label": {
+              "type": "text",
+              "value": "Нет"
+            },
+            "name": {
+              "type": "text",
+              "value": "Нет"
+            },
+            "sound": {
+              "type": "text",
+              "value": "_cards/audio/no.mp3"
+            },
+            "answer": {
+              "type": "text",
+              "value": "no"
+            }
+          },
+          "tags": {
+            "group": "answers"
+          },
+          "zOrder": 0
+        }
+      ],
+      "objectives": [
+        {
+          "id": "answered",
+          "type": "anySelected",
+          "config": {
+            "group": "answers"
+          },
+          "requires": null
+        }
+      ]
+    },
+    {
+      "levelId": "5_banana_banana",
+      "entities": [
+        {
+          "id": "left_5",
+          "components": [],
+          "behaviors": [],
+          "properties": {
+            "position": {
+              "type": "vec2",
+              "x": 340.0,
+              "y": 300.0
+            },
+            "image": {
+              "type": "text",
+              "value": "_cards/banana.jpg"
+            },
+            "label": {
+              "type": "text",
+              "value": "Банан"
+            },
+            "name": {
+              "type": "text",
+              "value": "Банан"
+            },
+            "sound": {
+              "type": "text",
+              "value": "_cards/audio/banana.mp3"
+            },
+            "correctAnswer": {
+              "type": "text",
+              "value": "yes"
+            }
+          },
+          "tags": {
+            "group": "question"
+          },
+          "zOrder": 0
+        },
+        {
+          "id": "right_5",
+          "components": [],
+          "behaviors": [],
+          "properties": {
+            "position": {
+              "type": "vec2",
+              "x": 660.0,
+              "y": 300.0
+            },
+            "image": {
+              "type": "text",
+              "value": "_cards/banana.jpg"
+            },
+            "label": {
+              "type": "text",
+              "value": "Банан"
+            },
+            "name": {
+              "type": "text",
+              "value": "Банан"
+            },
+            "sound": {
+              "type": "text",
+              "value": "_cards/audio/banana.mp3"
+            }
+          },
+          "tags": {
+            "group": "question"
+          },
+          "zOrder": 0
+        },
+        {
+          "id": "yes",
+          "components": [
+            "tap"
+          ],
+          "behaviors": [],
+          "properties": {
+            "position": {
+              "type": "vec2",
+              "x": 320.0,
+              "y": 720.0
+            },
+            "image": {
+              "type": "text",
+              "value": "_cards/yes.jpg"
+            },
+            "label": {
+              "type": "text",
+              "value": "Да"
+            },
+            "name": {
+              "type": "text",
+              "value": "Да"
+            },
+            "sound": {
+              "type": "text",
+              "value": "_cards/audio/yes.mp3"
+            },
+            "answer": {
+              "type": "text",
+              "value": "yes"
+            }
+          },
+          "tags": {
+            "group": "answers"
+          },
+          "zOrder": 0
+        },
+        {
+          "id": "no",
+          "components": [
+            "tap"
+          ],
+          "behaviors": [],
+          "properties": {
+            "position": {
+              "type": "vec2",
+              "x": 680.0,
+              "y": 720.0
+            },
+            "image": {
+              "type": "text",
+              "value": "_cards/no.jpg"
+            },
+            "label": {
+              "type": "text",
+              "value": "Нет"
+            },
+            "name": {
+              "type": "text",
+              "value": "Нет"
+            },
+            "sound": {
+              "type": "text",
+              "value": "_cards/audio/no.mp3"
+            },
+            "answer": {
+              "type": "text",
+              "value": "no"
+            }
+          },
+          "tags": {
+            "group": "answers"
+          },
+          "zOrder": 0
+        }
+      ],
+      "objectives": [
+        {
+          "id": "answered",
+          "type": "anySelected",
+          "config": {
+            "group": "answers"
+          },
+          "requires": null
+        }
+      ]
+    }
+  ]
+}

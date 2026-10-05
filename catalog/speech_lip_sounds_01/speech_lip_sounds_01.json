@@ -1,0 +1,273 @@
+{
+  "sceneId": "speech_lip_sounds_01",
+  "meta": {
+    "title": "Губы: па, ба, ма, фу",
+    "description": "Звуки, которые видно на губах. Рядом показано, как сложить губы.",
+    "ageMin": 2,
+    "ageMax": 7,
+    "version": 1,
+    "tags": [
+      "speech",
+      "imitation",
+      "syllables"
+    ],
+    "skills": [
+      "speech_motor",
+      "sound_imitation",
+      "vocal_initiation",
+      "expressive_speech"
+    ],
+    "icon": "👄",
+    "requires": [],
+    "speech": {
+      "stage": "imitation",
+      "targets": [
+        "apraxia",
+        "alalia",
+        "dysarthria"
+      ],
+      "modes": [
+        "imitation",
+        "voice"
+      ],
+      "words": [
+        "па",
+        "ба",
+        "ма",
+        "фу"
+      ],
+      "adultTip": "Сядьте лицом к ребёнку, чтобы он видел ваши губы, и дайте потрогать их рукой. «П» и «Б» — одно и то же движение губ, разница только в голосе."
+    }
+  },
+  "entities": [
+    {
+      "id": "dad",
+      "components": [
+        "tap"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 500.0,
+          "y": 440.0
+        },
+        "width": {
+          "type": "num",
+          "value": 320.0
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/dad.jpg"
+        },
+        "name": {
+          "type": "text",
+          "value": "папа"
+        },
+        "speech": {
+          "type": "text",
+          "value": "Па!"
+        },
+        "rewardMotion": {
+          "type": "text",
+          "value": "jump"
+        },
+        "mouth": {
+          "type": "text",
+          "value": "_anim/mouth_pb.json"
+        }
+      },
+      "tags": {
+        "group": "targets"
+      },
+      "zOrder": 0,
+      "initialState": "INACTIVE"
+    },
+    {
+      "id": "grandmother",
+      "components": [
+        "tap"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 500.0,
+          "y": 440.0
+        },
+        "width": {
+          "type": "num",
+          "value": 320.0
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/grandmother.jpg"
+        },
+        "name": {
+          "type": "text",
+          "value": "баба"
+        },
+        "speech": {
+          "type": "text",
+          "value": "Ба!"
+        },
+        "rewardMotion": {
+          "type": "text",
+          "value": "jump"
+        },
+        "mouth": {
+          "type": "text",
+          "value": "_anim/mouth_pb.json"
+        }
+      },
+      "tags": {
+        "group": "targets"
+      },
+      "zOrder": 0,
+      "initialState": "INACTIVE"
+    },
+    {
+      "id": "mom",
+      "components": [
+        "tap"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 500.0,
+          "y": 440.0
+        },
+        "width": {
+          "type": "num",
+          "value": 320.0
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/mom.jpg"
+        },
+        "name": {
+          "type": "text",
+          "value": "мама"
+        },
+        "speech": {
+          "type": "text",
+          "value": "Ма!"
+        },
+        "rewardMotion": {
+          "type": "text",
+          "value": "jump"
+        },
+        "mouth": {
+          "type": "text",
+          "value": "_anim/mouth_m.json"
+        }
+      },
+      "tags": {
+        "group": "targets"
+      },
+      "zOrder": 0,
+      "initialState": "INACTIVE"
+    },
+    {
+      "id": "fu",
+      "components": [
+        "tap"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 500.0,
+          "y": 440.0
+        },
+        "width": {
+          "type": "num",
+          "value": 320.0
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/disgust.jpg"
+        },
+        "name": {
+          "type": "text",
+          "value": "фу"
+        },
+        "speech": {
+          "type": "text",
+          "value": "Фу!"
+        },
+        "rewardMotion": {
+          "type": "text",
+          "value": "wiggle"
+        },
+        "mouth": {
+          "type": "text",
+          "value": "_anim/mouth_vf.json"
+        }
+      },
+      "tags": {
+        "group": "targets"
+      },
+      "zOrder": 0,
+      "initialState": "INACTIVE"
+    }
+  ],
+  "objectives": [
+    {
+      "id": "turns",
+      "type": "interactionCount",
+      "config": {
+        "count": "4"
+      },
+      "requires": null
+    }
+  ],
+  "behaviors": [
+    {
+      "behaviorRef": {
+        "type": "progressTracker",
+        "config": {}
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "audioPrompt",
+        "config": {
+          "on": "sceneStarted",
+          "text": "Скажи!",
+          "sound": "_sounds/speech/skazhi-3628b3.wav"
+        }
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "awaitResponse",
+        "config": {
+          "group": "targets",
+          "accept": "voice,adult",
+          "waitMs": "6000",
+          "maxPrompts": "2",
+          "rewardMs": "1800"
+        }
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "playSoundOnEvent",
+        "config": {
+          "on": "sceneCompleted",
+          "sound": "complete"
+        }
+      },
+      "entityId": null
+    }
+  ],
+  "fieldPolicies": {},
+  "idleTimeout": 40,
+  "onIdle": "HINT",
+  "metadata": {}
+}

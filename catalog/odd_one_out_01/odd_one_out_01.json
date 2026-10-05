@@ -17,9 +17,21 @@
           "type": "text",
           "value": "animal"
         },
-        "emoji": {
+        "image": {
           "type": "text",
-          "value": "🐱"
+          "value": "_cards/cat.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Кошка"
+        },
+        "name": {
+          "type": "text",
+          "value": "Кошка"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/cat.mp3"
         }
       },
       "tags": {
@@ -43,9 +55,21 @@
           "type": "text",
           "value": "animal"
         },
-        "emoji": {
+        "image": {
           "type": "text",
-          "value": "🐶"
+          "value": "_cards/dog.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Собака"
+        },
+        "name": {
+          "type": "text",
+          "value": "Собака"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/dog.mp3"
         }
       },
       "tags": {
@@ -69,9 +93,21 @@
           "type": "text",
           "value": "animal"
         },
-        "emoji": {
+        "image": {
           "type": "text",
-          "value": "🐰"
+          "value": "_cards/rabbit.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Кролик"
+        },
+        "name": {
+          "type": "text",
+          "value": "Кролик"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/rabbit.mp3"
         }
       },
       "tags": {
@@ -95,9 +131,21 @@
           "type": "text",
           "value": "vehicle"
         },
-        "emoji": {
+        "image": {
           "type": "text",
-          "value": "🚗"
+          "value": "_cards/car.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Машина"
+        },
+        "name": {
+          "type": "text",
+          "value": "Машина"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/car.mp3"
         }
       },
       "tags": {
@@ -123,7 +171,8 @@
         "type": "audioPrompt",
         "config": {
           "on": "sceneStarted",
-          "text": "Что здесь лишнее?"
+          "text": "Что здесь лишнее?",
+          "sound": "_sounds/speech/chto-zdes-lishnee-a7ebe4.wav"
         }
       },
       "entityId": null

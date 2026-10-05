@@ -1,0 +1,108 @@
+{
+ "sounds": {
+  "cat": {
+   "label": "Кошка",
+   "seconds": 1.59,
+   "title": "File:Meow of a Siamese cat - freemaster2.wav",
+   "page": "https://commons.wikimedia.org/wiki/File%3AMeow_of_a_Siamese_cat_-_freemaster2.wav",
+   "licence": "CC0",
+   "author": "freemaster2"
+  },
+  "dog": {
+   "label": "Собака",
+   "seconds": 2.66,
+   "title": "File:Barking of a dog.ogg",
+   "page": "https://commons.wikimedia.org/wiki/File%3ABarking_of_a_dog.ogg",
+   "licence": "CC BY-SA 3.0",
+   "author": "Amada44"
+  },
+  "cow": {
+   "label": "Корова",
+   "seconds": 3.84,
+   "title": "File:Single Cow Moo.ogg",
+   "page": "https://commons.wikimedia.org/wiki/File%3ASingle_Cow_Moo.ogg",
+   "licence": "CC BY-SA 4.0",
+   "author": "MichaeltheFox8621"
+  },
+  "sheep": {
+   "label": "Овца",
+   "seconds": 1.2,
+   "title": "File:Mudchute sheep 1.ogg",
+   "page": "https://commons.wikimedia.org/wiki/File%3AMudchute_sheep_1.ogg",
+   "licence": "CC BY-SA 3.0",
+   "author": "Secretlondon"
+  },
+  "pig": {
+   "label": "Свинья",
+   "seconds": 0.73,
+   "title": "File:Pig grunt - Erdie.ogg",
+   "page": "https://commons.wikimedia.org/wiki/File%3APig_grunt_-_Erdie.ogg",
+   "licence": "CC BY 3.0",
+   "author": "erdie"
+  },
+  "horse": {
+   "label": "Лошадь",
+   "seconds": 2.35,
+   "title": "File:Wiehern.ogg",
+   "page": "https://commons.wikimedia.org/wiki/File%3AWiehern.ogg",
+   "licence": "Public domain",
+   "author": "Hü."
+  },
+  "rooster": {
+   "label": "Петух",
+   "seconds": 3.92,
+   "title": "File:Rooster crowing.ogg",
+   "page": "https://commons.wikimedia.org/wiki/File%3ARooster_crowing.ogg",
+   "licence": "CC BY-SA 4.0",
+   "author": "Filo gèn'"
+  },
+  "duck": {
+   "label": "Утка",
+   "seconds": 3.53,
+   "title": "File:Anas platyrhynchos - Mallard - XC62258.ogg",
+   "page": "https://commons.wikimedia.org/wiki/File%3AAnas_platyrhynchos_-_Mallard_-_XC62258.ogg",
+   "licence": "CC BY-SA 3.0",
+   "author": "Jonathon Jongsma"
+  },
+  "frog": {
+   "label": "Лягушка",
+   "seconds": 4.47,
+   "title": "File:Single Frog Croak.oga",
+   "page": "https://commons.wikimedia.org/wiki/File%3ASingle_Frog_Croak.oga",
+   "licence": "CC BY-SA 4.0",
+   "author": "MichaeltheFox8621"
+  },
+  "lion": {
+   "label": "Лев",
+   "seconds": 5.02,
+   "title": "File:Lion raring-sound1TamilNadu178.ogg",
+   "page": "https://commons.wikimedia.org/wiki/File%3ALion_raring-sound1TamilNadu178.ogg",
+   "licence": "Public domain",
+   "author": "த*உழவன்"
+  },
+  "elephant": {
+   "label": "Слон",
+   "seconds": 1.52,
+   "title": "File:Elephant voice - trumpeting.ogg",
+   "page": "https://commons.wikimedia.org/wiki/File%3AElephant_voice_-_trumpeting.ogg",
+   "licence": "CC0",
+   "author": "தகவலுழவன்"
+  },
+  "wolf": {
+   "label": "Волк",
+   "seconds": 5.02,
+   "title": "File:Jem howls.ogg",
+   "page": "https://commons.wikimedia.org/wiki/File%3AJem_howls.ogg",
+   "licence": "Public domain",
+   "author": "amethysta"
+  },
+  "bear": {
+   "label": "Медведь",
+   "seconds": 5.02,
+   "title": "File:Bear growl.ogg",
+   "page": "https://commons.wikimedia.org/wiki/File%3ABear_growl.ogg",
+   "licence": "CC BY 3.0",
+   "author": "Shizhao"
+  }
+ }
+}

@@ -25,9 +25,21 @@
           "type": "text",
           "value": "big"
         },
-        "emoji": {
+        "image": {
           "type": "text",
-          "value": "🐘"
+          "value": "_cards/elephant.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Слон"
+        },
+        "name": {
+          "type": "text",
+          "value": "Слон"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/elephant.mp3"
         }
       },
       "tags": {
@@ -59,9 +71,21 @@
           "type": "text",
           "value": "small"
         },
-        "emoji": {
+        "image": {
           "type": "text",
-          "value": "🐭"
+          "value": "_cards/mouse.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Мышь"
+        },
+        "name": {
+          "type": "text",
+          "value": "Мышь"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/mouse.mp3"
         }
       },
       "tags": {
@@ -97,13 +121,17 @@
           "type": "text",
           "value": "big"
         },
-        "emoji": {
-          "type": "text",
-          "value": "🧺"
-        },
         "label": {
           "type": "text",
           "value": "Большой"
+        },
+        "width": {
+          "type": "num",
+          "value": 190.0
+        },
+        "shape": {
+          "type": "text",
+          "value": "circle"
         }
       },
       "tags": {},
@@ -137,13 +165,17 @@
           "type": "text",
           "value": "small"
         },
-        "emoji": {
-          "type": "text",
-          "value": "🧺"
-        },
         "label": {
           "type": "text",
           "value": "Маленький"
+        },
+        "width": {
+          "type": "num",
+          "value": 88.0
+        },
+        "shape": {
+          "type": "text",
+          "value": "circle"
         }
       },
       "tags": {},
@@ -166,7 +198,8 @@
         "type": "audioPrompt",
         "config": {
           "on": "sceneStarted",
-          "text": "Положи большое к большому, маленькое к маленькому"
+          "text": "Положи большое к большому, маленькое к маленькому",
+          "sound": "_sounds/speech/polozhi-bolshoe-k-bolshomu-malenkoe-k-malenkomu-2e0aff.wav"
         }
       },
       "entityId": null

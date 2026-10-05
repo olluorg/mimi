@@ -17,9 +17,21 @@
           "type": "text",
           "value": "red"
         },
-        "emoji": {
+        "image": {
           "type": "text",
-          "value": "🍎"
+          "value": "_cards/apple.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Яблоко"
+        },
+        "name": {
+          "type": "text",
+          "value": "Яблоко"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/apple.mp3"
         }
       },
       "tags": {
@@ -43,9 +55,21 @@
           "type": "text",
           "value": "blue"
         },
-        "emoji": {
+        "image": {
           "type": "text",
-          "value": "🚙"
+          "value": "_cards/car.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Машина"
+        },
+        "name": {
+          "type": "text",
+          "value": "Машина"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/car.mp3"
         }
       },
       "tags": {
@@ -69,9 +93,21 @@
           "type": "text",
           "value": "yellow"
         },
-        "emoji": {
+        "image": {
           "type": "text",
-          "value": "🌻"
+          "value": "_cards/lemon.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Лимон"
+        },
+        "name": {
+          "type": "text",
+          "value": "Лимон"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/lemon.mp3"
         }
       },
       "tags": {
@@ -95,9 +131,21 @@
           "type": "text",
           "value": "red"
         },
-        "emoji": {
+        "image": {
           "type": "text",
-          "value": "🌹"
+          "value": "_cards/strawberry.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Клубника"
+        },
+        "name": {
+          "type": "text",
+          "value": "Клубника"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/strawberry.mp3"
         }
       },
       "tags": {
@@ -121,9 +169,21 @@
           "type": "text",
           "value": "blue"
         },
-        "emoji": {
+        "image": {
           "type": "text",
-          "value": "🐋"
+          "value": "_cards/whale.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Кит"
+        },
+        "name": {
+          "type": "text",
+          "value": "Кит"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/whale.mp3"
         }
       },
       "tags": {
@@ -147,9 +207,21 @@
           "type": "text",
           "value": "yellow"
         },
-        "emoji": {
+        "image": {
           "type": "text",
-          "value": "🍋"
+          "value": "_cards/lemon.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Лимон"
+        },
+        "name": {
+          "type": "text",
+          "value": "Лимон"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/lemon.mp3"
         }
       },
       "tags": {
@@ -173,9 +245,21 @@
           "type": "text",
           "value": "red"
         },
-        "emoji": {
+        "image": {
           "type": "text",
-          "value": "🚒"
+          "value": "_cards/fire-truck.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Пожарная машина"
+        },
+        "name": {
+          "type": "text",
+          "value": "Пожарная машина"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/fire-truck.mp3"
         }
       },
       "tags": {
@@ -199,9 +283,21 @@
           "type": "text",
           "value": "blue"
         },
-        "emoji": {
+        "image": {
           "type": "text",
-          "value": "🫐"
+          "value": "_cards/blueberries.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Черника"
+        },
+        "name": {
+          "type": "text",
+          "value": "Черника"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/blueberries.mp3"
         }
       },
       "tags": {
@@ -225,9 +321,9 @@
           "type": "text",
           "value": "yellow"
         },
-        "emoji": {
+        "shape": {
           "type": "text",
-          "value": "⭐"
+          "value": "star"
         }
       },
       "tags": {
@@ -263,13 +359,17 @@
           "type": "text",
           "value": "red"
         },
-        "emoji": {
-          "type": "text",
-          "value": "🔴"
-        },
         "label": {
           "type": "text",
           "value": "Красный"
+        },
+        "shape": {
+          "type": "text",
+          "value": "circle"
+        },
+        "color": {
+          "type": "text",
+          "value": "red"
         }
       },
       "tags": {},
@@ -303,13 +403,17 @@
           "type": "text",
           "value": "blue"
         },
-        "emoji": {
-          "type": "text",
-          "value": "🔵"
-        },
         "label": {
           "type": "text",
           "value": "Синий"
+        },
+        "shape": {
+          "type": "text",
+          "value": "circle"
+        },
+        "color": {
+          "type": "text",
+          "value": "blue"
         }
       },
       "tags": {},
@@ -343,13 +447,17 @@
           "type": "text",
           "value": "yellow"
         },
-        "emoji": {
-          "type": "text",
-          "value": "🟡"
-        },
         "label": {
           "type": "text",
           "value": "Жёлтый"
+        },
+        "shape": {
+          "type": "text",
+          "value": "circle"
+        },
+        "color": {
+          "type": "text",
+          "value": "yellow"
         }
       },
       "tags": {},
@@ -372,7 +480,8 @@
         "type": "audioPrompt",
         "config": {
           "on": "sceneStarted",
-          "text": "Разложи предметы по цвету"
+          "text": "Разложи предметы по цвету",
+          "sound": "_sounds/speech/razlozhi-predmety-po-cvetu-3b38e6.wav"
         }
       },
       "entityId": null

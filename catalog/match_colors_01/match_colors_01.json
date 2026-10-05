@@ -21,9 +21,9 @@
           "type": "text",
           "value": "red"
         },
-        "emoji": {
+        "shape": {
           "type": "text",
-          "value": "🔴"
+          "value": "circle"
         }
       },
       "tags": {
@@ -51,9 +51,9 @@
           "type": "text",
           "value": "blue"
         },
-        "emoji": {
+        "shape": {
           "type": "text",
-          "value": "🔵"
+          "value": "circle"
         }
       },
       "tags": {
@@ -81,9 +81,9 @@
           "type": "text",
           "value": "green"
         },
-        "emoji": {
+        "shape": {
           "type": "text",
-          "value": "🟢"
+          "value": "circle"
         }
       },
       "tags": {
@@ -123,9 +123,9 @@
           "type": "text",
           "value": "red"
         },
-        "emoji": {
+        "shape": {
           "type": "text",
-          "value": "🟥"
+          "value": "square"
         }
       },
       "tags": {},
@@ -163,9 +163,9 @@
           "type": "text",
           "value": "blue"
         },
-        "emoji": {
+        "shape": {
           "type": "text",
-          "value": "🟦"
+          "value": "square"
         }
       },
       "tags": {},
@@ -203,9 +203,9 @@
           "type": "text",
           "value": "green"
         },
-        "emoji": {
+        "shape": {
           "type": "text",
-          "value": "🟩"
+          "value": "square"
         }
       },
       "tags": {},
@@ -223,6 +223,17 @@
     }
   ],
   "behaviors": [
+    {
+      "behaviorRef": {
+        "type": "audioPrompt",
+        "config": {
+          "on": "sceneStarted",
+          "text": "Положи кружок к своему цвету",
+          "sound": "_sounds/speech/polozhi-kruzhok-k-svoemu-cvetu-b619c8.wav"
+        }
+      },
+      "entityId": null
+    },
     {
       "behaviorRef": {
         "type": "progressTracker",

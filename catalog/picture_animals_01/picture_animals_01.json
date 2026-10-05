@@ -1,0 +1,567 @@
+{
+  "sceneId": "picture_animals_01",
+  "meta": {
+    "title": "Кто это?",
+    "description": "Нажимай на картинки — услышишь, кто это. Ошибиться нельзя.",
+    "ageMin": 1,
+    "ageMax": 5,
+    "version": 1,
+    "tags": [
+      "cards",
+      "vocabulary",
+      "cause_effect"
+    ],
+    "skills": [
+      "receptive_speech",
+      "word_association",
+      "visual_attention",
+      "task_completion"
+    ],
+    "icon": "🐾",
+    "requires": []
+  },
+  "entities": [
+    {
+      "id": "bear",
+      "components": [
+        "tap"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 220.0,
+          "y": 300.0
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/bear.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Медведь"
+        },
+        "name": {
+          "type": "text",
+          "value": "Медведь"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/bear.mp3"
+        }
+      },
+      "tags": {
+        "group": "gallery"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "boar",
+      "components": [
+        "tap"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 500.0,
+          "y": 300.0
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/boar.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Кабан"
+        },
+        "name": {
+          "type": "text",
+          "value": "Кабан"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/boar.mp3"
+        }
+      },
+      "tags": {
+        "group": "gallery"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "bull",
+      "components": [
+        "tap"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 780.0,
+          "y": 300.0
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/bull.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Бык"
+        },
+        "name": {
+          "type": "text",
+          "value": "Бык"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/bull.mp3"
+        }
+      },
+      "tags": {
+        "group": "gallery"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "calf",
+      "components": [
+        "tap"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 220.0,
+          "y": 550.0
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/calf.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Теленок"
+        },
+        "name": {
+          "type": "text",
+          "value": "Теленок"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/calf.mp3"
+        }
+      },
+      "tags": {
+        "group": "gallery"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "cat",
+      "components": [
+        "tap"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 500.0,
+          "y": 550.0
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/cat.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Кошка"
+        },
+        "name": {
+          "type": "text",
+          "value": "Кошка"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/cat.mp3"
+        }
+      },
+      "tags": {
+        "group": "gallery"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "chick",
+      "components": [
+        "tap"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 780.0,
+          "y": 550.0
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/chick.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Цыпленок"
+        },
+        "name": {
+          "type": "text",
+          "value": "Цыпленок"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/chick.mp3"
+        }
+      },
+      "tags": {
+        "group": "gallery"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "cow",
+      "components": [
+        "tap"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 220.0,
+          "y": 800.0
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/cow.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Корова"
+        },
+        "name": {
+          "type": "text",
+          "value": "Корова"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/cow.mp3"
+        }
+      },
+      "tags": {
+        "group": "gallery"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "dog",
+      "components": [
+        "tap"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 500.0,
+          "y": 800.0
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/dog.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Собака"
+        },
+        "name": {
+          "type": "text",
+          "value": "Собака"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/dog.mp3"
+        }
+      },
+      "tags": {
+        "group": "gallery"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "duck",
+      "components": [
+        "tap"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 780.0,
+          "y": 800.0
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/duck.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Утка"
+        },
+        "name": {
+          "type": "text",
+          "value": "Утка"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/duck.mp3"
+        }
+      },
+      "tags": {
+        "group": "gallery"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "duckling",
+      "components": [
+        "tap"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 220.0,
+          "y": 1050.0
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/duckling.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Утенок"
+        },
+        "name": {
+          "type": "text",
+          "value": "Утенок"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/duckling.mp3"
+        }
+      },
+      "tags": {
+        "group": "gallery"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "elephant",
+      "components": [
+        "tap"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 500.0,
+          "y": 1050.0
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/elephant.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Слон"
+        },
+        "name": {
+          "type": "text",
+          "value": "Слон"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/elephant.mp3"
+        }
+      },
+      "tags": {
+        "group": "gallery"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "fish",
+      "components": [
+        "tap"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 780.0,
+          "y": 1050.0
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/fish.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Рыба"
+        },
+        "name": {
+          "type": "text",
+          "value": "Рыба"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/fish.mp3"
+        }
+      },
+      "tags": {
+        "group": "gallery"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "foal",
+      "components": [
+        "tap"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 220.0,
+          "y": 1300.0
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/foal.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Жеребенок"
+        },
+        "name": {
+          "type": "text",
+          "value": "Жеребенок"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/foal.mp3"
+        }
+      },
+      "tags": {
+        "group": "gallery"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "fox",
+      "components": [
+        "tap"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 500.0,
+          "y": 1300.0
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/fox.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Лиса"
+        },
+        "name": {
+          "type": "text",
+          "value": "Лиса"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/fox.mp3"
+        }
+      },
+      "tags": {
+        "group": "gallery"
+      },
+      "zOrder": 0
+    }
+  ],
+  "objectives": [
+    {
+      "id": "looked",
+      "type": "interactionCount",
+      "config": {
+        "count": "8"
+      },
+      "requires": null
+    }
+  ],
+  "behaviors": [
+    {
+      "behaviorRef": {
+        "type": "audioPrompt",
+        "config": {
+          "on": "sceneStarted",
+          "text": "Нажимай на картинки. Я назову, кто это",
+          "sound": "_sounds/speech/nazhimay-na-kartinki-ya-nazovu-kto-eto-4fc985.wav"
+        }
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "progressTracker",
+        "config": {}
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "freeSelection",
+        "config": {
+          "group": "gallery",
+          "repeatable": "true",
+          "speak": "true"
+        }
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "playSoundOnEvent",
+        "config": {
+          "on": "sceneCompleted",
+          "sound": "complete"
+        }
+      },
+      "entityId": null
+    }
+  ],
+  "fieldPolicies": {},
+  "idleTimeout": 40,
+  "onIdle": "HINT",
+  "metadata": {},
+  "variation": {
+    "pick": [
+      {
+        "group": "gallery",
+        "count": 6
+      }
+    ],
+    "shufflePositions": [
+      "gallery"
+    ]
+  }
+}

@@ -50,7 +50,7 @@ class ObjectiveSystemTest {
     }
 
     @Test
-    fun `allMatched - LOCKED_COMPLETE when all entities matched (single objective auto-locks)`() {
+    fun `allMatched - LOCKED_COMPLETE when all entities matched and the single objective auto-locks`() {
         val world = worldWithEntities("apple" to EntityLifecycleState.TENTATIVE, "banana" to EntityLifecycleState.TENTATIVE)
         val defs  = listOf(ObjectiveDefinition("obj1", "allMatched", mapOf("group" to "fruits")))
         val result = system.evaluate(defs, world, mapOf("obj1" to ObjectiveState.PROGRESSING), tick = 1L)

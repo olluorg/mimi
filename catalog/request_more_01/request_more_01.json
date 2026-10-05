@@ -1,0 +1,304 @@
+{
+  "sceneId": "request_more_01",
+  "meta": {
+    "title": "Попроси «ещё»",
+    "description": "Нажимай «ещё» — и появится ещё один шарик.",
+    "ageMin": 2,
+    "ageMax": 6,
+    "version": 1,
+    "tags": [
+      "communication",
+      "aac",
+      "requesting"
+    ],
+    "skills": [
+      "expressive_speech",
+      "task_completion",
+      "turn_taking",
+      "receptive_speech",
+      "requesting"
+    ],
+    "icon": "➕",
+    "requires": [],
+    "speech": {
+      "stage": "aac",
+      "targets": [
+        "alalia",
+        "apraxia"
+      ],
+      "modes": [
+        "aac"
+      ],
+      "words": [
+        "ещё"
+      ],
+      "adultTip": "Когда ребёнок нажимает картинку, повторите слово сами и сразу дайте то, что он попросил. Картинка — это его голос, она не мешает речи, а помогает ей."
+    }
+  },
+  "entities": [
+    {
+      "id": "more",
+      "components": [
+        "tap"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 500.0,
+          "y": 660.0
+        },
+        "name": {
+          "type": "text",
+          "value": "ещё"
+        },
+        "label": {
+          "type": "text",
+          "value": "ещё"
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/more.jpg"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/more.mp3"
+        }
+      },
+      "tags": {
+        "group": "request"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "balloon_0",
+      "components": [],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 150.0,
+          "y": 260.0
+        },
+        "name": {
+          "type": "text",
+          "value": "шарик"
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/balloon.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Воздушный шар"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/balloon.mp3"
+        }
+      },
+      "tags": {
+        "group": "reward"
+      },
+      "zOrder": 0,
+      "initialState": "INACTIVE"
+    },
+    {
+      "id": "balloon_1",
+      "components": [],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 325.0,
+          "y": 260.0
+        },
+        "name": {
+          "type": "text",
+          "value": "шарик"
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/balloon.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Воздушный шар"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/balloon.mp3"
+        }
+      },
+      "tags": {
+        "group": "reward"
+      },
+      "zOrder": 0,
+      "initialState": "INACTIVE"
+    },
+    {
+      "id": "balloon_2",
+      "components": [],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 500.0,
+          "y": 260.0
+        },
+        "name": {
+          "type": "text",
+          "value": "шарик"
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/balloon.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Воздушный шар"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/balloon.mp3"
+        }
+      },
+      "tags": {
+        "group": "reward"
+      },
+      "zOrder": 0,
+      "initialState": "INACTIVE"
+    },
+    {
+      "id": "balloon_3",
+      "components": [],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 675.0,
+          "y": 260.0
+        },
+        "name": {
+          "type": "text",
+          "value": "шарик"
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/balloon.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Воздушный шар"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/balloon.mp3"
+        }
+      },
+      "tags": {
+        "group": "reward"
+      },
+      "zOrder": 0,
+      "initialState": "INACTIVE"
+    },
+    {
+      "id": "balloon_4",
+      "components": [],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 850.0,
+          "y": 260.0
+        },
+        "name": {
+          "type": "text",
+          "value": "шарик"
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/balloon.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Воздушный шар"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/balloon.mp3"
+        }
+      },
+      "tags": {
+        "group": "reward"
+      },
+      "zOrder": 0,
+      "initialState": "INACTIVE"
+    }
+  ],
+  "objectives": [
+    {
+      "id": "asked",
+      "type": "interactionCount",
+      "config": {
+        "count": "5"
+      },
+      "requires": null
+    }
+  ],
+  "behaviors": [
+    {
+      "behaviorRef": {
+        "type": "progressTracker",
+        "config": {}
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "audioPrompt",
+        "config": {
+          "on": "sceneStarted",
+          "text": "Нажми «ещё»",
+          "sound": "_sounds/speech/nazhmi-esche-11c727.wav"
+        }
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "freeSelection",
+        "config": {
+          "group": "request",
+          "repeatable": "true",
+          "speak": "true"
+        }
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "revealNext",
+        "config": {
+          "group": "reward",
+          "on": "matchSuccess"
+        }
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "playSoundOnEvent",
+        "config": {
+          "on": "sceneCompleted",
+          "sound": "complete"
+        }
+      },
+      "entityId": null
+    }
+  ],
+  "fieldPolicies": {},
+  "idleTimeout": 25,
+  "onIdle": "HINT",
+  "metadata": {}
+}

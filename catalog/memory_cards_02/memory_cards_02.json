@@ -17,13 +17,17 @@
           "type": "text",
           "value": "dog"
         },
-        "face": {
-          "type": "text",
-          "value": "🐶"
-        },
         "cardState": {
           "type": "text",
           "value": "hidden"
+        },
+        "faceImage": {
+          "type": "text",
+          "value": "_cards/dog.jpg"
+        },
+        "faceLabel": {
+          "type": "text",
+          "value": "Собака"
         }
       },
       "tags": {
@@ -47,13 +51,17 @@
           "type": "text",
           "value": "frog"
         },
-        "face": {
-          "type": "text",
-          "value": "🐸"
-        },
         "cardState": {
           "type": "text",
           "value": "hidden"
+        },
+        "faceImage": {
+          "type": "text",
+          "value": "_cards/frog.jpg"
+        },
+        "faceLabel": {
+          "type": "text",
+          "value": "Лягушка"
         }
       },
       "tags": {
@@ -77,13 +85,17 @@
           "type": "text",
           "value": "lion"
         },
-        "face": {
-          "type": "text",
-          "value": "🦁"
-        },
         "cardState": {
           "type": "text",
           "value": "hidden"
+        },
+        "faceImage": {
+          "type": "text",
+          "value": "_cards/lion.jpg"
+        },
+        "faceLabel": {
+          "type": "text",
+          "value": "Лев"
         }
       },
       "tags": {
@@ -107,13 +119,17 @@
           "type": "text",
           "value": "cat"
         },
-        "face": {
-          "type": "text",
-          "value": "🐱"
-        },
         "cardState": {
           "type": "text",
           "value": "hidden"
+        },
+        "faceImage": {
+          "type": "text",
+          "value": "_cards/cat.jpg"
+        },
+        "faceLabel": {
+          "type": "text",
+          "value": "Кошка"
         }
       },
       "tags": {
@@ -137,13 +153,17 @@
           "type": "text",
           "value": "panda"
         },
-        "face": {
-          "type": "text",
-          "value": "🐼"
-        },
         "cardState": {
           "type": "text",
           "value": "hidden"
+        },
+        "faceImage": {
+          "type": "text",
+          "value": "_cards/panda.jpg"
+        },
+        "faceLabel": {
+          "type": "text",
+          "value": "Панда"
         }
       },
       "tags": {
@@ -167,13 +187,17 @@
           "type": "text",
           "value": "rabbit"
         },
-        "face": {
-          "type": "text",
-          "value": "🐰"
-        },
         "cardState": {
           "type": "text",
           "value": "hidden"
+        },
+        "faceImage": {
+          "type": "text",
+          "value": "_cards/rabbit.jpg"
+        },
+        "faceLabel": {
+          "type": "text",
+          "value": "Кролик"
         }
       },
       "tags": {
@@ -197,13 +221,17 @@
           "type": "text",
           "value": "cat"
         },
-        "face": {
-          "type": "text",
-          "value": "🐱"
-        },
         "cardState": {
           "type": "text",
           "value": "hidden"
+        },
+        "faceImage": {
+          "type": "text",
+          "value": "_cards/cat.jpg"
+        },
+        "faceLabel": {
+          "type": "text",
+          "value": "Кошка"
         }
       },
       "tags": {
@@ -227,13 +255,17 @@
           "type": "text",
           "value": "panda"
         },
-        "face": {
-          "type": "text",
-          "value": "🐼"
-        },
         "cardState": {
           "type": "text",
           "value": "hidden"
+        },
+        "faceImage": {
+          "type": "text",
+          "value": "_cards/panda.jpg"
+        },
+        "faceLabel": {
+          "type": "text",
+          "value": "Панда"
         }
       },
       "tags": {
@@ -257,13 +289,17 @@
           "type": "text",
           "value": "frog"
         },
-        "face": {
-          "type": "text",
-          "value": "🐸"
-        },
         "cardState": {
           "type": "text",
           "value": "hidden"
+        },
+        "faceImage": {
+          "type": "text",
+          "value": "_cards/frog.jpg"
+        },
+        "faceLabel": {
+          "type": "text",
+          "value": "Лягушка"
         }
       },
       "tags": {
@@ -287,13 +323,17 @@
           "type": "text",
           "value": "dog"
         },
-        "face": {
-          "type": "text",
-          "value": "🐶"
-        },
         "cardState": {
           "type": "text",
           "value": "hidden"
+        },
+        "faceImage": {
+          "type": "text",
+          "value": "_cards/dog.jpg"
+        },
+        "faceLabel": {
+          "type": "text",
+          "value": "Собака"
         }
       },
       "tags": {
@@ -317,13 +357,17 @@
           "type": "text",
           "value": "rabbit"
         },
-        "face": {
-          "type": "text",
-          "value": "🐰"
-        },
         "cardState": {
           "type": "text",
           "value": "hidden"
+        },
+        "faceImage": {
+          "type": "text",
+          "value": "_cards/rabbit.jpg"
+        },
+        "faceLabel": {
+          "type": "text",
+          "value": "Кролик"
         }
       },
       "tags": {
@@ -347,13 +391,17 @@
           "type": "text",
           "value": "lion"
         },
-        "face": {
-          "type": "text",
-          "value": "🦁"
-        },
         "cardState": {
           "type": "text",
           "value": "hidden"
+        },
+        "faceImage": {
+          "type": "text",
+          "value": "_cards/lion.jpg"
+        },
+        "faceLabel": {
+          "type": "text",
+          "value": "Лев"
         }
       },
       "tags": {
@@ -375,11 +423,21 @@
   "behaviors": [
     {
       "behaviorRef": {
+        "type": "audioPrompt",
+        "config": {
+          "on": "sceneStarted",
+          "text": "Открывай карточки и ищи пары",
+          "sound": "_sounds/speech/otkryvay-kartochki-i-ischi-pary-659d0e.wav"
+        }
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
         "type": "memoryFlipController",
         "config": {
           "group": "cards",
-          "maxOpenCards": "2",
-          "flipBackDelayMs": "800"
+          "maxOpenCards": "2"
         }
       },
       "entityId": null
@@ -405,16 +463,6 @@
       "behaviorRef": {
         "type": "adaptiveHint",
         "config": {}
-      },
-      "entityId": null
-    },
-    {
-      "behaviorRef": {
-        "type": "playSoundOnEvent",
-        "config": {
-          "on": "pairMatched",
-          "sound": "correct"
-        }
       },
       "entityId": null
     },

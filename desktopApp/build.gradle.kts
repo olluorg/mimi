@@ -11,14 +11,6 @@ dependencies {
     implementation(project(":sharedUI"))
 }
 
-tasks.register<JavaExec>("generateCatalog") {
-    dependsOn("compileKotlin")
-    classpath = sourceSets["main"].runtimeClasspath
-    mainClass.set("GenerateCatalogKt")
-    workingDir = rootProject.projectDir
-    systemProperty("catalog.outputDir", "${rootProject.projectDir}/catalog")
-}
-
 compose.desktop {
     application {
         mainClass = "MainKt"

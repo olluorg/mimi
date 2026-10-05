@@ -20,6 +20,7 @@ concurrency:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+    timeout-minutes: 45
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
@@ -27,40 +28,21 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Generate catalog.json from scene files
-        run: |
-          python3 - <<'EOF'
-          import json, pathlib, sys
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
 
-          BASE_URL = "https://olluorg.github.io/mimi"
-          catalog_dir = pathlib.Path("catalog")
+      - uses: gradle/actions/setup-gradle@v4
 
-          scenes = []
-          seen_ids = set()
+      # Publishing is over-the-air: whatever lands here reaches every installed
+      # app without a release. Nothing deploys unless every scene parses,
+      # validates, and can actually be completed.
+      - name: Validate catalog
+        run: ./gradlew :core:jvmTest --tests '*CatalogIntegrityTest*' --stacktrace
 
-          # Scan subdirectories: catalog/{id}/{id}.json
-          for sub in sorted(catalog_dir.iterdir()):
-              if not sub.is_dir():
-                  continue
-              scene_file = sub / f"{sub.name}.json"
-              if not scene_file.exists():
-                  continue
-              try:
-                  data = json.loads(scene_file.read_text())
-                  scene_id = data.get("sceneId") or sub.name
-                  if scene_id in seen_ids:
-                      continue
-                  seen_ids.add(scene_id)
-                  scenes.append({"id": scene_id, "url": f"{BASE_URL}/{sub.name}/{scene_file.name}"})
-              except Exception as e:
-                  print(f"WARNING: skipping {scene_file}: {e}", file=sys.stderr)
-
-          index = {"version": 2, "scenes": scenes}
-          (catalog_dir / "catalog.json").write_text(json.dumps(index, ensure_ascii=False, indent=2))
-          print(f"Generated catalog.json with {len(scenes)} scenes:")
-          for s in scenes:
-              print(f"  {s['id']}")
-          EOF
+      - name: Regenerate catalog index
+        run: ./gradlew generateCatalogIndex
 
       - uses: actions/configure-pages@v4
 
@@ -71,3 +53,12 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
+      - name: Upload validation reports
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: catalog-validation-reports
+          path: core/build/reports/tests/
+          retention-days: 7
+          if-no-files-found: ignore

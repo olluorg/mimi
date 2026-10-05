@@ -23,7 +23,7 @@
         },
         "emoji": {
           "type": "text",
-          "value": "1️⃣"
+          "value": "1"
         }
       },
       "tags": {
@@ -53,7 +53,7 @@
         },
         "emoji": {
           "type": "text",
-          "value": "2️⃣"
+          "value": "2"
         }
       },
       "tags": {
@@ -83,7 +83,7 @@
         },
         "emoji": {
           "type": "text",
-          "value": "3️⃣"
+          "value": "3"
         }
       },
       "tags": {
@@ -123,9 +123,9 @@
           "type": "text",
           "value": "1"
         },
-        "emoji": {
-          "type": "text",
-          "value": "⚀"
+        "count": {
+          "type": "num",
+          "value": 1.0
         }
       },
       "tags": {},
@@ -163,9 +163,9 @@
           "type": "text",
           "value": "2"
         },
-        "emoji": {
-          "type": "text",
-          "value": "⚁"
+        "count": {
+          "type": "num",
+          "value": 2.0
         }
       },
       "tags": {},
@@ -203,9 +203,9 @@
           "type": "text",
           "value": "3"
         },
-        "emoji": {
-          "type": "text",
-          "value": "⚂"
+        "count": {
+          "type": "num",
+          "value": 3.0
         }
       },
       "tags": {},
@@ -223,6 +223,17 @@
     }
   ],
   "behaviors": [
+    {
+      "behaviorRef": {
+        "type": "audioPrompt",
+        "config": {
+          "on": "sceneStarted",
+          "text": "Положи цифру к точкам",
+          "sound": "_sounds/speech/polozhi-cifru-k-tochkam-8732b0.wav"
+        }
+      },
+      "entityId": null
+    },
     {
       "behaviorRef": {
         "type": "progressTracker",

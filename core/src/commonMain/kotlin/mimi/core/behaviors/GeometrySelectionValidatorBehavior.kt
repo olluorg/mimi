@@ -36,10 +36,22 @@ class GeometrySelectionValidatorBehavior(
                     source = id,
                     tick   = ctx.tick
                 ),
-                Command.TriggerFeedback(feedbackType = "matchSuccess", source = id, tick = ctx.tick)
+                Command.TriggerFeedback(
+                    feedbackType = "matchSuccess",
+                    params       = mapOf("source" to tappedId),
+                    source       = id,
+                    tick         = ctx.tick
+                )
             )
         } else {
-            listOf(Command.TriggerFeedback(feedbackType = "matchFail", source = id, tick = ctx.tick))
+            listOf(
+                Command.TriggerFeedback(
+                    feedbackType = "matchFail",
+                    params       = mapOf("source" to tappedId, "reason" to "wrong_size"),
+                    source       = id,
+                    tick         = ctx.tick
+                )
+            )
         }
     }
 }
@@ -55,6 +67,16 @@ class GeometrySelectionValidatorPlugin : BehaviorPlugin {
             group  = config["group"] ?: "choices",
             select = config["select"] ?: "largest"
         )
+
+    override fun validateConfig(config: Map<String, String>): ValidationResult =
+        SPEC.check(config)
+
+    private companion object {
+        private val SPEC = ConfigSpec.of("geometrySelectionValidator") {
+            text("group")
+            oneOf("select", "largest", "smallest")
+        }
+    }
 }
 
 internal fun EntitySnapshot.visualArea(): Double {

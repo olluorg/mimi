@@ -1,0 +1,604 @@
+{
+  "sceneId": "yes_no_is_it_big_01",
+  "meta": {
+    "title": "Это большой?",
+    "description": "Один и тот же вопрос про разных зверей: большой он или нет?",
+    "ageMin": 3,
+    "ageMax": 7,
+    "version": 1,
+    "tags": [
+      "yes_no",
+      "communication",
+      "comparison"
+    ],
+    "skills": [
+      "size_comparison",
+      "receptive_speech",
+      "problem_solving",
+      "visual_attention"
+    ],
+    "icon": "🐘",
+    "requires": [
+      "yes_no_is_it_01"
+    ]
+  },
+  "entities": [],
+  "objectives": [],
+  "behaviors": [
+    {
+      "behaviorRef": {
+        "type": "progressTracker",
+        "config": {}
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "audioPrompt",
+        "config": {
+          "on": "sceneStarted",
+          "text": "Это большой?",
+          "sound": "_sounds/speech/eto-bolshoy-2b7023.wav"
+        }
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "propertySelectionValidator",
+        "config": {
+          "property": "answer",
+          "expectedFrom": "correctAnswer"
+        }
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "adaptiveHint",
+        "config": {}
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "playSoundOnEvent",
+        "config": {
+          "on": "sceneCompleted",
+          "sound": "complete"
+        }
+      },
+      "entityId": null
+    }
+  ],
+  "fieldPolicies": {},
+  "idleTimeout": 25,
+  "onIdle": "HINT",
+  "metadata": {},
+  "levels": [
+    {
+      "levelId": "1_elephant_yes",
+      "entities": [
+        {
+          "id": "elephant",
+          "components": [],
+          "behaviors": [],
+          "properties": {
+            "position": {
+              "type": "vec2",
+              "x": 500.0,
+              "y": 300.0
+            },
+            "image": {
+              "type": "text",
+              "value": "_cards/elephant.jpg"
+            },
+            "label": {
+              "type": "text",
+              "value": "Слон"
+            },
+            "name": {
+              "type": "text",
+              "value": "Слон"
+            },
+            "sound": {
+              "type": "text",
+              "value": "_cards/audio/elephant.mp3"
+            },
+            "correctAnswer": {
+              "type": "text",
+              "value": "yes"
+            },
+            "question": {
+              "type": "text",
+              "value": "Это большой?"
+            }
+          },
+          "tags": {
+            "group": "question"
+          },
+          "zOrder": 0
+        },
+        {
+          "id": "yes",
+          "components": [
+            "tap"
+          ],
+          "behaviors": [],
+          "properties": {
+            "position": {
+              "type": "vec2",
+              "x": 320.0,
+              "y": 720.0
+            },
+            "image": {
+              "type": "text",
+              "value": "_cards/yes.jpg"
+            },
+            "label": {
+              "type": "text",
+              "value": "Да"
+            },
+            "name": {
+              "type": "text",
+              "value": "Да"
+            },
+            "sound": {
+              "type": "text",
+              "value": "_cards/audio/yes.mp3"
+            },
+            "answer": {
+              "type": "text",
+              "value": "yes"
+            }
+          },
+          "tags": {
+            "group": "answers"
+          },
+          "zOrder": 0
+        },
+        {
+          "id": "no",
+          "components": [
+            "tap"
+          ],
+          "behaviors": [],
+          "properties": {
+            "position": {
+              "type": "vec2",
+              "x": 680.0,
+              "y": 720.0
+            },
+            "image": {
+              "type": "text",
+              "value": "_cards/no.jpg"
+            },
+            "label": {
+              "type": "text",
+              "value": "Нет"
+            },
+            "name": {
+              "type": "text",
+              "value": "Нет"
+            },
+            "sound": {
+              "type": "text",
+              "value": "_cards/audio/no.mp3"
+            },
+            "answer": {
+              "type": "text",
+              "value": "no"
+            }
+          },
+          "tags": {
+            "group": "answers"
+          },
+          "zOrder": 0
+        }
+      ],
+      "objectives": [
+        {
+          "id": "answered",
+          "type": "anySelected",
+          "config": {
+            "group": "answers"
+          },
+          "requires": null
+        }
+      ]
+    },
+    {
+      "levelId": "2_mouse_no",
+      "entities": [
+        {
+          "id": "mouse",
+          "components": [],
+          "behaviors": [],
+          "properties": {
+            "position": {
+              "type": "vec2",
+              "x": 500.0,
+              "y": 300.0
+            },
+            "image": {
+              "type": "text",
+              "value": "_cards/mouse.jpg"
+            },
+            "label": {
+              "type": "text",
+              "value": "Мышь"
+            },
+            "name": {
+              "type": "text",
+              "value": "Мышь"
+            },
+            "sound": {
+              "type": "text",
+              "value": "_cards/audio/mouse.mp3"
+            },
+            "correctAnswer": {
+              "type": "text",
+              "value": "no"
+            },
+            "question": {
+              "type": "text",
+              "value": "Это большой?"
+            }
+          },
+          "tags": {
+            "group": "question"
+          },
+          "zOrder": 0
+        },
+        {
+          "id": "yes",
+          "components": [
+            "tap"
+          ],
+          "behaviors": [],
+          "properties": {
+            "position": {
+              "type": "vec2",
+              "x": 320.0,
+              "y": 720.0
+            },
+            "image": {
+              "type": "text",
+              "value": "_cards/yes.jpg"
+            },
+            "label": {
+              "type": "text",
+              "value": "Да"
+            },
+            "name": {
+              "type": "text",
+              "value": "Да"
+            },
+            "sound": {
+              "type": "text",
+              "value": "_cards/audio/yes.mp3"
+            },
+            "answer": {
+              "type": "text",
+              "value": "yes"
+            }
+          },
+          "tags": {
+            "group": "answers"
+          },
+          "zOrder": 0
+        },
+        {
+          "id": "no",
+          "components": [
+            "tap"
+          ],
+          "behaviors": [],
+          "properties": {
+            "position": {
+              "type": "vec2",
+              "x": 680.0,
+              "y": 720.0
+            },
+            "image": {
+              "type": "text",
+              "value": "_cards/no.jpg"
+            },
+            "label": {
+              "type": "text",
+              "value": "Нет"
+            },
+            "name": {
+              "type": "text",
+              "value": "Нет"
+            },
+            "sound": {
+              "type": "text",
+              "value": "_cards/audio/no.mp3"
+            },
+            "answer": {
+              "type": "text",
+              "value": "no"
+            }
+          },
+          "tags": {
+            "group": "answers"
+          },
+          "zOrder": 0
+        }
+      ],
+      "objectives": [
+        {
+          "id": "answered",
+          "type": "anySelected",
+          "config": {
+            "group": "answers"
+          },
+          "requires": null
+        }
+      ]
+    },
+    {
+      "levelId": "3_lion_yes",
+      "entities": [
+        {
+          "id": "lion",
+          "components": [],
+          "behaviors": [],
+          "properties": {
+            "position": {
+              "type": "vec2",
+              "x": 500.0,
+              "y": 300.0
+            },
+            "image": {
+              "type": "text",
+              "value": "_cards/lion.jpg"
+            },
+            "label": {
+              "type": "text",
+              "value": "Лев"
+            },
+            "name": {
+              "type": "text",
+              "value": "Лев"
+            },
+            "sound": {
+              "type": "text",
+              "value": "_cards/audio/lion.mp3"
+            },
+            "correctAnswer": {
+              "type": "text",
+              "value": "yes"
+            },
+            "question": {
+              "type": "text",
+              "value": "Это большой?"
+            }
+          },
+          "tags": {
+            "group": "question"
+          },
+          "zOrder": 0
+        },
+        {
+          "id": "yes",
+          "components": [
+            "tap"
+          ],
+          "behaviors": [],
+          "properties": {
+            "position": {
+              "type": "vec2",
+              "x": 320.0,
+              "y": 720.0
+            },
+            "image": {
+              "type": "text",
+              "value": "_cards/yes.jpg"
+            },
+            "label": {
+              "type": "text",
+              "value": "Да"
+            },
+            "name": {
+              "type": "text",
+              "value": "Да"
+            },
+            "sound": {
+              "type": "text",
+              "value": "_cards/audio/yes.mp3"
+            },
+            "answer": {
+              "type": "text",
+              "value": "yes"
+            }
+          },
+          "tags": {
+            "group": "answers"
+          },
+          "zOrder": 0
+        },
+        {
+          "id": "no",
+          "components": [
+            "tap"
+          ],
+          "behaviors": [],
+          "properties": {
+            "position": {
+              "type": "vec2",
+              "x": 680.0,
+              "y": 720.0
+            },
+            "image": {
+              "type": "text",
+              "value": "_cards/no.jpg"
+            },
+            "label": {
+              "type": "text",
+              "value": "Нет"
+            },
+            "name": {
+              "type": "text",
+              "value": "Нет"
+            },
+            "sound": {
+              "type": "text",
+              "value": "_cards/audio/no.mp3"
+            },
+            "answer": {
+              "type": "text",
+              "value": "no"
+            }
+          },
+          "tags": {
+            "group": "answers"
+          },
+          "zOrder": 0
+        }
+      ],
+      "objectives": [
+        {
+          "id": "answered",
+          "type": "anySelected",
+          "config": {
+            "group": "answers"
+          },
+          "requires": null
+        }
+      ]
+    },
+    {
+      "levelId": "4_bee_no",
+      "entities": [
+        {
+          "id": "bee",
+          "components": [],
+          "behaviors": [],
+          "properties": {
+            "position": {
+              "type": "vec2",
+              "x": 500.0,
+              "y": 300.0
+            },
+            "image": {
+              "type": "text",
+              "value": "_cards/bee.jpg"
+            },
+            "label": {
+              "type": "text",
+              "value": "Пчела"
+            },
+            "name": {
+              "type": "text",
+              "value": "Пчела"
+            },
+            "sound": {
+              "type": "text",
+              "value": "_cards/audio/bee.mp3"
+            },
+            "correctAnswer": {
+              "type": "text",
+              "value": "no"
+            },
+            "question": {
+              "type": "text",
+              "value": "Это большой?"
+            }
+          },
+          "tags": {
+            "group": "question"
+          },
+          "zOrder": 0
+        },
+        {
+          "id": "yes",
+          "components": [
+            "tap"
+          ],
+          "behaviors": [],
+          "properties": {
+            "position": {
+              "type": "vec2",
+              "x": 320.0,
+              "y": 720.0
+            },
+            "image": {
+              "type": "text",
+              "value": "_cards/yes.jpg"
+            },
+            "label": {
+              "type": "text",
+              "value": "Да"
+            },
+            "name": {
+              "type": "text",
+              "value": "Да"
+            },
+            "sound": {
+              "type": "text",
+              "value": "_cards/audio/yes.mp3"
+            },
+            "answer": {
+              "type": "text",
+              "value": "yes"
+            }
+          },
+          "tags": {
+            "group": "answers"
+          },
+          "zOrder": 0
+        },
+        {
+          "id": "no",
+          "components": [
+            "tap"
+          ],
+          "behaviors": [],
+          "properties": {
+            "position": {
+              "type": "vec2",
+              "x": 680.0,
+              "y": 720.0
+            },
+            "image": {
+              "type": "text",
+              "value": "_cards/no.jpg"
+            },
+            "label": {
+              "type": "text",
+              "value": "Нет"
+            },
+            "name": {
+              "type": "text",
+              "value": "Нет"
+            },
+            "sound": {
+              "type": "text",
+              "value": "_cards/audio/no.mp3"
+            },
+            "answer": {
+              "type": "text",
+              "value": "no"
+            }
+          },
+          "tags": {
+            "group": "answers"
+          },
+          "zOrder": 0
+        }
+      ],
+      "objectives": [
+        {
+          "id": "answered",
+          "type": "anySelected",
+          "config": {
+            "group": "answers"
+          },
+          "requires": null
+        }
+      ]
+    }
+  ]
+}

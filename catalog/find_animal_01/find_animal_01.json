@@ -21,9 +21,17 @@
           "type": "text",
           "value": "cat"
         },
-        "emoji": {
+        "image": {
           "type": "text",
-          "value": "🐱"
+          "value": "_cards/cat.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Кошка"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/cat.mp3"
         }
       },
       "tags": {
@@ -51,9 +59,17 @@
           "type": "text",
           "value": "dog"
         },
-        "emoji": {
+        "image": {
           "type": "text",
-          "value": "🐶"
+          "value": "_cards/dog.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Собака"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/dog.mp3"
         }
       },
       "tags": {
@@ -81,9 +97,17 @@
           "type": "text",
           "value": "car"
         },
-        "emoji": {
+        "image": {
           "type": "text",
-          "value": "🚗"
+          "value": "_cards/car.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Машина"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/car.mp3"
         }
       },
       "tags": {

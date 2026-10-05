@@ -1,0 +1,146 @@
+{
+  "sceneId": "yes_no_01",
+  "meta": {
+    "title": "Да или нет",
+    "description": "Учимся показывать «да» и «нет» — самые нужные слова.",
+    "ageMin": 2,
+    "ageMax": 7,
+    "version": 1,
+    "tags": [
+      "yes_no",
+      "choice",
+      "communication"
+    ],
+    "skills": [
+      "expressive_speech",
+      "receptive_speech",
+      "task_completion",
+      "visual_attention"
+    ],
+    "icon": "👍",
+    "requires": []
+  },
+  "entities": [
+    {
+      "id": "yes",
+      "components": [
+        "tap"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 320.0,
+          "y": 480.0
+        },
+        "name": {
+          "type": "text",
+          "value": "да"
+        },
+        "label": {
+          "type": "text",
+          "value": "да"
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/yes.jpg"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/yes.mp3"
+        }
+      },
+      "tags": {
+        "group": "choices"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "no",
+      "components": [
+        "tap"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 680.0,
+          "y": 480.0
+        },
+        "name": {
+          "type": "text",
+          "value": "нет"
+        },
+        "label": {
+          "type": "text",
+          "value": "нет"
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/no.jpg"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/no.mp3"
+        }
+      },
+      "tags": {
+        "group": "choices"
+      },
+      "zOrder": 0
+    }
+  ],
+  "objectives": [
+    {
+      "id": "chose",
+      "type": "anySelected",
+      "config": {
+        "group": "choices"
+      },
+      "requires": null
+    }
+  ],
+  "behaviors": [
+    {
+      "behaviorRef": {
+        "type": "progressTracker",
+        "config": {}
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "audioPrompt",
+        "config": {
+          "on": "sceneStarted",
+          "text": "Покажи: да или нет",
+          "sound": "_sounds/speech/pokazhi-da-ili-net-e5f7d1.wav"
+        }
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "freeSelection",
+        "config": {
+          "group": "choices"
+        }
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "playSoundOnEvent",
+        "config": {
+          "on": "sceneCompleted",
+          "sound": "complete"
+        }
+      },
+      "entityId": null
+    }
+  ],
+  "fieldPolicies": {},
+  "idleTimeout": 25,
+  "onIdle": "HINT",
+  "metadata": {}
+}

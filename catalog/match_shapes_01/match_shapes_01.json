@@ -21,9 +21,9 @@
           "type": "text",
           "value": "circle"
         },
-        "emoji": {
+        "color": {
           "type": "text",
-          "value": "🔵"
+          "value": "blue"
         }
       },
       "tags": {
@@ -51,9 +51,9 @@
           "type": "text",
           "value": "triangle"
         },
-        "emoji": {
+        "color": {
           "type": "text",
-          "value": "🔺"
+          "value": "red"
         }
       },
       "tags": {
@@ -81,9 +81,9 @@
           "type": "text",
           "value": "square"
         },
-        "emoji": {
+        "color": {
           "type": "text",
-          "value": "🟦"
+          "value": "blue"
         }
       },
       "tags": {
@@ -123,9 +123,9 @@
           "type": "text",
           "value": "circle"
         },
-        "emoji": {
+        "color": {
           "type": "text",
-          "value": "⭕"
+          "value": "red"
         }
       },
       "tags": {},
@@ -163,9 +163,9 @@
           "type": "text",
           "value": "triangle"
         },
-        "emoji": {
+        "color": {
           "type": "text",
-          "value": "🔻"
+          "value": "red"
         }
       },
       "tags": {},
@@ -203,9 +203,9 @@
           "type": "text",
           "value": "square"
         },
-        "emoji": {
+        "color": {
           "type": "text",
-          "value": "🔲"
+          "value": "black"
         }
       },
       "tags": {},
@@ -223,6 +223,17 @@
     }
   ],
   "behaviors": [
+    {
+      "behaviorRef": {
+        "type": "audioPrompt",
+        "config": {
+          "on": "sceneStarted",
+          "text": "Положи фигуру к такой же",
+          "sound": "_sounds/speech/polozhi-figuru-k-takoy-zhe-063130.wav"
+        }
+      },
+      "entityId": null
+    },
     {
       "behaviorRef": {
         "type": "progressTracker",

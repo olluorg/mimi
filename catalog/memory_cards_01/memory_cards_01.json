@@ -17,13 +17,17 @@
           "type": "text",
           "value": "apple"
         },
-        "face": {
-          "type": "text",
-          "value": "🍎"
-        },
         "cardState": {
           "type": "text",
           "value": "hidden"
+        },
+        "faceImage": {
+          "type": "text",
+          "value": "_cards/apple.jpg"
+        },
+        "faceLabel": {
+          "type": "text",
+          "value": "Яблоко"
         }
       },
       "tags": {
@@ -47,13 +51,17 @@
           "type": "text",
           "value": "banana"
         },
-        "face": {
-          "type": "text",
-          "value": "🍌"
-        },
         "cardState": {
           "type": "text",
           "value": "hidden"
+        },
+        "faceImage": {
+          "type": "text",
+          "value": "_cards/banana.jpg"
+        },
+        "faceLabel": {
+          "type": "text",
+          "value": "Банан"
         }
       },
       "tags": {
@@ -77,13 +85,17 @@
           "type": "text",
           "value": "apple"
         },
-        "face": {
-          "type": "text",
-          "value": "🍎"
-        },
         "cardState": {
           "type": "text",
           "value": "hidden"
+        },
+        "faceImage": {
+          "type": "text",
+          "value": "_cards/apple.jpg"
+        },
+        "faceLabel": {
+          "type": "text",
+          "value": "Яблоко"
         }
       },
       "tags": {
@@ -107,13 +119,17 @@
           "type": "text",
           "value": "banana"
         },
-        "face": {
-          "type": "text",
-          "value": "🍌"
-        },
         "cardState": {
           "type": "text",
           "value": "hidden"
+        },
+        "faceImage": {
+          "type": "text",
+          "value": "_cards/banana.jpg"
+        },
+        "faceLabel": {
+          "type": "text",
+          "value": "Банан"
         }
       },
       "tags": {
@@ -135,11 +151,21 @@
   "behaviors": [
     {
       "behaviorRef": {
+        "type": "audioPrompt",
+        "config": {
+          "on": "sceneStarted",
+          "text": "Открывай карточки и ищи пары",
+          "sound": "_sounds/speech/otkryvay-kartochki-i-ischi-pary-659d0e.wav"
+        }
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
         "type": "memoryFlipController",
         "config": {
           "group": "cards",
-          "maxOpenCards": "2",
-          "flipBackDelayMs": "800"
+          "maxOpenCards": "2"
         }
       },
       "entityId": null
@@ -165,16 +191,6 @@
       "behaviorRef": {
         "type": "adaptiveHint",
         "config": {}
-      },
-      "entityId": null
-    },
-    {
-      "behaviorRef": {
-        "type": "playSoundOnEvent",
-        "config": {
-          "on": "pairMatched",
-          "sound": "correct"
-        }
       },
       "entityId": null
     },

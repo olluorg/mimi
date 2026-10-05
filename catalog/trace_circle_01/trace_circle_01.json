@@ -50,11 +50,21 @@
   "behaviors": [
     {
       "behaviorRef": {
+        "type": "audioPrompt",
+        "config": {
+          "on": "sceneStarted",
+          "text": "Обведи круг пальцем",
+          "sound": "_sounds/speech/obvedi-krug-palcem-46e655.wav"
+        }
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
         "type": "circleTraceValidator",
         "config": {
           "group": "trace",
-          "snapTolerance": 60.0,
-          "progressMode": "arcLength"
+          "snapTolerance": 60.0
         }
       },
       "entityId": null
@@ -69,19 +79,7 @@
     {
       "behaviorRef": {
         "type": "adaptiveHint",
-        "config": {
-          "mode": "trace"
-        }
-      },
-      "entityId": null
-    },
-    {
-      "behaviorRef": {
-        "type": "playSoundOnEvent",
-        "config": {
-          "on": "traceCompleted",
-          "sound": "complete"
-        }
+        "config": {}
       },
       "entityId": null
     }

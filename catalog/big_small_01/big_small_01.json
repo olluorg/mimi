@@ -21,9 +21,13 @@
           "type": "num",
           "value": 260.0
         },
-        "emoji": {
+        "shape": {
           "type": "text",
-          "value": "🟦"
+          "value": "square"
+        },
+        "color": {
+          "type": "text",
+          "value": "blue"
         }
       },
       "tags": {
@@ -51,9 +55,13 @@
           "type": "num",
           "value": 100.0
         },
-        "emoji": {
+        "shape": {
           "type": "text",
-          "value": "🟩"
+          "value": "square"
+        },
+        "color": {
+          "type": "text",
+          "value": "green"
         }
       },
       "tags": {
@@ -78,12 +86,21 @@
   "behaviors": [
     {
       "behaviorRef": {
+        "type": "audioPrompt",
+        "config": {
+          "on": "sceneStarted",
+          "text": "Нажми на большой",
+          "sound": "_sounds/speech/nazhmi-na-bolshoy-ff2a19.wav"
+        }
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
         "type": "geometrySelectionValidator",
         "config": {
           "group": "choices",
-          "metric": "area",
-          "select": "largest",
-          "minRatio": "2.5"
+          "select": "largest"
         }
       },
       "entityId": null
@@ -98,19 +115,7 @@
     {
       "behaviorRef": {
         "type": "adaptiveHint",
-        "config": {
-          "mode": "comparison"
-        }
-      },
-      "entityId": null
-    },
-    {
-      "behaviorRef": {
-        "type": "playSoundOnEvent",
-        "config": {
-          "on": "selectionCorrect",
-          "sound": "correct"
-        }
+        "config": {}
       },
       "entityId": null
     }

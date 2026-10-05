@@ -1,0 +1,330 @@
+{
+  "sceneId": "emotion_match_01",
+  "meta": {
+    "title": "Подбери настроение",
+    "description": "Перетащи лицо к такому же настроению.",
+    "ageMin": 3,
+    "ageMax": 7,
+    "version": 1,
+    "tags": [
+      "emotions",
+      "matching"
+    ],
+    "skills": [
+      "matching",
+      "visual_attention",
+      "receptive_speech",
+      "categorization"
+    ],
+    "icon": "🙂",
+    "requires": [
+      "emotion_find_happy_01"
+    ]
+  },
+  "entities": [
+    {
+      "id": "face_happy",
+      "components": [
+        "drag"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 220.0,
+          "y": 260.0
+        },
+        "zOrder": {
+          "type": "num",
+          "value": 1.0
+        },
+        "mood": {
+          "type": "text",
+          "value": "happy"
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/joy.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Радость"
+        },
+        "name": {
+          "type": "text",
+          "value": "Радость"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/joy.mp3"
+        }
+      },
+      "tags": {
+        "group": "faces"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "face_sad",
+      "components": [
+        "drag"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 500.0,
+          "y": 260.0
+        },
+        "zOrder": {
+          "type": "num",
+          "value": 1.0
+        },
+        "mood": {
+          "type": "text",
+          "value": "sad"
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/sadness.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Грусть"
+        },
+        "name": {
+          "type": "text",
+          "value": "Грусть"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/sadness.mp3"
+        }
+      },
+      "tags": {
+        "group": "faces"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "face_angry",
+      "components": [
+        "drag"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 780.0,
+          "y": 260.0
+        },
+        "zOrder": {
+          "type": "num",
+          "value": 1.0
+        },
+        "mood": {
+          "type": "text",
+          "value": "angry"
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/anger.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Злость"
+        },
+        "name": {
+          "type": "text",
+          "value": "Злость"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/anger.mp3"
+        }
+      },
+      "tags": {
+        "group": "faces"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "slot_sad",
+      "components": [
+        "dropTarget"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 220.0,
+          "y": 720.0
+        },
+        "zOrder": {
+          "type": "num",
+          "value": 0.0
+        },
+        "constraintType": {
+          "type": "text",
+          "value": "propertyEquals"
+        },
+        "source": {
+          "type": "text",
+          "value": "mood"
+        },
+        "target": {
+          "type": "text",
+          "value": "mood"
+        },
+        "mood": {
+          "type": "text",
+          "value": "sad"
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/sadness.jpg"
+        }
+      },
+      "tags": {},
+      "zOrder": 0
+    },
+    {
+      "id": "slot_angry",
+      "components": [
+        "dropTarget"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 500.0,
+          "y": 720.0
+        },
+        "zOrder": {
+          "type": "num",
+          "value": 0.0
+        },
+        "constraintType": {
+          "type": "text",
+          "value": "propertyEquals"
+        },
+        "source": {
+          "type": "text",
+          "value": "mood"
+        },
+        "target": {
+          "type": "text",
+          "value": "mood"
+        },
+        "mood": {
+          "type": "text",
+          "value": "angry"
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/anger.jpg"
+        }
+      },
+      "tags": {},
+      "zOrder": 0
+    },
+    {
+      "id": "slot_happy",
+      "components": [
+        "dropTarget"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 780.0,
+          "y": 720.0
+        },
+        "zOrder": {
+          "type": "num",
+          "value": 0.0
+        },
+        "constraintType": {
+          "type": "text",
+          "value": "propertyEquals"
+        },
+        "source": {
+          "type": "text",
+          "value": "mood"
+        },
+        "target": {
+          "type": "text",
+          "value": "mood"
+        },
+        "mood": {
+          "type": "text",
+          "value": "happy"
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/joy.jpg"
+        }
+      },
+      "tags": {},
+      "zOrder": 0
+    }
+  ],
+  "objectives": [
+    {
+      "id": "all",
+      "type": "allMatched",
+      "config": {
+        "group": "faces"
+      },
+      "requires": null
+    }
+  ],
+  "behaviors": [
+    {
+      "behaviorRef": {
+        "type": "progressTracker",
+        "config": {}
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "audioPrompt",
+        "config": {
+          "on": "sceneStarted",
+          "text": "Подбери одинаковые лица",
+          "sound": "_sounds/speech/podberi-odinakovye-lica-6f9bf2.wav"
+        }
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "snapToTarget",
+        "config": {}
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "adaptiveHint",
+        "config": {}
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "playSoundOnEvent",
+        "config": {
+          "on": "sceneCompleted",
+          "sound": "complete"
+        }
+      },
+      "entityId": null
+    }
+  ],
+  "fieldPolicies": {},
+  "idleTimeout": 15,
+  "onIdle": "HINT",
+  "metadata": {}
+}

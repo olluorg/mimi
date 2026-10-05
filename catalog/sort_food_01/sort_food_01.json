@@ -21,9 +21,21 @@
           "type": "text",
           "value": "fruit"
         },
-        "emoji": {
+        "image": {
           "type": "text",
-          "value": "🍎"
+          "value": "_cards/apple.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Яблоко"
+        },
+        "name": {
+          "type": "text",
+          "value": "Яблоко"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/apple.mp3"
         }
       },
       "tags": {
@@ -51,9 +63,21 @@
           "type": "text",
           "value": "fruit"
         },
-        "emoji": {
+        "image": {
           "type": "text",
-          "value": "🍌"
+          "value": "_cards/banana.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Банан"
+        },
+        "name": {
+          "type": "text",
+          "value": "Банан"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/banana.mp3"
         }
       },
       "tags": {
@@ -81,9 +105,21 @@
           "type": "text",
           "value": "vegetable"
         },
-        "emoji": {
+        "image": {
           "type": "text",
-          "value": "🥕"
+          "value": "_cards/carrot.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Морковь"
+        },
+        "name": {
+          "type": "text",
+          "value": "Морковь"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/carrot.mp3"
         }
       },
       "tags": {
@@ -111,9 +147,21 @@
           "type": "text",
           "value": "vegetable"
         },
-        "emoji": {
+        "image": {
           "type": "text",
-          "value": "🥦"
+          "value": "_cards/broccoli.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Брокколи"
+        },
+        "name": {
+          "type": "text",
+          "value": "Брокколи"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/broccoli.mp3"
         }
       },
       "tags": {
@@ -153,9 +201,17 @@
           "type": "text",
           "value": "fruit"
         },
-        "emoji": {
+        "image": {
           "type": "text",
-          "value": "🍱"
+          "value": "_cards/pear.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Фрукты"
+        },
+        "name": {
+          "type": "text",
+          "value": "Фрукты"
         }
       },
       "tags": {},
@@ -193,9 +249,17 @@
           "type": "text",
           "value": "vegetable"
         },
-        "emoji": {
+        "image": {
           "type": "text",
-          "value": "🥗"
+          "value": "_cards/potato.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Овощи"
+        },
+        "name": {
+          "type": "text",
+          "value": "Овощи"
         }
       },
       "tags": {},
@@ -213,6 +277,17 @@
     }
   ],
   "behaviors": [
+    {
+      "behaviorRef": {
+        "type": "audioPrompt",
+        "config": {
+          "on": "sceneStarted",
+          "text": "Разложи по корзинам",
+          "sound": "_sounds/speech/razlozhi-po-korzinam-219e52.wav"
+        }
+      },
+      "entityId": null
+    },
     {
       "behaviorRef": {
         "type": "progressTracker",

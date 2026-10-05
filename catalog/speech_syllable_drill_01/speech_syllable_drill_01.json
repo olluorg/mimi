@@ -1,0 +1,325 @@
+{
+  "sceneId": "speech_syllable_drill_01",
+  "meta": {
+    "title": "Слоги: ма-ма, па-па",
+    "description": "Короткая тренировка повторяющихся слогов вразброс — много повторений за раз.",
+    "ageMin": 3,
+    "ageMax": 7,
+    "version": 1,
+    "tags": [
+      "speech",
+      "drill",
+      "syllables"
+    ],
+    "skills": [
+      "speech_motor",
+      "sound_imitation",
+      "expressive_speech",
+      "sustained_attention"
+    ],
+    "icon": "👩",
+    "requires": [],
+    "speech": {
+      "stage": "words",
+      "targets": [
+        "apraxia",
+        "alalia"
+      ],
+      "modes": [
+        "drill",
+        "imitation",
+        "voice"
+      ],
+      "words": [
+        "ма-ма",
+        "па-па",
+        "ба-ба",
+        "би-би",
+        "ту-ту"
+      ],
+      "adultTip": "Сядьте лицом к ребёнку и говорите слог медленно, вместе с ним, чётко показывая губы. Хвалите не каждый раз — так движение запоминается лучше."
+    }
+  },
+  "entities": [
+    {
+      "id": "mom",
+      "components": [
+        "tap"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 500.0,
+          "y": 440.0
+        },
+        "width": {
+          "type": "num",
+          "value": 320.0
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/mom.jpg"
+        },
+        "name": {
+          "type": "text",
+          "value": "мама"
+        },
+        "speech": {
+          "type": "text",
+          "value": "Ма-ма"
+        },
+        "rewardMotion": {
+          "type": "text",
+          "value": "jump"
+        },
+        "mouth": {
+          "type": "text",
+          "value": "_anim/mouth_ma.json"
+        }
+      },
+      "tags": {
+        "group": "targets"
+      },
+      "zOrder": 0,
+      "initialState": "INACTIVE"
+    },
+    {
+      "id": "dad",
+      "components": [
+        "tap"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 500.0,
+          "y": 440.0
+        },
+        "width": {
+          "type": "num",
+          "value": 320.0
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/dad.jpg"
+        },
+        "name": {
+          "type": "text",
+          "value": "папа"
+        },
+        "speech": {
+          "type": "text",
+          "value": "Па-па"
+        },
+        "rewardMotion": {
+          "type": "text",
+          "value": "jump"
+        },
+        "mouth": {
+          "type": "text",
+          "value": "_anim/mouth_ma.json"
+        }
+      },
+      "tags": {
+        "group": "targets"
+      },
+      "zOrder": 0,
+      "initialState": "INACTIVE"
+    },
+    {
+      "id": "grandmother",
+      "components": [
+        "tap"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 500.0,
+          "y": 440.0
+        },
+        "width": {
+          "type": "num",
+          "value": 320.0
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/grandmother.jpg"
+        },
+        "name": {
+          "type": "text",
+          "value": "баба"
+        },
+        "speech": {
+          "type": "text",
+          "value": "Ба-ба"
+        },
+        "rewardMotion": {
+          "type": "text",
+          "value": "jump"
+        },
+        "mouth": {
+          "type": "text",
+          "value": "_anim/mouth_ma.json"
+        }
+      },
+      "tags": {
+        "group": "targets"
+      },
+      "zOrder": 0,
+      "initialState": "INACTIVE"
+    },
+    {
+      "id": "car",
+      "components": [
+        "tap"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 500.0,
+          "y": 440.0
+        },
+        "width": {
+          "type": "num",
+          "value": 320.0
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/car.jpg"
+        },
+        "name": {
+          "type": "text",
+          "value": "би-би"
+        },
+        "speech": {
+          "type": "text",
+          "value": "Би-би"
+        },
+        "rewardMotion": {
+          "type": "text",
+          "value": "drive"
+        },
+        "reward": {
+          "type": "text",
+          "value": "_sounds/car.wav"
+        },
+        "mouth": {
+          "type": "text",
+          "value": "_anim/mouth_ma.json"
+        }
+      },
+      "tags": {
+        "group": "targets"
+      },
+      "zOrder": 0,
+      "initialState": "INACTIVE"
+    },
+    {
+      "id": "train",
+      "components": [
+        "tap"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 500.0,
+          "y": 440.0
+        },
+        "width": {
+          "type": "num",
+          "value": 320.0
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/train.jpg"
+        },
+        "name": {
+          "type": "text",
+          "value": "ту-ту"
+        },
+        "speech": {
+          "type": "text",
+          "value": "Ту-ту"
+        },
+        "rewardMotion": {
+          "type": "text",
+          "value": "drive"
+        },
+        "reward": {
+          "type": "text",
+          "value": "_sounds/train.wav"
+        }
+      },
+      "tags": {
+        "group": "targets"
+      },
+      "zOrder": 0,
+      "initialState": "INACTIVE"
+    }
+  ],
+  "objectives": [
+    {
+      "id": "turns",
+      "type": "interactionCount",
+      "config": {
+        "count": "12"
+      },
+      "requires": null
+    }
+  ],
+  "behaviors": [
+    {
+      "behaviorRef": {
+        "type": "progressTracker",
+        "config": {}
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "audioPrompt",
+        "config": {
+          "on": "sceneStarted",
+          "text": "Скажи!",
+          "sound": "_sounds/speech/skazhi-3628b3.wav"
+        }
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "awaitResponse",
+        "config": {
+          "group": "targets",
+          "accept": "voice,adult",
+          "order": "random",
+          "trials": "12",
+          "feedback": "fading",
+          "waitMs": "5000",
+          "leadMs": "600",
+          "rewardMs": "1200",
+          "maxPrompts": "2"
+        }
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "playSoundOnEvent",
+        "config": {
+          "on": "sceneCompleted",
+          "sound": "complete"
+        }
+      },
+      "entityId": null
+    }
+  ],
+  "fieldPolicies": {},
+  "idleTimeout": 40,
+  "onIdle": "HINT",
+  "metadata": {}
+}

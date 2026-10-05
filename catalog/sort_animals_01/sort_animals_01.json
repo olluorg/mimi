@@ -21,9 +21,21 @@
           "type": "text",
           "value": "house"
         },
-        "emoji": {
+        "image": {
           "type": "text",
-          "value": "🐱"
+          "value": "_cards/cat.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Кошка"
+        },
+        "name": {
+          "type": "text",
+          "value": "Кошка"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/cat.mp3"
         }
       },
       "tags": {
@@ -51,9 +63,21 @@
           "type": "text",
           "value": "bowl"
         },
-        "emoji": {
+        "image": {
           "type": "text",
-          "value": "🐠"
+          "value": "_cards/fish.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Рыба"
+        },
+        "name": {
+          "type": "text",
+          "value": "Рыба"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/fish.mp3"
         }
       },
       "tags": {
@@ -81,9 +105,21 @@
           "type": "text",
           "value": "nest"
         },
-        "emoji": {
+        "image": {
           "type": "text",
-          "value": "🐦"
+          "value": "_cards/hen.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Курица-птица"
+        },
+        "name": {
+          "type": "text",
+          "value": "Курица-птица"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/hen.mp3"
         }
       },
       "tags": {
@@ -123,9 +159,9 @@
           "type": "text",
           "value": "house"
         },
-        "emoji": {
+        "image": {
           "type": "text",
-          "value": "🏠"
+          "value": "_cards/house.jpg"
         }
       },
       "tags": {},
@@ -163,9 +199,9 @@
           "type": "text",
           "value": "bowl"
         },
-        "emoji": {
+        "image": {
           "type": "text",
-          "value": "🫙"
+          "value": "_cards/fish.jpg"
         }
       },
       "tags": {},
@@ -203,9 +239,9 @@
           "type": "text",
           "value": "nest"
         },
-        "emoji": {
+        "image": {
           "type": "text",
-          "value": "🪺"
+          "value": "_cards/hen.jpg"
         }
       },
       "tags": {},
@@ -223,6 +259,17 @@
     }
   ],
   "behaviors": [
+    {
+      "behaviorRef": {
+        "type": "audioPrompt",
+        "config": {
+          "on": "sceneStarted",
+          "text": "Помоги каждому найти дом",
+          "sound": "_sounds/speech/pomogi-kazhdomu-nayti-dom-343620.wav"
+        }
+      },
+      "entityId": null
+    },
     {
       "behaviorRef": {
         "type": "progressTracker",

@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <!-- Speech games measure how loud the child's voice is. Nothing is recorded
+         or sent anywhere; only the loudness is read, while such a game is open. -->
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+
     <application
         android:icon="@mipmap/ic_launcher"
         android:label="Mimi"

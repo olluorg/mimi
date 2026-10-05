@@ -1,0 +1,238 @@
+{
+  "sceneId": "routine_handwash_01",
+  "meta": {
+    "title": "Моем руки по порядку",
+    "description": "Нажимай картинки по порядку: как мы моем руки.",
+    "ageMin": 3,
+    "ageMax": 6,
+    "version": 1,
+    "tags": [
+      "routine",
+      "daily_life",
+      "sequencing"
+    ],
+    "skills": [
+      "sequencing",
+      "task_completion",
+      "receptive_speech",
+      "visual_planning"
+    ],
+    "icon": "🧼",
+    "requires": []
+  },
+  "entities": [
+    {
+      "id": "tap_water",
+      "components": [
+        "tap"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 170.0,
+          "y": 450.0
+        },
+        "sequenceIndex": {
+          "type": "num",
+          "value": 1.0
+        },
+        "name": {
+          "type": "text",
+          "value": "включить воду"
+        },
+        "label": {
+          "type": "text",
+          "value": "включить воду"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/faucet.mp3"
+        },
+        "pictogram": {
+          "type": "text",
+          "value": "faucet"
+        }
+      },
+      "tags": {
+        "group": "steps"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "soap",
+      "components": [
+        "tap"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 390.0,
+          "y": 450.0
+        },
+        "sequenceIndex": {
+          "type": "num",
+          "value": 2.0
+        },
+        "name": {
+          "type": "text",
+          "value": "намылить"
+        },
+        "label": {
+          "type": "text",
+          "value": "намылить"
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/soap.jpg"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/soap.mp3"
+        }
+      },
+      "tags": {
+        "group": "steps"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "rinse",
+      "components": [
+        "tap"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 610.0,
+          "y": 450.0
+        },
+        "sequenceIndex": {
+          "type": "num",
+          "value": 3.0
+        },
+        "name": {
+          "type": "text",
+          "value": "смыть"
+        },
+        "label": {
+          "type": "text",
+          "value": "смыть"
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/wash.jpg"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/wash.mp3"
+        }
+      },
+      "tags": {
+        "group": "steps"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "towel",
+      "components": [
+        "tap"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 830.0,
+          "y": 450.0
+        },
+        "sequenceIndex": {
+          "type": "num",
+          "value": 4.0
+        },
+        "name": {
+          "type": "text",
+          "value": "вытереть"
+        },
+        "label": {
+          "type": "text",
+          "value": "вытереть"
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/towel.jpg"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/towel.mp3"
+        }
+      },
+      "tags": {
+        "group": "steps"
+      },
+      "zOrder": 0
+    }
+  ],
+  "objectives": [
+    {
+      "id": "in_order",
+      "type": "sequenceCompleted",
+      "config": {
+        "group": "steps"
+      },
+      "requires": null
+    }
+  ],
+  "behaviors": [
+    {
+      "behaviorRef": {
+        "type": "progressTracker",
+        "config": {}
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "audioPrompt",
+        "config": {
+          "on": "sceneStarted",
+          "text": "Что сначала?",
+          "sound": "_sounds/speech/chto-snachala-b9b33a.wav"
+        }
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "sequenceValidator",
+        "config": {
+          "group": "steps",
+          "property": "sequenceIndex"
+        }
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "adaptiveHint",
+        "config": {}
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "playSoundOnEvent",
+        "config": {
+          "on": "sceneCompleted",
+          "sound": "complete"
+        }
+      },
+      "entityId": null
+    }
+  ],
+  "fieldPolicies": {},
+  "idleTimeout": 20,
+  "onIdle": "HINT",
+  "metadata": {}
+}

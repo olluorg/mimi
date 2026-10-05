@@ -1,7 +1,7 @@
 package org.ollu.mini.sound
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
 
+/** The app's voice: recordings first, the device's speech engine only as a fallback. */
 @Composable
-fun rememberTtsPlayer(): TtsPlayer = remember { createTtsPlayer() }
+fun rememberTtsPlayer(): TtsPlayer = BakedSpeech

@@ -1,0 +1,877 @@
+{
+  "sceneId": "sort_cards_clothes_food_01",
+  "meta": {
+    "title": "Одежда и еда",
+    "description": "Разложи картинки по корзинам.",
+    "ageMin": 3,
+    "ageMax": 6,
+    "version": 1,
+    "tags": [
+      "cards",
+      "sorting",
+      "categorization"
+    ],
+    "skills": [
+      "categorization",
+      "matching",
+      "visual_attention",
+      "task_completion",
+      "receptive_speech"
+    ],
+    "icon": "👕",
+    "requires": []
+  },
+  "entities": [
+    {
+      "id": "backpack",
+      "components": [
+        "drag"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 170.0,
+          "y": 240.0
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/backpack.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Рюкзак"
+        },
+        "name": {
+          "type": "text",
+          "value": "Рюкзак"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/backpack.mp3"
+        },
+        "zOrder": {
+          "type": "num",
+          "value": 1.0
+        },
+        "kind": {
+          "type": "text",
+          "value": "clothes"
+        }
+      },
+      "tags": {
+        "group": "items",
+        "kind": "clothes"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "blouse",
+      "components": [
+        "drag"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 390.0,
+          "y": 240.0
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/blouse.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Блузка"
+        },
+        "name": {
+          "type": "text",
+          "value": "Блузка"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/blouse.mp3"
+        },
+        "zOrder": {
+          "type": "num",
+          "value": 1.0
+        },
+        "kind": {
+          "type": "text",
+          "value": "clothes"
+        }
+      },
+      "tags": {
+        "group": "items",
+        "kind": "clothes"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "boots",
+      "components": [
+        "drag"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 610.0,
+          "y": 240.0
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/boots.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Ботинки"
+        },
+        "name": {
+          "type": "text",
+          "value": "Ботинки"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/boots.mp3"
+        },
+        "zOrder": {
+          "type": "num",
+          "value": 1.0
+        },
+        "kind": {
+          "type": "text",
+          "value": "clothes"
+        }
+      },
+      "tags": {
+        "group": "items",
+        "kind": "clothes"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "cap",
+      "components": [
+        "drag"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 830.0,
+          "y": 240.0
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/cap.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Кепка"
+        },
+        "name": {
+          "type": "text",
+          "value": "Кепка"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/cap.mp3"
+        },
+        "zOrder": {
+          "type": "num",
+          "value": 1.0
+        },
+        "kind": {
+          "type": "text",
+          "value": "clothes"
+        }
+      },
+      "tags": {
+        "group": "items",
+        "kind": "clothes"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "collar",
+      "components": [
+        "drag"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 170.0,
+          "y": 410.0
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/collar.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Воротник"
+        },
+        "name": {
+          "type": "text",
+          "value": "Воротник"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/collar.mp3"
+        },
+        "zOrder": {
+          "type": "num",
+          "value": 1.0
+        },
+        "kind": {
+          "type": "text",
+          "value": "clothes"
+        }
+      },
+      "tags": {
+        "group": "items",
+        "kind": "clothes"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "dress",
+      "components": [
+        "drag"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 390.0,
+          "y": 410.0
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/dress.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Платье"
+        },
+        "name": {
+          "type": "text",
+          "value": "Платье"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/dress.mp3"
+        },
+        "zOrder": {
+          "type": "num",
+          "value": 1.0
+        },
+        "kind": {
+          "type": "text",
+          "value": "clothes"
+        }
+      },
+      "tags": {
+        "group": "items",
+        "kind": "clothes"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "hat",
+      "components": [
+        "drag"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 610.0,
+          "y": 410.0
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/hat.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Шапка"
+        },
+        "name": {
+          "type": "text",
+          "value": "Шапка"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/hat.mp3"
+        },
+        "zOrder": {
+          "type": "num",
+          "value": 1.0
+        },
+        "kind": {
+          "type": "text",
+          "value": "clothes"
+        }
+      },
+      "tags": {
+        "group": "items",
+        "kind": "clothes"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "hood",
+      "components": [
+        "drag"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 830.0,
+          "y": 410.0
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/hood.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Капюшон"
+        },
+        "name": {
+          "type": "text",
+          "value": "Капюшон"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/hood.mp3"
+        },
+        "zOrder": {
+          "type": "num",
+          "value": 1.0
+        },
+        "kind": {
+          "type": "text",
+          "value": "clothes"
+        }
+      },
+      "tags": {
+        "group": "items",
+        "kind": "clothes"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "apple",
+      "components": [
+        "drag"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 170.0,
+          "y": 580.0
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/apple.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Яблоко"
+        },
+        "name": {
+          "type": "text",
+          "value": "Яблоко"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/apple.mp3"
+        },
+        "zOrder": {
+          "type": "num",
+          "value": 1.0
+        },
+        "kind": {
+          "type": "text",
+          "value": "food"
+        }
+      },
+      "tags": {
+        "group": "items",
+        "kind": "food"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "apricot",
+      "components": [
+        "drag"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 390.0,
+          "y": 580.0
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/apricot.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Абрикос"
+        },
+        "name": {
+          "type": "text",
+          "value": "Абрикос"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/apricot.mp3"
+        },
+        "zOrder": {
+          "type": "num",
+          "value": 1.0
+        },
+        "kind": {
+          "type": "text",
+          "value": "food"
+        }
+      },
+      "tags": {
+        "group": "items",
+        "kind": "food"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "avocado",
+      "components": [
+        "drag"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 610.0,
+          "y": 580.0
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/avocado.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Авокадо"
+        },
+        "name": {
+          "type": "text",
+          "value": "Авокадо"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/avocado.mp3"
+        },
+        "zOrder": {
+          "type": "num",
+          "value": 1.0
+        },
+        "kind": {
+          "type": "text",
+          "value": "food"
+        }
+      },
+      "tags": {
+        "group": "items",
+        "kind": "food"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "bagel",
+      "components": [
+        "drag"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 830.0,
+          "y": 580.0
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/bagel.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Баранка"
+        },
+        "name": {
+          "type": "text",
+          "value": "Баранка"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/bagel.mp3"
+        },
+        "zOrder": {
+          "type": "num",
+          "value": 1.0
+        },
+        "kind": {
+          "type": "text",
+          "value": "food"
+        }
+      },
+      "tags": {
+        "group": "items",
+        "kind": "food"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "banana",
+      "components": [
+        "drag"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 170.0,
+          "y": 750.0
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/banana.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Банан"
+        },
+        "name": {
+          "type": "text",
+          "value": "Банан"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/banana.mp3"
+        },
+        "zOrder": {
+          "type": "num",
+          "value": 1.0
+        },
+        "kind": {
+          "type": "text",
+          "value": "food"
+        }
+      },
+      "tags": {
+        "group": "items",
+        "kind": "food"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "banana-chips",
+      "components": [
+        "drag"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 390.0,
+          "y": 750.0
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/banana-chips.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Банановые чипсы"
+        },
+        "name": {
+          "type": "text",
+          "value": "Банановые чипсы"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/banana-chips.mp3"
+        },
+        "zOrder": {
+          "type": "num",
+          "value": 1.0
+        },
+        "kind": {
+          "type": "text",
+          "value": "food"
+        }
+      },
+      "tags": {
+        "group": "items",
+        "kind": "food"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "bar",
+      "components": [
+        "drag"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 610.0,
+          "y": 750.0
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/bar.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Батончик"
+        },
+        "name": {
+          "type": "text",
+          "value": "Батончик"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/bar.mp3"
+        },
+        "zOrder": {
+          "type": "num",
+          "value": 1.0
+        },
+        "kind": {
+          "type": "text",
+          "value": "food"
+        }
+      },
+      "tags": {
+        "group": "items",
+        "kind": "food"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "borscht",
+      "components": [
+        "drag"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 830.0,
+          "y": 750.0
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/borscht.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Борщ"
+        },
+        "name": {
+          "type": "text",
+          "value": "Борщ"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/borscht.mp3"
+        },
+        "zOrder": {
+          "type": "num",
+          "value": 1.0
+        },
+        "kind": {
+          "type": "text",
+          "value": "food"
+        }
+      },
+      "tags": {
+        "group": "items",
+        "kind": "food"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "basket_clothes",
+      "components": [
+        "dropTarget"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 300.0,
+          "y": 800.0
+        },
+        "zOrder": {
+          "type": "num",
+          "value": 0.0
+        },
+        "label": {
+          "type": "text",
+          "value": "Одежда"
+        },
+        "constraintType": {
+          "type": "text",
+          "value": "propertyEquals"
+        },
+        "source": {
+          "type": "text",
+          "value": "kind"
+        },
+        "target": {
+          "type": "text",
+          "value": "kind"
+        },
+        "kind": {
+          "type": "text",
+          "value": "clothes"
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/shirt.jpg"
+        }
+      },
+      "tags": {},
+      "zOrder": 0
+    },
+    {
+      "id": "basket_food",
+      "components": [
+        "dropTarget"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 700.0,
+          "y": 800.0
+        },
+        "zOrder": {
+          "type": "num",
+          "value": 0.0
+        },
+        "label": {
+          "type": "text",
+          "value": "Еда"
+        },
+        "constraintType": {
+          "type": "text",
+          "value": "propertyEquals"
+        },
+        "source": {
+          "type": "text",
+          "value": "kind"
+        },
+        "target": {
+          "type": "text",
+          "value": "kind"
+        },
+        "kind": {
+          "type": "text",
+          "value": "food"
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/apple.jpg"
+        }
+      },
+      "tags": {},
+      "zOrder": 0
+    }
+  ],
+  "objectives": [
+    {
+      "id": "sorted",
+      "type": "allMatched",
+      "config": {
+        "group": "items"
+      },
+      "requires": null
+    }
+  ],
+  "behaviors": [
+    {
+      "behaviorRef": {
+        "type": "progressTracker",
+        "config": {}
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "audioPrompt",
+        "config": {
+          "on": "sceneStarted",
+          "text": "Разложи по корзинам",
+          "sound": "_sounds/speech/razlozhi-po-korzinam-219e52.wav"
+        }
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "snapToTarget",
+        "config": {}
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "adaptiveHint",
+        "config": {}
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "playSoundOnEvent",
+        "config": {
+          "on": "sceneCompleted",
+          "sound": "complete"
+        }
+      },
+      "entityId": null
+    }
+  ],
+  "fieldPolicies": {},
+  "idleTimeout": 20,
+  "onIdle": "HINT",
+  "metadata": {},
+  "variation": {
+    "pick": [
+      {
+        "group": "clothes",
+        "count": 2,
+        "tagKey": "kind"
+      },
+      {
+        "group": "food",
+        "count": 2,
+        "tagKey": "kind"
+      }
+    ],
+    "shufflePositions": [
+      "items"
+    ]
+  }
+}

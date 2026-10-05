@@ -25,9 +25,21 @@
           "type": "text",
           "value": "big"
         },
-        "emoji": {
+        "image": {
           "type": "text",
-          "value": "🐘"
+          "value": "_cards/elephant.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Слон"
+        },
+        "name": {
+          "type": "text",
+          "value": "Слон"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/elephant.mp3"
         }
       },
       "tags": {
@@ -59,9 +71,21 @@
           "type": "text",
           "value": "big"
         },
-        "emoji": {
+        "image": {
           "type": "text",
-          "value": "🦁"
+          "value": "_cards/lion.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Лев"
+        },
+        "name": {
+          "type": "text",
+          "value": "Лев"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/lion.mp3"
         }
       },
       "tags": {
@@ -93,9 +117,21 @@
           "type": "text",
           "value": "medium"
         },
-        "emoji": {
+        "image": {
           "type": "text",
-          "value": "🐮"
+          "value": "_cards/cow.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Корова"
+        },
+        "name": {
+          "type": "text",
+          "value": "Корова"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/cow.mp3"
         }
       },
       "tags": {
@@ -127,9 +163,21 @@
           "type": "text",
           "value": "medium"
         },
-        "emoji": {
+        "image": {
           "type": "text",
-          "value": "🐇"
+          "value": "_cards/rabbit.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Кролик"
+        },
+        "name": {
+          "type": "text",
+          "value": "Кролик"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/rabbit.mp3"
         }
       },
       "tags": {
@@ -161,9 +209,21 @@
           "type": "text",
           "value": "small"
         },
-        "emoji": {
+        "image": {
           "type": "text",
-          "value": "🐭"
+          "value": "_cards/mouse.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Мышь"
+        },
+        "name": {
+          "type": "text",
+          "value": "Мышь"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/mouse.mp3"
         }
       },
       "tags": {
@@ -195,9 +255,21 @@
           "type": "text",
           "value": "small"
         },
-        "emoji": {
+        "image": {
           "type": "text",
-          "value": "🐜"
+          "value": "_cards/bee.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Пчела"
+        },
+        "name": {
+          "type": "text",
+          "value": "Пчела"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/bee.mp3"
         }
       },
       "tags": {
@@ -233,13 +305,17 @@
           "type": "text",
           "value": "big"
         },
-        "emoji": {
-          "type": "text",
-          "value": "🧺"
-        },
         "label": {
           "type": "text",
           "value": "Большой"
+        },
+        "width": {
+          "type": "num",
+          "value": 190.0
+        },
+        "shape": {
+          "type": "text",
+          "value": "circle"
         }
       },
       "tags": {},
@@ -273,13 +349,17 @@
           "type": "text",
           "value": "medium"
         },
-        "emoji": {
-          "type": "text",
-          "value": "🧺"
-        },
         "label": {
           "type": "text",
           "value": "Средний"
+        },
+        "width": {
+          "type": "num",
+          "value": 130.0
+        },
+        "shape": {
+          "type": "text",
+          "value": "circle"
         }
       },
       "tags": {},
@@ -313,13 +393,17 @@
           "type": "text",
           "value": "small"
         },
-        "emoji": {
-          "type": "text",
-          "value": "🧺"
-        },
         "label": {
           "type": "text",
           "value": "Маленький"
+        },
+        "width": {
+          "type": "num",
+          "value": 88.0
+        },
+        "shape": {
+          "type": "text",
+          "value": "circle"
         }
       },
       "tags": {},
@@ -342,7 +426,8 @@
         "type": "audioPrompt",
         "config": {
           "on": "sceneStarted",
-          "text": "Разложи по размеру: большой, средний, маленький"
+          "text": "Разложи по размеру: большой, средний, маленький",
+          "sound": "_sounds/speech/razlozhi-po-razmeru-bolshoy-sredniy-malenkiy-c49e2f.wav"
         }
       },
       "entityId": null

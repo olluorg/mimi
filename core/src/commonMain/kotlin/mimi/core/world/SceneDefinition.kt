@@ -23,7 +23,11 @@ data class SceneDefinition(
     val idleTimeout:   Int                                = 30,
     val onIdle:        OnIdleAction                       = OnIdleAction.HINT,
     val metadata:      Map<String, String>                = emptyMap(),
-    val levels:        List<LevelDefinition>              = emptyList()
+    val levels:        List<LevelDefinition>              = emptyList(),
+    /** How this scene should differ between plays; null means always identical. */
+    val variation:     SceneVariation?                    = null,
+    /** The engine-relevant part of the scene's `meta` block — its speech profile. */
+    val meta:          SceneAnnotations                   = SceneAnnotations()
 ) {
     // If multi-level, level 0's entities/objectives override top-level fields.
     fun entitiesForLevel(index: Int): List<EntityDefinition> =
@@ -42,7 +46,14 @@ data class EntityDefinition(
     val behaviors:  List<BehaviorRef>                     = emptyList(),
     val properties: Map<PropertyKey, PropertyValue>       = emptyMap(),
     val tags:       Map<TagKey, String>                   = emptyMap(),
-    val zOrder:     Int                                   = 0
+    val zOrder:     Int                                   = 0,
+    /**
+     * What the entity starts as. Defaults to on-screen and interactive.
+     * Declaring INACTIVE lets a scene hold something back — a reward that
+     * appears only once the child asks for it, an item revealed step by step —
+     * without needing a state machine to hide it first.
+     */
+    val initialState: EntityLifecycleState                = EntityLifecycleState.ACTIVE
 )
 
 @Serializable

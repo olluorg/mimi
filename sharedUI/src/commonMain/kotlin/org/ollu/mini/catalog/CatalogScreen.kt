@@ -24,88 +24,14 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import mimi.core.world.SceneDefinition
+import mimi.core.world.SpeechVocabulary
+import org.ollu.mini.theme.AppIcon
+import org.ollu.mini.theme.AppIconGlyph
 import org.ollu.mini.progress.ProgressRepository
-import org.ollu.mini.sound.rememberTtsPlayer
+import org.ollu.mini.skills.skillColorOf
+import org.ollu.mini.skills.skillLabelOf
 
 private val BG = Color(0xFFF5F7FA)
-
-private val skillLabel = mapOf(
-    "attention"             to "Внимание",
-    "visual_attention"      to "Зрит. внимание",
-    "selective_attention"   to "Избир. внимание",
-    "sustained_attention"   to "Устойч. внимание",
-    "fine_motor"            to "Мелкая моторика",
-    "hand_eye_coordination" to "Глаз-рука",
-    "gesture_control"       to "Жесты",
-    "trace_control"         to "Обводка",
-    "matching"              to "Соответствие",
-    "categorization"        to "Категоризация",
-    "sequencing"            to "Последовательность",
-    "memory"                to "Память",
-    "working_memory"        to "Рабочая память",
-    "visual_memory"         to "Зрит. память",
-    "sequential_memory"     to "Послед. память",
-    "associative_memory"    to "Ассоц. память",
-    "problem_solving"       to "Решение задач",
-    "receptive_speech"      to "Понимание речи",
-    "expressive_speech"     to "Активная речь",
-    "word_association"      to "Ассоциации",
-    "phonemic_awareness"    to "Фонем. слух",
-    "color_recognition"     to "Цвета",
-    "shape_recognition"     to "Формы",
-    "size_comparison"       to "Размеры",
-    "pattern_recognition"   to "Паттерны",
-    "numbers"               to "Цифры",
-    "counting"              to "Счёт",
-    "letters"               to "Буквы",
-    "reading_readiness"     to "Подгот. к чтению",
-    "task_completion"       to "Завершение",
-    "turn_taking"           to "Очерёдность",
-    "patience"              to "Терпение",
-    "impulse_control"       to "Контроль импульсов",
-    "reaction_speed"        to "Реакция",
-    "visual_planning"       to "Планирование",
-    "inhibitory_control"    to "Торможение"
-)
-
-private val skillColor = mapOf(
-    "attention"             to Color(0xFF5C9BD6),
-    "visual_attention"      to Color(0xFF5C9BD6),
-    "selective_attention"   to Color(0xFF5C9BD6),
-    "sustained_attention"   to Color(0xFF5C9BD6),
-    "fine_motor"            to Color(0xFFFF8A65),
-    "hand_eye_coordination" to Color(0xFFFF8A65),
-    "gesture_control"       to Color(0xFFFF8A65),
-    "trace_control"         to Color(0xFFFF8A65),
-    "matching"              to Color(0xFF9C7BB8),
-    "categorization"        to Color(0xFF9C7BB8),
-    "sequencing"            to Color(0xFF9C7BB8),
-    "memory"                to Color(0xFF9C7BB8),
-    "working_memory"        to Color(0xFF9C7BB8),
-    "visual_memory"         to Color(0xFF26C6DA),
-    "sequential_memory"     to Color(0xFFEF5350),
-    "associative_memory"    to Color(0xFF66BB6A),
-    "problem_solving"       to Color(0xFF9C7BB8),
-    "receptive_speech"      to Color(0xFF66BB6A),
-    "expressive_speech"     to Color(0xFF66BB6A),
-    "word_association"      to Color(0xFF66BB6A),
-    "phonemic_awareness"    to Color(0xFF66BB6A),
-    "color_recognition"     to Color(0xFF26C6DA),
-    "shape_recognition"     to Color(0xFF26C6DA),
-    "size_comparison"       to Color(0xFF26C6DA),
-    "pattern_recognition"   to Color(0xFF26C6DA),
-    "numbers"               to Color(0xFFEF5350),
-    "counting"              to Color(0xFFEF5350),
-    "letters"               to Color(0xFFEF5350),
-    "reading_readiness"     to Color(0xFFEF5350),
-    "task_completion"       to Color(0xFFFFB300),
-    "turn_taking"           to Color(0xFFFFB300),
-    "patience"              to Color(0xFFFFB300),
-    "impulse_control"       to Color(0xFFFFB300),
-    "reaction_speed"        to Color(0xFFEF5350),
-    "visual_planning"       to Color(0xFF9C7BB8),
-    "inhibitory_control"    to Color(0xFFFFB300)
-)
 
 @Composable
 fun CatalogScreen(
@@ -113,31 +39,47 @@ fun CatalogScreen(
     onSceneSelected:    (CatalogEntry, SceneDefinition) -> Unit,
     progressRepository: ProgressRepository? = null,
     onBack:             (() -> Unit)? = null,
-    onEntriesUpdated:   ((List<CatalogEntry>) -> Unit)? = null
+    onEntriesUpdated:   ((List<CatalogEntry>) -> Unit)? = null,
+    /** Open with only the speech games shown — the «Запуск речи» entry point. */
+    speechOnly:         Boolean = false
 ) {
     val repo = remember { SceneRepository() }
     DisposableEffect(repo) { onDispose { repo.close() } }
 
     var uiState        by remember { mutableStateOf(CatalogState(isRefreshing = true)) }
-    var completedIds   by remember { mutableStateOf(progressRepository?.getCompletedSceneIds() ?: emptySet<String>()) }
+    var completedIds   by remember { mutableStateOf(progressRepository?.getCompletedSceneIds(progressRepository.currentChildId()) ?: emptySet<String>()) }
     var selectedSkills by remember { mutableStateOf(emptySet<String>()) }
     var ageFilter      by remember { mutableStateOf(0) }  // 0=все 1=2-3 2=4-5 3=6-7
+    var speechFilter   by remember { mutableStateOf(speechOnly) }
+    var speechTarget   by remember { mutableStateOf<String?>(null) }
 
     LaunchedEffect(catalogUrl) {
         repo.catalogFlow(catalogUrl).collect { state ->
             uiState      = state
-            completedIds = progressRepository?.getCompletedSceneIds() ?: emptySet()
+            completedIds = progressRepository?.getCompletedSceneIds(progressRepository.currentChildId()) ?: emptySet()
             if (state.entries.isNotEmpty()) onEntriesUpdated?.invoke(state.entries)
         }
     }
 
     val allSkills = remember(uiState.entries) {
         uiState.entries.flatMap { it.skills }.distinct()
-            .sortedBy { skillLabel[it] ?: it }
+            .sortedBy { skillLabelOf(it) }
     }
 
-    val displayedEntries = remember(uiState.entries, selectedSkills, ageFilter) {
+    val displayedEntries = remember(uiState.entries, selectedSkills, ageFilter, speechFilter, speechTarget) {
         uiState.entries
+            .let { list ->
+                // Only games that passed the speech check: the validator will not
+                // publish a scene labelled as speech without a speech mechanic.
+                if (!speechFilter) list
+                else list.filter { entry ->
+                    val speech = entry.speech ?: return@filter false
+                    speechTarget == null || speechTarget in speech.targets
+                }.sortedBy { entry ->
+                    // First steps first: pictures, then voice, then sounds, then words.
+                    SpeechVocabulary.STAGES.keys.indexOf(entry.speech?.stage).takeIf { it >= 0 } ?: 99
+                }
+            }
             .let { list ->
                 when (ageFilter) {
                     1    -> list.filter { it.ageMin <= 3 && it.ageMax >= 2 }
@@ -152,7 +94,7 @@ fun CatalogScreen(
             }
     }
 
-    Box(Modifier.fillMaxSize().background(BG)) {
+    Box(Modifier.fillMaxSize().background(BG).safeDrawingPadding()) {
 
         when {
             uiState.entries.isEmpty() && uiState.isRefreshing -> {
@@ -193,6 +135,15 @@ fun CatalogScreen(
                                 )
                             }
                         }
+                    }
+
+                    item(span = { GridItemSpan(maxLineSpan) }) {
+                        SpeechFilterBar(
+                            enabled  = speechFilter,
+                            target   = speechTarget,
+                            onToggle = { speechFilter = !speechFilter; if (!speechFilter) speechTarget = null },
+                            onTarget = { speechTarget = it }
+                        )
                     }
 
                     item(span = { GridItemSpan(maxLineSpan) }) {
@@ -244,6 +195,78 @@ fun CatalogScreen(
                         modifier   = Modifier.fillMaxWidth().align(Alignment.TopCenter).height(3.dp),
                         color      = Color(0xFF4A90D9),
                         trackColor = Color.Transparent
+                    )
+                }
+            }
+        }
+    }
+}
+
+private val SPEECH_ACCENT = Color(0xFF43A047)
+
+/**
+ * The switch to speech games only, and — once on — who they are for.
+ *
+ * Kept apart from the skill chips: those describe what a game touches, this
+ * one is a promise that the game gets the child to communicate, and only
+ * scenes whose speech mechanic the validator has checked are behind it.
+ */
+@Composable
+private fun SpeechFilterBar(
+    enabled:  Boolean,
+    target:   String?,
+    onToggle: () -> Unit,
+    onTarget: (String?) -> Unit
+) {
+    Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+        Surface(
+            onClick = onToggle,
+            shape   = RoundedCornerShape(20.dp),
+            color   = if (enabled) SPEECH_ACCENT else Color.White,
+            shadowElevation = if (enabled) 0.dp else 1.dp
+        ) {
+            Row(
+                Modifier.padding(horizontal = 14.dp, vertical = 8.dp),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.spacedBy(8.dp)
+            ) {
+                AppIconGlyph(AppIcon.Mic, if (enabled) Color.White else SPEECH_ACCENT, size = 20.dp)
+                Text(
+                    "Запуск речи",
+                    fontWeight = FontWeight.SemiBold,
+                    color = if (enabled) Color.White else SPEECH_ACCENT
+                )
+            }
+        }
+        if (enabled) {
+            Text(
+                "Игры, где ребёнок говорит, повторяет или просит. Играйте рядом: " +
+                    "произносите слово вместе с игрой и ждите ответа.",
+                style = MaterialTheme.typography.bodySmall,
+                color = Color(0xFF5F6B78)
+            )
+            Row(
+                modifier              = Modifier.horizontalScroll(rememberScrollState()),
+                horizontalArrangement = Arrangement.spacedBy(8.dp)
+            ) {
+                FilterChip(
+                    selected = target == null,
+                    onClick  = { onTarget(null) },
+                    label    = { Text("Все", fontSize = 12.sp) },
+                    colors   = FilterChipDefaults.filterChipColors(
+                        selectedContainerColor = SPEECH_ACCENT,
+                        selectedLabelColor     = Color.White
+                    )
+                )
+                SpeechVocabulary.TARGETS.forEach { (id, label) ->
+                    FilterChip(
+                        selected = target == id,
+                        onClick  = { onTarget(if (target == id) null else id) },
+                        label    = { Text(label, fontSize = 12.sp) },
+                        colors   = FilterChipDefaults.filterChipColors(
+                            selectedContainerColor = SPEECH_ACCENT,
+                            selectedLabelColor     = Color.White
+                        )
                     )
                 }
             }
@@ -307,13 +330,13 @@ private fun SkillFilterBar(
         ) {
             allSkills.forEach { skill ->
                 val selected = skill in selectedSkills
-                val color    = skillColor[skill] ?: Color(0xFF888888)
+                val color    = skillColorOf(skill)
                 FilterChip(
                     selected = selected,
                     onClick  = { onToggle(skill) },
                     label    = {
                         Text(
-                            skillLabel[skill] ?: skill,
+                            skillLabelOf(skill),
                             fontSize = 12.sp,
                             maxLines = 1
                         )
@@ -330,17 +353,15 @@ private fun SkillFilterBar(
 
 @Composable
 private fun SceneTile(entry: CatalogEntry, loading: Boolean, completed: Boolean, error: String?, onClick: () -> Unit) {
-    val tts = rememberTtsPlayer()
-    val accent = entry.skills.firstNotNullOfOrNull { skillColor[it] } ?: Color(0xFF457B9D)
+    val accent = entry.skills.firstOrNull()?.let { skillColorOf(it) } ?: Color(0xFF457B9D)
     Column(
         modifier = Modifier
             .fillMaxWidth()
             .heightIn(min = 200.dp)
             .background(Color.White, RoundedCornerShape(20.dp))
-            .clickable(enabled = !loading) {
-                if (entry.title.isNotBlank()) tts.speak(entry.title)
-                onClick()
-            }
+            // No title read aloud: the game opens straight into its own spoken
+            // instruction, and the two voices landed on top of each other.
+            .clickable(enabled = !loading, onClick = onClick)
             .padding(12.dp),
         verticalArrangement   = Arrangement.spacedBy(8.dp),
         horizontalAlignment   = Alignment.CenterHorizontally
@@ -372,6 +393,16 @@ private fun SceneTile(entry: CatalogEntry, loading: Boolean, completed: Boolean,
                     contentAlignment = Alignment.Center
                 ) { Text("✓", fontSize = 16.sp, color = Color.White, fontWeight = FontWeight.Bold) }
             }
+            if (entry.isSpeechGame) {
+                Box(
+                    modifier         = Modifier
+                        .align(Alignment.TopStart)
+                        .padding(6.dp)
+                        .size(28.dp)
+                        .background(SPEECH_ACCENT, CircleShape),
+                    contentAlignment = Alignment.Center
+                ) { AppIconGlyph(AppIcon.Mic, Color.White, size = 18.dp) }
+            }
             if (loading) {
                 CircularProgressIndicator(
                     Modifier.align(Alignment.Center).size(36.dp),
@@ -394,6 +425,17 @@ private fun SceneTile(entry: CatalogEntry, loading: Boolean, completed: Boolean,
             style = MaterialTheme.typography.labelSmall,
             color = Color(0xFF8B96A3)
         )
+        entry.speech?.let { speech ->
+            val stage = SpeechVocabulary.STAGES[speech.stage]
+            val words = speech.words.take(4).joinToString(", ")
+            Text(
+                listOfNotNull(stage, words.ifBlank { null }).joinToString(" · "),
+                style     = MaterialTheme.typography.labelSmall,
+                color     = SPEECH_ACCENT,
+                textAlign = TextAlign.Center,
+                maxLines  = 2
+            )
+        }
         if (error != null) {
             Text(
                 "⚠️ $error",
@@ -411,53 +453,23 @@ private fun SceneTile(entry: CatalogEntry, loading: Boolean, completed: Boolean,
 
 @Composable
 private fun ChildNameHeader(progressRepository: ProgressRepository?, onBack: (() -> Unit)?) {
-    var name    by remember { mutableStateOf(progressRepository?.getChildName() ?: "") }
-    var editing by remember { mutableStateOf(name.isEmpty()) }
-
+    // Naming and switching children lives in the grown-up menu now; this header
+    // only says whose catalogue is on screen.
+    val name = progressRepository?.currentProfile()?.name
     Column(Modifier.padding(bottom = 8.dp)) {
         if (onBack != null) {
             TextButton(onClick = onBack, contentPadding = PaddingValues(0.dp)) {
                 Text("⬅  Назад", color = Color(0xFF666666))
             }
         }
-        if (editing) {
-            Surface(shape = RoundedCornerShape(8.dp), color = Color.White, modifier = Modifier.fillMaxWidth()) {
-            Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.padding(12.dp)) {
-                OutlinedTextField(
-                    value           = name,
-                    onValueChange   = { name = it },
-                    placeholder     = { Text("Имя ребёнка") },
-                    singleLine      = true,
-                    keyboardOptions = KeyboardOptions(imeAction = ImeAction.Done),
-                    keyboardActions = KeyboardActions(onDone = {
-                        if (name.isNotBlank()) { progressRepository?.setChildName(name); editing = false }
-                    }),
-                    modifier = Modifier.weight(1f)
-                )
-                Spacer(Modifier.width(8.dp))
-                Button(
-                    onClick = {
-                        if (name.isNotBlank()) { progressRepository?.setChildName(name); editing = false }
-                    },
-                    colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF4CAF50))
-                ) { Text("✓  OK") }
-            }
-            }
-        } else {
-            Surface(shape = RoundedCornerShape(8.dp), color = Color.White, modifier = Modifier.fillMaxWidth()) {
-                Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.padding(16.dp)) {
-                    Column(Modifier.weight(1f)) {
-                        Text(
-                            "Привет, $name",
-                            style      = MaterialTheme.typography.headlineSmall,
-                            fontWeight = FontWeight.Bold,
-                            color = Color(0xFF263445)
-                        )
-                        Text("Свободный режим", style = MaterialTheme.typography.bodyMedium, color = Color(0xFF687381))
-                    }
-                    TextButton(onClick = { editing = true }) { Text("✏️  Изменить", color = Color(0xFF457B9D)) }
-                }
-            }
+        if (!name.isNullOrBlank()) {
+            Text(
+                name,
+                style = MaterialTheme.typography.titleMedium,
+                fontWeight = FontWeight.SemiBold,
+                color = Color(0xFF1D3557),
+                modifier = Modifier.padding(start = 4.dp, bottom = 4.dp)
+            )
         }
     }
 }

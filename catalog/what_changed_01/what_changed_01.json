@@ -11,9 +11,13 @@
           "x": 260.0,
           "y": 340.0
         },
-        "emoji": {
+        "shape": {
           "type": "text",
-          "value": "🌙"
+          "value": "circle"
+        },
+        "color": {
+          "type": "text",
+          "value": "white"
         }
       },
       "tags": {
@@ -31,9 +35,21 @@
           "x": 500.0,
           "y": 340.0
         },
-        "emoji": {
+        "image": {
           "type": "text",
-          "value": "⚽"
+          "value": "_cards/ball.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Мяч"
+        },
+        "name": {
+          "type": "text",
+          "value": "Мяч"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/ball.mp3"
         }
       },
       "tags": {
@@ -51,9 +67,21 @@
           "x": 740.0,
           "y": 340.0
         },
-        "emoji": {
+        "image": {
           "type": "text",
-          "value": "🚗"
+          "value": "_cards/car.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Машина"
+        },
+        "name": {
+          "type": "text",
+          "value": "Машина"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/car.mp3"
         }
       },
       "tags": {
@@ -77,9 +105,13 @@
           "type": "text",
           "value": "true"
         },
-        "emoji": {
+        "shape": {
           "type": "text",
-          "value": "⭐"
+          "value": "star"
+        },
+        "color": {
+          "type": "text",
+          "value": "yellow"
         }
       },
       "tags": {
@@ -103,9 +135,21 @@
           "type": "text",
           "value": "false"
         },
-        "emoji": {
+        "image": {
           "type": "text",
-          "value": "⚽"
+          "value": "_cards/ball.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Мяч"
+        },
+        "name": {
+          "type": "text",
+          "value": "Мяч"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/ball.mp3"
         }
       },
       "tags": {
@@ -129,9 +173,21 @@
           "type": "text",
           "value": "false"
         },
-        "emoji": {
+        "image": {
           "type": "text",
-          "value": "🚗"
+          "value": "_cards/car.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Машина"
+        },
+        "name": {
+          "type": "text",
+          "value": "Машина"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/car.mp3"
         }
       },
       "tags": {
@@ -154,6 +210,17 @@
   "behaviors": [
     {
       "behaviorRef": {
+        "type": "audioPrompt",
+        "config": {
+          "on": "sceneStarted",
+          "text": "Что изменилось?",
+          "sound": "_sounds/speech/chto-izmenilos-b2d340.wav"
+        }
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
         "type": "propertySelectionValidator",
         "config": {
           "property": "changed",
@@ -172,9 +239,7 @@
     {
       "behaviorRef": {
         "type": "adaptiveHint",
-        "config": {
-          "mode": "visual_change"
-        }
+        "config": {}
       },
       "entityId": null
     },

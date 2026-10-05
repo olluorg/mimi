@@ -36,7 +36,7 @@ class DefaultWorldStateTest {
     // ── Immutability ──────────────────────────────────────────────────────────
 
     @Test
-    fun `apply returns new instance, original unchanged`() {
+    fun `apply returns a new instance and leaves the original unchanged`() {
         val world = DefaultWorldStateFactory.fromScene(makeScene())
         val cmd   = Command.SetProperty(
             target = "apple", field = "color",

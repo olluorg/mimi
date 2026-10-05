@@ -17,13 +17,17 @@
           "type": "num",
           "value": 1.0
         },
-        "emoji": {
-          "type": "text",
-          "value": "⭐"
-        },
         "label": {
           "type": "text",
           "value": "1"
+        },
+        "shape": {
+          "type": "text",
+          "value": "star"
+        },
+        "color": {
+          "type": "text",
+          "value": "yellow"
         }
       },
       "tags": {
@@ -47,13 +51,17 @@
           "type": "num",
           "value": 2.0
         },
-        "emoji": {
-          "type": "text",
-          "value": "⭐"
-        },
         "label": {
           "type": "text",
           "value": "2"
+        },
+        "shape": {
+          "type": "text",
+          "value": "star"
+        },
+        "color": {
+          "type": "text",
+          "value": "yellow"
         }
       },
       "tags": {
@@ -77,13 +85,17 @@
           "type": "num",
           "value": 3.0
         },
-        "emoji": {
-          "type": "text",
-          "value": "⭐"
-        },
         "label": {
           "type": "text",
           "value": "3"
+        },
+        "shape": {
+          "type": "text",
+          "value": "star"
+        },
+        "color": {
+          "type": "text",
+          "value": "yellow"
         }
       },
       "tags": {
@@ -107,13 +119,17 @@
           "type": "num",
           "value": 4.0
         },
-        "emoji": {
-          "type": "text",
-          "value": "⭐"
-        },
         "label": {
           "type": "text",
           "value": "4"
+        },
+        "shape": {
+          "type": "text",
+          "value": "star"
+        },
+        "color": {
+          "type": "text",
+          "value": "yellow"
         }
       },
       "tags": {
@@ -137,13 +153,17 @@
           "type": "num",
           "value": 5.0
         },
-        "emoji": {
-          "type": "text",
-          "value": "⭐"
-        },
         "label": {
           "type": "text",
           "value": "5"
+        },
+        "shape": {
+          "type": "text",
+          "value": "star"
+        },
+        "color": {
+          "type": "text",
+          "value": "yellow"
         }
       },
       "tags": {
@@ -178,7 +198,8 @@
         "type": "audioPrompt",
         "config": {
           "on": "sceneStarted",
-          "text": "Считай звёзды по порядку!"
+          "text": "Нажимай звёзды по порядку",
+          "sound": "_sounds/speech/nazhimay-zvezdy-po-poryadku-a41b99.wav"
         }
       },
       "entityId": null
@@ -187,16 +208,6 @@
       "behaviorRef": {
         "type": "progressTracker",
         "config": {}
-      },
-      "entityId": null
-    },
-    {
-      "behaviorRef": {
-        "type": "playSoundOnEvent",
-        "config": {
-          "on": "sequenceStepCorrect",
-          "sound": "tap_ok"
-        }
       },
       "entityId": null
     },

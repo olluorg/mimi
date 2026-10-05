@@ -1,0 +1,200 @@
+{
+  "sceneId": "emotion_find_happy_01",
+  "meta": {
+    "title": "Найди весёлое лицо",
+    "description": "Посмотри на лица и нажми на весёлое.",
+    "ageMin": 2,
+    "ageMax": 6,
+    "version": 1,
+    "tags": [
+      "emotions",
+      "faces"
+    ],
+    "skills": [
+      "receptive_speech",
+      "visual_attention",
+      "selective_attention",
+      "matching"
+    ],
+    "icon": "😊",
+    "requires": []
+  },
+  "entities": [
+    {
+      "id": "happy",
+      "components": [
+        "tap"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 220.0,
+          "y": 450.0
+        },
+        "mood": {
+          "type": "text",
+          "value": "happy"
+        },
+        "name": {
+          "type": "text",
+          "value": "весёлый"
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/joy.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Радость"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/joy.mp3"
+        }
+      },
+      "tags": {
+        "group": "faces"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "sad",
+      "components": [
+        "tap"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 500.0,
+          "y": 450.0
+        },
+        "mood": {
+          "type": "text",
+          "value": "sad"
+        },
+        "name": {
+          "type": "text",
+          "value": "грустный"
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/sadness.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Грусть"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/sadness.mp3"
+        }
+      },
+      "tags": {
+        "group": "faces"
+      },
+      "zOrder": 0
+    },
+    {
+      "id": "angry",
+      "components": [
+        "tap"
+      ],
+      "behaviors": [],
+      "properties": {
+        "position": {
+          "type": "vec2",
+          "x": 780.0,
+          "y": 450.0
+        },
+        "mood": {
+          "type": "text",
+          "value": "angry"
+        },
+        "name": {
+          "type": "text",
+          "value": "сердитый"
+        },
+        "image": {
+          "type": "text",
+          "value": "_cards/anger.jpg"
+        },
+        "label": {
+          "type": "text",
+          "value": "Злость"
+        },
+        "sound": {
+          "type": "text",
+          "value": "_cards/audio/anger.mp3"
+        }
+      },
+      "tags": {
+        "group": "faces"
+      },
+      "zOrder": 0
+    }
+  ],
+  "objectives": [
+    {
+      "id": "found",
+      "type": "entitySelected",
+      "config": {
+        "property": "mood",
+        "value": "happy"
+      },
+      "requires": null
+    }
+  ],
+  "behaviors": [
+    {
+      "behaviorRef": {
+        "type": "progressTracker",
+        "config": {}
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "audioPrompt",
+        "config": {
+          "on": "sceneStarted",
+          "text": "Найди весёлое лицо",
+          "sound": "_sounds/speech/naydi-veseloe-lico-55bccb.wav"
+        }
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "propertySelectionValidator",
+        "config": {
+          "property": "mood",
+          "expected": "happy"
+        }
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "adaptiveHint",
+        "config": {}
+      },
+      "entityId": null
+    },
+    {
+      "behaviorRef": {
+        "type": "playSoundOnEvent",
+        "config": {
+          "on": "sceneCompleted",
+          "sound": "complete"
+        }
+      },
+      "entityId": null
+    }
+  ],
+  "fieldPolicies": {},
+  "idleTimeout": 15,
+  "onIdle": "HINT",
+  "metadata": {}
+}
